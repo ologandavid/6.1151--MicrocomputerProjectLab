@@ -1,0 +1,91 @@
+dont_use_io iocell 1 0
+dont_use_io iocell 1 1
+dont_use_io iocell 1 3
+set_location "\UART_1:BUART:rx_state_2\" macrocell 1 0 1 0
+set_location "\UART_2:BUART:sTX:sCLOCK:TxBitClkGen\" datapathcell 2 0 2 
+set_location "\UART_1:BUART:rx_status_4\" macrocell 2 0 0 3
+set_location "\UART_2:BUART:tx_bitclk\" macrocell 3 0 0 1
+set_location "\UART_2:BUART:sRX:RxSts\" statusicell 2 1 4 
+set_location "\UART_2:BUART:rx_postpoll\" macrocell 3 1 0 1
+set_location "\UART_2:BUART:sRX:RxShifter:u0\" datapathcell 3 1 2 
+set_location "\UART_1:BUART:txn\" macrocell 2 1 1 0
+set_location "\UART_1:BUART:rx_postpoll\" macrocell 0 0 1 1
+set_location "\UART_1:BUART:rx_state_3\" macrocell 1 0 0 2
+set_location "\UART_1:BUART:tx_ctrl_mark_last\" macrocell 2 0 0 2
+set_location "\UART_1:BUART:sTX:sCLOCK:TxBitClkGen\" datapathcell 2 2 2 
+set_location "Net_128" macrocell 2 0 0 0
+set_location "\UART_2:BUART:rx_counter_load\" macrocell 3 2 1 1
+set_location "MODIN1_0" macrocell 0 0 1 2
+set_location "\UART_2:BUART:rx_state_2\" macrocell 3 2 0 0
+set_location "\UART_2:BUART:tx_status_2\" macrocell 3 0 1 3
+set_location "\UART_1:BUART:tx_status_2\" macrocell 2 0 1 3
+set_location "\UART_2:BUART:rx_bitclk_enable\" macrocell 3 1 0 3
+set_location "\UART_2:BUART:rx_state_0\" macrocell 3 2 1 0
+set_location "\UART_1:BUART:sTX:TxSts\" statusicell 2 2 4 
+set_location "\UART_2:BUART:rx_state_3\" macrocell 3 2 1 2
+set_location "\UART_2:BUART:txn\" macrocell 3 0 0 0
+set_location "\UART_1:BUART:tx_state_2\" macrocell 2 2 1 0
+set_location "\UART_1:BUART:rx_state_stop1_reg\" macrocell 1 0 1 3
+set_location "\UART_1:BUART:rx_counter_load\" macrocell 1 0 0 1
+set_location "\UART_2:BUART:rx_status_4\" macrocell 2 1 0 3
+set_location "\UART_2:BUART:sRX:RxBitCounter\" count7cell 3 1 7 
+set_location "\UART_2:BUART:tx_ctrl_mark_last\" macrocell 2 1 0 1
+set_location "\UART_1:BUART:tx_state_1\" macrocell 2 2 1 3
+set_location "\UART_2:BUART:pollcount_0\" macrocell 3 1 0 2
+set_location "\UART_1:BUART:rx_state_0\" macrocell 1 0 0 0
+set_location "\UART_2:BUART:rx_status_5\" macrocell 2 1 1 1
+set_location "\UART_1:BUART:rx_status_5\" macrocell 2 0 1 0
+set_location "\UART_1:BUART:tx_state_0\" macrocell 2 2 0 0
+set_location "MODIN1_1" macrocell 0 0 1 0
+set_location "\UART_1:BUART:rx_status_3\" macrocell 1 0 0 3
+set_location "\UART_1:BUART:tx_bitclk\" macrocell 2 2 0 1
+set_location "\UART_2:BUART:rx_last\" macrocell 3 0 1 0
+set_location "\UART_1:BUART:sRX:RxSts\" statusicell 1 0 4 
+set_location "\UART_2:BUART:tx_state_0\" macrocell 3 0 1 1
+set_location "\UART_2:BUART:rx_load_fifo\" macrocell 3 2 1 3
+set_location "\UART_1:BUART:rx_load_fifo\" macrocell 1 0 1 2
+set_location "\UART_2:BUART:counter_load_not\" macrocell 3 1 1 3
+set_location "\UART_1:BUART:counter_load_not\" macrocell 2 2 0 2
+set_location "\UART_2:BUART:rx_status_3\" macrocell 3 2 0 2
+set_location "\UART_2:BUART:sTX:TxShifter:u0\" datapathcell 3 0 2 
+set_location "\UART_2:BUART:tx_state_2\" macrocell 3 1 1 0
+set_location "\UART_1:BUART:sRX:RxShifter:u0\" datapathcell 1 0 2 
+set_location "\UART_1:BUART:rx_last\" macrocell 1 0 1 1
+set_location "\UART_2:BUART:tx_status_0\" macrocell 3 0 1 2
+set_location "\UART_1:BUART:tx_status_0\" macrocell 2 2 1 1
+set_location "\UART_2:BUART:sTX:TxSts\" statusicell 3 0 4 
+set_location "\UART_1:BUART:sTX:TxShifter:u0\" datapathcell 2 1 2 
+set_location "\UART_2:BUART:rx_state_stop1_reg\" macrocell 3 2 0 3
+set_location "\UART_2:BUART:pollcount_1\" macrocell 3 1 0 0
+set_location "Net_46" macrocell 2 1 1 3
+set_location "\UART_1:BUART:rx_bitclk_enable\" macrocell 0 0 1 3
+set_location "\UART_2:BUART:tx_state_1\" macrocell 3 1 1 1
+set_location "\UART_1:BUART:sRX:RxBitCounter\" count7cell 0 0 7 
+set_location "\Control_Reg_1:Sync:ctrl_reg\" controlcell 3 0 6 
+set_location "\ADC_SAR_2:IRQ\" interrupt -1 -1 1
+set_location "\ADC_SAR_1:IRQ\" interrupt -1 -1 0
+set_io "Pin_3(0)" iocell 3 2
+set_location "ClockBlock" clockblockcell -1 -1 0
+# Note: port 15 is the logical name for port 8
+set_io "Rx_2(0)" iocell 15 2
+# Note: port 12 is the logical name for port 7
+set_io "Rx_1(0)" iocell 12 6
+set_io "Pin_8(0)" iocell 3 7
+set_io "B2(0)" iocell 0 5
+set_io "Pin_4(0)" iocell 3 3
+# Note: port 12 is the logical name for port 7
+set_io "Tx_1(0)" iocell 12 7
+set_io "Pin_7(0)" iocell 3 6
+set_location "\ADC_SAR_1:ADC_SAR\" sarcell -1 -1 0
+set_io "Pin_1(0)" iocell 3 0
+set_io "B1(0)" iocell 0 4
+set_io "Pin_6(0)" iocell 3 5
+set_io "Pin_2(0)" iocell 3 1
+set_location "\ADC_SAR_2:ADC_SAR\" sarcell -1 -1 1
+set_io "B4(0)" iocell 0 7
+set_io "VRy(0)" iocell 0 1
+set_io "VRx(0)" iocell 0 0
+# Note: port 12 is the logical name for port 7
+set_io "Tx_2(0)" iocell 12 3
+set_io "B3(0)" iocell 0 6
+set_io "Pin_5(0)" iocell 3 4

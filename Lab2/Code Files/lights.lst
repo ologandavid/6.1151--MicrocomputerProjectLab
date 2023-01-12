@@ -1,0 +1,45 @@
+1F40:              .org 8000
+                   
+                   main:
+1F40: 12 1F 67         lcall init
+1F43: 90 FE 03         mov dptr, #0FE03h
+1F46: 74 36            mov A, #36h
+1F48: F0               movx @dptr, A     ; Update Control Byte with 36 
+                       loop:
+1F49: 12 1F 58         lcall getkey        ; Get a Button Press
+1F4C: 12 1F 74         lcall fix           ; Obtain the freq hex code in acc fr
+1F4F: 90 FE 00         mov dptr, #0FE00h
+1F52: F0               movx @dptr, A       ; Move in the low byte to #FE00h
+1F53: 74 01            mov a, #01h
+1F55: F0               movx @dptr, A       ; Move in the high byte to #FE00h
+1F56: 80 F1            sjmp loop
+                   
+                   getkey:
+1F58: 30 B3 FD         jnb P3.3, getkey        ; Jump if bit not set, wait for 
+1F5B: 75 90 FF         mov P1, #0FFh           ; Set Port 1 high to be read
+                       pressdone:              
+1F5E: 20 B3 FD             jb P3.3, pressdone  ; If press detected, wait for it
+1F61: E5 90                mov a, P1           ; Reading to Port 1
+1F63: C3                   clr C             
+1F64: 94 F0                SUBB A, #0F0h       ; Make first nibble 0s
+                           ;mov P1, a; Writing to Port 1
+                           ;clr P1
+1F66: 22                   ret
+                   
+                   init:
+1F67: 75 89 20         mov tmod, #20h
+1F6A: 75 88 41         mov tcon, #41h
+1F6D: 75 8D FD         mov th1, #0fdh
+1F70: 75 98 50         mov scon, #50h
+1F73: 22               ret
+                   
+                   fix:
+1F74: 04               inc a                   ; increment acc
+1F75: 83               movc a, @a+pc           ; get correct ASCII translation 
+1F76: 22               ret
+1F77: 00 00 09 00 
+      00 45 39 36 
+      00 30 27 20 
+      00 1C 15 11 
+                       .db 00h, 00h, 09h, 00h, 00h, 45h, 39h, 36h, 00h, 30h, 27
+                   

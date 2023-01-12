@@ -1,0 +1,55 @@
+8000:              .org 8000h
+                       ; Assumes the two numbers have been read in at 9000h and
+                       ; 9002h contains the addition
+                       ; 9003h contains the subtraction
+                       ; 9004h, 9005h contains the 16 bit multiplication
+                       ; 9006h, 9007h contains the quotient and remainder
+                   main:
+8000: 75 83 90         mov dph, #90h
+8003: 75 82 00         mov dpl, #00h
+8006: E0               movx A, @dptr   ; First Number from #9000h into R1
+8007: F9               mov R1, A
+8008: 75 82 01         mov dpl, #01h
+800B: E0               movx A, @dptr   ; Second Number from #9001h into R2
+800C: FA               mov R2, A
+800D: 12 80 1C         lcall addition
+8010: 12 80 23         lcall subtract
+8013: 12 80 2A         lcall multiply
+8016: 12 80 39         lcall divide
+8019: 02 00 00         ljmp 00h
+                   
+                   addition:
+801C: E9               mov A, R1
+801D: 2A               ADD A, R2
+801E: 75 82 02         mov dpl, #02h
+8021: F0               movx @dptr, A
+8022: 22               ret
+                   
+                   subtract:
+8023: E9               mov A, R1
+8024: 9A               SUBB A, R2
+8025: 75 82 03         mov dpl, #03h
+8028: F0               movx @dptr, A
+8029: 22               ret
+                   
+                   multiply:
+802A: E9               mov A, R1
+802B: 8A F0            mov B, R2
+802D: A4               MUL AB
+802E: 75 82 04         mov dpl, #04h
+8031: F0               movx @dptr, A
+8032: 75 82 05         mov dpl, #05h
+8035: E5 F0            mov A, B
+8037: F0               movx @dptr, A
+8038: 22               ret
+                   
+                   divide:
+8039: E9               mov A, R1
+803A: 8A F0            mov B, R2
+803C: 84               DIV AB
+803D: 75 82 06         mov dpl, #06h
+8040: F0               movx @dptr, A
+8041: 75 82 07         mov dpl, #07h
+8044: E5 F0            mov A, B
+8046: F0               movx @dptr, A
+8047: 22               ret

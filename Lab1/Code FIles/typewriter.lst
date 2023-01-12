@@ -1,0 +1,40 @@
+                   ; The main loop or body of our typerwriter program:
+                   
+0000:              .org 00h
+0000: 02 01 00              ljmp start ;power up and reset vector
+                   
+0100:              .org 100h
+                   start:
+0100: 12 01 0D              lcall init
+                            loop:
+0103: 12 01 1A                      lcall getchr
+0106: 12 01 24                      lcall sndchr
+0109: F5 90                         mov P1, a
+010B: 80 F6                         sjmp loop
+                   
+                   init:
+010D: 75 89 20              mov tmod, #20h
+0110: 75 88 41              mov tcon, #41h
+0113: 75 8D FD              mov th1, #0fdh
+0116: 75 98 50              mov scon, #50h
+0119: 22                    ret
+                   
+                   
+                   getchr:
+011A: 30 98 FD              jnb ri, getchr
+011D: E5 99                 mov a, sbuf
+011F: 54 7F                 anl a, #7fh
+0121: C2 98                 clr ri
+0123: 22                    ret
+                   
+                   sndchr:
+0124: C2 99                 clr scon.1
+0126: F5 99                 mov sbuf, a
+                            txloop:
+0128: 30 99 FD                      jnb scon.1, txloop
+012B: 22                    ret
+                   
+                   
+                   
+                   
+                   

@@ -1,0 +1,12 @@
+8000:              .org 8000h
+                   
+                   main:
+8000: 75 83 90         mov dph, #90h
+8003: 75 82 00         mov dpl, #00h   ; Preset dph and dpl to 9000h
+8006: E0               movx A, @dptr   ; Move the value at 9000h into acc
+8007: F8               mov R0, A      ;
+                       loop: 
+8008: D8 FE            DJNZ R0, loop
+800A: B2 90            cpl P1.0
+800C: 80 F2            sjmp main
+                   

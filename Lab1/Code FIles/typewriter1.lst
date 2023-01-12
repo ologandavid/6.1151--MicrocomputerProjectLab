@@ -1,0 +1,46 @@
+                   ; The main loop or body of our typewriter program:
+                   
+0000:              .org 00h
+0000: 02 01 00         ljmp start; power up and reset vector
+                   
+0100:              .org 100h
+                   start:
+0100: 12 01 14         lcall init
+0103: 79 41            mov R1, #41h; Initialize counter for 65 characters
+                       loop:
+0105: 12 01 21             lcall getchr
+0108: 12 01 2B             lcall sndchr
+010B: F5 90                mov P1, a; Read letter output to the 
+010D: D9 F6                DJNZ R1, loop; decrement R1, if 0, run crlf sub-func
+010F: 12 01 33             lcall crlf
+0112: 80 F1                sjmp loop
+                   
+                   init:
+0114: 75 89 20         mov tmod, #20h
+0117: 75 88 41         mov tcon, #41h
+011A: 75 8D FD         mov th1, #0fdh
+011D: 75 98 50         mov scon, #50h
+0120: 22               ret
+                   
+                   getchr:
+0121: 30 98 FD         jnb ri, getchr
+0124: E5 99            mov a, sbuf
+0126: 54 7F            anl a, #7fh
+0128: C2 98            clr ri
+012A: 22               ret
+                   
+                   sndchr:
+012B: C2 99            clr scon.1
+012D: F5 99            mov sbuf, a; 
+                       txloop:
+012F: 30 99 FD             jnb scon.1, txloop
+0132: 22               ret
+                   
+                   crlf: 
+0133: 74 0A            mov a, #0Ah; Linefeed #10d,#0Ah 
+0135: 12 01 2B         lcall sndchr
+0138: 74 0D            mov a, #0Dh; Carriage Return #13d, #0Dh 
+013A: 12 01 2B         lcall sndchr
+013D: 79 41            mov R1, #41h; Reset the Counter to 65
+013F: 22               ret; return to DJNZ call
+                   

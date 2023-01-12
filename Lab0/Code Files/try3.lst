@@ -1,0 +1,6 @@
+                            main:
+0000: 75 90 11              mov P1, #11h
+0003: 75 90 22              mov P1, #22h
+                            loop:
+0006: 75 90 55                      mov P1, #55h
+0009: 80 FB                         sjmp loop

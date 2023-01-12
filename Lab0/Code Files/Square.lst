@@ -1,0 +1,13 @@
+                   main:
+0000: 78 10                 mov R0, #10h;
+0002: 79 10                 mov R1, #10h;
+                            loop:   
+0004: C2 87                 CLR P0.7;
+0006: 75 90 E6              mov P1, #0E6h;
+0009: D8 F9                 DJNZ R0, loop;
+                            loop2:
+000B: 75 90 1A              mov P1, #1Ah
+000E: D9 FB                 DJNZ R1, loop2;
+0010: D2 87                 SETB P0.7;      
+0012: 80 EC                 sjmp main
+                   

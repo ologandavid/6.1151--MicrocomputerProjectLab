@@ -1,0 +1,48 @@
+0000:              .org 00h
+0000: 02 01 00         ljmp start ; power up and reset vector
+                   
+0100:              .org 100h
+                   
+                   start:
+0100: 12 01 0E         lcall init
+                       loop:
+0103: 12 01 1B             lcall getkey
+0106: 12 01 34             lcall fix
+0109: 12 01 2C             lcall sndkey
+010C: 80 F5            sjmp loop
+                   
+                   init:
+010E: 75 89 20         mov tmod, #20h
+0111: 75 88 41         mov tcon, #41h
+0114: 75 8D FD         mov th1, #0fdh
+0117: 75 98 50         mov scon, #50h
+011A: 22               ret
+                   
+                   getkey:
+011B: 30 B3 FD         jnb P3.3, getkey
+011E: 75 90 FF         mov P1, #0FFh; Set Port 1 high to be read
+                       pressdone:
+0121: 20 B3 FD             jb P3.3, pressdone
+0124: E5 90                mov a, P1; Reading to Port 1
+0126: C3                   clr C
+0127: 94 F0                SUBB A, #0F0h
+0129: F5 90                mov P1, a; Writing to Port 1
+012B: 22                   ret
+                   
+                   sndkey:
+012C: C2 99            clr scon.1
+012E: F5 99            mov sbuf, a; Move contents of the accummulator into sbuf
+                       txloop:
+0130: 30 99 FD             jnb scon.1, txloop
+0133: 22               ret
+                   
+                   fix:
+0134: 04               inc a
+0135: 83               movc a, @a+pc
+0136: 22               ret
+0137: 00 00 30 00 
+      00 39 38 37 
+      00 36 35 34 
+      00 33 32 31 
+                       .db 00h, 00h, 30h, 00h, 00h, 39h, 38h, 37h, 00h, 36h, 35
+                   

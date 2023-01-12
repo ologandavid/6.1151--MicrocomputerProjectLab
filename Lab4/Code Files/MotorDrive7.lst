@@ -1,0 +1,184 @@
+0000:              .org 0000h
+                   
+                   main:
+0000: 78 00            mov R0, #00h
+0002: 79 FF            mov R1, #0FFh
+0004: 7A 00            mov R2, #00h
+0006: 7B 55            mov R3, #055h
+0008: 12 00 13         lcall init
+000B: 12 00 9B         lcall getkey2
+000E: 12 00 86         lcall getkey
+0011: 80 ED            sjmp main
+                   
+                   init:
+0013: 90 FE 33         mov dptr, #0FE33h       ; Initialize the 8255 for 8 bit
+0016: 74 80            mov a, #80h             ; Read 80h into the acc
+0018: F0               movx @dptr, a           ; Move 80h into location of 8255
+0019: 22               ret
+                   
+                   forward:
+001A: FE               mov R6, a
+001B: 90 FE 30         mov dptr, #0FE30h       ; Logic Level High
+001E: 74 03            mov a, #03h             
+0020: F0               movx @dptr, a
+0021: 12 00 60         lcall delay1
+0024: 90 FE 30         mov dptr, #0FE30h       ; Logic Level Low
+0027: 74 00            mov a, #00h             
+0029: F0               movx @dptr, a
+002A: 12 00 73         lcall delay2
+002D: EE               mov a, R6
+002E: 22               ret
+                   
+                   right:
+002F: FE               mov R6, a
+0030: 90 FE 30         mov dptr, #0FE30h       ; Logic Level High
+0033: 74 01            mov a, #01h             
+0035: F0               movx @dptr, a
+0036: 12 00 60         lcall delay1
+0039: 90 FE 30         mov dptr, #0FE30h       ; Logic Level Low
+003C: 74 00            mov a, #00h             
+003E: F0               movx @dptr, a
+003F: 12 00 73         lcall delay2
+0042: EE               mov a, R6
+0043: 22               ret
+                   
+                   left:
+0044: FE               mov R6, a
+0045: 90 FE 30         mov dptr, #0FE30h       ; Logic Level High
+0048: 74 02            mov a, #02h             
+004A: F0               movx @dptr, a
+004B: 12 00 60         lcall delay1
+004E: 90 FE 30         mov dptr, #0FE30h       ; Logic Level Low
+0051: 74 00            mov a, #00h             
+0053: F0               movx @dptr, a
+0054: 12 00 73         lcall delay2
+0057: EE               mov a, R6
+0058: 22               ret
+                   
+                   stops:
+0059: 90 FE 30         mov dptr, #0FE30h       ; Logic Level High
+005C: 74 00            mov a, #00h             
+005E: F0               movx @dptr, a
+005F: 22               ret
+                   
+                   delay1:                 ; Comparing with R0(high), R1(low)
+0060: AC 00            mov R4, 0       ; high byte
+0062: AD 01            mov R5, 1       ; low byte
+                       start:
+0064: BD 00 04         CJNE R5, #00h, notsame0
+0067: BC 00 04         CJNE R4, #00h, notsame1 
+006A: 22               ret
+                       notsame0:
+006B: 1D                   dec R5
+006C: 80 F6                sjmp start
+                       notsame1:
+006E: 1C                   dec R4
+006F: 7D FF                mov R5, #0FFh
+0071: 80 F1                sjmp start
+                   
+                   
+                   delay2:
+0073: AC 02            mov R4, 2       ; high byte
+0075: AD 03            mov R5, 3       ; low byte
+                       start2:
+0077: BD 00 04         CJNE R5, #00h, notsame2
+007A: BC 00 04         CJNE R4, #00h, notsame3
+007D: 22               ret
+                       
+                       notsame2:
+007E: 1D                   dec R5
+007F: 80 F6                sjmp start2
+                       notsame3:
+0081: 1C                   dec R4
+0082: 7D FF                mov R5, #0FFh
+0084: 80 F1                sjmp start2
+                   
+                   getkey:
+0086: 30 B3 FD         jnb P3.3, getkey        ; Jump if bit not set, wait for 
+0089: 75 90 FF         mov P1, #0FFh           ; Set Port 1 high to be read
+008C: E5 90            mov a, P1           ; Reading to Port 1
+008E: C3               clr C               
+008F: 94 F0            SUBB A, #0F0h       ; Make first nibble 0s
+                       pressdone:
+0091: 12 00 AD             lcall choice              
+0094: 20 B3 FA             jb P3.3, pressdone  ; If press detected, wait for it
+0097: 12 00 59             lcall stops
+009A: 22                   ret
+                   
+                   getkey2:
+009B: 30 B3 FD         jnb P3.3, getkey2        ; Jump if bit not set, wait for
+009E: 75 90 FF         mov P1, #0FFh           ; Set Port 1 high to be read
+00A1: E5 90            mov a, P1           ; Reading to Port 1
+00A3: C3               clr C               
+00A4: 94 F0            SUBB A, #0F0h       ; Make first nibble 0s
+                       pressdone2:            
+00A6: 20 B3 FD             jb P3.3, pressdone2  ; If press detected, wait for i
+00A9: 12 00 C6             lcall choice2
+00AC: 22                   ret
+                   
+                   choice:
+                       straight:
+00AD: B4 0F 05             CJNE A, #0Fh, turnr
+00B0: 12 00 1A             lcall forward
+00B3: 80 10                sjmp finished
+                       turnr:
+00B5: B4 0E 05             CJNE A, #0Eh, turnl
+00B8: 12 00 2F             lcall right
+00BB: 80 08                sjmp finished
+                       turnl:
+00BD: B4 0D 06             CJNE A, #0Dh, D50
+00C0: 12 00 44             lcall left
+00C3: 80 00                sjmp finished
+                       finished:
+00C5: 22                   ret
+                   
+                   choice2:
+                       D50:
+00C6: B4 0B 08             CJNE A, #0Bh, D75
+00C9: 78 00                mov R0, #00h
+00CB: 79 FF                mov R1, #0FFh
+00CD: 7A 00                mov R2, #00h
+00CF: 7B FF                mov R3, #0FFh
+                       D75:
+00D1: B4 0A 08             CJNE A, #0Ah, D1
+00D4: 78 00                mov R0, #00h
+00D6: 79 FF                mov R1, #0FFh
+00D8: 7A 00                mov R2, #00h
+00DA: 7B 55                mov R3, #055h
+                       D1:
+00DC: B4 09 08             CJNE A, #09h, D7
+00DF: 78 FF                mov R0, #0FFh
+00E1: 79 00                mov R1, #00h
+00E3: 7A 00                mov R2, #00h
+00E5: 7B 01                mov R3, #01h
+                       D7:
+00E7: B4 07 30             CJNE A, #07h, finished2
+00EA: 7F FF                mov R7, #0FFh
+00EC: 75 F0 02             mov B, #02h
+                           here:
+00EF: 12 00 1A                 lcall forward
+00F2: DF FB                    DJNZ R7, here
+00F4: 7F FF                    mov R7, #0FFh
+00F6: D5 F0 F6                 DJNZ B, here
+00F9: 7F FF                mov R7, #0FFh
+00FB: 75 F0 02             mov B, #02h
+                           here1:
+00FE: 12 00 2F                 lcall right
+0101: DF FB                    DJNZ R7, here1
+0103: 7F FF                    mov R7, #0FFh
+0105: D5 F0 F6                 DJNZ B, here1
+0108: 7F FF                mov R7, #0FFh
+010A: 75 F0 02             mov B, #02h
+                           here2:
+010D: 12 00 44                 lcall left
+0110: DF FB                    DJNZ R7, here2
+0112: 7F FF                    mov R7, #0FFh
+0114: D5 F0 F6                 DJNZ B, here2
+0117: 12 00 59             lcall stops
+                       finished2:
+011A: 22                   ret
+                   
+                   
+                   
+                   
+                   

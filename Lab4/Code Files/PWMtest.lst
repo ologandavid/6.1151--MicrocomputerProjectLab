@@ -1,0 +1,61 @@
+                   main:
+0000: 12 00 10         lcall init
+                       main2:
+0003: 78 00            mov R0, #00h
+0005: 79 FF            mov R1, #0FFh
+0007: 7A 00            mov R2, #00h
+0009: 7B 55            mov R3, #055h
+000B: 12 00 17         lcall forward
+000E: 80 F3            sjmp main2
+                   
+                   
+                   init:
+0010: 90 FE 33         mov dptr, #0FE33h       ; Initialize the 8255 for 8 bit
+0013: 74 80            mov a, #80h             ; Read 80h into the acc
+0015: F0               movx @dptr, a           ; Move 80h into location of 8255
+0016: 22               ret
+                   
+                   forward:
+0017: 90 FE 30         mov dptr, #0FE30h       ; Logic Level High
+001A: 74 03            mov a, #03h             
+001C: F0               movx @dptr, a
+001D: 12 00 2A         lcall delay1
+0020: 90 FE 30         mov dptr, #0FE30h       ; Logic Level High
+0023: 74 00            mov a, #00h             
+0025: F0               movx @dptr, a
+0026: 12 00 3D         lcall delay2
+0029: 22               ret
+                   
+                   delay1:                 ; Comparing with R0(high), R1(low)
+002A: AC 00            mov R4, 0       ; high byte
+002C: AD 01            mov R5, 1       ; low byte
+                       start:
+002E: BD 00 04         CJNE R5, #00h, notsame0
+0031: BC 00 04         CJNE R4, #00h, notsame1 
+0034: 22               ret
+                   
+                       notsame0:
+0035: 1D                   dec R5
+0036: 80 F6                sjmp start
+                       notsame1:
+0038: 1C                   dec R4
+0039: 7D FF                mov R5, #0FFh
+003B: 80 F1                sjmp start
+                   
+                   
+                   delay2:
+003D: AC 02            mov R4, 2       ; high byte
+003F: AD 03            mov R5, 3       ; low byte
+                       start2:
+0041: BD 00 04         CJNE R5, #00h, notsame2
+0044: BC 00 04         CJNE R4, #00h, notsame3
+0047: 22               ret
+                       
+                       notsame2:
+0048: 1D                   dec R5
+0049: 80 F6                sjmp start2
+                       notsame3:
+004B: 1C                   dec R4
+004C: 7D FF                mov R5, #0FFh
+004E: 80 F1                sjmp start2
+                   

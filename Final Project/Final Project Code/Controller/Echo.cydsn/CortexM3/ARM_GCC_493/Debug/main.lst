@@ -1,0 +1,1875 @@
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccqrg31h.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"main.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.R_XADC,"ax",%progbits
+  19              		.align	2
+  20              		.global	R_XADC
+  21              		.thumb
+  22              		.thumb_func
+  23              		.type	R_XADC, %function
+  24              	R_XADC:
+  25              	.LFB64:
+  26              		.file 1 ".\\main.c"
+   1:.\main.c      **** /* ========================================
+   2:.\main.c      ****  *
+   3:.\main.c      ****  * Copyright YOUR COMPANY, THE YEAR
+   4:.\main.c      ****  * All Rights Reserved
+   5:.\main.c      ****  * UNPUBLISHED, LICENSED SOFTWARE.
+   6:.\main.c      ****  *
+   7:.\main.c      ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:.\main.c      ****  * WHICH IS THE PROPERTY OF your company.
+   9:.\main.c      ****  *
+  10:.\main.c      ****  * ========================================
+  11:.\main.c      **** */
+  12:.\main.c      **** #include <project.h>
+  13:.\main.c      **** #include <stdio.h>
+  14:.\main.c      **** #include <math.h>
+  15:.\main.c      **** uint16 xadcResult = 0;
+  16:.\main.c      **** uint16 yadcResult = 0;
+  17:.\main.c      **** char xsend = 4;
+  18:.\main.c      **** char ysend = 4;
+  19:.\main.c      **** char bstate =0;
+  20:.\main.c      ****    
+  21:.\main.c      **** void R_XADC();
+  22:.\main.c      **** void R_YADC();
+  23:.\main.c      **** void C_XADC();
+  24:.\main.c      **** void C_YADC();
+  25:.\main.c      **** void C_B();
+  26:.\main.c      **** 
+  27:.\main.c      **** int main()
+  28:.\main.c      **** {
+  29:.\main.c      ****     CyGlobalIntEnable; /* Enable global interrupts. */
+  30:.\main.c      ****     
+  31:.\main.c      ****     /* Place your initialization/startup code here (e.g. MyInst_Start()) */
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccqrg31h.s 			page 2
+
+
+  32:.\main.c      **** 
+  33:.\main.c      ****     UART_1_Init();
+  34:.\main.c      ****     UART_1_Start();
+  35:.\main.c      ****     unsigned char j = 10;
+  36:.\main.c      ****     //int Result[2];
+  37:.\main.c      ****     //int bytesWritten;     
+  38:.\main.c      ****     //char S1[8];   
+  39:.\main.c      ****     
+  40:.\main.c      ****     ADC_SAR_1_Start();
+  41:.\main.c      ****     ADC_SAR_2_Start();
+  42:.\main.c      ****     ADC_SAR_1_StartConvert();
+  43:.\main.c      ****     ADC_SAR_2_StartConvert();
+  44:.\main.c      ****     //UART_1_PutString("Hello World!");
+  45:.\main.c      ****     for(;;)
+  46:.\main.c      ****     {
+  47:.\main.c      ****         R_XADC();
+  48:.\main.c      ****         R_YADC();
+  49:.\main.c      ****         C_XADC();
+  50:.\main.c      ****         C_YADC();
+  51:.\main.c      ****         C_B();
+  52:.\main.c      ****         UART_1_WriteTxData(xsend);
+  53:.\main.c      ****         CyDelay(j);	
+  54:.\main.c      ****         UART_1_WriteTxData(ysend);
+  55:.\main.c      ****         CyDelay(j);	
+  56:.\main.c      ****         UART_1_WriteTxData(bstate);
+  57:.\main.c      ****         CyDelay(j);	
+  58:.\main.c      ****         /* Place your application code here. 
+  59:.\main.c      ****         if (UART_1_GetRxBufferSize() > 0) {
+  60:.\main.c      ****             uint8 c = UART_1_GetChar();
+  61:.\main.c      ****             UART_1_PutChar(c);
+  62:.\main.c      ****             Control_Reg_1_Write(c);
+  63:.\main.c      ****         }*/
+  64:.\main.c      ****     }
+  65:.\main.c      **** }
+  66:.\main.c      **** 
+  67:.\main.c      **** 
+  68:.\main.c      **** void R_XADC()
+  69:.\main.c      **** {
+  27              		.loc 1 69 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31 0000 08B5     		push	{r3, lr}
+  32              		.cfi_def_cfa_offset 8
+  33              		.cfi_offset 3, -8
+  34              		.cfi_offset 14, -4
+  70:.\main.c      ****   if( ADC_SAR_1_IsEndConversion(ADC_SAR_1_WAIT_FOR_RESULT) )
+  35              		.loc 1 70 0
+  36 0002 0020     		movs	r0, #0
+  37 0004 FFF7FEFF 		bl	ADC_SAR_1_IsEndConversion
+  38              	.LVL0:
+  39 0008 80B1     		cbz	r0, .L1
+  71:.\main.c      **** 		{
+  72:.\main.c      **** 			xadcResult = ADC_SAR_1_GetResult16();		// read the adc and assign the value adcResult
+  40              		.loc 1 72 0
+  41 000a FFF7FEFF 		bl	ADC_SAR_1_GetResult16
+  42              	.LVL1:
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccqrg31h.s 			page 3
+
+
+  43 000e 80B2     		uxth	r0, r0
+  73:.\main.c      ****             xadcResult = (int)xadcResult;
+  74:.\main.c      ****             xadcResult = (xadcResult)/5;              // adcResult is the integer scaling between 0
+  44              		.loc 1 74 0
+  45 0010 074B     		ldr	r3, .L5
+  46 0012 A3FB0030 		umull	r3, r0, r3, r0
+  47 0016 8008     		lsrs	r0, r0, #2
+  48 0018 064B     		ldr	r3, .L5+4
+  49 001a 1880     		strh	r0, [r3]	@ movhi
+  75:.\main.c      ****    		if (xadcResult & 0x8000)
+  76:.\main.c      ****    		{
+  77:.\main.c      ****     		xadcResult = 0;       // ignore negative ADC results
+  78:.\main.c      ****    		}
+  79:.\main.c      ****    		else if (xadcResult >= 0xfff)
+  50              		.loc 1 79 0
+  51 001c 40F6FE73 		movw	r3, #4094
+  52 0020 9842     		cmp	r0, r3
+  53 0022 03D9     		bls	.L1
+  80:.\main.c      ****    		{
+  81:.\main.c      ****     		xadcResult = 0xfff;      // ignore high ADC results
+  54              		.loc 1 81 0
+  55 0024 40F6FF72 		movw	r2, #4095
+  56 0028 024B     		ldr	r3, .L5+4
+  57 002a 1A80     		strh	r2, [r3]	@ movhi
+  58              	.L1:
+  59 002c 08BD     		pop	{r3, pc}
+  60              	.L6:
+  61 002e 00BF     		.align	2
+  62              	.L5:
+  63 0030 CDCCCCCC 		.word	-858993459
+  64 0034 00000000 		.word	.LANCHOR0
+  65              		.cfi_endproc
+  66              	.LFE64:
+  67              		.size	R_XADC, .-R_XADC
+  68              		.section	.text.R_YADC,"ax",%progbits
+  69              		.align	2
+  70              		.global	R_YADC
+  71              		.thumb
+  72              		.thumb_func
+  73              		.type	R_YADC, %function
+  74              	R_YADC:
+  75              	.LFB65:
+  82:.\main.c      ****    		}
+  83:.\main.c      **** 		}
+  84:.\main.c      **** }
+  85:.\main.c      **** void R_YADC(){
+  76              		.loc 1 85 0
+  77              		.cfi_startproc
+  78              		@ args = 0, pretend = 0, frame = 0
+  79              		@ frame_needed = 0, uses_anonymous_args = 0
+  80 0000 08B5     		push	{r3, lr}
+  81              		.cfi_def_cfa_offset 8
+  82              		.cfi_offset 3, -8
+  83              		.cfi_offset 14, -4
+  86:.\main.c      ****   if( ADC_SAR_2_IsEndConversion(ADC_SAR_2_WAIT_FOR_RESULT) )
+  84              		.loc 1 86 0
+  85 0002 0020     		movs	r0, #0
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccqrg31h.s 			page 4
+
+
+  86 0004 FFF7FEFF 		bl	ADC_SAR_2_IsEndConversion
+  87              	.LVL2:
+  88 0008 80B1     		cbz	r0, .L7
+  87:.\main.c      **** 		{
+  88:.\main.c      **** 			yadcResult = ADC_SAR_2_GetResult16();		// read the adc and assign the value adcResult
+  89              		.loc 1 88 0
+  90 000a FFF7FEFF 		bl	ADC_SAR_2_GetResult16
+  91              	.LVL3:
+  92 000e 80B2     		uxth	r0, r0
+  89:.\main.c      ****             yadcResult = (int)yadcResult;
+  90:.\main.c      ****             yadcResult = (yadcResult)/5;              // adcResult is the integer scaling between 0
+  93              		.loc 1 90 0
+  94 0010 074B     		ldr	r3, .L11
+  95 0012 A3FB0030 		umull	r3, r0, r3, r0
+  96 0016 8008     		lsrs	r0, r0, #2
+  97 0018 064B     		ldr	r3, .L11+4
+  98 001a 5880     		strh	r0, [r3, #2]	@ movhi
+  91:.\main.c      ****    		if (yadcResult & 0x8000)
+  92:.\main.c      ****    		{
+  93:.\main.c      ****     		yadcResult = 0;       // ignore negative ADC results
+  94:.\main.c      ****    		}
+  95:.\main.c      ****    		else if (yadcResult >= 0xfff)
+  99              		.loc 1 95 0
+ 100 001c 40F6FE73 		movw	r3, #4094
+ 101 0020 9842     		cmp	r0, r3
+ 102 0022 03D9     		bls	.L7
+  96:.\main.c      ****    		{
+  97:.\main.c      ****     		yadcResult = 0xfff;      // ignore high ADC results
+ 103              		.loc 1 97 0
+ 104 0024 40F6FF72 		movw	r2, #4095
+ 105 0028 024B     		ldr	r3, .L11+4
+ 106 002a 5A80     		strh	r2, [r3, #2]	@ movhi
+ 107              	.L7:
+ 108 002c 08BD     		pop	{r3, pc}
+ 109              	.L12:
+ 110 002e 00BF     		.align	2
+ 111              	.L11:
+ 112 0030 CDCCCCCC 		.word	-858993459
+ 113 0034 00000000 		.word	.LANCHOR0
+ 114              		.cfi_endproc
+ 115              	.LFE65:
+ 116              		.size	R_YADC, .-R_YADC
+ 117              		.section	.text.C_XADC,"ax",%progbits
+ 118              		.align	2
+ 119              		.global	C_XADC
+ 120              		.thumb
+ 121              		.thumb_func
+ 122              		.type	C_XADC, %function
+ 123              	C_XADC:
+ 124              	.LFB66:
+  98:.\main.c      ****    		}    										// delay in milliseconds
+  99:.\main.c      **** 		}
+ 100:.\main.c      **** }
+ 101:.\main.c      **** 
+ 102:.\main.c      **** void C_XADC()
+ 103:.\main.c      **** {
+ 125              		.loc 1 103 0
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccqrg31h.s 			page 5
+
+
+ 126              		.cfi_startproc
+ 127              		@ args = 0, pretend = 0, frame = 0
+ 128              		@ frame_needed = 0, uses_anonymous_args = 0
+ 129              		@ link register save eliminated.
+ 104:.\main.c      ****     if (0 <= xadcResult && xadcResult < 100){
+ 130              		.loc 1 104 0
+ 131 0000 234B     		ldr	r3, .L23
+ 132 0002 1B88     		ldrh	r3, [r3]
+ 133 0004 632B     		cmp	r3, #99
+ 134 0006 02D8     		bhi	.L14
+ 105:.\main.c      ****             xsend = 'A';
+ 135              		.loc 1 105 0
+ 136 0008 4121     		movs	r1, #65
+ 137 000a 224A     		ldr	r2, .L23+4
+ 138 000c 1170     		strb	r1, [r2]
+ 139              	.L14:
+ 106:.\main.c      ****         }
+ 107:.\main.c      ****         if (100 <= xadcResult && xadcResult < 200){
+ 140              		.loc 1 107 0
+ 141 000e A3F16402 		sub	r2, r3, #100
+ 142 0012 92B2     		uxth	r2, r2
+ 143 0014 632A     		cmp	r2, #99
+ 144 0016 02D8     		bhi	.L15
+ 108:.\main.c      ****             xsend = 'B';
+ 145              		.loc 1 108 0
+ 146 0018 4221     		movs	r1, #66
+ 147 001a 1E4A     		ldr	r2, .L23+4
+ 148 001c 1170     		strb	r1, [r2]
+ 149              	.L15:
+ 109:.\main.c      ****         }
+ 110:.\main.c      ****         if (200 <= xadcResult && xadcResult < 300){
+ 150              		.loc 1 110 0
+ 151 001e A3F1C802 		sub	r2, r3, #200
+ 152 0022 92B2     		uxth	r2, r2
+ 153 0024 632A     		cmp	r2, #99
+ 154 0026 02D8     		bhi	.L16
+ 111:.\main.c      ****             xsend = 'C';
+ 155              		.loc 1 111 0
+ 156 0028 4321     		movs	r1, #67
+ 157 002a 1A4A     		ldr	r2, .L23+4
+ 158 002c 1170     		strb	r1, [r2]
+ 159              	.L16:
+ 112:.\main.c      ****         }
+ 113:.\main.c      ****         if (300 <= xadcResult && xadcResult < 400){
+ 160              		.loc 1 113 0
+ 161 002e A3F59672 		sub	r2, r3, #300
+ 162 0032 92B2     		uxth	r2, r2
+ 163 0034 632A     		cmp	r2, #99
+ 164 0036 02D8     		bhi	.L17
+ 114:.\main.c      ****             xsend = 'D';
+ 165              		.loc 1 114 0
+ 166 0038 4421     		movs	r1, #68
+ 167 003a 164A     		ldr	r2, .L23+4
+ 168 003c 1170     		strb	r1, [r2]
+ 169              	.L17:
+ 115:.\main.c      ****         }
+ 116:.\main.c      ****         if (400 <= xadcResult && xadcResult < 500){
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccqrg31h.s 			page 6
+
+
+ 170              		.loc 1 116 0
+ 171 003e A3F5C872 		sub	r2, r3, #400
+ 172 0042 92B2     		uxth	r2, r2
+ 173 0044 632A     		cmp	r2, #99
+ 174 0046 02D8     		bhi	.L18
+ 117:.\main.c      ****             xsend = 'E';
+ 175              		.loc 1 117 0
+ 176 0048 4521     		movs	r1, #69
+ 177 004a 124A     		ldr	r2, .L23+4
+ 178 004c 1170     		strb	r1, [r2]
+ 179              	.L18:
+ 118:.\main.c      ****         }
+ 119:.\main.c      ****         if (500 <= xadcResult && xadcResult < 600){
+ 180              		.loc 1 119 0
+ 181 004e A3F5FA72 		sub	r2, r3, #500
+ 182 0052 92B2     		uxth	r2, r2
+ 183 0054 632A     		cmp	r2, #99
+ 184 0056 02D8     		bhi	.L19
+ 120:.\main.c      ****             xsend = 'F';
+ 185              		.loc 1 120 0
+ 186 0058 4621     		movs	r1, #70
+ 187 005a 0E4A     		ldr	r2, .L23+4
+ 188 005c 1170     		strb	r1, [r2]
+ 189              	.L19:
+ 121:.\main.c      ****         }
+ 122:.\main.c      ****         if (600 <= xadcResult && xadcResult < 700){
+ 190              		.loc 1 122 0
+ 191 005e A3F51672 		sub	r2, r3, #600
+ 192 0062 92B2     		uxth	r2, r2
+ 193 0064 632A     		cmp	r2, #99
+ 194 0066 02D8     		bhi	.L20
+ 123:.\main.c      ****             xsend = 'G';
+ 195              		.loc 1 123 0
+ 196 0068 4721     		movs	r1, #71
+ 197 006a 0A4A     		ldr	r2, .L23+4
+ 198 006c 1170     		strb	r1, [r2]
+ 199              	.L20:
+ 124:.\main.c      ****         }
+ 125:.\main.c      ****         if (700 <= xadcResult && xadcResult < 800){
+ 200              		.loc 1 125 0
+ 201 006e A3F52F72 		sub	r2, r3, #700
+ 202 0072 92B2     		uxth	r2, r2
+ 203 0074 632A     		cmp	r2, #99
+ 204 0076 02D8     		bhi	.L21
+ 126:.\main.c      ****             xsend = 'H';
+ 205              		.loc 1 126 0
+ 206 0078 4821     		movs	r1, #72
+ 207 007a 064A     		ldr	r2, .L23+4
+ 208 007c 1170     		strb	r1, [r2]
+ 209              	.L21:
+ 127:.\main.c      ****         }
+ 128:.\main.c      ****         if (800 <= xadcResult && xadcResult < 900){
+ 210              		.loc 1 128 0
+ 211 007e A3F54873 		sub	r3, r3, #800
+ 212 0082 9BB2     		uxth	r3, r3
+ 213 0084 632B     		cmp	r3, #99
+ 214 0086 02D8     		bhi	.L13
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccqrg31h.s 			page 7
+
+
+ 129:.\main.c      ****             xsend = 'I';
+ 215              		.loc 1 129 0
+ 216 0088 4922     		movs	r2, #73
+ 217 008a 024B     		ldr	r3, .L23+4
+ 218 008c 1A70     		strb	r2, [r3]
+ 219              	.L13:
+ 220 008e 7047     		bx	lr
+ 221              	.L24:
+ 222              		.align	2
+ 223              	.L23:
+ 224 0090 00000000 		.word	.LANCHOR0
+ 225 0094 00000000 		.word	.LANCHOR1
+ 226              		.cfi_endproc
+ 227              	.LFE66:
+ 228              		.size	C_XADC, .-C_XADC
+ 229              		.section	.text.C_YADC,"ax",%progbits
+ 230              		.align	2
+ 231              		.global	C_YADC
+ 232              		.thumb
+ 233              		.thumb_func
+ 234              		.type	C_YADC, %function
+ 235              	C_YADC:
+ 236              	.LFB67:
+ 130:.\main.c      ****         }
+ 131:.\main.c      **** }
+ 132:.\main.c      **** 
+ 133:.\main.c      **** void C_YADC()
+ 134:.\main.c      **** {
+ 237              		.loc 1 134 0
+ 238              		.cfi_startproc
+ 239              		@ args = 0, pretend = 0, frame = 0
+ 240              		@ frame_needed = 0, uses_anonymous_args = 0
+ 241              		@ link register save eliminated.
+ 135:.\main.c      ****     if (0 <= yadcResult && yadcResult < 100){
+ 242              		.loc 1 135 0
+ 243 0000 234B     		ldr	r3, .L35
+ 244 0002 5B88     		ldrh	r3, [r3, #2]
+ 245 0004 632B     		cmp	r3, #99
+ 246 0006 02D8     		bhi	.L26
+ 136:.\main.c      ****             ysend = 'J';
+ 247              		.loc 1 136 0
+ 248 0008 4A21     		movs	r1, #74
+ 249 000a 224A     		ldr	r2, .L35+4
+ 250 000c 5170     		strb	r1, [r2, #1]
+ 251              	.L26:
+ 137:.\main.c      ****         }
+ 138:.\main.c      ****         if (100 <= yadcResult && yadcResult < 200){
+ 252              		.loc 1 138 0
+ 253 000e A3F16402 		sub	r2, r3, #100
+ 254 0012 92B2     		uxth	r2, r2
+ 255 0014 632A     		cmp	r2, #99
+ 256 0016 02D8     		bhi	.L27
+ 139:.\main.c      ****             ysend = 'K';
+ 257              		.loc 1 139 0
+ 258 0018 4B21     		movs	r1, #75
+ 259 001a 1E4A     		ldr	r2, .L35+4
+ 260 001c 5170     		strb	r1, [r2, #1]
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccqrg31h.s 			page 8
+
+
+ 261              	.L27:
+ 140:.\main.c      ****         }
+ 141:.\main.c      ****         if (200 <= yadcResult && yadcResult < 300){
+ 262              		.loc 1 141 0
+ 263 001e A3F1C802 		sub	r2, r3, #200
+ 264 0022 92B2     		uxth	r2, r2
+ 265 0024 632A     		cmp	r2, #99
+ 266 0026 02D8     		bhi	.L28
+ 142:.\main.c      ****             ysend = 'L';
+ 267              		.loc 1 142 0
+ 268 0028 4C21     		movs	r1, #76
+ 269 002a 1A4A     		ldr	r2, .L35+4
+ 270 002c 5170     		strb	r1, [r2, #1]
+ 271              	.L28:
+ 143:.\main.c      ****         }
+ 144:.\main.c      ****         if (300 <= yadcResult && yadcResult < 400){
+ 272              		.loc 1 144 0
+ 273 002e A3F59672 		sub	r2, r3, #300
+ 274 0032 92B2     		uxth	r2, r2
+ 275 0034 632A     		cmp	r2, #99
+ 276 0036 02D8     		bhi	.L29
+ 145:.\main.c      ****             ysend = 'M';
+ 277              		.loc 1 145 0
+ 278 0038 4D21     		movs	r1, #77
+ 279 003a 164A     		ldr	r2, .L35+4
+ 280 003c 5170     		strb	r1, [r2, #1]
+ 281              	.L29:
+ 146:.\main.c      ****         }
+ 147:.\main.c      ****         if (400 <= yadcResult && yadcResult < 500){
+ 282              		.loc 1 147 0
+ 283 003e A3F5C872 		sub	r2, r3, #400
+ 284 0042 92B2     		uxth	r2, r2
+ 285 0044 632A     		cmp	r2, #99
+ 286 0046 02D8     		bhi	.L30
+ 148:.\main.c      ****             ysend = 'N';
+ 287              		.loc 1 148 0
+ 288 0048 4E21     		movs	r1, #78
+ 289 004a 124A     		ldr	r2, .L35+4
+ 290 004c 5170     		strb	r1, [r2, #1]
+ 291              	.L30:
+ 149:.\main.c      ****         }
+ 150:.\main.c      ****         if (500 <= yadcResult && yadcResult < 600){
+ 292              		.loc 1 150 0
+ 293 004e A3F5FA72 		sub	r2, r3, #500
+ 294 0052 92B2     		uxth	r2, r2
+ 295 0054 632A     		cmp	r2, #99
+ 296 0056 02D8     		bhi	.L31
+ 151:.\main.c      ****             ysend = 'O';
+ 297              		.loc 1 151 0
+ 298 0058 4F21     		movs	r1, #79
+ 299 005a 0E4A     		ldr	r2, .L35+4
+ 300 005c 5170     		strb	r1, [r2, #1]
+ 301              	.L31:
+ 152:.\main.c      ****         }
+ 153:.\main.c      ****         if (600 <= yadcResult && yadcResult < 700){
+ 302              		.loc 1 153 0
+ 303 005e A3F51672 		sub	r2, r3, #600
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccqrg31h.s 			page 9
+
+
+ 304 0062 92B2     		uxth	r2, r2
+ 305 0064 632A     		cmp	r2, #99
+ 306 0066 02D8     		bhi	.L32
+ 154:.\main.c      ****             ysend = 'P';
+ 307              		.loc 1 154 0
+ 308 0068 5021     		movs	r1, #80
+ 309 006a 0A4A     		ldr	r2, .L35+4
+ 310 006c 5170     		strb	r1, [r2, #1]
+ 311              	.L32:
+ 155:.\main.c      ****         }
+ 156:.\main.c      ****         if (700 <= yadcResult && yadcResult < 800){
+ 312              		.loc 1 156 0
+ 313 006e A3F52F72 		sub	r2, r3, #700
+ 314 0072 92B2     		uxth	r2, r2
+ 315 0074 632A     		cmp	r2, #99
+ 316 0076 02D8     		bhi	.L33
+ 157:.\main.c      ****             ysend = 'Q';
+ 317              		.loc 1 157 0
+ 318 0078 5121     		movs	r1, #81
+ 319 007a 064A     		ldr	r2, .L35+4
+ 320 007c 5170     		strb	r1, [r2, #1]
+ 321              	.L33:
+ 158:.\main.c      ****         }
+ 159:.\main.c      ****         if (800 <= yadcResult && yadcResult < 900){
+ 322              		.loc 1 159 0
+ 323 007e A3F54873 		sub	r3, r3, #800
+ 324 0082 9BB2     		uxth	r3, r3
+ 325 0084 632B     		cmp	r3, #99
+ 326 0086 02D8     		bhi	.L25
+ 160:.\main.c      ****             ysend = 'R';
+ 327              		.loc 1 160 0
+ 328 0088 5222     		movs	r2, #82
+ 329 008a 024B     		ldr	r3, .L35+4
+ 330 008c 5A70     		strb	r2, [r3, #1]
+ 331              	.L25:
+ 332 008e 7047     		bx	lr
+ 333              	.L36:
+ 334              		.align	2
+ 335              	.L35:
+ 336 0090 00000000 		.word	.LANCHOR0
+ 337 0094 00000000 		.word	.LANCHOR1
+ 338              		.cfi_endproc
+ 339              	.LFE67:
+ 340              		.size	C_YADC, .-C_YADC
+ 341              		.section	.text.C_B,"ax",%progbits
+ 342              		.align	2
+ 343              		.global	C_B
+ 344              		.thumb
+ 345              		.thumb_func
+ 346              		.type	C_B, %function
+ 347              	C_B:
+ 348              	.LFB68:
+ 161:.\main.c      ****         }
+ 162:.\main.c      **** }
+ 163:.\main.c      **** 
+ 164:.\main.c      **** void C_B(){
+ 349              		.loc 1 164 0
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccqrg31h.s 			page 10
+
+
+ 350              		.cfi_startproc
+ 351              		@ args = 0, pretend = 0, frame = 0
+ 352              		@ frame_needed = 0, uses_anonymous_args = 0
+ 353 0000 08B5     		push	{r3, lr}
+ 354              		.cfi_def_cfa_offset 8
+ 355              		.cfi_offset 3, -8
+ 356              		.cfi_offset 14, -4
+ 165:.\main.c      ****     if (B1_Read()==0){
+ 357              		.loc 1 165 0
+ 358 0002 FFF7FEFF 		bl	B1_Read
+ 359              	.LVL4:
+ 360 0006 18B9     		cbnz	r0, .L38
+ 166:.\main.c      ****         bstate = 'S';
+ 361              		.loc 1 166 0
+ 362 0008 5322     		movs	r2, #83
+ 363 000a 0E4B     		ldr	r3, .L44
+ 364 000c 1A71     		strb	r2, [r3, #4]
+ 365 000e 08BD     		pop	{r3, pc}
+ 366              	.L38:
+ 167:.\main.c      ****     }
+ 168:.\main.c      ****     else if (B2_Read()==0){
+ 367              		.loc 1 168 0
+ 368 0010 FFF7FEFF 		bl	B2_Read
+ 369              	.LVL5:
+ 370 0014 18B9     		cbnz	r0, .L40
+ 169:.\main.c      ****         bstate = 'T';
+ 371              		.loc 1 169 0
+ 372 0016 5422     		movs	r2, #84
+ 373 0018 0A4B     		ldr	r3, .L44
+ 374 001a 1A71     		strb	r2, [r3, #4]
+ 375 001c 08BD     		pop	{r3, pc}
+ 376              	.L40:
+ 170:.\main.c      ****     }
+ 171:.\main.c      ****     else if (B3_Read()==0){
+ 377              		.loc 1 171 0
+ 378 001e FFF7FEFF 		bl	B3_Read
+ 379              	.LVL6:
+ 380 0022 18B9     		cbnz	r0, .L41
+ 172:.\main.c      ****         bstate = 'U';
+ 381              		.loc 1 172 0
+ 382 0024 5522     		movs	r2, #85
+ 383 0026 074B     		ldr	r3, .L44
+ 384 0028 1A71     		strb	r2, [r3, #4]
+ 385 002a 08BD     		pop	{r3, pc}
+ 386              	.L41:
+ 173:.\main.c      ****     }
+ 174:.\main.c      ****     else if (B4_Read()==0){
+ 387              		.loc 1 174 0
+ 388 002c FFF7FEFF 		bl	B4_Read
+ 389              	.LVL7:
+ 390 0030 18B9     		cbnz	r0, .L42
+ 175:.\main.c      ****         bstate = 'V';
+ 391              		.loc 1 175 0
+ 392 0032 5622     		movs	r2, #86
+ 393 0034 034B     		ldr	r3, .L44
+ 394 0036 1A71     		strb	r2, [r3, #4]
+ 395 0038 08BD     		pop	{r3, pc}
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccqrg31h.s 			page 11
+
+
+ 396              	.L42:
+ 176:.\main.c      ****     }
+ 177:.\main.c      ****     else{
+ 178:.\main.c      ****         bstate='W';
+ 397              		.loc 1 178 0
+ 398 003a 5722     		movs	r2, #87
+ 399 003c 014B     		ldr	r3, .L44
+ 400 003e 1A71     		strb	r2, [r3, #4]
+ 401 0040 08BD     		pop	{r3, pc}
+ 402              	.L45:
+ 403 0042 00BF     		.align	2
+ 404              	.L44:
+ 405 0044 00000000 		.word	.LANCHOR0
+ 406              		.cfi_endproc
+ 407              	.LFE68:
+ 408              		.size	C_B, .-C_B
+ 409              		.section	.text.main,"ax",%progbits
+ 410              		.align	2
+ 411              		.global	main
+ 412              		.thumb
+ 413              		.thumb_func
+ 414              		.type	main, %function
+ 415              	main:
+ 416              	.LFB63:
+  28:.\main.c      ****     CyGlobalIntEnable; /* Enable global interrupts. */
+ 417              		.loc 1 28 0
+ 418              		.cfi_startproc
+ 419              		@ args = 0, pretend = 0, frame = 0
+ 420              		@ frame_needed = 0, uses_anonymous_args = 0
+ 421 0000 10B5     		push	{r4, lr}
+ 422              		.cfi_def_cfa_offset 8
+ 423              		.cfi_offset 4, -8
+ 424              		.cfi_offset 14, -4
+  29:.\main.c      ****     
+ 425              		.loc 1 29 0
+ 426              	@ 29 ".\main.c" 1
+ 427 0002 62B6     		CPSIE   i
+ 428              	@ 0 "" 2
+  33:.\main.c      ****     UART_1_Start();
+ 429              		.loc 1 33 0
+ 430              		.thumb
+ 431 0004 FFF7FEFF 		bl	UART_1_Init
+ 432              	.LVL8:
+  34:.\main.c      ****     unsigned char j = 10;
+ 433              		.loc 1 34 0
+ 434 0008 FFF7FEFF 		bl	UART_1_Start
+ 435              	.LVL9:
+  40:.\main.c      ****     ADC_SAR_2_Start();
+ 436              		.loc 1 40 0
+ 437 000c FFF7FEFF 		bl	ADC_SAR_1_Start
+ 438              	.LVL10:
+  41:.\main.c      ****     ADC_SAR_1_StartConvert();
+ 439              		.loc 1 41 0
+ 440 0010 FFF7FEFF 		bl	ADC_SAR_2_Start
+ 441              	.LVL11:
+  42:.\main.c      ****     ADC_SAR_2_StartConvert();
+ 442              		.loc 1 42 0
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccqrg31h.s 			page 12
+
+
+ 443 0014 FFF7FEFF 		bl	ADC_SAR_1_StartConvert
+ 444              	.LVL12:
+  43:.\main.c      ****     //UART_1_PutString("Hello World!");
+ 445              		.loc 1 43 0
+ 446 0018 FFF7FEFF 		bl	ADC_SAR_2_StartConvert
+ 447              	.LVL13:
+ 448              	.L47:
+  47:.\main.c      ****         R_YADC();
+ 449              		.loc 1 47 0 discriminator 1
+ 450 001c FFF7FEFF 		bl	R_XADC
+ 451              	.LVL14:
+  48:.\main.c      ****         C_XADC();
+ 452              		.loc 1 48 0 discriminator 1
+ 453 0020 FFF7FEFF 		bl	R_YADC
+ 454              	.LVL15:
+  49:.\main.c      ****         C_YADC();
+ 455              		.loc 1 49 0 discriminator 1
+ 456 0024 FFF7FEFF 		bl	C_XADC
+ 457              	.LVL16:
+  50:.\main.c      ****         C_B();
+ 458              		.loc 1 50 0 discriminator 1
+ 459 0028 FFF7FEFF 		bl	C_YADC
+ 460              	.LVL17:
+  51:.\main.c      ****         UART_1_WriteTxData(xsend);
+ 461              		.loc 1 51 0 discriminator 1
+ 462 002c FFF7FEFF 		bl	C_B
+ 463              	.LVL18:
+  52:.\main.c      ****         CyDelay(j);	
+ 464              		.loc 1 52 0 discriminator 1
+ 465 0030 0A4C     		ldr	r4, .L49
+ 466 0032 2078     		ldrb	r0, [r4]	@ zero_extendqisi2
+ 467 0034 FFF7FEFF 		bl	UART_1_WriteTxData
+ 468              	.LVL19:
+  53:.\main.c      ****         UART_1_WriteTxData(ysend);
+ 469              		.loc 1 53 0 discriminator 1
+ 470 0038 0A20     		movs	r0, #10
+ 471 003a FFF7FEFF 		bl	CyDelay
+ 472              	.LVL20:
+  54:.\main.c      ****         CyDelay(j);	
+ 473              		.loc 1 54 0 discriminator 1
+ 474 003e 6078     		ldrb	r0, [r4, #1]	@ zero_extendqisi2
+ 475 0040 FFF7FEFF 		bl	UART_1_WriteTxData
+ 476              	.LVL21:
+  55:.\main.c      ****         UART_1_WriteTxData(bstate);
+ 477              		.loc 1 55 0 discriminator 1
+ 478 0044 0A20     		movs	r0, #10
+ 479 0046 FFF7FEFF 		bl	CyDelay
+ 480              	.LVL22:
+  56:.\main.c      ****         CyDelay(j);	
+ 481              		.loc 1 56 0 discriminator 1
+ 482 004a 054B     		ldr	r3, .L49+4
+ 483 004c 1879     		ldrb	r0, [r3, #4]	@ zero_extendqisi2
+ 484 004e FFF7FEFF 		bl	UART_1_WriteTxData
+ 485              	.LVL23:
+  57:.\main.c      ****         /* Place your application code here. 
+ 486              		.loc 1 57 0 discriminator 1
+ 487 0052 0A20     		movs	r0, #10
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccqrg31h.s 			page 13
+
+
+ 488 0054 FFF7FEFF 		bl	CyDelay
+ 489              	.LVL24:
+  64:.\main.c      **** }
+ 490              		.loc 1 64 0 discriminator 1
+ 491 0058 E0E7     		b	.L47
+ 492              	.L50:
+ 493 005a 00BF     		.align	2
+ 494              	.L49:
+ 495 005c 00000000 		.word	.LANCHOR1
+ 496 0060 00000000 		.word	.LANCHOR0
+ 497              		.cfi_endproc
+ 498              	.LFE63:
+ 499              		.size	main, .-main
+ 500              		.global	bstate
+ 501              		.global	ysend
+ 502              		.global	xsend
+ 503              		.global	yadcResult
+ 504              		.global	xadcResult
+ 505              		.data
+ 506              		.set	.LANCHOR1,. + 0
+ 507              		.type	xsend, %object
+ 508              		.size	xsend, 1
+ 509              	xsend:
+ 510 0000 04       		.byte	4
+ 511              		.type	ysend, %object
+ 512              		.size	ysend, 1
+ 513              	ysend:
+ 514 0001 04       		.byte	4
+ 515              		.bss
+ 516              		.align	1
+ 517              		.set	.LANCHOR0,. + 0
+ 518              		.type	xadcResult, %object
+ 519              		.size	xadcResult, 2
+ 520              	xadcResult:
+ 521 0000 0000     		.space	2
+ 522              		.type	yadcResult, %object
+ 523              		.size	yadcResult, 2
+ 524              	yadcResult:
+ 525 0002 0000     		.space	2
+ 526              		.type	bstate, %object
+ 527              		.size	bstate, 1
+ 528              	bstate:
+ 529 0004 00       		.space	1
+ 530 0005 00       		.text
+ 531              	.Letext0:
+ 532              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\3.3\\psoc creator\\import\\gnu\\arm\\4.9.
+ 533              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\3.3\\psoc creator\\import\\gnu\\arm\\4.9.
+ 534              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 535              		.file 5 "Generated_Source\\PSoC5/core_cm3.h"
+ 536              		.file 6 "Generated_Source\\PSoC5/ADC_SAR_1.h"
+ 537              		.file 7 "Generated_Source\\PSoC5/ADC_SAR_2.h"
+ 538              		.file 8 "Generated_Source\\PSoC5/B1.h"
+ 539              		.file 9 "Generated_Source\\PSoC5/B2.h"
+ 540              		.file 10 "Generated_Source\\PSoC5/B3.h"
+ 541              		.file 11 "Generated_Source\\PSoC5/B4.h"
+ 542              		.file 12 "Generated_Source\\PSoC5/UART_1.h"
+ 543              		.file 13 "Generated_Source\\PSoC5/CyLib.h"
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccqrg31h.s 			page 14
+
+
+ 544              		.section	.debug_info,"",%progbits
+ 545              	.Ldebug_info0:
+ 546 0000 82030000 		.4byte	0x382
+ 547 0004 0400     		.2byte	0x4
+ 548 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 549 000a 04       		.byte	0x4
+ 550 000b 01       		.uleb128 0x1
+ 551 000c 6A010000 		.4byte	.LASF44
+ 552 0010 01       		.byte	0x1
+ 553 0011 5B000000 		.4byte	.LASF45
+ 554 0015 14020000 		.4byte	.LASF46
+ 555 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 556 001d 00000000 		.4byte	0
+ 557 0021 00000000 		.4byte	.Ldebug_line0
+ 558 0025 02       		.uleb128 0x2
+ 559 0026 01       		.byte	0x1
+ 560 0027 06       		.byte	0x6
+ 561 0028 E6020000 		.4byte	.LASF0
+ 562 002c 02       		.uleb128 0x2
+ 563 002d 01       		.byte	0x1
+ 564 002e 08       		.byte	0x8
+ 565 002f 8A000000 		.4byte	.LASF1
+ 566 0033 02       		.uleb128 0x2
+ 567 0034 02       		.byte	0x2
+ 568 0035 05       		.byte	0x5
+ 569 0036 A3020000 		.4byte	.LASF2
+ 570 003a 02       		.uleb128 0x2
+ 571 003b 02       		.byte	0x2
+ 572 003c 07       		.byte	0x7
+ 573 003d 02030000 		.4byte	.LASF3
+ 574 0041 03       		.uleb128 0x3
+ 575 0042 3A000000 		.4byte	.LASF9
+ 576 0046 02       		.byte	0x2
+ 577 0047 3F       		.byte	0x3f
+ 578 0048 4C000000 		.4byte	0x4c
+ 579 004c 02       		.uleb128 0x2
+ 580 004d 04       		.byte	0x4
+ 581 004e 05       		.byte	0x5
+ 582 004f BA020000 		.4byte	.LASF4
+ 583 0053 02       		.uleb128 0x2
+ 584 0054 04       		.byte	0x4
+ 585 0055 07       		.byte	0x7
+ 586 0056 B1000000 		.4byte	.LASF5
+ 587 005a 02       		.uleb128 0x2
+ 588 005b 08       		.byte	0x8
+ 589 005c 05       		.byte	0x5
+ 590 005d 80020000 		.4byte	.LASF6
+ 591 0061 02       		.uleb128 0x2
+ 592 0062 08       		.byte	0x8
+ 593 0063 07       		.byte	0x7
+ 594 0064 53010000 		.4byte	.LASF7
+ 595 0068 04       		.uleb128 0x4
+ 596 0069 04       		.byte	0x4
+ 597 006a 05       		.byte	0x5
+ 598 006b 696E7400 		.ascii	"int\000"
+ 599 006f 02       		.uleb128 0x2
+ 600 0070 04       		.byte	0x4
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccqrg31h.s 			page 15
+
+
+ 601 0071 07       		.byte	0x7
+ 602 0072 3E010000 		.4byte	.LASF8
+ 603 0076 03       		.uleb128 0x3
+ 604 0077 03020000 		.4byte	.LASF10
+ 605 007b 03       		.byte	0x3
+ 606 007c 2C       		.byte	0x2c
+ 607 007d 41000000 		.4byte	0x41
+ 608 0081 05       		.uleb128 0x5
+ 609 0082 AD020000 		.4byte	.LASF11
+ 610 0086 04       		.byte	0x4
+ 611 0087 9201     		.2byte	0x192
+ 612 0089 2C000000 		.4byte	0x2c
+ 613 008d 05       		.uleb128 0x5
+ 614 008e 2A010000 		.4byte	.LASF12
+ 615 0092 04       		.byte	0x4
+ 616 0093 9301     		.2byte	0x193
+ 617 0095 3A000000 		.4byte	0x3a
+ 618 0099 05       		.uleb128 0x5
+ 619 009a 37010000 		.4byte	.LASF13
+ 620 009e 04       		.byte	0x4
+ 621 009f 9401     		.2byte	0x194
+ 622 00a1 53000000 		.4byte	0x53
+ 623 00a5 05       		.uleb128 0x5
+ 624 00a6 AB000000 		.4byte	.LASF14
+ 625 00aa 04       		.byte	0x4
+ 626 00ab 9601     		.2byte	0x196
+ 627 00ad 33000000 		.4byte	0x33
+ 628 00b1 02       		.uleb128 0x2
+ 629 00b2 04       		.byte	0x4
+ 630 00b3 04       		.byte	0x4
+ 631 00b4 64000000 		.4byte	.LASF15
+ 632 00b8 02       		.uleb128 0x2
+ 633 00b9 08       		.byte	0x8
+ 634 00ba 04       		.byte	0x4
+ 635 00bb 13010000 		.4byte	.LASF16
+ 636 00bf 02       		.uleb128 0x2
+ 637 00c0 01       		.byte	0x1
+ 638 00c1 08       		.byte	0x8
+ 639 00c2 8E020000 		.4byte	.LASF17
+ 640 00c6 02       		.uleb128 0x2
+ 641 00c7 04       		.byte	0x4
+ 642 00c8 07       		.byte	0x7
+ 643 00c9 0B020000 		.4byte	.LASF18
+ 644 00cd 02       		.uleb128 0x2
+ 645 00ce 08       		.byte	0x8
+ 646 00cf 04       		.byte	0x4
+ 647 00d0 DA020000 		.4byte	.LASF19
+ 648 00d4 06       		.uleb128 0x6
+ 649 00d5 B3020000 		.4byte	.LASF20
+ 650 00d9 01       		.byte	0x1
+ 651 00da 44       		.byte	0x44
+ 652 00db 00000000 		.4byte	.LFB64
+ 653 00df 38000000 		.4byte	.LFE64-.LFB64
+ 654 00e3 01       		.uleb128 0x1
+ 655 00e4 9C       		.byte	0x9c
+ 656 00e5 06010000 		.4byte	0x106
+ 657 00e9 07       		.uleb128 0x7
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccqrg31h.s 			page 16
+
+
+ 658 00ea 08000000 		.4byte	.LVL0
+ 659 00ee D1020000 		.4byte	0x2d1
+ 660 00f2 FC000000 		.4byte	0xfc
+ 661 00f6 08       		.uleb128 0x8
+ 662 00f7 01       		.uleb128 0x1
+ 663 00f8 50       		.byte	0x50
+ 664 00f9 01       		.uleb128 0x1
+ 665 00fa 30       		.byte	0x30
+ 666 00fb 00       		.byte	0
+ 667 00fc 09       		.uleb128 0x9
+ 668 00fd 0E000000 		.4byte	.LVL1
+ 669 0101 E6020000 		.4byte	0x2e6
+ 670 0105 00       		.byte	0
+ 671 0106 06       		.uleb128 0x6
+ 672 0107 33000000 		.4byte	.LASF21
+ 673 010b 01       		.byte	0x1
+ 674 010c 55       		.byte	0x55
+ 675 010d 00000000 		.4byte	.LFB65
+ 676 0111 38000000 		.4byte	.LFE65-.LFB65
+ 677 0115 01       		.uleb128 0x1
+ 678 0116 9C       		.byte	0x9c
+ 679 0117 38010000 		.4byte	0x138
+ 680 011b 07       		.uleb128 0x7
+ 681 011c 08000000 		.4byte	.LVL2
+ 682 0120 F1020000 		.4byte	0x2f1
+ 683 0124 2E010000 		.4byte	0x12e
+ 684 0128 08       		.uleb128 0x8
+ 685 0129 01       		.uleb128 0x1
+ 686 012a 50       		.byte	0x50
+ 687 012b 01       		.uleb128 0x1
+ 688 012c 30       		.byte	0x30
+ 689 012d 00       		.byte	0
+ 690 012e 09       		.uleb128 0x9
+ 691 012f 0E000000 		.4byte	.LVL3
+ 692 0133 06030000 		.4byte	0x306
+ 693 0137 00       		.byte	0
+ 694 0138 0A       		.uleb128 0xa
+ 695 0139 44000000 		.4byte	.LASF22
+ 696 013d 01       		.byte	0x1
+ 697 013e 66       		.byte	0x66
+ 698 013f 00000000 		.4byte	.LFB66
+ 699 0143 98000000 		.4byte	.LFE66-.LFB66
+ 700 0147 01       		.uleb128 0x1
+ 701 0148 9C       		.byte	0x9c
+ 702 0149 0A       		.uleb128 0xa
+ 703 014a C3000000 		.4byte	.LASF23
+ 704 014e 01       		.byte	0x1
+ 705 014f 85       		.byte	0x85
+ 706 0150 00000000 		.4byte	.LFB67
+ 707 0154 98000000 		.4byte	.LFE67-.LFB67
+ 708 0158 01       		.uleb128 0x1
+ 709 0159 9C       		.byte	0x9c
+ 710 015a 0B       		.uleb128 0xb
+ 711 015b 435F4200 		.ascii	"C_B\000"
+ 712 015f 01       		.byte	0x1
+ 713 0160 A4       		.byte	0xa4
+ 714 0161 00000000 		.4byte	.LFB68
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccqrg31h.s 			page 17
+
+
+ 715 0165 48000000 		.4byte	.LFE68-.LFB68
+ 716 0169 01       		.uleb128 0x1
+ 717 016a 9C       		.byte	0x9c
+ 718 016b 94010000 		.4byte	0x194
+ 719 016f 09       		.uleb128 0x9
+ 720 0170 06000000 		.4byte	.LVL4
+ 721 0174 11030000 		.4byte	0x311
+ 722 0178 09       		.uleb128 0x9
+ 723 0179 14000000 		.4byte	.LVL5
+ 724 017d 1C030000 		.4byte	0x31c
+ 725 0181 09       		.uleb128 0x9
+ 726 0182 22000000 		.4byte	.LVL6
+ 727 0186 27030000 		.4byte	0x327
+ 728 018a 09       		.uleb128 0x9
+ 729 018b 30000000 		.4byte	.LVL7
+ 730 018f 32030000 		.4byte	0x332
+ 731 0193 00       		.byte	0
+ 732 0194 0C       		.uleb128 0xc
+ 733 0195 25010000 		.4byte	.LASF47
+ 734 0199 01       		.byte	0x1
+ 735 019a 1B       		.byte	0x1b
+ 736 019b 68000000 		.4byte	0x68
+ 737 019f 00000000 		.4byte	.LFB63
+ 738 01a3 64000000 		.4byte	.LFE63-.LFB63
+ 739 01a7 01       		.uleb128 0x1
+ 740 01a8 9C       		.byte	0x9c
+ 741 01a9 6B020000 		.4byte	0x26b
+ 742 01ad 0D       		.uleb128 0xd
+ 743 01ae 6A00     		.ascii	"j\000"
+ 744 01b0 01       		.byte	0x1
+ 745 01b1 23       		.byte	0x23
+ 746 01b2 2C000000 		.4byte	0x2c
+ 747 01b6 0A       		.byte	0xa
+ 748 01b7 09       		.uleb128 0x9
+ 749 01b8 08000000 		.4byte	.LVL8
+ 750 01bc 3D030000 		.4byte	0x33d
+ 751 01c0 09       		.uleb128 0x9
+ 752 01c1 0C000000 		.4byte	.LVL9
+ 753 01c5 44030000 		.4byte	0x344
+ 754 01c9 09       		.uleb128 0x9
+ 755 01ca 10000000 		.4byte	.LVL10
+ 756 01ce 4B030000 		.4byte	0x34b
+ 757 01d2 09       		.uleb128 0x9
+ 758 01d3 14000000 		.4byte	.LVL11
+ 759 01d7 52030000 		.4byte	0x352
+ 760 01db 09       		.uleb128 0x9
+ 761 01dc 18000000 		.4byte	.LVL12
+ 762 01e0 59030000 		.4byte	0x359
+ 763 01e4 09       		.uleb128 0x9
+ 764 01e5 1C000000 		.4byte	.LVL13
+ 765 01e9 60030000 		.4byte	0x360
+ 766 01ed 09       		.uleb128 0x9
+ 767 01ee 20000000 		.4byte	.LVL14
+ 768 01f2 D4000000 		.4byte	0xd4
+ 769 01f6 09       		.uleb128 0x9
+ 770 01f7 24000000 		.4byte	.LVL15
+ 771 01fb 06010000 		.4byte	0x106
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccqrg31h.s 			page 18
+
+
+ 772 01ff 09       		.uleb128 0x9
+ 773 0200 28000000 		.4byte	.LVL16
+ 774 0204 38010000 		.4byte	0x138
+ 775 0208 09       		.uleb128 0x9
+ 776 0209 2C000000 		.4byte	.LVL17
+ 777 020d 49010000 		.4byte	0x149
+ 778 0211 09       		.uleb128 0x9
+ 779 0212 30000000 		.4byte	.LVL18
+ 780 0216 5A010000 		.4byte	0x15a
+ 781 021a 09       		.uleb128 0x9
+ 782 021b 38000000 		.4byte	.LVL19
+ 783 021f 67030000 		.4byte	0x367
+ 784 0223 07       		.uleb128 0x7
+ 785 0224 3E000000 		.4byte	.LVL20
+ 786 0228 78030000 		.4byte	0x378
+ 787 022c 36020000 		.4byte	0x236
+ 788 0230 08       		.uleb128 0x8
+ 789 0231 01       		.uleb128 0x1
+ 790 0232 50       		.byte	0x50
+ 791 0233 01       		.uleb128 0x1
+ 792 0234 3A       		.byte	0x3a
+ 793 0235 00       		.byte	0
+ 794 0236 09       		.uleb128 0x9
+ 795 0237 44000000 		.4byte	.LVL21
+ 796 023b 67030000 		.4byte	0x367
+ 797 023f 07       		.uleb128 0x7
+ 798 0240 4A000000 		.4byte	.LVL22
+ 799 0244 78030000 		.4byte	0x378
+ 800 0248 52020000 		.4byte	0x252
+ 801 024c 08       		.uleb128 0x8
+ 802 024d 01       		.uleb128 0x1
+ 803 024e 50       		.byte	0x50
+ 804 024f 01       		.uleb128 0x1
+ 805 0250 3A       		.byte	0x3a
+ 806 0251 00       		.byte	0
+ 807 0252 09       		.uleb128 0x9
+ 808 0253 52000000 		.4byte	.LVL23
+ 809 0257 67030000 		.4byte	0x367
+ 810 025b 0E       		.uleb128 0xe
+ 811 025c 58000000 		.4byte	.LVL24
+ 812 0260 78030000 		.4byte	0x378
+ 813 0264 08       		.uleb128 0x8
+ 814 0265 01       		.uleb128 0x1
+ 815 0266 50       		.byte	0x50
+ 816 0267 01       		.uleb128 0x1
+ 817 0268 3A       		.byte	0x3a
+ 818 0269 00       		.byte	0
+ 819 026a 00       		.byte	0
+ 820 026b 0F       		.uleb128 0xf
+ 821 026c E8000000 		.4byte	.LASF24
+ 822 0270 05       		.byte	0x5
+ 823 0271 9606     		.2byte	0x696
+ 824 0273 77020000 		.4byte	0x277
+ 825 0277 10       		.uleb128 0x10
+ 826 0278 76000000 		.4byte	0x76
+ 827 027c 11       		.uleb128 0x11
+ 828 027d F8010000 		.4byte	.LASF25
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccqrg31h.s 			page 19
+
+
+ 829 0281 01       		.byte	0x1
+ 830 0282 0F       		.byte	0xf
+ 831 0283 8D000000 		.4byte	0x8d
+ 832 0287 05       		.uleb128 0x5
+ 833 0288 03       		.byte	0x3
+ 834 0289 00000000 		.4byte	xadcResult
+ 835 028d 11       		.uleb128 0x11
+ 836 028e 1A010000 		.4byte	.LASF26
+ 837 0292 01       		.byte	0x1
+ 838 0293 10       		.byte	0x10
+ 839 0294 8D000000 		.4byte	0x8d
+ 840 0298 05       		.uleb128 0x5
+ 841 0299 03       		.byte	0x3
+ 842 029a 00000000 		.4byte	yadcResult
+ 843 029e 11       		.uleb128 0x11
+ 844 029f 84000000 		.4byte	.LASF27
+ 845 02a3 01       		.byte	0x1
+ 846 02a4 11       		.byte	0x11
+ 847 02a5 BF000000 		.4byte	0xbf
+ 848 02a9 05       		.uleb128 0x5
+ 849 02aa 03       		.byte	0x3
+ 850 02ab 00000000 		.4byte	xsend
+ 851 02af 11       		.uleb128 0x11
+ 852 02b0 31010000 		.4byte	.LASF28
+ 853 02b4 01       		.byte	0x1
+ 854 02b5 12       		.byte	0x12
+ 855 02b6 BF000000 		.4byte	0xbf
+ 856 02ba 05       		.uleb128 0x5
+ 857 02bb 03       		.byte	0x3
+ 858 02bc 00000000 		.4byte	ysend
+ 859 02c0 11       		.uleb128 0x11
+ 860 02c1 E1000000 		.4byte	.LASF29
+ 861 02c5 01       		.byte	0x1
+ 862 02c6 13       		.byte	0x13
+ 863 02c7 BF000000 		.4byte	0xbf
+ 864 02cb 05       		.uleb128 0x5
+ 865 02cc 03       		.byte	0x3
+ 866 02cd 00000000 		.4byte	bstate
+ 867 02d1 12       		.uleb128 0x12
+ 868 02d2 6A000000 		.4byte	.LASF30
+ 869 02d6 06       		.byte	0x6
+ 870 02d7 39       		.byte	0x39
+ 871 02d8 81000000 		.4byte	0x81
+ 872 02dc E6020000 		.4byte	0x2e6
+ 873 02e0 13       		.uleb128 0x13
+ 874 02e1 81000000 		.4byte	0x81
+ 875 02e5 00       		.byte	0
+ 876 02e6 14       		.uleb128 0x14
+ 877 02e7 6A020000 		.4byte	.LASF32
+ 878 02eb 06       		.byte	0x6
+ 879 02ec 3B       		.byte	0x3b
+ 880 02ed A5000000 		.4byte	0xa5
+ 881 02f1 12       		.uleb128 0x12
+ 882 02f2 0C000000 		.4byte	.LASF31
+ 883 02f6 07       		.byte	0x7
+ 884 02f7 39       		.byte	0x39
+ 885 02f8 81000000 		.4byte	0x81
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccqrg31h.s 			page 20
+
+
+ 886 02fc 06030000 		.4byte	0x306
+ 887 0300 13       		.uleb128 0x13
+ 888 0301 81000000 		.4byte	0x81
+ 889 0305 00       		.byte	0
+ 890 0306 14       		.uleb128 0x14
+ 891 0307 F5000000 		.4byte	.LASF33
+ 892 030b 07       		.byte	0x7
+ 893 030c 3B       		.byte	0x3b
+ 894 030d A5000000 		.4byte	0xa5
+ 895 0311 14       		.uleb128 0x14
+ 896 0312 53000000 		.4byte	.LASF34
+ 897 0316 08       		.byte	0x8
+ 898 0317 29       		.byte	0x29
+ 899 0318 81000000 		.4byte	0x81
+ 900 031c 14       		.uleb128 0x14
+ 901 031d 0B010000 		.4byte	.LASF35
+ 902 0321 09       		.byte	0x9
+ 903 0322 29       		.byte	0x29
+ 904 0323 81000000 		.4byte	0x81
+ 905 0327 14       		.uleb128 0x14
+ 906 0328 4B010000 		.4byte	.LASF36
+ 907 032c 0A       		.byte	0xa
+ 908 032d 29       		.byte	0x29
+ 909 032e 81000000 		.4byte	0x81
+ 910 0332 14       		.uleb128 0x14
+ 911 0333 4B000000 		.4byte	.LASF37
+ 912 0337 0B       		.byte	0xb
+ 913 0338 29       		.byte	0x29
+ 914 0339 81000000 		.4byte	0x81
+ 915 033d 15       		.uleb128 0x15
+ 916 033e 00000000 		.4byte	.LASF38
+ 917 0342 0C       		.byte	0xc
+ 918 0343 59       		.byte	0x59
+ 919 0344 15       		.uleb128 0x15
+ 920 0345 26000000 		.4byte	.LASF39
+ 921 0349 0C       		.byte	0xc
+ 922 034a 54       		.byte	0x54
+ 923 034b 15       		.uleb128 0x15
+ 924 034c F2020000 		.4byte	.LASF40
+ 925 0350 06       		.byte	0x6
+ 926 0351 34       		.byte	0x34
+ 927 0352 15       		.uleb128 0x15
+ 928 0353 93020000 		.4byte	.LASF41
+ 929 0357 07       		.byte	0x7
+ 930 0358 34       		.byte	0x34
+ 931 0359 15       		.uleb128 0x15
+ 932 035a CA000000 		.4byte	.LASF42
+ 933 035e 06       		.byte	0x6
+ 934 035f D1       		.byte	0xd1
+ 935 0360 15       		.uleb128 0x15
+ 936 0361 C3020000 		.4byte	.LASF43
+ 937 0365 07       		.byte	0x7
+ 938 0366 D1       		.byte	0xd1
+ 939 0367 16       		.uleb128 0x16
+ 940 0368 98000000 		.4byte	.LASF48
+ 941 036c 0C       		.byte	0xc
+ 942 036d 88       		.byte	0x88
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccqrg31h.s 			page 21
+
+
+ 943 036e 78030000 		.4byte	0x378
+ 944 0372 13       		.uleb128 0x13
+ 945 0373 81000000 		.4byte	0x81
+ 946 0377 00       		.byte	0
+ 947 0378 17       		.uleb128 0x17
+ 948 0379 15030000 		.4byte	.LASF49
+ 949 037d 0D       		.byte	0xd
+ 950 037e 76       		.byte	0x76
+ 951 037f 13       		.uleb128 0x13
+ 952 0380 99000000 		.4byte	0x99
+ 953 0384 00       		.byte	0
+ 954 0385 00       		.byte	0
+ 955              		.section	.debug_abbrev,"",%progbits
+ 956              	.Ldebug_abbrev0:
+ 957 0000 01       		.uleb128 0x1
+ 958 0001 11       		.uleb128 0x11
+ 959 0002 01       		.byte	0x1
+ 960 0003 25       		.uleb128 0x25
+ 961 0004 0E       		.uleb128 0xe
+ 962 0005 13       		.uleb128 0x13
+ 963 0006 0B       		.uleb128 0xb
+ 964 0007 03       		.uleb128 0x3
+ 965 0008 0E       		.uleb128 0xe
+ 966 0009 1B       		.uleb128 0x1b
+ 967 000a 0E       		.uleb128 0xe
+ 968 000b 55       		.uleb128 0x55
+ 969 000c 17       		.uleb128 0x17
+ 970 000d 11       		.uleb128 0x11
+ 971 000e 01       		.uleb128 0x1
+ 972 000f 10       		.uleb128 0x10
+ 973 0010 17       		.uleb128 0x17
+ 974 0011 00       		.byte	0
+ 975 0012 00       		.byte	0
+ 976 0013 02       		.uleb128 0x2
+ 977 0014 24       		.uleb128 0x24
+ 978 0015 00       		.byte	0
+ 979 0016 0B       		.uleb128 0xb
+ 980 0017 0B       		.uleb128 0xb
+ 981 0018 3E       		.uleb128 0x3e
+ 982 0019 0B       		.uleb128 0xb
+ 983 001a 03       		.uleb128 0x3
+ 984 001b 0E       		.uleb128 0xe
+ 985 001c 00       		.byte	0
+ 986 001d 00       		.byte	0
+ 987 001e 03       		.uleb128 0x3
+ 988 001f 16       		.uleb128 0x16
+ 989 0020 00       		.byte	0
+ 990 0021 03       		.uleb128 0x3
+ 991 0022 0E       		.uleb128 0xe
+ 992 0023 3A       		.uleb128 0x3a
+ 993 0024 0B       		.uleb128 0xb
+ 994 0025 3B       		.uleb128 0x3b
+ 995 0026 0B       		.uleb128 0xb
+ 996 0027 49       		.uleb128 0x49
+ 997 0028 13       		.uleb128 0x13
+ 998 0029 00       		.byte	0
+ 999 002a 00       		.byte	0
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccqrg31h.s 			page 22
+
+
+ 1000 002b 04       		.uleb128 0x4
+ 1001 002c 24       		.uleb128 0x24
+ 1002 002d 00       		.byte	0
+ 1003 002e 0B       		.uleb128 0xb
+ 1004 002f 0B       		.uleb128 0xb
+ 1005 0030 3E       		.uleb128 0x3e
+ 1006 0031 0B       		.uleb128 0xb
+ 1007 0032 03       		.uleb128 0x3
+ 1008 0033 08       		.uleb128 0x8
+ 1009 0034 00       		.byte	0
+ 1010 0035 00       		.byte	0
+ 1011 0036 05       		.uleb128 0x5
+ 1012 0037 16       		.uleb128 0x16
+ 1013 0038 00       		.byte	0
+ 1014 0039 03       		.uleb128 0x3
+ 1015 003a 0E       		.uleb128 0xe
+ 1016 003b 3A       		.uleb128 0x3a
+ 1017 003c 0B       		.uleb128 0xb
+ 1018 003d 3B       		.uleb128 0x3b
+ 1019 003e 05       		.uleb128 0x5
+ 1020 003f 49       		.uleb128 0x49
+ 1021 0040 13       		.uleb128 0x13
+ 1022 0041 00       		.byte	0
+ 1023 0042 00       		.byte	0
+ 1024 0043 06       		.uleb128 0x6
+ 1025 0044 2E       		.uleb128 0x2e
+ 1026 0045 01       		.byte	0x1
+ 1027 0046 3F       		.uleb128 0x3f
+ 1028 0047 19       		.uleb128 0x19
+ 1029 0048 03       		.uleb128 0x3
+ 1030 0049 0E       		.uleb128 0xe
+ 1031 004a 3A       		.uleb128 0x3a
+ 1032 004b 0B       		.uleb128 0xb
+ 1033 004c 3B       		.uleb128 0x3b
+ 1034 004d 0B       		.uleb128 0xb
+ 1035 004e 11       		.uleb128 0x11
+ 1036 004f 01       		.uleb128 0x1
+ 1037 0050 12       		.uleb128 0x12
+ 1038 0051 06       		.uleb128 0x6
+ 1039 0052 40       		.uleb128 0x40
+ 1040 0053 18       		.uleb128 0x18
+ 1041 0054 9742     		.uleb128 0x2117
+ 1042 0056 19       		.uleb128 0x19
+ 1043 0057 01       		.uleb128 0x1
+ 1044 0058 13       		.uleb128 0x13
+ 1045 0059 00       		.byte	0
+ 1046 005a 00       		.byte	0
+ 1047 005b 07       		.uleb128 0x7
+ 1048 005c 898201   		.uleb128 0x4109
+ 1049 005f 01       		.byte	0x1
+ 1050 0060 11       		.uleb128 0x11
+ 1051 0061 01       		.uleb128 0x1
+ 1052 0062 31       		.uleb128 0x31
+ 1053 0063 13       		.uleb128 0x13
+ 1054 0064 01       		.uleb128 0x1
+ 1055 0065 13       		.uleb128 0x13
+ 1056 0066 00       		.byte	0
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccqrg31h.s 			page 23
+
+
+ 1057 0067 00       		.byte	0
+ 1058 0068 08       		.uleb128 0x8
+ 1059 0069 8A8201   		.uleb128 0x410a
+ 1060 006c 00       		.byte	0
+ 1061 006d 02       		.uleb128 0x2
+ 1062 006e 18       		.uleb128 0x18
+ 1063 006f 9142     		.uleb128 0x2111
+ 1064 0071 18       		.uleb128 0x18
+ 1065 0072 00       		.byte	0
+ 1066 0073 00       		.byte	0
+ 1067 0074 09       		.uleb128 0x9
+ 1068 0075 898201   		.uleb128 0x4109
+ 1069 0078 00       		.byte	0
+ 1070 0079 11       		.uleb128 0x11
+ 1071 007a 01       		.uleb128 0x1
+ 1072 007b 31       		.uleb128 0x31
+ 1073 007c 13       		.uleb128 0x13
+ 1074 007d 00       		.byte	0
+ 1075 007e 00       		.byte	0
+ 1076 007f 0A       		.uleb128 0xa
+ 1077 0080 2E       		.uleb128 0x2e
+ 1078 0081 00       		.byte	0
+ 1079 0082 3F       		.uleb128 0x3f
+ 1080 0083 19       		.uleb128 0x19
+ 1081 0084 03       		.uleb128 0x3
+ 1082 0085 0E       		.uleb128 0xe
+ 1083 0086 3A       		.uleb128 0x3a
+ 1084 0087 0B       		.uleb128 0xb
+ 1085 0088 3B       		.uleb128 0x3b
+ 1086 0089 0B       		.uleb128 0xb
+ 1087 008a 11       		.uleb128 0x11
+ 1088 008b 01       		.uleb128 0x1
+ 1089 008c 12       		.uleb128 0x12
+ 1090 008d 06       		.uleb128 0x6
+ 1091 008e 40       		.uleb128 0x40
+ 1092 008f 18       		.uleb128 0x18
+ 1093 0090 9742     		.uleb128 0x2117
+ 1094 0092 19       		.uleb128 0x19
+ 1095 0093 00       		.byte	0
+ 1096 0094 00       		.byte	0
+ 1097 0095 0B       		.uleb128 0xb
+ 1098 0096 2E       		.uleb128 0x2e
+ 1099 0097 01       		.byte	0x1
+ 1100 0098 3F       		.uleb128 0x3f
+ 1101 0099 19       		.uleb128 0x19
+ 1102 009a 03       		.uleb128 0x3
+ 1103 009b 08       		.uleb128 0x8
+ 1104 009c 3A       		.uleb128 0x3a
+ 1105 009d 0B       		.uleb128 0xb
+ 1106 009e 3B       		.uleb128 0x3b
+ 1107 009f 0B       		.uleb128 0xb
+ 1108 00a0 11       		.uleb128 0x11
+ 1109 00a1 01       		.uleb128 0x1
+ 1110 00a2 12       		.uleb128 0x12
+ 1111 00a3 06       		.uleb128 0x6
+ 1112 00a4 40       		.uleb128 0x40
+ 1113 00a5 18       		.uleb128 0x18
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccqrg31h.s 			page 24
+
+
+ 1114 00a6 9742     		.uleb128 0x2117
+ 1115 00a8 19       		.uleb128 0x19
+ 1116 00a9 01       		.uleb128 0x1
+ 1117 00aa 13       		.uleb128 0x13
+ 1118 00ab 00       		.byte	0
+ 1119 00ac 00       		.byte	0
+ 1120 00ad 0C       		.uleb128 0xc
+ 1121 00ae 2E       		.uleb128 0x2e
+ 1122 00af 01       		.byte	0x1
+ 1123 00b0 3F       		.uleb128 0x3f
+ 1124 00b1 19       		.uleb128 0x19
+ 1125 00b2 03       		.uleb128 0x3
+ 1126 00b3 0E       		.uleb128 0xe
+ 1127 00b4 3A       		.uleb128 0x3a
+ 1128 00b5 0B       		.uleb128 0xb
+ 1129 00b6 3B       		.uleb128 0x3b
+ 1130 00b7 0B       		.uleb128 0xb
+ 1131 00b8 49       		.uleb128 0x49
+ 1132 00b9 13       		.uleb128 0x13
+ 1133 00ba 11       		.uleb128 0x11
+ 1134 00bb 01       		.uleb128 0x1
+ 1135 00bc 12       		.uleb128 0x12
+ 1136 00bd 06       		.uleb128 0x6
+ 1137 00be 40       		.uleb128 0x40
+ 1138 00bf 18       		.uleb128 0x18
+ 1139 00c0 9742     		.uleb128 0x2117
+ 1140 00c2 19       		.uleb128 0x19
+ 1141 00c3 01       		.uleb128 0x1
+ 1142 00c4 13       		.uleb128 0x13
+ 1143 00c5 00       		.byte	0
+ 1144 00c6 00       		.byte	0
+ 1145 00c7 0D       		.uleb128 0xd
+ 1146 00c8 34       		.uleb128 0x34
+ 1147 00c9 00       		.byte	0
+ 1148 00ca 03       		.uleb128 0x3
+ 1149 00cb 08       		.uleb128 0x8
+ 1150 00cc 3A       		.uleb128 0x3a
+ 1151 00cd 0B       		.uleb128 0xb
+ 1152 00ce 3B       		.uleb128 0x3b
+ 1153 00cf 0B       		.uleb128 0xb
+ 1154 00d0 49       		.uleb128 0x49
+ 1155 00d1 13       		.uleb128 0x13
+ 1156 00d2 1C       		.uleb128 0x1c
+ 1157 00d3 0B       		.uleb128 0xb
+ 1158 00d4 00       		.byte	0
+ 1159 00d5 00       		.byte	0
+ 1160 00d6 0E       		.uleb128 0xe
+ 1161 00d7 898201   		.uleb128 0x4109
+ 1162 00da 01       		.byte	0x1
+ 1163 00db 11       		.uleb128 0x11
+ 1164 00dc 01       		.uleb128 0x1
+ 1165 00dd 31       		.uleb128 0x31
+ 1166 00de 13       		.uleb128 0x13
+ 1167 00df 00       		.byte	0
+ 1168 00e0 00       		.byte	0
+ 1169 00e1 0F       		.uleb128 0xf
+ 1170 00e2 34       		.uleb128 0x34
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccqrg31h.s 			page 25
+
+
+ 1171 00e3 00       		.byte	0
+ 1172 00e4 03       		.uleb128 0x3
+ 1173 00e5 0E       		.uleb128 0xe
+ 1174 00e6 3A       		.uleb128 0x3a
+ 1175 00e7 0B       		.uleb128 0xb
+ 1176 00e8 3B       		.uleb128 0x3b
+ 1177 00e9 05       		.uleb128 0x5
+ 1178 00ea 49       		.uleb128 0x49
+ 1179 00eb 13       		.uleb128 0x13
+ 1180 00ec 3F       		.uleb128 0x3f
+ 1181 00ed 19       		.uleb128 0x19
+ 1182 00ee 3C       		.uleb128 0x3c
+ 1183 00ef 19       		.uleb128 0x19
+ 1184 00f0 00       		.byte	0
+ 1185 00f1 00       		.byte	0
+ 1186 00f2 10       		.uleb128 0x10
+ 1187 00f3 35       		.uleb128 0x35
+ 1188 00f4 00       		.byte	0
+ 1189 00f5 49       		.uleb128 0x49
+ 1190 00f6 13       		.uleb128 0x13
+ 1191 00f7 00       		.byte	0
+ 1192 00f8 00       		.byte	0
+ 1193 00f9 11       		.uleb128 0x11
+ 1194 00fa 34       		.uleb128 0x34
+ 1195 00fb 00       		.byte	0
+ 1196 00fc 03       		.uleb128 0x3
+ 1197 00fd 0E       		.uleb128 0xe
+ 1198 00fe 3A       		.uleb128 0x3a
+ 1199 00ff 0B       		.uleb128 0xb
+ 1200 0100 3B       		.uleb128 0x3b
+ 1201 0101 0B       		.uleb128 0xb
+ 1202 0102 49       		.uleb128 0x49
+ 1203 0103 13       		.uleb128 0x13
+ 1204 0104 3F       		.uleb128 0x3f
+ 1205 0105 19       		.uleb128 0x19
+ 1206 0106 02       		.uleb128 0x2
+ 1207 0107 18       		.uleb128 0x18
+ 1208 0108 00       		.byte	0
+ 1209 0109 00       		.byte	0
+ 1210 010a 12       		.uleb128 0x12
+ 1211 010b 2E       		.uleb128 0x2e
+ 1212 010c 01       		.byte	0x1
+ 1213 010d 3F       		.uleb128 0x3f
+ 1214 010e 19       		.uleb128 0x19
+ 1215 010f 03       		.uleb128 0x3
+ 1216 0110 0E       		.uleb128 0xe
+ 1217 0111 3A       		.uleb128 0x3a
+ 1218 0112 0B       		.uleb128 0xb
+ 1219 0113 3B       		.uleb128 0x3b
+ 1220 0114 0B       		.uleb128 0xb
+ 1221 0115 27       		.uleb128 0x27
+ 1222 0116 19       		.uleb128 0x19
+ 1223 0117 49       		.uleb128 0x49
+ 1224 0118 13       		.uleb128 0x13
+ 1225 0119 3C       		.uleb128 0x3c
+ 1226 011a 19       		.uleb128 0x19
+ 1227 011b 01       		.uleb128 0x1
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccqrg31h.s 			page 26
+
+
+ 1228 011c 13       		.uleb128 0x13
+ 1229 011d 00       		.byte	0
+ 1230 011e 00       		.byte	0
+ 1231 011f 13       		.uleb128 0x13
+ 1232 0120 05       		.uleb128 0x5
+ 1233 0121 00       		.byte	0
+ 1234 0122 49       		.uleb128 0x49
+ 1235 0123 13       		.uleb128 0x13
+ 1236 0124 00       		.byte	0
+ 1237 0125 00       		.byte	0
+ 1238 0126 14       		.uleb128 0x14
+ 1239 0127 2E       		.uleb128 0x2e
+ 1240 0128 00       		.byte	0
+ 1241 0129 3F       		.uleb128 0x3f
+ 1242 012a 19       		.uleb128 0x19
+ 1243 012b 03       		.uleb128 0x3
+ 1244 012c 0E       		.uleb128 0xe
+ 1245 012d 3A       		.uleb128 0x3a
+ 1246 012e 0B       		.uleb128 0xb
+ 1247 012f 3B       		.uleb128 0x3b
+ 1248 0130 0B       		.uleb128 0xb
+ 1249 0131 27       		.uleb128 0x27
+ 1250 0132 19       		.uleb128 0x19
+ 1251 0133 49       		.uleb128 0x49
+ 1252 0134 13       		.uleb128 0x13
+ 1253 0135 3C       		.uleb128 0x3c
+ 1254 0136 19       		.uleb128 0x19
+ 1255 0137 00       		.byte	0
+ 1256 0138 00       		.byte	0
+ 1257 0139 15       		.uleb128 0x15
+ 1258 013a 2E       		.uleb128 0x2e
+ 1259 013b 00       		.byte	0
+ 1260 013c 3F       		.uleb128 0x3f
+ 1261 013d 19       		.uleb128 0x19
+ 1262 013e 03       		.uleb128 0x3
+ 1263 013f 0E       		.uleb128 0xe
+ 1264 0140 3A       		.uleb128 0x3a
+ 1265 0141 0B       		.uleb128 0xb
+ 1266 0142 3B       		.uleb128 0x3b
+ 1267 0143 0B       		.uleb128 0xb
+ 1268 0144 27       		.uleb128 0x27
+ 1269 0145 19       		.uleb128 0x19
+ 1270 0146 3C       		.uleb128 0x3c
+ 1271 0147 19       		.uleb128 0x19
+ 1272 0148 00       		.byte	0
+ 1273 0149 00       		.byte	0
+ 1274 014a 16       		.uleb128 0x16
+ 1275 014b 2E       		.uleb128 0x2e
+ 1276 014c 01       		.byte	0x1
+ 1277 014d 3F       		.uleb128 0x3f
+ 1278 014e 19       		.uleb128 0x19
+ 1279 014f 03       		.uleb128 0x3
+ 1280 0150 0E       		.uleb128 0xe
+ 1281 0151 3A       		.uleb128 0x3a
+ 1282 0152 0B       		.uleb128 0xb
+ 1283 0153 3B       		.uleb128 0x3b
+ 1284 0154 0B       		.uleb128 0xb
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccqrg31h.s 			page 27
+
+
+ 1285 0155 27       		.uleb128 0x27
+ 1286 0156 19       		.uleb128 0x19
+ 1287 0157 3C       		.uleb128 0x3c
+ 1288 0158 19       		.uleb128 0x19
+ 1289 0159 01       		.uleb128 0x1
+ 1290 015a 13       		.uleb128 0x13
+ 1291 015b 00       		.byte	0
+ 1292 015c 00       		.byte	0
+ 1293 015d 17       		.uleb128 0x17
+ 1294 015e 2E       		.uleb128 0x2e
+ 1295 015f 01       		.byte	0x1
+ 1296 0160 3F       		.uleb128 0x3f
+ 1297 0161 19       		.uleb128 0x19
+ 1298 0162 03       		.uleb128 0x3
+ 1299 0163 0E       		.uleb128 0xe
+ 1300 0164 3A       		.uleb128 0x3a
+ 1301 0165 0B       		.uleb128 0xb
+ 1302 0166 3B       		.uleb128 0x3b
+ 1303 0167 0B       		.uleb128 0xb
+ 1304 0168 27       		.uleb128 0x27
+ 1305 0169 19       		.uleb128 0x19
+ 1306 016a 3C       		.uleb128 0x3c
+ 1307 016b 19       		.uleb128 0x19
+ 1308 016c 00       		.byte	0
+ 1309 016d 00       		.byte	0
+ 1310 016e 00       		.byte	0
+ 1311              		.section	.debug_aranges,"",%progbits
+ 1312 0000 44000000 		.4byte	0x44
+ 1313 0004 0200     		.2byte	0x2
+ 1314 0006 00000000 		.4byte	.Ldebug_info0
+ 1315 000a 04       		.byte	0x4
+ 1316 000b 00       		.byte	0
+ 1317 000c 0000     		.2byte	0
+ 1318 000e 0000     		.2byte	0
+ 1319 0010 00000000 		.4byte	.LFB64
+ 1320 0014 38000000 		.4byte	.LFE64-.LFB64
+ 1321 0018 00000000 		.4byte	.LFB65
+ 1322 001c 38000000 		.4byte	.LFE65-.LFB65
+ 1323 0020 00000000 		.4byte	.LFB66
+ 1324 0024 98000000 		.4byte	.LFE66-.LFB66
+ 1325 0028 00000000 		.4byte	.LFB67
+ 1326 002c 98000000 		.4byte	.LFE67-.LFB67
+ 1327 0030 00000000 		.4byte	.LFB68
+ 1328 0034 48000000 		.4byte	.LFE68-.LFB68
+ 1329 0038 00000000 		.4byte	.LFB63
+ 1330 003c 64000000 		.4byte	.LFE63-.LFB63
+ 1331 0040 00000000 		.4byte	0
+ 1332 0044 00000000 		.4byte	0
+ 1333              		.section	.debug_ranges,"",%progbits
+ 1334              	.Ldebug_ranges0:
+ 1335 0000 00000000 		.4byte	.LFB64
+ 1336 0004 38000000 		.4byte	.LFE64
+ 1337 0008 00000000 		.4byte	.LFB65
+ 1338 000c 38000000 		.4byte	.LFE65
+ 1339 0010 00000000 		.4byte	.LFB66
+ 1340 0014 98000000 		.4byte	.LFE66
+ 1341 0018 00000000 		.4byte	.LFB67
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccqrg31h.s 			page 28
+
+
+ 1342 001c 98000000 		.4byte	.LFE67
+ 1343 0020 00000000 		.4byte	.LFB68
+ 1344 0024 48000000 		.4byte	.LFE68
+ 1345 0028 00000000 		.4byte	.LFB63
+ 1346 002c 64000000 		.4byte	.LFE63
+ 1347 0030 00000000 		.4byte	0
+ 1348 0034 00000000 		.4byte	0
+ 1349              		.section	.debug_line,"",%progbits
+ 1350              	.Ldebug_line0:
+ 1351 0000 7D020000 		.section	.debug_str,"MS",%progbits,1
+ 1351      02009E01 
+ 1351      00000201 
+ 1351      FB0E0D00 
+ 1351      01010101 
+ 1352              	.LASF38:
+ 1353 0000 55415254 		.ascii	"UART_1_Init\000"
+ 1353      5F315F49 
+ 1353      6E697400 
+ 1354              	.LASF31:
+ 1355 000c 4144435F 		.ascii	"ADC_SAR_2_IsEndConversion\000"
+ 1355      5341525F 
+ 1355      325F4973 
+ 1355      456E6443 
+ 1355      6F6E7665 
+ 1356              	.LASF39:
+ 1357 0026 55415254 		.ascii	"UART_1_Start\000"
+ 1357      5F315F53 
+ 1357      74617274 
+ 1357      00
+ 1358              	.LASF21:
+ 1359 0033 525F5941 		.ascii	"R_YADC\000"
+ 1359      444300
+ 1360              	.LASF9:
+ 1361 003a 5F5F696E 		.ascii	"__int32_t\000"
+ 1361      7433325F 
+ 1361      7400
+ 1362              	.LASF22:
+ 1363 0044 435F5841 		.ascii	"C_XADC\000"
+ 1363      444300
+ 1364              	.LASF37:
+ 1365 004b 42345F52 		.ascii	"B4_Read\000"
+ 1365      65616400 
+ 1366              	.LASF34:
+ 1367 0053 42315F52 		.ascii	"B1_Read\000"
+ 1367      65616400 
+ 1368              	.LASF45:
+ 1369 005b 2E5C6D61 		.ascii	".\\main.c\000"
+ 1369      696E2E63 
+ 1369      00
+ 1370              	.LASF15:
+ 1371 0064 666C6F61 		.ascii	"float\000"
+ 1371      7400
+ 1372              	.LASF30:
+ 1373 006a 4144435F 		.ascii	"ADC_SAR_1_IsEndConversion\000"
+ 1373      5341525F 
+ 1373      315F4973 
+ 1373      456E6443 
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccqrg31h.s 			page 29
+
+
+ 1373      6F6E7665 
+ 1374              	.LASF27:
+ 1375 0084 7873656E 		.ascii	"xsend\000"
+ 1375      6400
+ 1376              	.LASF1:
+ 1377 008a 756E7369 		.ascii	"unsigned char\000"
+ 1377      676E6564 
+ 1377      20636861 
+ 1377      7200
+ 1378              	.LASF48:
+ 1379 0098 55415254 		.ascii	"UART_1_WriteTxData\000"
+ 1379      5F315F57 
+ 1379      72697465 
+ 1379      54784461 
+ 1379      746100
+ 1380              	.LASF14:
+ 1381 00ab 696E7431 		.ascii	"int16\000"
+ 1381      3600
+ 1382              	.LASF5:
+ 1383 00b1 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1383      20756E73 
+ 1383      69676E65 
+ 1383      6420696E 
+ 1383      7400
+ 1384              	.LASF23:
+ 1385 00c3 435F5941 		.ascii	"C_YADC\000"
+ 1385      444300
+ 1386              	.LASF42:
+ 1387 00ca 4144435F 		.ascii	"ADC_SAR_1_StartConvert\000"
+ 1387      5341525F 
+ 1387      315F5374 
+ 1387      61727443 
+ 1387      6F6E7665 
+ 1388              	.LASF29:
+ 1389 00e1 62737461 		.ascii	"bstate\000"
+ 1389      746500
+ 1390              	.LASF24:
+ 1391 00e8 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 1391      52784275 
+ 1391      66666572 
+ 1391      00
+ 1392              	.LASF33:
+ 1393 00f5 4144435F 		.ascii	"ADC_SAR_2_GetResult16\000"
+ 1393      5341525F 
+ 1393      325F4765 
+ 1393      74526573 
+ 1393      756C7431 
+ 1394              	.LASF35:
+ 1395 010b 42325F52 		.ascii	"B2_Read\000"
+ 1395      65616400 
+ 1396              	.LASF16:
+ 1397 0113 646F7562 		.ascii	"double\000"
+ 1397      6C6500
+ 1398              	.LASF26:
+ 1399 011a 79616463 		.ascii	"yadcResult\000"
+ 1399      52657375 
+ 1399      6C7400
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccqrg31h.s 			page 30
+
+
+ 1400              	.LASF47:
+ 1401 0125 6D61696E 		.ascii	"main\000"
+ 1401      00
+ 1402              	.LASF12:
+ 1403 012a 75696E74 		.ascii	"uint16\000"
+ 1403      313600
+ 1404              	.LASF28:
+ 1405 0131 7973656E 		.ascii	"ysend\000"
+ 1405      6400
+ 1406              	.LASF13:
+ 1407 0137 75696E74 		.ascii	"uint32\000"
+ 1407      333200
+ 1408              	.LASF8:
+ 1409 013e 756E7369 		.ascii	"unsigned int\000"
+ 1409      676E6564 
+ 1409      20696E74 
+ 1409      00
+ 1410              	.LASF36:
+ 1411 014b 42335F52 		.ascii	"B3_Read\000"
+ 1411      65616400 
+ 1412              	.LASF7:
+ 1413 0153 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1413      206C6F6E 
+ 1413      6720756E 
+ 1413      7369676E 
+ 1413      65642069 
+ 1414              	.LASF44:
+ 1415 016a 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 1415      4320342E 
+ 1415      392E3320 
+ 1415      32303135 
+ 1415      30333033 
+ 1416 019d 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 1416      20726576 
+ 1416      6973696F 
+ 1416      6E203232 
+ 1416      31323230 
+ 1417 01d0 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 1417      66756E63 
+ 1417      74696F6E 
+ 1417      2D736563 
+ 1417      74696F6E 
+ 1418              	.LASF25:
+ 1419 01f8 78616463 		.ascii	"xadcResult\000"
+ 1419      52657375 
+ 1419      6C7400
+ 1420              	.LASF10:
+ 1421 0203 696E7433 		.ascii	"int32_t\000"
+ 1421      325F7400 
+ 1422              	.LASF18:
+ 1423 020b 73697A65 		.ascii	"sizetype\000"
+ 1423      74797065 
+ 1423      00
+ 1424              	.LASF46:
+ 1425 0214 433A5C55 		.ascii	"C:\\Users\\ologa\\Documents\\MIT\\Senior S22\\6.115"
+ 1425      73657273 
+ 1425      5C6F6C6F 
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccqrg31h.s 			page 31
+
+
+ 1425      67615C44 
+ 1425      6F63756D 
+ 1426 0241 315C4669 		.ascii	"1\\Final Project\\HC06_Examples\\Echo.cydsn\000"
+ 1426      6E616C20 
+ 1426      50726F6A 
+ 1426      6563745C 
+ 1426      48433036 
+ 1427              	.LASF32:
+ 1428 026a 4144435F 		.ascii	"ADC_SAR_1_GetResult16\000"
+ 1428      5341525F 
+ 1428      315F4765 
+ 1428      74526573 
+ 1428      756C7431 
+ 1429              	.LASF6:
+ 1430 0280 6C6F6E67 		.ascii	"long long int\000"
+ 1430      206C6F6E 
+ 1430      6720696E 
+ 1430      7400
+ 1431              	.LASF17:
+ 1432 028e 63686172 		.ascii	"char\000"
+ 1432      00
+ 1433              	.LASF41:
+ 1434 0293 4144435F 		.ascii	"ADC_SAR_2_Start\000"
+ 1434      5341525F 
+ 1434      325F5374 
+ 1434      61727400 
+ 1435              	.LASF2:
+ 1436 02a3 73686F72 		.ascii	"short int\000"
+ 1436      7420696E 
+ 1436      7400
+ 1437              	.LASF11:
+ 1438 02ad 75696E74 		.ascii	"uint8\000"
+ 1438      3800
+ 1439              	.LASF20:
+ 1440 02b3 525F5841 		.ascii	"R_XADC\000"
+ 1440      444300
+ 1441              	.LASF4:
+ 1442 02ba 6C6F6E67 		.ascii	"long int\000"
+ 1442      20696E74 
+ 1442      00
+ 1443              	.LASF43:
+ 1444 02c3 4144435F 		.ascii	"ADC_SAR_2_StartConvert\000"
+ 1444      5341525F 
+ 1444      325F5374 
+ 1444      61727443 
+ 1444      6F6E7665 
+ 1445              	.LASF19:
+ 1446 02da 6C6F6E67 		.ascii	"long double\000"
+ 1446      20646F75 
+ 1446      626C6500 
+ 1447              	.LASF0:
+ 1448 02e6 7369676E 		.ascii	"signed char\000"
+ 1448      65642063 
+ 1448      68617200 
+ 1449              	.LASF40:
+ 1450 02f2 4144435F 		.ascii	"ADC_SAR_1_Start\000"
+ 1450      5341525F 
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccqrg31h.s 			page 32
+
+
+ 1450      315F5374 
+ 1450      61727400 
+ 1451              	.LASF3:
+ 1452 0302 73686F72 		.ascii	"short unsigned int\000"
+ 1452      7420756E 
+ 1452      7369676E 
+ 1452      65642069 
+ 1452      6E7400
+ 1453              	.LASF49:
+ 1454 0315 43794465 		.ascii	"CyDelay\000"
+ 1454      6C617900 
+ 1455              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br

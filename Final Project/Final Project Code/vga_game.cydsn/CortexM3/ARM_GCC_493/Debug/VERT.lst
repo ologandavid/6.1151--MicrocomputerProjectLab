@@ -1,0 +1,2421 @@
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"VERT.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.global	VERT_initVar
+  19              		.bss
+  20              		.type	VERT_initVar, %object
+  21              		.size	VERT_initVar, 1
+  22              	VERT_initVar:
+  23 0000 00       		.space	1
+  24              		.section	.text.VERT_Start,"ax",%progbits
+  25              		.align	2
+  26              		.global	VERT_Start
+  27              		.thumb
+  28              		.thumb_func
+  29              		.type	VERT_Start, %function
+  30              	VERT_Start:
+  31              	.LFB0:
+  32              		.file 1 ".\\Generated_Source\\PSoC5\\VERT.c"
+   1:.\Generated_Source\PSoC5/VERT.c **** /*******************************************************************************
+   2:.\Generated_Source\PSoC5/VERT.c **** * File Name: VERT.c  
+   3:.\Generated_Source\PSoC5/VERT.c **** * Version 3.0
+   4:.\Generated_Source\PSoC5/VERT.c **** *
+   5:.\Generated_Source\PSoC5/VERT.c **** * Description:
+   6:.\Generated_Source\PSoC5/VERT.c **** *  The PWM User Module consist of an 8 or 16-bit counter with two 8 or 16-bit
+   7:.\Generated_Source\PSoC5/VERT.c **** *  comparitors. Each instance of this user module is capable of generating
+   8:.\Generated_Source\PSoC5/VERT.c **** *  two PWM outputs with the same period. The pulse width is selectable between
+   9:.\Generated_Source\PSoC5/VERT.c **** *  1 and 255/65535. The period is selectable between 2 and 255/65536 clocks. 
+  10:.\Generated_Source\PSoC5/VERT.c **** *  The compare value output may be configured to be active when the present 
+  11:.\Generated_Source\PSoC5/VERT.c **** *  counter is less than or less than/equal to the compare value.
+  12:.\Generated_Source\PSoC5/VERT.c **** *  A terminal count output is also provided. It generates a pulse one clock
+  13:.\Generated_Source\PSoC5/VERT.c **** *  width wide when the counter is equal to zero.
+  14:.\Generated_Source\PSoC5/VERT.c **** *
+  15:.\Generated_Source\PSoC5/VERT.c **** * Note:
+  16:.\Generated_Source\PSoC5/VERT.c **** *
+  17:.\Generated_Source\PSoC5/VERT.c **** *******************************************************************************
+  18:.\Generated_Source\PSoC5/VERT.c **** * Copyright 2008-2012, Cypress Semiconductor Corporation.  All rights reserved.
+  19:.\Generated_Source\PSoC5/VERT.c **** * You may use this file only in accordance with the license, terms, conditions, 
+  20:.\Generated_Source\PSoC5/VERT.c **** * disclaimers, and limitations in the end user license agreement accompanying 
+  21:.\Generated_Source\PSoC5/VERT.c **** * the software package with which this file was provided.
+  22:.\Generated_Source\PSoC5/VERT.c **** ********************************************************************************/
+  23:.\Generated_Source\PSoC5/VERT.c **** 
+  24:.\Generated_Source\PSoC5/VERT.c **** #include "cytypes.h"
+  25:.\Generated_Source\PSoC5/VERT.c **** #include "VERT.h"
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 2
+
+
+  26:.\Generated_Source\PSoC5/VERT.c **** 
+  27:.\Generated_Source\PSoC5/VERT.c **** uint8 VERT_initVar = 0u;
+  28:.\Generated_Source\PSoC5/VERT.c **** 
+  29:.\Generated_Source\PSoC5/VERT.c **** 
+  30:.\Generated_Source\PSoC5/VERT.c **** /*******************************************************************************
+  31:.\Generated_Source\PSoC5/VERT.c **** * Function Name: VERT_Start
+  32:.\Generated_Source\PSoC5/VERT.c **** ********************************************************************************
+  33:.\Generated_Source\PSoC5/VERT.c **** *
+  34:.\Generated_Source\PSoC5/VERT.c **** * Summary:
+  35:.\Generated_Source\PSoC5/VERT.c **** *  The start function initializes the pwm with the default values, the 
+  36:.\Generated_Source\PSoC5/VERT.c **** *  enables the counter to begin counting.  It does not enable interrupts,
+  37:.\Generated_Source\PSoC5/VERT.c **** *  the EnableInt command should be called if interrupt generation is required.
+  38:.\Generated_Source\PSoC5/VERT.c **** *
+  39:.\Generated_Source\PSoC5/VERT.c **** * Parameters:  
+  40:.\Generated_Source\PSoC5/VERT.c **** *  None  
+  41:.\Generated_Source\PSoC5/VERT.c **** *
+  42:.\Generated_Source\PSoC5/VERT.c **** * Return: 
+  43:.\Generated_Source\PSoC5/VERT.c **** *  None
+  44:.\Generated_Source\PSoC5/VERT.c **** *
+  45:.\Generated_Source\PSoC5/VERT.c **** * Global variables:
+  46:.\Generated_Source\PSoC5/VERT.c **** *  VERT_initVar: Is modified when this function is called for the 
+  47:.\Generated_Source\PSoC5/VERT.c **** *   first time. Is used to ensure that initialization happens only once.
+  48:.\Generated_Source\PSoC5/VERT.c **** *
+  49:.\Generated_Source\PSoC5/VERT.c **** *******************************************************************************/
+  50:.\Generated_Source\PSoC5/VERT.c **** void VERT_Start(void) 
+  51:.\Generated_Source\PSoC5/VERT.c **** {
+  33              		.loc 1 51 0
+  34              		.cfi_startproc
+  35              		@ args = 0, pretend = 0, frame = 0
+  36              		@ frame_needed = 1, uses_anonymous_args = 0
+  37 0000 80B5     		push	{r7, lr}
+  38              		.cfi_def_cfa_offset 8
+  39              		.cfi_offset 7, -8
+  40              		.cfi_offset 14, -4
+  41 0002 00AF     		add	r7, sp, #0
+  42              		.cfi_def_cfa_register 7
+  52:.\Generated_Source\PSoC5/VERT.c ****     /* If not Initialized then initialize all required hardware and software */
+  53:.\Generated_Source\PSoC5/VERT.c ****     if(VERT_initVar == 0u)
+  43              		.loc 1 53 0
+  44 0004 054B     		ldr	r3, .L3
+  45 0006 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  46 0008 002B     		cmp	r3, #0
+  47 000a 04D1     		bne	.L2
+  54:.\Generated_Source\PSoC5/VERT.c ****     {
+  55:.\Generated_Source\PSoC5/VERT.c ****         VERT_Init();
+  48              		.loc 1 55 0
+  49 000c FFF7FEFF 		bl	VERT_Init
+  56:.\Generated_Source\PSoC5/VERT.c ****         VERT_initVar = 1u;
+  50              		.loc 1 56 0
+  51 0010 024B     		ldr	r3, .L3
+  52 0012 0122     		movs	r2, #1
+  53 0014 1A70     		strb	r2, [r3]
+  54              	.L2:
+  57:.\Generated_Source\PSoC5/VERT.c ****     }
+  58:.\Generated_Source\PSoC5/VERT.c ****     VERT_Enable();
+  55              		.loc 1 58 0
+  56 0016 FFF7FEFF 		bl	VERT_Enable
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 3
+
+
+  59:.\Generated_Source\PSoC5/VERT.c **** 
+  60:.\Generated_Source\PSoC5/VERT.c **** }
+  57              		.loc 1 60 0
+  58 001a 80BD     		pop	{r7, pc}
+  59              	.L4:
+  60              		.align	2
+  61              	.L3:
+  62 001c 00000000 		.word	VERT_initVar
+  63              		.cfi_endproc
+  64              	.LFE0:
+  65              		.size	VERT_Start, .-VERT_Start
+  66              		.section	.text.VERT_Init,"ax",%progbits
+  67              		.align	2
+  68              		.global	VERT_Init
+  69              		.thumb
+  70              		.thumb_func
+  71              		.type	VERT_Init, %function
+  72              	VERT_Init:
+  73              	.LFB1:
+  61:.\Generated_Source\PSoC5/VERT.c **** 
+  62:.\Generated_Source\PSoC5/VERT.c **** 
+  63:.\Generated_Source\PSoC5/VERT.c **** /*******************************************************************************
+  64:.\Generated_Source\PSoC5/VERT.c **** * Function Name: VERT_Init
+  65:.\Generated_Source\PSoC5/VERT.c **** ********************************************************************************
+  66:.\Generated_Source\PSoC5/VERT.c **** *
+  67:.\Generated_Source\PSoC5/VERT.c **** * Summary:
+  68:.\Generated_Source\PSoC5/VERT.c **** *  Initialize component's parameters to the parameters set by user in the 
+  69:.\Generated_Source\PSoC5/VERT.c **** *  customizer of the component placed onto schematic. Usually called in 
+  70:.\Generated_Source\PSoC5/VERT.c **** *  VERT_Start().
+  71:.\Generated_Source\PSoC5/VERT.c **** *
+  72:.\Generated_Source\PSoC5/VERT.c **** * Parameters:  
+  73:.\Generated_Source\PSoC5/VERT.c **** *  None
+  74:.\Generated_Source\PSoC5/VERT.c **** *
+  75:.\Generated_Source\PSoC5/VERT.c **** * Return: 
+  76:.\Generated_Source\PSoC5/VERT.c **** *  None
+  77:.\Generated_Source\PSoC5/VERT.c **** *
+  78:.\Generated_Source\PSoC5/VERT.c **** *******************************************************************************/
+  79:.\Generated_Source\PSoC5/VERT.c **** void VERT_Init(void) 
+  80:.\Generated_Source\PSoC5/VERT.c **** {
+  74              		.loc 1 80 0
+  75              		.cfi_startproc
+  76              		@ args = 0, pretend = 0, frame = 8
+  77              		@ frame_needed = 1, uses_anonymous_args = 0
+  78 0000 80B5     		push	{r7, lr}
+  79              		.cfi_def_cfa_offset 8
+  80              		.cfi_offset 7, -8
+  81              		.cfi_offset 14, -4
+  82 0002 82B0     		sub	sp, sp, #8
+  83              		.cfi_def_cfa_offset 16
+  84 0004 00AF     		add	r7, sp, #0
+  85              		.cfi_def_cfa_register 7
+  81:.\Generated_Source\PSoC5/VERT.c ****     #if (VERT_UsingFixedFunction || VERT_UseControl)
+  82:.\Generated_Source\PSoC5/VERT.c ****         uint8 ctrl;
+  83:.\Generated_Source\PSoC5/VERT.c ****     #endif /* (VERT_UsingFixedFunction || VERT_UseControl) */
+  84:.\Generated_Source\PSoC5/VERT.c ****     
+  85:.\Generated_Source\PSoC5/VERT.c ****     #if(!VERT_UsingFixedFunction) 
+  86:.\Generated_Source\PSoC5/VERT.c ****         #if(VERT_UseStatus)
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 4
+
+
+  87:.\Generated_Source\PSoC5/VERT.c ****             /* Interrupt State Backup for Critical Region*/
+  88:.\Generated_Source\PSoC5/VERT.c ****             uint8 VERT_interruptState;
+  89:.\Generated_Source\PSoC5/VERT.c ****         #endif /* (VERT_UseStatus) */
+  90:.\Generated_Source\PSoC5/VERT.c ****     #endif /* (!VERT_UsingFixedFunction) */
+  91:.\Generated_Source\PSoC5/VERT.c ****     
+  92:.\Generated_Source\PSoC5/VERT.c ****     #if (VERT_UsingFixedFunction)
+  93:.\Generated_Source\PSoC5/VERT.c ****         /* You are allowed to write the compare value (FF only) */
+  94:.\Generated_Source\PSoC5/VERT.c ****         VERT_CONTROL |= VERT_CFG0_MODE;
+  95:.\Generated_Source\PSoC5/VERT.c ****         #if (VERT_DeadBand2_4)
+  96:.\Generated_Source\PSoC5/VERT.c ****             VERT_CONTROL |= VERT_CFG0_DB;
+  97:.\Generated_Source\PSoC5/VERT.c ****         #endif /* (VERT_DeadBand2_4) */
+  98:.\Generated_Source\PSoC5/VERT.c ****                 
+  99:.\Generated_Source\PSoC5/VERT.c ****         ctrl = VERT_CONTROL3 & ((uint8 )(~VERT_CTRL_CMPMODE1_MASK));
+ 100:.\Generated_Source\PSoC5/VERT.c ****         VERT_CONTROL3 = ctrl | VERT_DEFAULT_COMPARE1_MODE;
+ 101:.\Generated_Source\PSoC5/VERT.c ****         
+ 102:.\Generated_Source\PSoC5/VERT.c ****          /* Clear and Set SYNCTC and SYNCCMP bits of RT1 register */
+ 103:.\Generated_Source\PSoC5/VERT.c ****         VERT_RT1 &= ((uint8)(~VERT_RT1_MASK));
+ 104:.\Generated_Source\PSoC5/VERT.c ****         VERT_RT1 |= VERT_SYNC;     
+ 105:.\Generated_Source\PSoC5/VERT.c ****                 
+ 106:.\Generated_Source\PSoC5/VERT.c ****         /*Enable DSI Sync all all inputs of the PWM*/
+ 107:.\Generated_Source\PSoC5/VERT.c ****         VERT_RT1 &= ((uint8)(~VERT_SYNCDSI_MASK));
+ 108:.\Generated_Source\PSoC5/VERT.c ****         VERT_RT1 |= VERT_SYNCDSI_EN;
+ 109:.\Generated_Source\PSoC5/VERT.c ****        
+ 110:.\Generated_Source\PSoC5/VERT.c ****     #elif (VERT_UseControl)
+ 111:.\Generated_Source\PSoC5/VERT.c ****         /* Set the default compare mode defined in the parameter */
+ 112:.\Generated_Source\PSoC5/VERT.c ****         ctrl = VERT_CONTROL & ((uint8)(~VERT_CTRL_CMPMODE2_MASK)) & ((uint8)(~VERT_CTRL_CMPMODE1_MA
+  86              		.loc 1 112 0
+  87 0006 154B     		ldr	r3, .L6
+  88 0008 1B78     		ldrb	r3, [r3]
+  89 000a DBB2     		uxtb	r3, r3
+  90 000c 23F03F03 		bic	r3, r3, #63
+  91 0010 FB71     		strb	r3, [r7, #7]
+ 113:.\Generated_Source\PSoC5/VERT.c ****         VERT_CONTROL = ctrl | VERT_DEFAULT_COMPARE2_MODE | 
+  92              		.loc 1 113 0
+  93 0012 124A     		ldr	r2, .L6
+  94 0014 FB79     		ldrb	r3, [r7, #7]
+  95 0016 43F02103 		orr	r3, r3, #33
+  96 001a DBB2     		uxtb	r3, r3
+  97 001c 1370     		strb	r3, [r2]
+ 114:.\Generated_Source\PSoC5/VERT.c ****                                    VERT_DEFAULT_COMPARE1_MODE;
+ 115:.\Generated_Source\PSoC5/VERT.c ****     #endif /* (VERT_UsingFixedFunction) */
+ 116:.\Generated_Source\PSoC5/VERT.c ****         
+ 117:.\Generated_Source\PSoC5/VERT.c ****     #if (!VERT_UsingFixedFunction)
+ 118:.\Generated_Source\PSoC5/VERT.c ****         #if (VERT_Resolution == 8)
+ 119:.\Generated_Source\PSoC5/VERT.c ****             /* Set FIFO 0 to 1 byte register for period*/
+ 120:.\Generated_Source\PSoC5/VERT.c ****             VERT_AUX_CONTROLDP0 |= (VERT_AUX_CTRL_FIFO0_CLR);
+ 121:.\Generated_Source\PSoC5/VERT.c ****         #else /* (VERT_Resolution == 16)*/
+ 122:.\Generated_Source\PSoC5/VERT.c ****             /* Set FIFO 0 to 1 byte register for period */
+ 123:.\Generated_Source\PSoC5/VERT.c ****             VERT_AUX_CONTROLDP0 |= (VERT_AUX_CTRL_FIFO0_CLR);
+  98              		.loc 1 123 0
+  99 001e 104A     		ldr	r2, .L6+4
+ 100 0020 0F4B     		ldr	r3, .L6+4
+ 101 0022 1B78     		ldrb	r3, [r3]
+ 102 0024 DBB2     		uxtb	r3, r3
+ 103 0026 43F00103 		orr	r3, r3, #1
+ 104 002a DBB2     		uxtb	r3, r3
+ 105 002c 1370     		strb	r3, [r2]
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 5
+
+
+ 124:.\Generated_Source\PSoC5/VERT.c ****             VERT_AUX_CONTROLDP1 |= (VERT_AUX_CTRL_FIFO0_CLR);
+ 106              		.loc 1 124 0
+ 107 002e 0D4A     		ldr	r2, .L6+8
+ 108 0030 0C4B     		ldr	r3, .L6+8
+ 109 0032 1B78     		ldrb	r3, [r3]
+ 110 0034 DBB2     		uxtb	r3, r3
+ 111 0036 43F00103 		orr	r3, r3, #1
+ 112 003a DBB2     		uxtb	r3, r3
+ 113 003c 1370     		strb	r3, [r2]
+ 125:.\Generated_Source\PSoC5/VERT.c ****         #endif /* (VERT_Resolution == 8) */
+ 126:.\Generated_Source\PSoC5/VERT.c **** 
+ 127:.\Generated_Source\PSoC5/VERT.c ****         VERT_WriteCounter(VERT_INIT_PERIOD_VALUE);
+ 114              		.loc 1 127 0
+ 115 003e 40F22530 		movw	r0, #805
+ 116 0042 FFF7FEFF 		bl	VERT_WriteCounter
+ 128:.\Generated_Source\PSoC5/VERT.c ****     #endif /* (!VERT_UsingFixedFunction) */
+ 129:.\Generated_Source\PSoC5/VERT.c ****         
+ 130:.\Generated_Source\PSoC5/VERT.c ****     VERT_WritePeriod(VERT_INIT_PERIOD_VALUE);
+ 117              		.loc 1 130 0
+ 118 0046 40F22530 		movw	r0, #805
+ 119 004a FFF7FEFF 		bl	VERT_WritePeriod
+ 131:.\Generated_Source\PSoC5/VERT.c **** 
+ 132:.\Generated_Source\PSoC5/VERT.c ****         #if (VERT_UseOneCompareMode)
+ 133:.\Generated_Source\PSoC5/VERT.c ****             VERT_WriteCompare(VERT_INIT_COMPARE_VALUE1);
+ 120              		.loc 1 133 0
+ 121 004e 2620     		movs	r0, #38
+ 122 0050 FFF7FEFF 		bl	VERT_WriteCompare
+ 134:.\Generated_Source\PSoC5/VERT.c ****         #else
+ 135:.\Generated_Source\PSoC5/VERT.c ****             VERT_WriteCompare1(VERT_INIT_COMPARE_VALUE1);
+ 136:.\Generated_Source\PSoC5/VERT.c ****             VERT_WriteCompare2(VERT_INIT_COMPARE_VALUE2);
+ 137:.\Generated_Source\PSoC5/VERT.c ****         #endif /* (VERT_UseOneCompareMode) */
+ 138:.\Generated_Source\PSoC5/VERT.c ****         
+ 139:.\Generated_Source\PSoC5/VERT.c ****         #if (VERT_KillModeMinTime)
+ 140:.\Generated_Source\PSoC5/VERT.c ****             VERT_WriteKillTime(VERT_MinimumKillTime);
+ 141:.\Generated_Source\PSoC5/VERT.c ****         #endif /* (VERT_KillModeMinTime) */
+ 142:.\Generated_Source\PSoC5/VERT.c ****         
+ 143:.\Generated_Source\PSoC5/VERT.c ****         #if (VERT_DeadBandUsed)
+ 144:.\Generated_Source\PSoC5/VERT.c ****             VERT_WriteDeadTime(VERT_INIT_DEAD_TIME);
+ 145:.\Generated_Source\PSoC5/VERT.c ****         #endif /* (VERT_DeadBandUsed) */
+ 146:.\Generated_Source\PSoC5/VERT.c **** 
+ 147:.\Generated_Source\PSoC5/VERT.c ****     #if (VERT_UseStatus || VERT_UsingFixedFunction)
+ 148:.\Generated_Source\PSoC5/VERT.c ****         VERT_SetInterruptMode(VERT_INIT_INTERRUPTS_MODE);
+ 149:.\Generated_Source\PSoC5/VERT.c ****     #endif /* (VERT_UseStatus || VERT_UsingFixedFunction) */
+ 150:.\Generated_Source\PSoC5/VERT.c ****         
+ 151:.\Generated_Source\PSoC5/VERT.c ****     #if (VERT_UsingFixedFunction)
+ 152:.\Generated_Source\PSoC5/VERT.c ****         /* Globally Enable the Fixed Function Block chosen */
+ 153:.\Generated_Source\PSoC5/VERT.c ****         VERT_GLOBAL_ENABLE |= VERT_BLOCK_EN_MASK;
+ 154:.\Generated_Source\PSoC5/VERT.c ****         /* Set the Interrupt source to come from the status register */
+ 155:.\Generated_Source\PSoC5/VERT.c ****         VERT_CONTROL2 |= VERT_CTRL2_IRQ_SEL;
+ 156:.\Generated_Source\PSoC5/VERT.c ****     #else
+ 157:.\Generated_Source\PSoC5/VERT.c ****         #if(VERT_UseStatus)
+ 158:.\Generated_Source\PSoC5/VERT.c ****             
+ 159:.\Generated_Source\PSoC5/VERT.c ****             /* CyEnterCriticalRegion and CyExitCriticalRegion are used to mark following region cri
+ 160:.\Generated_Source\PSoC5/VERT.c ****             /* Enter Critical Region*/
+ 161:.\Generated_Source\PSoC5/VERT.c ****             VERT_interruptState = CyEnterCriticalSection();
+ 162:.\Generated_Source\PSoC5/VERT.c ****             /* Use the interrupt output of the status register for IRQ output */
+ 163:.\Generated_Source\PSoC5/VERT.c ****             VERT_STATUS_AUX_CTRL |= VERT_STATUS_ACTL_INT_EN_MASK;
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 6
+
+
+ 164:.\Generated_Source\PSoC5/VERT.c ****             
+ 165:.\Generated_Source\PSoC5/VERT.c ****              /* Exit Critical Region*/
+ 166:.\Generated_Source\PSoC5/VERT.c ****             CyExitCriticalSection(VERT_interruptState);
+ 167:.\Generated_Source\PSoC5/VERT.c ****             
+ 168:.\Generated_Source\PSoC5/VERT.c ****             /* Clear the FIFO to enable the VERT_STATUS_FIFOFULL
+ 169:.\Generated_Source\PSoC5/VERT.c ****                    bit to be set on FIFO full. */
+ 170:.\Generated_Source\PSoC5/VERT.c ****             VERT_ClearFIFO();
+ 171:.\Generated_Source\PSoC5/VERT.c ****         #endif /* (VERT_UseStatus) */
+ 172:.\Generated_Source\PSoC5/VERT.c ****     #endif /* (VERT_UsingFixedFunction) */
+ 173:.\Generated_Source\PSoC5/VERT.c **** }
+ 123              		.loc 1 173 0
+ 124 0054 0837     		adds	r7, r7, #8
+ 125              		.cfi_def_cfa_offset 8
+ 126 0056 BD46     		mov	sp, r7
+ 127              		.cfi_def_cfa_register 13
+ 128              		@ sp needed
+ 129 0058 80BD     		pop	{r7, pc}
+ 130              	.L7:
+ 131 005a 00BF     		.align	2
+ 132              	.L6:
+ 133 005c 79640040 		.word	1073767545
+ 134 0060 9A650040 		.word	1073767834
+ 135 0064 9B650040 		.word	1073767835
+ 136              		.cfi_endproc
+ 137              	.LFE1:
+ 138              		.size	VERT_Init, .-VERT_Init
+ 139              		.section	.text.VERT_Enable,"ax",%progbits
+ 140              		.align	2
+ 141              		.global	VERT_Enable
+ 142              		.thumb
+ 143              		.thumb_func
+ 144              		.type	VERT_Enable, %function
+ 145              	VERT_Enable:
+ 146              	.LFB2:
+ 174:.\Generated_Source\PSoC5/VERT.c **** 
+ 175:.\Generated_Source\PSoC5/VERT.c **** 
+ 176:.\Generated_Source\PSoC5/VERT.c **** /*******************************************************************************
+ 177:.\Generated_Source\PSoC5/VERT.c **** * Function Name: VERT_Enable
+ 178:.\Generated_Source\PSoC5/VERT.c **** ********************************************************************************
+ 179:.\Generated_Source\PSoC5/VERT.c **** *
+ 180:.\Generated_Source\PSoC5/VERT.c **** * Summary: 
+ 181:.\Generated_Source\PSoC5/VERT.c **** *  Enables the PWM block operation
+ 182:.\Generated_Source\PSoC5/VERT.c **** *
+ 183:.\Generated_Source\PSoC5/VERT.c **** * Parameters:  
+ 184:.\Generated_Source\PSoC5/VERT.c **** *  None
+ 185:.\Generated_Source\PSoC5/VERT.c **** *
+ 186:.\Generated_Source\PSoC5/VERT.c **** * Return: 
+ 187:.\Generated_Source\PSoC5/VERT.c **** *  None
+ 188:.\Generated_Source\PSoC5/VERT.c **** *
+ 189:.\Generated_Source\PSoC5/VERT.c **** * Side Effects: 
+ 190:.\Generated_Source\PSoC5/VERT.c **** *  This works only if software enable mode is chosen
+ 191:.\Generated_Source\PSoC5/VERT.c **** *
+ 192:.\Generated_Source\PSoC5/VERT.c **** *******************************************************************************/
+ 193:.\Generated_Source\PSoC5/VERT.c **** void VERT_Enable(void) 
+ 194:.\Generated_Source\PSoC5/VERT.c **** {
+ 147              		.loc 1 194 0
+ 148              		.cfi_startproc
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 7
+
+
+ 149              		@ args = 0, pretend = 0, frame = 0
+ 150              		@ frame_needed = 1, uses_anonymous_args = 0
+ 151              		@ link register save eliminated.
+ 152 0000 80B4     		push	{r7}
+ 153              		.cfi_def_cfa_offset 4
+ 154              		.cfi_offset 7, -4
+ 155 0002 00AF     		add	r7, sp, #0
+ 156              		.cfi_def_cfa_register 7
+ 195:.\Generated_Source\PSoC5/VERT.c ****     /* Globally Enable the Fixed Function Block chosen */
+ 196:.\Generated_Source\PSoC5/VERT.c ****     #if (VERT_UsingFixedFunction)
+ 197:.\Generated_Source\PSoC5/VERT.c ****         VERT_GLOBAL_ENABLE |= VERT_BLOCK_EN_MASK;
+ 198:.\Generated_Source\PSoC5/VERT.c ****         VERT_GLOBAL_STBY_ENABLE |= VERT_BLOCK_STBY_EN_MASK;
+ 199:.\Generated_Source\PSoC5/VERT.c ****     #endif /* (VERT_UsingFixedFunction) */
+ 200:.\Generated_Source\PSoC5/VERT.c ****     
+ 201:.\Generated_Source\PSoC5/VERT.c ****     /* Enable the PWM from the control register  */
+ 202:.\Generated_Source\PSoC5/VERT.c ****     #if (VERT_UseControl || VERT_UsingFixedFunction)
+ 203:.\Generated_Source\PSoC5/VERT.c ****         VERT_CONTROL |= VERT_CTRL_ENABLE;
+ 157              		.loc 1 203 0
+ 158 0004 054A     		ldr	r2, .L9
+ 159 0006 054B     		ldr	r3, .L9
+ 160 0008 1B78     		ldrb	r3, [r3]
+ 161 000a DBB2     		uxtb	r3, r3
+ 162 000c 63F07F03 		orn	r3, r3, #127
+ 163 0010 DBB2     		uxtb	r3, r3
+ 164 0012 1370     		strb	r3, [r2]
+ 204:.\Generated_Source\PSoC5/VERT.c ****     #endif /* (VERT_UseControl || VERT_UsingFixedFunction) */
+ 205:.\Generated_Source\PSoC5/VERT.c **** }
+ 165              		.loc 1 205 0
+ 166 0014 BD46     		mov	sp, r7
+ 167              		.cfi_def_cfa_register 13
+ 168              		@ sp needed
+ 169 0016 5DF8047B 		ldr	r7, [sp], #4
+ 170              		.cfi_restore 7
+ 171              		.cfi_def_cfa_offset 0
+ 172 001a 7047     		bx	lr
+ 173              	.L10:
+ 174              		.align	2
+ 175              	.L9:
+ 176 001c 79640040 		.word	1073767545
+ 177              		.cfi_endproc
+ 178              	.LFE2:
+ 179              		.size	VERT_Enable, .-VERT_Enable
+ 180              		.section	.text.VERT_Stop,"ax",%progbits
+ 181              		.align	2
+ 182              		.global	VERT_Stop
+ 183              		.thumb
+ 184              		.thumb_func
+ 185              		.type	VERT_Stop, %function
+ 186              	VERT_Stop:
+ 187              	.LFB3:
+ 206:.\Generated_Source\PSoC5/VERT.c **** 
+ 207:.\Generated_Source\PSoC5/VERT.c **** 
+ 208:.\Generated_Source\PSoC5/VERT.c **** /*******************************************************************************
+ 209:.\Generated_Source\PSoC5/VERT.c **** * Function Name: VERT_Stop
+ 210:.\Generated_Source\PSoC5/VERT.c **** ********************************************************************************
+ 211:.\Generated_Source\PSoC5/VERT.c **** *
+ 212:.\Generated_Source\PSoC5/VERT.c **** * Summary:
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 8
+
+
+ 213:.\Generated_Source\PSoC5/VERT.c **** *  The stop function halts the PWM, but does not change any modes or disable
+ 214:.\Generated_Source\PSoC5/VERT.c **** *  interrupts.
+ 215:.\Generated_Source\PSoC5/VERT.c **** *
+ 216:.\Generated_Source\PSoC5/VERT.c **** * Parameters:  
+ 217:.\Generated_Source\PSoC5/VERT.c **** *  None  
+ 218:.\Generated_Source\PSoC5/VERT.c **** *
+ 219:.\Generated_Source\PSoC5/VERT.c **** * Return: 
+ 220:.\Generated_Source\PSoC5/VERT.c **** *  None
+ 221:.\Generated_Source\PSoC5/VERT.c **** *
+ 222:.\Generated_Source\PSoC5/VERT.c **** * Side Effects:
+ 223:.\Generated_Source\PSoC5/VERT.c **** *  If the Enable mode is set to Hardware only then this function
+ 224:.\Generated_Source\PSoC5/VERT.c **** *  has no effect on the operation of the PWM
+ 225:.\Generated_Source\PSoC5/VERT.c **** *
+ 226:.\Generated_Source\PSoC5/VERT.c **** *******************************************************************************/
+ 227:.\Generated_Source\PSoC5/VERT.c **** void VERT_Stop(void) 
+ 228:.\Generated_Source\PSoC5/VERT.c **** {
+ 188              		.loc 1 228 0
+ 189              		.cfi_startproc
+ 190              		@ args = 0, pretend = 0, frame = 0
+ 191              		@ frame_needed = 1, uses_anonymous_args = 0
+ 192              		@ link register save eliminated.
+ 193 0000 80B4     		push	{r7}
+ 194              		.cfi_def_cfa_offset 4
+ 195              		.cfi_offset 7, -4
+ 196 0002 00AF     		add	r7, sp, #0
+ 197              		.cfi_def_cfa_register 7
+ 229:.\Generated_Source\PSoC5/VERT.c ****     #if (VERT_UseControl || VERT_UsingFixedFunction)
+ 230:.\Generated_Source\PSoC5/VERT.c ****         VERT_CONTROL &= ((uint8)(~VERT_CTRL_ENABLE));
+ 198              		.loc 1 230 0
+ 199 0004 054A     		ldr	r2, .L12
+ 200 0006 054B     		ldr	r3, .L12
+ 201 0008 1B78     		ldrb	r3, [r3]
+ 202 000a DBB2     		uxtb	r3, r3
+ 203 000c 03F07F03 		and	r3, r3, #127
+ 204 0010 DBB2     		uxtb	r3, r3
+ 205 0012 1370     		strb	r3, [r2]
+ 231:.\Generated_Source\PSoC5/VERT.c ****     #endif /* (VERT_UseControl || VERT_UsingFixedFunction) */
+ 232:.\Generated_Source\PSoC5/VERT.c ****     
+ 233:.\Generated_Source\PSoC5/VERT.c ****     /* Globally disable the Fixed Function Block chosen */
+ 234:.\Generated_Source\PSoC5/VERT.c ****     #if (VERT_UsingFixedFunction)
+ 235:.\Generated_Source\PSoC5/VERT.c ****         VERT_GLOBAL_ENABLE &= ((uint8)(~VERT_BLOCK_EN_MASK));
+ 236:.\Generated_Source\PSoC5/VERT.c ****         VERT_GLOBAL_STBY_ENABLE &= ((uint8)(~VERT_BLOCK_STBY_EN_MASK));
+ 237:.\Generated_Source\PSoC5/VERT.c ****     #endif /* (VERT_UsingFixedFunction) */
+ 238:.\Generated_Source\PSoC5/VERT.c **** }
+ 206              		.loc 1 238 0
+ 207 0014 BD46     		mov	sp, r7
+ 208              		.cfi_def_cfa_register 13
+ 209              		@ sp needed
+ 210 0016 5DF8047B 		ldr	r7, [sp], #4
+ 211              		.cfi_restore 7
+ 212              		.cfi_def_cfa_offset 0
+ 213 001a 7047     		bx	lr
+ 214              	.L13:
+ 215              		.align	2
+ 216              	.L12:
+ 217 001c 79640040 		.word	1073767545
+ 218              		.cfi_endproc
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 9
+
+
+ 219              	.LFE3:
+ 220              		.size	VERT_Stop, .-VERT_Stop
+ 221              		.section	.text.VERT_WriteCounter,"ax",%progbits
+ 222              		.align	2
+ 223              		.global	VERT_WriteCounter
+ 224              		.thumb
+ 225              		.thumb_func
+ 226              		.type	VERT_WriteCounter, %function
+ 227              	VERT_WriteCounter:
+ 228              	.LFB4:
+ 239:.\Generated_Source\PSoC5/VERT.c **** 
+ 240:.\Generated_Source\PSoC5/VERT.c **** 
+ 241:.\Generated_Source\PSoC5/VERT.c **** #if (VERT_UseOneCompareMode)
+ 242:.\Generated_Source\PSoC5/VERT.c **** 	#if (VERT_CompareMode1SW)
+ 243:.\Generated_Source\PSoC5/VERT.c **** 
+ 244:.\Generated_Source\PSoC5/VERT.c **** 
+ 245:.\Generated_Source\PSoC5/VERT.c **** 		/*******************************************************************************
+ 246:.\Generated_Source\PSoC5/VERT.c **** 		* Function Name: VERT_SetCompareMode
+ 247:.\Generated_Source\PSoC5/VERT.c **** 		********************************************************************************
+ 248:.\Generated_Source\PSoC5/VERT.c **** 		* 
+ 249:.\Generated_Source\PSoC5/VERT.c **** 		* Summary:
+ 250:.\Generated_Source\PSoC5/VERT.c **** 		*  This function writes the Compare Mode for the pwm output when in Dither mode,
+ 251:.\Generated_Source\PSoC5/VERT.c **** 		*  Center Align Mode or One Output Mode.
+ 252:.\Generated_Source\PSoC5/VERT.c **** 		*
+ 253:.\Generated_Source\PSoC5/VERT.c **** 		* Parameters:
+ 254:.\Generated_Source\PSoC5/VERT.c **** 		*  comparemode:  The new compare mode for the PWM output. Use the compare types
+ 255:.\Generated_Source\PSoC5/VERT.c **** 		*                defined in the H file as input arguments.
+ 256:.\Generated_Source\PSoC5/VERT.c **** 		*
+ 257:.\Generated_Source\PSoC5/VERT.c **** 		* Return:
+ 258:.\Generated_Source\PSoC5/VERT.c **** 		*  None
+ 259:.\Generated_Source\PSoC5/VERT.c **** 		*
+ 260:.\Generated_Source\PSoC5/VERT.c **** 		*******************************************************************************/
+ 261:.\Generated_Source\PSoC5/VERT.c **** 		void VERT_SetCompareMode(uint8 comparemode) 
+ 262:.\Generated_Source\PSoC5/VERT.c **** 		{
+ 263:.\Generated_Source\PSoC5/VERT.c **** 		    #if(VERT_UsingFixedFunction)
+ 264:.\Generated_Source\PSoC5/VERT.c ****             
+ 265:.\Generated_Source\PSoC5/VERT.c ****                 #if(0 != VERT_CTRL_CMPMODE1_SHIFT)
+ 266:.\Generated_Source\PSoC5/VERT.c ****                     uint8 comparemodemasked = ((uint8)((uint8)comparemode << VERT_CTRL_CMPMODE1_SHI
+ 267:.\Generated_Source\PSoC5/VERT.c ****                 #else
+ 268:.\Generated_Source\PSoC5/VERT.c ****                     uint8 comparemodemasked = comparemode;
+ 269:.\Generated_Source\PSoC5/VERT.c ****                 #endif /* (0 != VERT_CTRL_CMPMODE1_SHIFT) */
+ 270:.\Generated_Source\PSoC5/VERT.c ****             
+ 271:.\Generated_Source\PSoC5/VERT.c **** 	            VERT_CONTROL3 &= ((uint8)(~VERT_CTRL_CMPMODE1_MASK)); /*Clear Existing Data */
+ 272:.\Generated_Source\PSoC5/VERT.c **** 	            VERT_CONTROL3 |= comparemodemasked;     
+ 273:.\Generated_Source\PSoC5/VERT.c **** 		                
+ 274:.\Generated_Source\PSoC5/VERT.c **** 		    #elif (VERT_UseControl)
+ 275:.\Generated_Source\PSoC5/VERT.c **** 		        
+ 276:.\Generated_Source\PSoC5/VERT.c ****                 #if(0 != VERT_CTRL_CMPMODE1_SHIFT)
+ 277:.\Generated_Source\PSoC5/VERT.c ****                     uint8 comparemode1masked = ((uint8)((uint8)comparemode << VERT_CTRL_CMPMODE1_SH
+ 278:.\Generated_Source\PSoC5/VERT.c ****     		                                    VERT_CTRL_CMPMODE1_MASK;
+ 279:.\Generated_Source\PSoC5/VERT.c ****                 #else
+ 280:.\Generated_Source\PSoC5/VERT.c ****                     uint8 comparemode1masked = comparemode & VERT_CTRL_CMPMODE1_MASK;              
+ 281:.\Generated_Source\PSoC5/VERT.c ****                 #endif /* (0 != VERT_CTRL_CMPMODE1_SHIFT) */
+ 282:.\Generated_Source\PSoC5/VERT.c ****                 
+ 283:.\Generated_Source\PSoC5/VERT.c ****                 #if(0 != VERT_CTRL_CMPMODE2_SHIFT)                            
+ 284:.\Generated_Source\PSoC5/VERT.c ****     		        uint8 comparemode2masked = ((uint8)((uint8)comparemode << VERT_CTRL_CMPMODE2_SHIFT)) 
+ 285:.\Generated_Source\PSoC5/VERT.c ****     		                                   VERT_CTRL_CMPMODE2_MASK;
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 10
+
+
+ 286:.\Generated_Source\PSoC5/VERT.c ****                 #else
+ 287:.\Generated_Source\PSoC5/VERT.c ****     		        uint8 comparemode2masked = comparemode & VERT_CTRL_CMPMODE2_MASK;                
+ 288:.\Generated_Source\PSoC5/VERT.c ****                 #endif /* (0 != VERT_CTRL_CMPMODE2_SHIFT) */
+ 289:.\Generated_Source\PSoC5/VERT.c ****                 
+ 290:.\Generated_Source\PSoC5/VERT.c **** 		        /*Clear existing mode */
+ 291:.\Generated_Source\PSoC5/VERT.c **** 		        VERT_CONTROL &= ((uint8)(~(VERT_CTRL_CMPMODE1_MASK | VERT_CTRL_CMPMODE2_MASK))); 
+ 292:.\Generated_Source\PSoC5/VERT.c **** 		        VERT_CONTROL |= (comparemode1masked | comparemode2masked);
+ 293:.\Generated_Source\PSoC5/VERT.c **** 		        
+ 294:.\Generated_Source\PSoC5/VERT.c **** 		    #else
+ 295:.\Generated_Source\PSoC5/VERT.c **** 		        uint8 temp = comparemode;
+ 296:.\Generated_Source\PSoC5/VERT.c **** 		    #endif /* (VERT_UsingFixedFunction) */
+ 297:.\Generated_Source\PSoC5/VERT.c **** 		}
+ 298:.\Generated_Source\PSoC5/VERT.c **** 	#endif /* VERT_CompareMode1SW */
+ 299:.\Generated_Source\PSoC5/VERT.c **** 
+ 300:.\Generated_Source\PSoC5/VERT.c **** #else /* UseOneCompareMode */
+ 301:.\Generated_Source\PSoC5/VERT.c **** 
+ 302:.\Generated_Source\PSoC5/VERT.c **** 	#if (VERT_CompareMode1SW)
+ 303:.\Generated_Source\PSoC5/VERT.c **** 
+ 304:.\Generated_Source\PSoC5/VERT.c **** 
+ 305:.\Generated_Source\PSoC5/VERT.c **** 		/*******************************************************************************
+ 306:.\Generated_Source\PSoC5/VERT.c **** 		* Function Name: VERT_SetCompareMode1
+ 307:.\Generated_Source\PSoC5/VERT.c **** 		********************************************************************************
+ 308:.\Generated_Source\PSoC5/VERT.c **** 		* 
+ 309:.\Generated_Source\PSoC5/VERT.c **** 		* Summary:
+ 310:.\Generated_Source\PSoC5/VERT.c **** 		*  This function writes the Compare Mode for the pwm or pwm1 output
+ 311:.\Generated_Source\PSoC5/VERT.c **** 		*
+ 312:.\Generated_Source\PSoC5/VERT.c **** 		* Parameters:  
+ 313:.\Generated_Source\PSoC5/VERT.c **** 		*  comparemode:  The new compare mode for the PWM output. Use the compare types
+ 314:.\Generated_Source\PSoC5/VERT.c **** 		*                defined in the H file as input arguments.
+ 315:.\Generated_Source\PSoC5/VERT.c **** 		*
+ 316:.\Generated_Source\PSoC5/VERT.c **** 		* Return: 
+ 317:.\Generated_Source\PSoC5/VERT.c **** 		*  None
+ 318:.\Generated_Source\PSoC5/VERT.c **** 		*
+ 319:.\Generated_Source\PSoC5/VERT.c **** 		*******************************************************************************/
+ 320:.\Generated_Source\PSoC5/VERT.c **** 		void VERT_SetCompareMode1(uint8 comparemode) 
+ 321:.\Generated_Source\PSoC5/VERT.c **** 		{
+ 322:.\Generated_Source\PSoC5/VERT.c **** 		    #if(0 != VERT_CTRL_CMPMODE1_SHIFT)
+ 323:.\Generated_Source\PSoC5/VERT.c ****                 uint8 comparemodemasked = ((uint8)((uint8)comparemode << VERT_CTRL_CMPMODE1_SHIFT))
+ 324:.\Generated_Source\PSoC5/VERT.c ****     		                               VERT_CTRL_CMPMODE1_MASK;
+ 325:.\Generated_Source\PSoC5/VERT.c **** 		    #else
+ 326:.\Generated_Source\PSoC5/VERT.c ****                 uint8 comparemodemasked = comparemode & VERT_CTRL_CMPMODE1_MASK;                
+ 327:.\Generated_Source\PSoC5/VERT.c ****             #endif /* (0 != VERT_CTRL_CMPMODE1_SHIFT) */
+ 328:.\Generated_Source\PSoC5/VERT.c ****                    
+ 329:.\Generated_Source\PSoC5/VERT.c **** 		    #if (VERT_UseControl)
+ 330:.\Generated_Source\PSoC5/VERT.c **** 		        VERT_CONTROL &= ((uint8)(~VERT_CTRL_CMPMODE1_MASK)); /*Clear existing mode */
+ 331:.\Generated_Source\PSoC5/VERT.c **** 		        VERT_CONTROL |= comparemodemasked;
+ 332:.\Generated_Source\PSoC5/VERT.c **** 		    #endif /* (VERT_UseControl) */
+ 333:.\Generated_Source\PSoC5/VERT.c **** 		}
+ 334:.\Generated_Source\PSoC5/VERT.c **** 	#endif /* VERT_CompareMode1SW */
+ 335:.\Generated_Source\PSoC5/VERT.c **** 
+ 336:.\Generated_Source\PSoC5/VERT.c **** #if (VERT_CompareMode2SW)
+ 337:.\Generated_Source\PSoC5/VERT.c **** 
+ 338:.\Generated_Source\PSoC5/VERT.c **** 
+ 339:.\Generated_Source\PSoC5/VERT.c ****     /*******************************************************************************
+ 340:.\Generated_Source\PSoC5/VERT.c ****     * Function Name: VERT_SetCompareMode2
+ 341:.\Generated_Source\PSoC5/VERT.c ****     ********************************************************************************
+ 342:.\Generated_Source\PSoC5/VERT.c ****     * 
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 11
+
+
+ 343:.\Generated_Source\PSoC5/VERT.c ****     * Summary:
+ 344:.\Generated_Source\PSoC5/VERT.c ****     *  This function writes the Compare Mode for the pwm or pwm2 output
+ 345:.\Generated_Source\PSoC5/VERT.c ****     *
+ 346:.\Generated_Source\PSoC5/VERT.c ****     * Parameters:  
+ 347:.\Generated_Source\PSoC5/VERT.c ****     *  comparemode:  The new compare mode for the PWM output. Use the compare types
+ 348:.\Generated_Source\PSoC5/VERT.c ****     *                defined in the H file as input arguments.
+ 349:.\Generated_Source\PSoC5/VERT.c ****     *
+ 350:.\Generated_Source\PSoC5/VERT.c ****     * Return: 
+ 351:.\Generated_Source\PSoC5/VERT.c ****     *  None
+ 352:.\Generated_Source\PSoC5/VERT.c ****     *
+ 353:.\Generated_Source\PSoC5/VERT.c ****     *******************************************************************************/
+ 354:.\Generated_Source\PSoC5/VERT.c ****     void VERT_SetCompareMode2(uint8 comparemode) 
+ 355:.\Generated_Source\PSoC5/VERT.c ****     {
+ 356:.\Generated_Source\PSoC5/VERT.c **** 
+ 357:.\Generated_Source\PSoC5/VERT.c ****         #if(0 != VERT_CTRL_CMPMODE2_SHIFT)
+ 358:.\Generated_Source\PSoC5/VERT.c ****             uint8 comparemodemasked = ((uint8)((uint8)comparemode << VERT_CTRL_CMPMODE2_SHIFT)) & 
+ 359:.\Generated_Source\PSoC5/VERT.c ****                                                  VERT_CTRL_CMPMODE2_MASK;
+ 360:.\Generated_Source\PSoC5/VERT.c ****         #else
+ 361:.\Generated_Source\PSoC5/VERT.c ****             uint8 comparemodemasked = comparemode & VERT_CTRL_CMPMODE2_MASK;            
+ 362:.\Generated_Source\PSoC5/VERT.c ****         #endif /* (0 != VERT_CTRL_CMPMODE2_SHIFT) */
+ 363:.\Generated_Source\PSoC5/VERT.c ****         
+ 364:.\Generated_Source\PSoC5/VERT.c ****         #if (VERT_UseControl)
+ 365:.\Generated_Source\PSoC5/VERT.c ****             VERT_CONTROL &= ((uint8)(~VERT_CTRL_CMPMODE2_MASK)); /*Clear existing mode */
+ 366:.\Generated_Source\PSoC5/VERT.c ****             VERT_CONTROL |= comparemodemasked;
+ 367:.\Generated_Source\PSoC5/VERT.c ****         #endif /* (VERT_UseControl) */
+ 368:.\Generated_Source\PSoC5/VERT.c ****     }
+ 369:.\Generated_Source\PSoC5/VERT.c ****     #endif /*VERT_CompareMode2SW */
+ 370:.\Generated_Source\PSoC5/VERT.c **** 
+ 371:.\Generated_Source\PSoC5/VERT.c **** #endif /* UseOneCompareMode */
+ 372:.\Generated_Source\PSoC5/VERT.c **** 
+ 373:.\Generated_Source\PSoC5/VERT.c **** 
+ 374:.\Generated_Source\PSoC5/VERT.c **** #if (!VERT_UsingFixedFunction)
+ 375:.\Generated_Source\PSoC5/VERT.c **** 
+ 376:.\Generated_Source\PSoC5/VERT.c **** 
+ 377:.\Generated_Source\PSoC5/VERT.c ****     /*******************************************************************************
+ 378:.\Generated_Source\PSoC5/VERT.c ****     * Function Name: VERT_WriteCounter
+ 379:.\Generated_Source\PSoC5/VERT.c ****     ********************************************************************************
+ 380:.\Generated_Source\PSoC5/VERT.c ****     * 
+ 381:.\Generated_Source\PSoC5/VERT.c ****     * Summary:
+ 382:.\Generated_Source\PSoC5/VERT.c ****     *  Writes a new counter value directly to the counter register. This will be 
+ 383:.\Generated_Source\PSoC5/VERT.c ****     *  implemented for that currently running period and only that period. This API 
+ 384:.\Generated_Source\PSoC5/VERT.c ****     *  is valid only for UDB implementation and not available for fixed function 
+ 385:.\Generated_Source\PSoC5/VERT.c ****     *  PWM implementation.    
+ 386:.\Generated_Source\PSoC5/VERT.c ****     *
+ 387:.\Generated_Source\PSoC5/VERT.c ****     * Parameters:  
+ 388:.\Generated_Source\PSoC5/VERT.c ****     *  counter:  The period new period counter value.
+ 389:.\Generated_Source\PSoC5/VERT.c ****     *
+ 390:.\Generated_Source\PSoC5/VERT.c ****     * Return: 
+ 391:.\Generated_Source\PSoC5/VERT.c ****     *  None
+ 392:.\Generated_Source\PSoC5/VERT.c ****     *
+ 393:.\Generated_Source\PSoC5/VERT.c ****     * Side Effects: 
+ 394:.\Generated_Source\PSoC5/VERT.c ****     *  The PWM Period will be reloaded when a counter value will be a zero
+ 395:.\Generated_Source\PSoC5/VERT.c ****     *
+ 396:.\Generated_Source\PSoC5/VERT.c ****     *******************************************************************************/
+ 397:.\Generated_Source\PSoC5/VERT.c ****     void VERT_WriteCounter(uint16 counter) \
+ 398:.\Generated_Source\PSoC5/VERT.c ****                                        
+ 399:.\Generated_Source\PSoC5/VERT.c ****     {
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 12
+
+
+ 229              		.loc 1 399 0
+ 230              		.cfi_startproc
+ 231              		@ args = 0, pretend = 0, frame = 8
+ 232              		@ frame_needed = 1, uses_anonymous_args = 0
+ 233              		@ link register save eliminated.
+ 234 0000 80B4     		push	{r7}
+ 235              		.cfi_def_cfa_offset 4
+ 236              		.cfi_offset 7, -4
+ 237 0002 83B0     		sub	sp, sp, #12
+ 238              		.cfi_def_cfa_offset 16
+ 239 0004 00AF     		add	r7, sp, #0
+ 240              		.cfi_def_cfa_register 7
+ 241 0006 0346     		mov	r3, r0
+ 242 0008 FB80     		strh	r3, [r7, #6]	@ movhi
+ 400:.\Generated_Source\PSoC5/VERT.c ****         CY_SET_REG16(VERT_COUNTER_LSB_PTR, counter);
+ 243              		.loc 1 400 0
+ 244 000a 044A     		ldr	r2, .L15
+ 245 000c FB88     		ldrh	r3, [r7, #6]	@ movhi
+ 246 000e 1380     		strh	r3, [r2]	@ movhi
+ 401:.\Generated_Source\PSoC5/VERT.c ****     }
+ 247              		.loc 1 401 0
+ 248 0010 0C37     		adds	r7, r7, #12
+ 249              		.cfi_def_cfa_offset 4
+ 250 0012 BD46     		mov	sp, r7
+ 251              		.cfi_def_cfa_register 13
+ 252              		@ sp needed
+ 253 0014 5DF8047B 		ldr	r7, [sp], #4
+ 254              		.cfi_restore 7
+ 255              		.cfi_def_cfa_offset 0
+ 256 0018 7047     		bx	lr
+ 257              	.L16:
+ 258 001a 00BF     		.align	2
+ 259              	.L15:
+ 260 001c 146A0040 		.word	1073768980
+ 261              		.cfi_endproc
+ 262              	.LFE4:
+ 263              		.size	VERT_WriteCounter, .-VERT_WriteCounter
+ 264              		.section	.text.VERT_ReadCounter,"ax",%progbits
+ 265              		.align	2
+ 266              		.global	VERT_ReadCounter
+ 267              		.thumb
+ 268              		.thumb_func
+ 269              		.type	VERT_ReadCounter, %function
+ 270              	VERT_ReadCounter:
+ 271              	.LFB5:
+ 402:.\Generated_Source\PSoC5/VERT.c **** 
+ 403:.\Generated_Source\PSoC5/VERT.c **** 
+ 404:.\Generated_Source\PSoC5/VERT.c ****     /*******************************************************************************
+ 405:.\Generated_Source\PSoC5/VERT.c ****     * Function Name: VERT_ReadCounter
+ 406:.\Generated_Source\PSoC5/VERT.c ****     ********************************************************************************
+ 407:.\Generated_Source\PSoC5/VERT.c ****     * 
+ 408:.\Generated_Source\PSoC5/VERT.c ****     * Summary:
+ 409:.\Generated_Source\PSoC5/VERT.c ****     *  This function returns the current value of the counter.  It doesn't matter
+ 410:.\Generated_Source\PSoC5/VERT.c ****     *  if the counter is enabled or running.
+ 411:.\Generated_Source\PSoC5/VERT.c ****     *
+ 412:.\Generated_Source\PSoC5/VERT.c ****     * Parameters:  
+ 413:.\Generated_Source\PSoC5/VERT.c ****     *  None  
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 13
+
+
+ 414:.\Generated_Source\PSoC5/VERT.c ****     *
+ 415:.\Generated_Source\PSoC5/VERT.c ****     * Return: 
+ 416:.\Generated_Source\PSoC5/VERT.c ****     *  The current value of the counter.
+ 417:.\Generated_Source\PSoC5/VERT.c ****     *
+ 418:.\Generated_Source\PSoC5/VERT.c ****     *******************************************************************************/
+ 419:.\Generated_Source\PSoC5/VERT.c ****     uint16 VERT_ReadCounter(void) 
+ 420:.\Generated_Source\PSoC5/VERT.c ****     {
+ 272              		.loc 1 420 0
+ 273              		.cfi_startproc
+ 274              		@ args = 0, pretend = 0, frame = 0
+ 275              		@ frame_needed = 1, uses_anonymous_args = 0
+ 276              		@ link register save eliminated.
+ 277 0000 80B4     		push	{r7}
+ 278              		.cfi_def_cfa_offset 4
+ 279              		.cfi_offset 7, -4
+ 280 0002 00AF     		add	r7, sp, #0
+ 281              		.cfi_def_cfa_register 7
+ 421:.\Generated_Source\PSoC5/VERT.c ****         /* Force capture by reading Accumulator */
+ 422:.\Generated_Source\PSoC5/VERT.c ****         /* Must first do a software capture to be able to read the counter */
+ 423:.\Generated_Source\PSoC5/VERT.c ****         /* It is up to the user code to make sure there isn't already captured data in the FIFO */
+ 424:.\Generated_Source\PSoC5/VERT.c ****         (void)VERT_COUNTERCAP_LSB;
+ 282              		.loc 1 424 0
+ 283 0004 044B     		ldr	r3, .L19
+ 284 0006 1B88     		ldrh	r3, [r3]	@ movhi
+ 425:.\Generated_Source\PSoC5/VERT.c ****         
+ 426:.\Generated_Source\PSoC5/VERT.c ****         /* Read the data from the FIFO (or capture register for Fixed Function)*/
+ 427:.\Generated_Source\PSoC5/VERT.c ****         return (CY_GET_REG16(VERT_CAPTURE_LSB_PTR));
+ 285              		.loc 1 427 0
+ 286 0008 044B     		ldr	r3, .L19+4
+ 287 000a 1B88     		ldrh	r3, [r3]	@ movhi
+ 288 000c 9BB2     		uxth	r3, r3
+ 428:.\Generated_Source\PSoC5/VERT.c ****     }
+ 289              		.loc 1 428 0
+ 290 000e 1846     		mov	r0, r3
+ 291 0010 BD46     		mov	sp, r7
+ 292              		.cfi_def_cfa_register 13
+ 293              		@ sp needed
+ 294 0012 5DF8047B 		ldr	r7, [sp], #4
+ 295              		.cfi_restore 7
+ 296              		.cfi_def_cfa_offset 0
+ 297 0016 7047     		bx	lr
+ 298              	.L20:
+ 299              		.align	2
+ 300              	.L19:
+ 301 0018 346A0040 		.word	1073769012
+ 302 001c B46A0040 		.word	1073769140
+ 303              		.cfi_endproc
+ 304              	.LFE5:
+ 305              		.size	VERT_ReadCounter, .-VERT_ReadCounter
+ 306              		.section	.text.VERT_WritePeriod,"ax",%progbits
+ 307              		.align	2
+ 308              		.global	VERT_WritePeriod
+ 309              		.thumb
+ 310              		.thumb_func
+ 311              		.type	VERT_WritePeriod, %function
+ 312              	VERT_WritePeriod:
+ 313              	.LFB6:
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 14
+
+
+ 429:.\Generated_Source\PSoC5/VERT.c **** 
+ 430:.\Generated_Source\PSoC5/VERT.c ****         #if (VERT_UseStatus)
+ 431:.\Generated_Source\PSoC5/VERT.c **** 
+ 432:.\Generated_Source\PSoC5/VERT.c **** 
+ 433:.\Generated_Source\PSoC5/VERT.c ****             /*******************************************************************************
+ 434:.\Generated_Source\PSoC5/VERT.c ****             * Function Name: VERT_ClearFIFO
+ 435:.\Generated_Source\PSoC5/VERT.c ****             ********************************************************************************
+ 436:.\Generated_Source\PSoC5/VERT.c ****             * 
+ 437:.\Generated_Source\PSoC5/VERT.c ****             * Summary:
+ 438:.\Generated_Source\PSoC5/VERT.c ****             *  This function clears all capture data from the capture FIFO
+ 439:.\Generated_Source\PSoC5/VERT.c ****             *
+ 440:.\Generated_Source\PSoC5/VERT.c ****             * Parameters:  
+ 441:.\Generated_Source\PSoC5/VERT.c ****             *  None
+ 442:.\Generated_Source\PSoC5/VERT.c ****             *
+ 443:.\Generated_Source\PSoC5/VERT.c ****             * Return: 
+ 444:.\Generated_Source\PSoC5/VERT.c ****             *  None
+ 445:.\Generated_Source\PSoC5/VERT.c ****             *
+ 446:.\Generated_Source\PSoC5/VERT.c ****             *******************************************************************************/
+ 447:.\Generated_Source\PSoC5/VERT.c ****             void VERT_ClearFIFO(void) 
+ 448:.\Generated_Source\PSoC5/VERT.c ****             {
+ 449:.\Generated_Source\PSoC5/VERT.c ****                 while(0u != (VERT_ReadStatusRegister() & VERT_STATUS_FIFONEMPTY))
+ 450:.\Generated_Source\PSoC5/VERT.c ****                 {
+ 451:.\Generated_Source\PSoC5/VERT.c ****                     (void)VERT_ReadCapture();
+ 452:.\Generated_Source\PSoC5/VERT.c ****                 }
+ 453:.\Generated_Source\PSoC5/VERT.c ****             }
+ 454:.\Generated_Source\PSoC5/VERT.c **** 
+ 455:.\Generated_Source\PSoC5/VERT.c ****         #endif /* VERT_UseStatus */
+ 456:.\Generated_Source\PSoC5/VERT.c **** 
+ 457:.\Generated_Source\PSoC5/VERT.c **** #endif /* !VERT_UsingFixedFunction */
+ 458:.\Generated_Source\PSoC5/VERT.c **** 
+ 459:.\Generated_Source\PSoC5/VERT.c **** 
+ 460:.\Generated_Source\PSoC5/VERT.c **** /*******************************************************************************
+ 461:.\Generated_Source\PSoC5/VERT.c **** * Function Name: VERT_WritePeriod
+ 462:.\Generated_Source\PSoC5/VERT.c **** ********************************************************************************
+ 463:.\Generated_Source\PSoC5/VERT.c **** * 
+ 464:.\Generated_Source\PSoC5/VERT.c **** * Summary:
+ 465:.\Generated_Source\PSoC5/VERT.c **** *  This function is used to change the period of the counter.  The new period 
+ 466:.\Generated_Source\PSoC5/VERT.c **** *  will be loaded the next time terminal count is detected.
+ 467:.\Generated_Source\PSoC5/VERT.c **** *
+ 468:.\Generated_Source\PSoC5/VERT.c **** * Parameters:  
+ 469:.\Generated_Source\PSoC5/VERT.c **** *  period:  Period value. May be between 1 and (2^Resolution)-1.  A value of 0 
+ 470:.\Generated_Source\PSoC5/VERT.c **** *           will result in the counter remaining at zero.
+ 471:.\Generated_Source\PSoC5/VERT.c **** *
+ 472:.\Generated_Source\PSoC5/VERT.c **** * Return: 
+ 473:.\Generated_Source\PSoC5/VERT.c **** *  None
+ 474:.\Generated_Source\PSoC5/VERT.c **** *
+ 475:.\Generated_Source\PSoC5/VERT.c **** *******************************************************************************/
+ 476:.\Generated_Source\PSoC5/VERT.c **** void VERT_WritePeriod(uint16 period) 
+ 477:.\Generated_Source\PSoC5/VERT.c **** {
+ 314              		.loc 1 477 0
+ 315              		.cfi_startproc
+ 316              		@ args = 0, pretend = 0, frame = 8
+ 317              		@ frame_needed = 1, uses_anonymous_args = 0
+ 318              		@ link register save eliminated.
+ 319 0000 80B4     		push	{r7}
+ 320              		.cfi_def_cfa_offset 4
+ 321              		.cfi_offset 7, -4
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 15
+
+
+ 322 0002 83B0     		sub	sp, sp, #12
+ 323              		.cfi_def_cfa_offset 16
+ 324 0004 00AF     		add	r7, sp, #0
+ 325              		.cfi_def_cfa_register 7
+ 326 0006 0346     		mov	r3, r0
+ 327 0008 FB80     		strh	r3, [r7, #6]	@ movhi
+ 478:.\Generated_Source\PSoC5/VERT.c ****     #if(VERT_UsingFixedFunction)
+ 479:.\Generated_Source\PSoC5/VERT.c ****         CY_SET_REG16(VERT_PERIOD_LSB_PTR, (uint16)period);
+ 480:.\Generated_Source\PSoC5/VERT.c ****     #else
+ 481:.\Generated_Source\PSoC5/VERT.c ****         CY_SET_REG16(VERT_PERIOD_LSB_PTR, period);
+ 328              		.loc 1 481 0
+ 329 000a 044A     		ldr	r2, .L22
+ 330 000c FB88     		ldrh	r3, [r7, #6]	@ movhi
+ 331 000e 1380     		strh	r3, [r2]	@ movhi
+ 482:.\Generated_Source\PSoC5/VERT.c ****     #endif /* (VERT_UsingFixedFunction) */
+ 483:.\Generated_Source\PSoC5/VERT.c **** }
+ 332              		.loc 1 483 0
+ 333 0010 0C37     		adds	r7, r7, #12
+ 334              		.cfi_def_cfa_offset 4
+ 335 0012 BD46     		mov	sp, r7
+ 336              		.cfi_def_cfa_register 13
+ 337              		@ sp needed
+ 338 0014 5DF8047B 		ldr	r7, [sp], #4
+ 339              		.cfi_restore 7
+ 340              		.cfi_def_cfa_offset 0
+ 341 0018 7047     		bx	lr
+ 342              	.L23:
+ 343 001a 00BF     		.align	2
+ 344              	.L22:
+ 345 001c 946A0040 		.word	1073769108
+ 346              		.cfi_endproc
+ 347              	.LFE6:
+ 348              		.size	VERT_WritePeriod, .-VERT_WritePeriod
+ 349              		.section	.text.VERT_WriteCompare,"ax",%progbits
+ 350              		.align	2
+ 351              		.global	VERT_WriteCompare
+ 352              		.thumb
+ 353              		.thumb_func
+ 354              		.type	VERT_WriteCompare, %function
+ 355              	VERT_WriteCompare:
+ 356              	.LFB7:
+ 484:.\Generated_Source\PSoC5/VERT.c **** 
+ 485:.\Generated_Source\PSoC5/VERT.c **** #if (VERT_UseOneCompareMode)
+ 486:.\Generated_Source\PSoC5/VERT.c **** 
+ 487:.\Generated_Source\PSoC5/VERT.c **** 
+ 488:.\Generated_Source\PSoC5/VERT.c ****     /*******************************************************************************
+ 489:.\Generated_Source\PSoC5/VERT.c ****     * Function Name: VERT_WriteCompare
+ 490:.\Generated_Source\PSoC5/VERT.c ****     ********************************************************************************
+ 491:.\Generated_Source\PSoC5/VERT.c ****     * 
+ 492:.\Generated_Source\PSoC5/VERT.c ****     * Summary:
+ 493:.\Generated_Source\PSoC5/VERT.c ****     *  This funtion is used to change the compare1 value when the PWM is in Dither
+ 494:.\Generated_Source\PSoC5/VERT.c ****     *  mode. The compare output will reflect the new value on the next UDB clock. 
+ 495:.\Generated_Source\PSoC5/VERT.c ****     *  The compare output will be driven high when the present counter value is 
+ 496:.\Generated_Source\PSoC5/VERT.c ****     *  compared to the compare value based on the compare mode defined in 
+ 497:.\Generated_Source\PSoC5/VERT.c ****     *  Dither Mode.
+ 498:.\Generated_Source\PSoC5/VERT.c ****     *
+ 499:.\Generated_Source\PSoC5/VERT.c ****     * Parameters:  
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 16
+
+
+ 500:.\Generated_Source\PSoC5/VERT.c ****     *  compare:  New compare value.  
+ 501:.\Generated_Source\PSoC5/VERT.c ****     *
+ 502:.\Generated_Source\PSoC5/VERT.c ****     * Return: 
+ 503:.\Generated_Source\PSoC5/VERT.c ****     *  None
+ 504:.\Generated_Source\PSoC5/VERT.c ****     *
+ 505:.\Generated_Source\PSoC5/VERT.c ****     * Side Effects:
+ 506:.\Generated_Source\PSoC5/VERT.c ****     *  This function is only available if the PWM mode parameter is set to
+ 507:.\Generated_Source\PSoC5/VERT.c ****     *  Dither Mode, Center Aligned Mode or One Output Mode
+ 508:.\Generated_Source\PSoC5/VERT.c ****     *
+ 509:.\Generated_Source\PSoC5/VERT.c ****     *******************************************************************************/
+ 510:.\Generated_Source\PSoC5/VERT.c ****     void VERT_WriteCompare(uint16 compare) \
+ 511:.\Generated_Source\PSoC5/VERT.c ****                                        
+ 512:.\Generated_Source\PSoC5/VERT.c ****     {	
+ 357              		.loc 1 512 0
+ 358              		.cfi_startproc
+ 359              		@ args = 0, pretend = 0, frame = 8
+ 360              		@ frame_needed = 1, uses_anonymous_args = 0
+ 361              		@ link register save eliminated.
+ 362 0000 80B4     		push	{r7}
+ 363              		.cfi_def_cfa_offset 4
+ 364              		.cfi_offset 7, -4
+ 365 0002 83B0     		sub	sp, sp, #12
+ 366              		.cfi_def_cfa_offset 16
+ 367 0004 00AF     		add	r7, sp, #0
+ 368              		.cfi_def_cfa_register 7
+ 369 0006 0346     		mov	r3, r0
+ 370 0008 FB80     		strh	r3, [r7, #6]	@ movhi
+ 513:.\Generated_Source\PSoC5/VERT.c **** 		#if(VERT_UsingFixedFunction)
+ 514:.\Generated_Source\PSoC5/VERT.c **** 			CY_SET_REG16(VERT_COMPARE1_LSB_PTR, (uint16)compare);
+ 515:.\Generated_Source\PSoC5/VERT.c **** 		#else
+ 516:.\Generated_Source\PSoC5/VERT.c **** 	        CY_SET_REG16(VERT_COMPARE1_LSB_PTR, compare);	
+ 371              		.loc 1 516 0
+ 372 000a 044A     		ldr	r2, .L25
+ 373 000c FB88     		ldrh	r3, [r7, #6]	@ movhi
+ 374 000e 1380     		strh	r3, [r2]	@ movhi
+ 517:.\Generated_Source\PSoC5/VERT.c **** 		#endif /* (VERT_UsingFixedFunction) */
+ 518:.\Generated_Source\PSoC5/VERT.c ****         
+ 519:.\Generated_Source\PSoC5/VERT.c ****         #if (VERT_PWMMode == VERT__B_PWM__DITHER)
+ 520:.\Generated_Source\PSoC5/VERT.c ****             #if(VERT_UsingFixedFunction)
+ 521:.\Generated_Source\PSoC5/VERT.c ****     			CY_SET_REG16(VERT_COMPARE2_LSB_PTR, (uint16)(compare + 1u));
+ 522:.\Generated_Source\PSoC5/VERT.c ****     		#else
+ 523:.\Generated_Source\PSoC5/VERT.c ****     	        CY_SET_REG16(VERT_COMPARE2_LSB_PTR, (compare + 1u));	
+ 524:.\Generated_Source\PSoC5/VERT.c ****     		#endif /* (VERT_UsingFixedFunction) */
+ 525:.\Generated_Source\PSoC5/VERT.c ****         #endif /* (VERT_PWMMode == VERT__B_PWM__DITHER) */
+ 526:.\Generated_Source\PSoC5/VERT.c ****     }
+ 375              		.loc 1 526 0
+ 376 0010 0C37     		adds	r7, r7, #12
+ 377              		.cfi_def_cfa_offset 4
+ 378 0012 BD46     		mov	sp, r7
+ 379              		.cfi_def_cfa_register 13
+ 380              		@ sp needed
+ 381 0014 5DF8047B 		ldr	r7, [sp], #4
+ 382              		.cfi_restore 7
+ 383              		.cfi_def_cfa_offset 0
+ 384 0018 7047     		bx	lr
+ 385              	.L26:
+ 386 001a 00BF     		.align	2
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 17
+
+
+ 387              	.L25:
+ 388 001c 546A0040 		.word	1073769044
+ 389              		.cfi_endproc
+ 390              	.LFE7:
+ 391              		.size	VERT_WriteCompare, .-VERT_WriteCompare
+ 392              		.section	.text.VERT_ReadControlRegister,"ax",%progbits
+ 393              		.align	2
+ 394              		.global	VERT_ReadControlRegister
+ 395              		.thumb
+ 396              		.thumb_func
+ 397              		.type	VERT_ReadControlRegister, %function
+ 398              	VERT_ReadControlRegister:
+ 399              	.LFB8:
+ 527:.\Generated_Source\PSoC5/VERT.c **** 
+ 528:.\Generated_Source\PSoC5/VERT.c **** 
+ 529:.\Generated_Source\PSoC5/VERT.c **** #else
+ 530:.\Generated_Source\PSoC5/VERT.c **** 
+ 531:.\Generated_Source\PSoC5/VERT.c **** 
+ 532:.\Generated_Source\PSoC5/VERT.c ****     /*******************************************************************************
+ 533:.\Generated_Source\PSoC5/VERT.c ****     * Function Name: VERT_WriteCompare1
+ 534:.\Generated_Source\PSoC5/VERT.c ****     ********************************************************************************
+ 535:.\Generated_Source\PSoC5/VERT.c ****     * 
+ 536:.\Generated_Source\PSoC5/VERT.c ****     * Summary:
+ 537:.\Generated_Source\PSoC5/VERT.c ****     *  This funtion is used to change the compare1 value.  The compare output will 
+ 538:.\Generated_Source\PSoC5/VERT.c ****     *  reflect the new value on the next UDB clock.  The compare output will be 
+ 539:.\Generated_Source\PSoC5/VERT.c ****     *  driven high when the present counter value is less than or less than or 
+ 540:.\Generated_Source\PSoC5/VERT.c ****     *  equal to the compare register, depending on the mode.
+ 541:.\Generated_Source\PSoC5/VERT.c ****     *
+ 542:.\Generated_Source\PSoC5/VERT.c ****     * Parameters:  
+ 543:.\Generated_Source\PSoC5/VERT.c ****     *  compare:  New compare value.  
+ 544:.\Generated_Source\PSoC5/VERT.c ****     *
+ 545:.\Generated_Source\PSoC5/VERT.c ****     * Return: 
+ 546:.\Generated_Source\PSoC5/VERT.c ****     *  None
+ 547:.\Generated_Source\PSoC5/VERT.c ****     *
+ 548:.\Generated_Source\PSoC5/VERT.c ****     *******************************************************************************/
+ 549:.\Generated_Source\PSoC5/VERT.c ****     void VERT_WriteCompare1(uint16 compare) \
+ 550:.\Generated_Source\PSoC5/VERT.c ****                                         
+ 551:.\Generated_Source\PSoC5/VERT.c ****     {
+ 552:.\Generated_Source\PSoC5/VERT.c ****         #if(VERT_UsingFixedFunction)
+ 553:.\Generated_Source\PSoC5/VERT.c ****             CY_SET_REG16(VERT_COMPARE1_LSB_PTR, (uint16)compare);
+ 554:.\Generated_Source\PSoC5/VERT.c ****         #else
+ 555:.\Generated_Source\PSoC5/VERT.c ****             CY_SET_REG16(VERT_COMPARE1_LSB_PTR, compare);
+ 556:.\Generated_Source\PSoC5/VERT.c ****         #endif /* (VERT_UsingFixedFunction) */
+ 557:.\Generated_Source\PSoC5/VERT.c ****     }
+ 558:.\Generated_Source\PSoC5/VERT.c **** 
+ 559:.\Generated_Source\PSoC5/VERT.c **** 
+ 560:.\Generated_Source\PSoC5/VERT.c ****     /*******************************************************************************
+ 561:.\Generated_Source\PSoC5/VERT.c ****     * Function Name: VERT_WriteCompare2
+ 562:.\Generated_Source\PSoC5/VERT.c ****     ********************************************************************************
+ 563:.\Generated_Source\PSoC5/VERT.c ****     * 
+ 564:.\Generated_Source\PSoC5/VERT.c ****     * Summary:
+ 565:.\Generated_Source\PSoC5/VERT.c ****     *  This funtion is used to change the compare value, for compare1 output.  
+ 566:.\Generated_Source\PSoC5/VERT.c ****     *  The compare output will reflect the new value on the next UDB clock.  
+ 567:.\Generated_Source\PSoC5/VERT.c ****     *  The compare output will be driven high when the present counter value is 
+ 568:.\Generated_Source\PSoC5/VERT.c ****     *  less than or less than or equal to the compare register, depending on the 
+ 569:.\Generated_Source\PSoC5/VERT.c ****     *  mode.
+ 570:.\Generated_Source\PSoC5/VERT.c ****     *
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 18
+
+
+ 571:.\Generated_Source\PSoC5/VERT.c ****     * Parameters:  
+ 572:.\Generated_Source\PSoC5/VERT.c ****     *  compare:  New compare value.  
+ 573:.\Generated_Source\PSoC5/VERT.c ****     *
+ 574:.\Generated_Source\PSoC5/VERT.c ****     * Return: 
+ 575:.\Generated_Source\PSoC5/VERT.c ****     *  None
+ 576:.\Generated_Source\PSoC5/VERT.c ****     *
+ 577:.\Generated_Source\PSoC5/VERT.c ****     *******************************************************************************/
+ 578:.\Generated_Source\PSoC5/VERT.c ****     void VERT_WriteCompare2(uint16 compare) \
+ 579:.\Generated_Source\PSoC5/VERT.c ****                                         
+ 580:.\Generated_Source\PSoC5/VERT.c ****     {
+ 581:.\Generated_Source\PSoC5/VERT.c ****         #if(VERT_UsingFixedFunction)
+ 582:.\Generated_Source\PSoC5/VERT.c ****             CY_SET_REG16(VERT_COMPARE2_LSB_PTR, compare);
+ 583:.\Generated_Source\PSoC5/VERT.c ****         #else
+ 584:.\Generated_Source\PSoC5/VERT.c ****             CY_SET_REG16(VERT_COMPARE2_LSB_PTR, compare);
+ 585:.\Generated_Source\PSoC5/VERT.c ****         #endif /* (VERT_UsingFixedFunction) */
+ 586:.\Generated_Source\PSoC5/VERT.c ****     }
+ 587:.\Generated_Source\PSoC5/VERT.c **** #endif /* UseOneCompareMode */
+ 588:.\Generated_Source\PSoC5/VERT.c **** 
+ 589:.\Generated_Source\PSoC5/VERT.c **** #if (VERT_DeadBandUsed)
+ 590:.\Generated_Source\PSoC5/VERT.c **** 
+ 591:.\Generated_Source\PSoC5/VERT.c **** 
+ 592:.\Generated_Source\PSoC5/VERT.c ****     /*******************************************************************************
+ 593:.\Generated_Source\PSoC5/VERT.c ****     * Function Name: VERT_WriteDeadTime
+ 594:.\Generated_Source\PSoC5/VERT.c ****     ********************************************************************************
+ 595:.\Generated_Source\PSoC5/VERT.c ****     * 
+ 596:.\Generated_Source\PSoC5/VERT.c ****     * Summary:
+ 597:.\Generated_Source\PSoC5/VERT.c ****     *  This function writes the dead-band counts to the corresponding register
+ 598:.\Generated_Source\PSoC5/VERT.c ****     *
+ 599:.\Generated_Source\PSoC5/VERT.c ****     * Parameters:  
+ 600:.\Generated_Source\PSoC5/VERT.c ****     *  deadtime:  Number of counts for dead time 
+ 601:.\Generated_Source\PSoC5/VERT.c ****     *
+ 602:.\Generated_Source\PSoC5/VERT.c ****     * Return: 
+ 603:.\Generated_Source\PSoC5/VERT.c ****     *  None
+ 604:.\Generated_Source\PSoC5/VERT.c ****     *
+ 605:.\Generated_Source\PSoC5/VERT.c ****     *******************************************************************************/
+ 606:.\Generated_Source\PSoC5/VERT.c ****     void VERT_WriteDeadTime(uint8 deadtime) 
+ 607:.\Generated_Source\PSoC5/VERT.c ****     {
+ 608:.\Generated_Source\PSoC5/VERT.c ****         /* If using the Dead Band 1-255 mode then just write the register */
+ 609:.\Generated_Source\PSoC5/VERT.c ****         #if(!VERT_DeadBand2_4)
+ 610:.\Generated_Source\PSoC5/VERT.c ****             CY_SET_REG8(VERT_DEADBAND_COUNT_PTR, deadtime);
+ 611:.\Generated_Source\PSoC5/VERT.c ****         #else
+ 612:.\Generated_Source\PSoC5/VERT.c ****             /* Otherwise the data has to be masked and offset */        
+ 613:.\Generated_Source\PSoC5/VERT.c ****             /* Clear existing data */
+ 614:.\Generated_Source\PSoC5/VERT.c ****             VERT_DEADBAND_COUNT &= ((uint8)(~VERT_DEADBAND_COUNT_MASK));
+ 615:.\Generated_Source\PSoC5/VERT.c ****             
+ 616:.\Generated_Source\PSoC5/VERT.c ****             /* Set new dead time */
+ 617:.\Generated_Source\PSoC5/VERT.c ****             #if(VERT_DEADBAND_COUNT_SHIFT)        
+ 618:.\Generated_Source\PSoC5/VERT.c ****                 VERT_DEADBAND_COUNT |= ((uint8)((uint8)deadtime << VERT_DEADBAND_COUNT_SHIFT)) & 
+ 619:.\Generated_Source\PSoC5/VERT.c ****                                                     VERT_DEADBAND_COUNT_MASK;
+ 620:.\Generated_Source\PSoC5/VERT.c ****             #else
+ 621:.\Generated_Source\PSoC5/VERT.c ****                 VERT_DEADBAND_COUNT |= deadtime & VERT_DEADBAND_COUNT_MASK;        
+ 622:.\Generated_Source\PSoC5/VERT.c ****             #endif /* (VERT_DEADBAND_COUNT_SHIFT) */
+ 623:.\Generated_Source\PSoC5/VERT.c ****         
+ 624:.\Generated_Source\PSoC5/VERT.c ****         #endif /* (!VERT_DeadBand2_4) */
+ 625:.\Generated_Source\PSoC5/VERT.c ****     }
+ 626:.\Generated_Source\PSoC5/VERT.c **** 
+ 627:.\Generated_Source\PSoC5/VERT.c **** 
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 19
+
+
+ 628:.\Generated_Source\PSoC5/VERT.c ****     /*******************************************************************************
+ 629:.\Generated_Source\PSoC5/VERT.c ****     * Function Name: VERT_ReadDeadTime
+ 630:.\Generated_Source\PSoC5/VERT.c ****     ********************************************************************************
+ 631:.\Generated_Source\PSoC5/VERT.c ****     * 
+ 632:.\Generated_Source\PSoC5/VERT.c ****     * Summary:
+ 633:.\Generated_Source\PSoC5/VERT.c ****     *  This function reads the dead-band counts from the corresponding register
+ 634:.\Generated_Source\PSoC5/VERT.c ****     *
+ 635:.\Generated_Source\PSoC5/VERT.c ****     * Parameters:  
+ 636:.\Generated_Source\PSoC5/VERT.c ****     *  None
+ 637:.\Generated_Source\PSoC5/VERT.c ****     *
+ 638:.\Generated_Source\PSoC5/VERT.c ****     * Return: 
+ 639:.\Generated_Source\PSoC5/VERT.c ****     *  Dead Band Counts
+ 640:.\Generated_Source\PSoC5/VERT.c ****     *
+ 641:.\Generated_Source\PSoC5/VERT.c ****     *******************************************************************************/
+ 642:.\Generated_Source\PSoC5/VERT.c ****     uint8 VERT_ReadDeadTime(void) 
+ 643:.\Generated_Source\PSoC5/VERT.c ****     {
+ 644:.\Generated_Source\PSoC5/VERT.c ****         /* If using the Dead Band 1-255 mode then just read the register */
+ 645:.\Generated_Source\PSoC5/VERT.c ****         #if(!VERT_DeadBand2_4)
+ 646:.\Generated_Source\PSoC5/VERT.c ****             return (CY_GET_REG8(VERT_DEADBAND_COUNT_PTR));
+ 647:.\Generated_Source\PSoC5/VERT.c ****         #else
+ 648:.\Generated_Source\PSoC5/VERT.c ****         
+ 649:.\Generated_Source\PSoC5/VERT.c ****             /* Otherwise the data has to be masked and offset */
+ 650:.\Generated_Source\PSoC5/VERT.c ****             #if(VERT_DEADBAND_COUNT_SHIFT)      
+ 651:.\Generated_Source\PSoC5/VERT.c ****                 return ((uint8)(((uint8)(VERT_DEADBAND_COUNT & VERT_DEADBAND_COUNT_MASK)) >> 
+ 652:.\Generated_Source\PSoC5/VERT.c ****                                                                            VERT_DEADBAND_COUNT_SHIF
+ 653:.\Generated_Source\PSoC5/VERT.c ****             #else
+ 654:.\Generated_Source\PSoC5/VERT.c ****                 return (VERT_DEADBAND_COUNT & VERT_DEADBAND_COUNT_MASK);
+ 655:.\Generated_Source\PSoC5/VERT.c ****             #endif /* (VERT_DEADBAND_COUNT_SHIFT) */
+ 656:.\Generated_Source\PSoC5/VERT.c ****         #endif /* (!VERT_DeadBand2_4) */
+ 657:.\Generated_Source\PSoC5/VERT.c ****     }
+ 658:.\Generated_Source\PSoC5/VERT.c **** #endif /* DeadBandUsed */
+ 659:.\Generated_Source\PSoC5/VERT.c **** 
+ 660:.\Generated_Source\PSoC5/VERT.c **** #if (VERT_UseStatus || VERT_UsingFixedFunction)
+ 661:.\Generated_Source\PSoC5/VERT.c **** 
+ 662:.\Generated_Source\PSoC5/VERT.c **** 
+ 663:.\Generated_Source\PSoC5/VERT.c ****     /*******************************************************************************
+ 664:.\Generated_Source\PSoC5/VERT.c ****     * Function Name: VERT_SetInterruptMode
+ 665:.\Generated_Source\PSoC5/VERT.c ****     ********************************************************************************
+ 666:.\Generated_Source\PSoC5/VERT.c ****     * 
+ 667:.\Generated_Source\PSoC5/VERT.c ****     * Summary:
+ 668:.\Generated_Source\PSoC5/VERT.c ****     *  This function configures the interrupts mask control of theinterrupt 
+ 669:.\Generated_Source\PSoC5/VERT.c ****     *  source status register.
+ 670:.\Generated_Source\PSoC5/VERT.c ****     *
+ 671:.\Generated_Source\PSoC5/VERT.c ****     * Parameters:  
+ 672:.\Generated_Source\PSoC5/VERT.c ****     *  uint8 interruptMode: Bit field containing the interrupt sources enabled 
+ 673:.\Generated_Source\PSoC5/VERT.c ****     *
+ 674:.\Generated_Source\PSoC5/VERT.c ****     * Return: 
+ 675:.\Generated_Source\PSoC5/VERT.c ****     *  None
+ 676:.\Generated_Source\PSoC5/VERT.c ****     *
+ 677:.\Generated_Source\PSoC5/VERT.c ****     *******************************************************************************/
+ 678:.\Generated_Source\PSoC5/VERT.c ****     void VERT_SetInterruptMode(uint8 interruptMode)  
+ 679:.\Generated_Source\PSoC5/VERT.c ****     {
+ 680:.\Generated_Source\PSoC5/VERT.c ****     	CY_SET_REG8(VERT_STATUS_MASK_PTR, interruptMode);
+ 681:.\Generated_Source\PSoC5/VERT.c ****     }
+ 682:.\Generated_Source\PSoC5/VERT.c **** 
+ 683:.\Generated_Source\PSoC5/VERT.c **** 
+ 684:.\Generated_Source\PSoC5/VERT.c ****     /*******************************************************************************
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 20
+
+
+ 685:.\Generated_Source\PSoC5/VERT.c ****     * Function Name: VERT_ReadStatusRegister
+ 686:.\Generated_Source\PSoC5/VERT.c ****     ********************************************************************************
+ 687:.\Generated_Source\PSoC5/VERT.c ****     * 
+ 688:.\Generated_Source\PSoC5/VERT.c ****     * Summary:
+ 689:.\Generated_Source\PSoC5/VERT.c ****     *  This function returns the current state of the status register. 
+ 690:.\Generated_Source\PSoC5/VERT.c ****     *
+ 691:.\Generated_Source\PSoC5/VERT.c ****     * Parameters:  
+ 692:.\Generated_Source\PSoC5/VERT.c ****     *  None
+ 693:.\Generated_Source\PSoC5/VERT.c ****     *
+ 694:.\Generated_Source\PSoC5/VERT.c ****     * Return: 
+ 695:.\Generated_Source\PSoC5/VERT.c ****     *  uint8 : Current status register value. The status register bits are:
+ 696:.\Generated_Source\PSoC5/VERT.c ****     *  [7:6] : Unused(0)
+ 697:.\Generated_Source\PSoC5/VERT.c ****     *  [5]   : Kill event output
+ 698:.\Generated_Source\PSoC5/VERT.c ****     *  [4]   : FIFO not empty
+ 699:.\Generated_Source\PSoC5/VERT.c ****     *  [3]   : FIFO full
+ 700:.\Generated_Source\PSoC5/VERT.c ****     *  [2]   : Terminal count
+ 701:.\Generated_Source\PSoC5/VERT.c ****     *  [1]   : Compare output 2
+ 702:.\Generated_Source\PSoC5/VERT.c ****     *  [0]   : Compare output 1
+ 703:.\Generated_Source\PSoC5/VERT.c ****     *
+ 704:.\Generated_Source\PSoC5/VERT.c ****     *******************************************************************************/
+ 705:.\Generated_Source\PSoC5/VERT.c ****     uint8 VERT_ReadStatusRegister(void)   
+ 706:.\Generated_Source\PSoC5/VERT.c ****     {
+ 707:.\Generated_Source\PSoC5/VERT.c ****     	uint8 result;
+ 708:.\Generated_Source\PSoC5/VERT.c ****     	
+ 709:.\Generated_Source\PSoC5/VERT.c ****     	result = CY_GET_REG8(VERT_STATUS_PTR);
+ 710:.\Generated_Source\PSoC5/VERT.c ****     	return (result);
+ 711:.\Generated_Source\PSoC5/VERT.c ****     }
+ 712:.\Generated_Source\PSoC5/VERT.c **** 
+ 713:.\Generated_Source\PSoC5/VERT.c **** #endif /* (VERT_UseStatus || VERT_UsingFixedFunction) */
+ 714:.\Generated_Source\PSoC5/VERT.c **** 
+ 715:.\Generated_Source\PSoC5/VERT.c **** 
+ 716:.\Generated_Source\PSoC5/VERT.c **** #if (VERT_UseControl)
+ 717:.\Generated_Source\PSoC5/VERT.c **** 
+ 718:.\Generated_Source\PSoC5/VERT.c **** 
+ 719:.\Generated_Source\PSoC5/VERT.c ****     /*******************************************************************************
+ 720:.\Generated_Source\PSoC5/VERT.c ****     * Function Name: VERT_ReadControlRegister
+ 721:.\Generated_Source\PSoC5/VERT.c ****     ********************************************************************************
+ 722:.\Generated_Source\PSoC5/VERT.c ****     * 
+ 723:.\Generated_Source\PSoC5/VERT.c ****     * Summary:
+ 724:.\Generated_Source\PSoC5/VERT.c ****     *  Returns the current state of the control register. This API is available 
+ 725:.\Generated_Source\PSoC5/VERT.c ****     *  only if the control register is not removed.
+ 726:.\Generated_Source\PSoC5/VERT.c ****     *
+ 727:.\Generated_Source\PSoC5/VERT.c ****     * Parameters:  
+ 728:.\Generated_Source\PSoC5/VERT.c ****     *  None 
+ 729:.\Generated_Source\PSoC5/VERT.c ****     *
+ 730:.\Generated_Source\PSoC5/VERT.c ****     * Return: 
+ 731:.\Generated_Source\PSoC5/VERT.c ****     *  uint8 : Current control register value
+ 732:.\Generated_Source\PSoC5/VERT.c ****     *
+ 733:.\Generated_Source\PSoC5/VERT.c ****     *******************************************************************************/    
+ 734:.\Generated_Source\PSoC5/VERT.c ****     uint8 VERT_ReadControlRegister(void) 
+ 735:.\Generated_Source\PSoC5/VERT.c ****     {
+ 400              		.loc 1 735 0
+ 401              		.cfi_startproc
+ 402              		@ args = 0, pretend = 0, frame = 8
+ 403              		@ frame_needed = 1, uses_anonymous_args = 0
+ 404              		@ link register save eliminated.
+ 405 0000 80B4     		push	{r7}
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 21
+
+
+ 406              		.cfi_def_cfa_offset 4
+ 407              		.cfi_offset 7, -4
+ 408 0002 83B0     		sub	sp, sp, #12
+ 409              		.cfi_def_cfa_offset 16
+ 410 0004 00AF     		add	r7, sp, #0
+ 411              		.cfi_def_cfa_register 7
+ 736:.\Generated_Source\PSoC5/VERT.c ****     	uint8 result;
+ 737:.\Generated_Source\PSoC5/VERT.c ****     	
+ 738:.\Generated_Source\PSoC5/VERT.c ****     	result = CY_GET_REG8(VERT_CONTROL_PTR);
+ 412              		.loc 1 738 0
+ 413 0006 054B     		ldr	r3, .L29
+ 414 0008 1B78     		ldrb	r3, [r3]
+ 415 000a FB71     		strb	r3, [r7, #7]
+ 739:.\Generated_Source\PSoC5/VERT.c ****     	return (result);
+ 416              		.loc 1 739 0
+ 417 000c FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 740:.\Generated_Source\PSoC5/VERT.c ****     }
+ 418              		.loc 1 740 0
+ 419 000e 1846     		mov	r0, r3
+ 420 0010 0C37     		adds	r7, r7, #12
+ 421              		.cfi_def_cfa_offset 4
+ 422 0012 BD46     		mov	sp, r7
+ 423              		.cfi_def_cfa_register 13
+ 424              		@ sp needed
+ 425 0014 5DF8047B 		ldr	r7, [sp], #4
+ 426              		.cfi_restore 7
+ 427              		.cfi_def_cfa_offset 0
+ 428 0018 7047     		bx	lr
+ 429              	.L30:
+ 430 001a 00BF     		.align	2
+ 431              	.L29:
+ 432 001c 79640040 		.word	1073767545
+ 433              		.cfi_endproc
+ 434              	.LFE8:
+ 435              		.size	VERT_ReadControlRegister, .-VERT_ReadControlRegister
+ 436              		.section	.text.VERT_WriteControlRegister,"ax",%progbits
+ 437              		.align	2
+ 438              		.global	VERT_WriteControlRegister
+ 439              		.thumb
+ 440              		.thumb_func
+ 441              		.type	VERT_WriteControlRegister, %function
+ 442              	VERT_WriteControlRegister:
+ 443              	.LFB9:
+ 741:.\Generated_Source\PSoC5/VERT.c **** 
+ 742:.\Generated_Source\PSoC5/VERT.c **** 
+ 743:.\Generated_Source\PSoC5/VERT.c ****     /*******************************************************************************
+ 744:.\Generated_Source\PSoC5/VERT.c ****     * Function Name: VERT_WriteControlRegister
+ 745:.\Generated_Source\PSoC5/VERT.c ****     ********************************************************************************
+ 746:.\Generated_Source\PSoC5/VERT.c ****     * 
+ 747:.\Generated_Source\PSoC5/VERT.c ****     * Summary:
+ 748:.\Generated_Source\PSoC5/VERT.c ****     *  Sets the bit field of the control register. This API is available only if 
+ 749:.\Generated_Source\PSoC5/VERT.c ****     *  the control register is not removed.
+ 750:.\Generated_Source\PSoC5/VERT.c ****     *
+ 751:.\Generated_Source\PSoC5/VERT.c ****     * Parameters:  
+ 752:.\Generated_Source\PSoC5/VERT.c ****     *  uint8 control: Control register bit field, The status register bits are:
+ 753:.\Generated_Source\PSoC5/VERT.c ****     *  [7]   : PWM Enable
+ 754:.\Generated_Source\PSoC5/VERT.c ****     *  [6]   : Reset
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 22
+
+
+ 755:.\Generated_Source\PSoC5/VERT.c ****     *  [5:3] : Compare Mode2
+ 756:.\Generated_Source\PSoC5/VERT.c ****     *  [2:0] : Compare Mode2
+ 757:.\Generated_Source\PSoC5/VERT.c ****     *
+ 758:.\Generated_Source\PSoC5/VERT.c ****     * Return: 
+ 759:.\Generated_Source\PSoC5/VERT.c ****     *  None
+ 760:.\Generated_Source\PSoC5/VERT.c ****     *
+ 761:.\Generated_Source\PSoC5/VERT.c ****     *******************************************************************************/  
+ 762:.\Generated_Source\PSoC5/VERT.c ****     void VERT_WriteControlRegister(uint8 control) 
+ 763:.\Generated_Source\PSoC5/VERT.c ****     {
+ 444              		.loc 1 763 0
+ 445              		.cfi_startproc
+ 446              		@ args = 0, pretend = 0, frame = 8
+ 447              		@ frame_needed = 1, uses_anonymous_args = 0
+ 448              		@ link register save eliminated.
+ 449 0000 80B4     		push	{r7}
+ 450              		.cfi_def_cfa_offset 4
+ 451              		.cfi_offset 7, -4
+ 452 0002 83B0     		sub	sp, sp, #12
+ 453              		.cfi_def_cfa_offset 16
+ 454 0004 00AF     		add	r7, sp, #0
+ 455              		.cfi_def_cfa_register 7
+ 456 0006 0346     		mov	r3, r0
+ 457 0008 FB71     		strb	r3, [r7, #7]
+ 764:.\Generated_Source\PSoC5/VERT.c ****     	CY_SET_REG8(VERT_CONTROL_PTR, control);
+ 458              		.loc 1 764 0
+ 459 000a 044A     		ldr	r2, .L32
+ 460 000c FB79     		ldrb	r3, [r7, #7]
+ 461 000e 1370     		strb	r3, [r2]
+ 765:.\Generated_Source\PSoC5/VERT.c ****     }
+ 462              		.loc 1 765 0
+ 463 0010 0C37     		adds	r7, r7, #12
+ 464              		.cfi_def_cfa_offset 4
+ 465 0012 BD46     		mov	sp, r7
+ 466              		.cfi_def_cfa_register 13
+ 467              		@ sp needed
+ 468 0014 5DF8047B 		ldr	r7, [sp], #4
+ 469              		.cfi_restore 7
+ 470              		.cfi_def_cfa_offset 0
+ 471 0018 7047     		bx	lr
+ 472              	.L33:
+ 473 001a 00BF     		.align	2
+ 474              	.L32:
+ 475 001c 79640040 		.word	1073767545
+ 476              		.cfi_endproc
+ 477              	.LFE9:
+ 478              		.size	VERT_WriteControlRegister, .-VERT_WriteControlRegister
+ 479              		.section	.text.VERT_ReadCapture,"ax",%progbits
+ 480              		.align	2
+ 481              		.global	VERT_ReadCapture
+ 482              		.thumb
+ 483              		.thumb_func
+ 484              		.type	VERT_ReadCapture, %function
+ 485              	VERT_ReadCapture:
+ 486              	.LFB10:
+ 766:.\Generated_Source\PSoC5/VERT.c **** 	
+ 767:.\Generated_Source\PSoC5/VERT.c **** #endif /* (VERT_UseControl) */
+ 768:.\Generated_Source\PSoC5/VERT.c **** 
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 23
+
+
+ 769:.\Generated_Source\PSoC5/VERT.c **** 
+ 770:.\Generated_Source\PSoC5/VERT.c **** #if (!VERT_UsingFixedFunction)
+ 771:.\Generated_Source\PSoC5/VERT.c **** 
+ 772:.\Generated_Source\PSoC5/VERT.c **** 
+ 773:.\Generated_Source\PSoC5/VERT.c ****     /*******************************************************************************
+ 774:.\Generated_Source\PSoC5/VERT.c ****     * Function Name: VERT_ReadCapture
+ 775:.\Generated_Source\PSoC5/VERT.c ****     ********************************************************************************
+ 776:.\Generated_Source\PSoC5/VERT.c ****     * 
+ 777:.\Generated_Source\PSoC5/VERT.c ****     * Summary:
+ 778:.\Generated_Source\PSoC5/VERT.c ****     *  Reads the capture value from the capture FIFO.
+ 779:.\Generated_Source\PSoC5/VERT.c ****     *
+ 780:.\Generated_Source\PSoC5/VERT.c ****     * Parameters:  
+ 781:.\Generated_Source\PSoC5/VERT.c ****     *  None
+ 782:.\Generated_Source\PSoC5/VERT.c ****     *
+ 783:.\Generated_Source\PSoC5/VERT.c ****     * Return: 
+ 784:.\Generated_Source\PSoC5/VERT.c ****     *  uint8/uint16: The current capture value
+ 785:.\Generated_Source\PSoC5/VERT.c ****     *
+ 786:.\Generated_Source\PSoC5/VERT.c ****     *******************************************************************************/  
+ 787:.\Generated_Source\PSoC5/VERT.c ****     uint16 VERT_ReadCapture(void)  
+ 788:.\Generated_Source\PSoC5/VERT.c ****     {
+ 487              		.loc 1 788 0
+ 488              		.cfi_startproc
+ 489              		@ args = 0, pretend = 0, frame = 0
+ 490              		@ frame_needed = 1, uses_anonymous_args = 0
+ 491              		@ link register save eliminated.
+ 492 0000 80B4     		push	{r7}
+ 493              		.cfi_def_cfa_offset 4
+ 494              		.cfi_offset 7, -4
+ 495 0002 00AF     		add	r7, sp, #0
+ 496              		.cfi_def_cfa_register 7
+ 789:.\Generated_Source\PSoC5/VERT.c ****     	return (CY_GET_REG16(VERT_CAPTURE_LSB_PTR));
+ 497              		.loc 1 789 0
+ 498 0004 034B     		ldr	r3, .L36
+ 499 0006 1B88     		ldrh	r3, [r3]	@ movhi
+ 500 0008 9BB2     		uxth	r3, r3
+ 790:.\Generated_Source\PSoC5/VERT.c ****     }
+ 501              		.loc 1 790 0
+ 502 000a 1846     		mov	r0, r3
+ 503 000c BD46     		mov	sp, r7
+ 504              		.cfi_def_cfa_register 13
+ 505              		@ sp needed
+ 506 000e 5DF8047B 		ldr	r7, [sp], #4
+ 507              		.cfi_restore 7
+ 508              		.cfi_def_cfa_offset 0
+ 509 0012 7047     		bx	lr
+ 510              	.L37:
+ 511              		.align	2
+ 512              	.L36:
+ 513 0014 B46A0040 		.word	1073769140
+ 514              		.cfi_endproc
+ 515              	.LFE10:
+ 516              		.size	VERT_ReadCapture, .-VERT_ReadCapture
+ 517              		.section	.text.VERT_ReadCompare,"ax",%progbits
+ 518              		.align	2
+ 519              		.global	VERT_ReadCompare
+ 520              		.thumb
+ 521              		.thumb_func
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 24
+
+
+ 522              		.type	VERT_ReadCompare, %function
+ 523              	VERT_ReadCompare:
+ 524              	.LFB11:
+ 791:.\Generated_Source\PSoC5/VERT.c **** 	
+ 792:.\Generated_Source\PSoC5/VERT.c **** #endif /* (!VERT_UsingFixedFunction) */
+ 793:.\Generated_Source\PSoC5/VERT.c **** 
+ 794:.\Generated_Source\PSoC5/VERT.c **** 
+ 795:.\Generated_Source\PSoC5/VERT.c **** #if (VERT_UseOneCompareMode)
+ 796:.\Generated_Source\PSoC5/VERT.c **** 
+ 797:.\Generated_Source\PSoC5/VERT.c **** 
+ 798:.\Generated_Source\PSoC5/VERT.c ****     /*******************************************************************************
+ 799:.\Generated_Source\PSoC5/VERT.c ****     * Function Name: VERT_ReadCompare
+ 800:.\Generated_Source\PSoC5/VERT.c ****     ********************************************************************************
+ 801:.\Generated_Source\PSoC5/VERT.c ****     * 
+ 802:.\Generated_Source\PSoC5/VERT.c ****     * Summary:
+ 803:.\Generated_Source\PSoC5/VERT.c ****     *  Reads the compare value for the compare output when the PWM Mode parameter is 
+ 804:.\Generated_Source\PSoC5/VERT.c ****     *  set to Dither mode, Center Aligned mode, or One Output mode.
+ 805:.\Generated_Source\PSoC5/VERT.c ****     *
+ 806:.\Generated_Source\PSoC5/VERT.c ****     * Parameters:  
+ 807:.\Generated_Source\PSoC5/VERT.c ****     *  None
+ 808:.\Generated_Source\PSoC5/VERT.c ****     *
+ 809:.\Generated_Source\PSoC5/VERT.c ****     * Return: 
+ 810:.\Generated_Source\PSoC5/VERT.c ****     *  uint8/uint16: Current compare value
+ 811:.\Generated_Source\PSoC5/VERT.c ****     *
+ 812:.\Generated_Source\PSoC5/VERT.c ****     *******************************************************************************/  
+ 813:.\Generated_Source\PSoC5/VERT.c ****     uint16 VERT_ReadCompare(void)  
+ 814:.\Generated_Source\PSoC5/VERT.c ****     {
+ 525              		.loc 1 814 0
+ 526              		.cfi_startproc
+ 527              		@ args = 0, pretend = 0, frame = 0
+ 528              		@ frame_needed = 1, uses_anonymous_args = 0
+ 529              		@ link register save eliminated.
+ 530 0000 80B4     		push	{r7}
+ 531              		.cfi_def_cfa_offset 4
+ 532              		.cfi_offset 7, -4
+ 533 0002 00AF     		add	r7, sp, #0
+ 534              		.cfi_def_cfa_register 7
+ 815:.\Generated_Source\PSoC5/VERT.c **** 		#if(VERT_UsingFixedFunction)
+ 816:.\Generated_Source\PSoC5/VERT.c ****             return ((uint16)CY_GET_REG16(VERT_COMPARE1_LSB_PTR));
+ 817:.\Generated_Source\PSoC5/VERT.c ****         #else
+ 818:.\Generated_Source\PSoC5/VERT.c ****             return (CY_GET_REG16(VERT_COMPARE1_LSB_PTR));
+ 535              		.loc 1 818 0
+ 536 0004 034B     		ldr	r3, .L40
+ 537 0006 1B88     		ldrh	r3, [r3]	@ movhi
+ 538 0008 9BB2     		uxth	r3, r3
+ 819:.\Generated_Source\PSoC5/VERT.c ****         #endif /* (VERT_UsingFixedFunction) */
+ 820:.\Generated_Source\PSoC5/VERT.c ****     }
+ 539              		.loc 1 820 0
+ 540 000a 1846     		mov	r0, r3
+ 541 000c BD46     		mov	sp, r7
+ 542              		.cfi_def_cfa_register 13
+ 543              		@ sp needed
+ 544 000e 5DF8047B 		ldr	r7, [sp], #4
+ 545              		.cfi_restore 7
+ 546              		.cfi_def_cfa_offset 0
+ 547 0012 7047     		bx	lr
+ 548              	.L41:
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 25
+
+
+ 549              		.align	2
+ 550              	.L40:
+ 551 0014 546A0040 		.word	1073769044
+ 552              		.cfi_endproc
+ 553              	.LFE11:
+ 554              		.size	VERT_ReadCompare, .-VERT_ReadCompare
+ 555              		.section	.text.VERT_ReadPeriod,"ax",%progbits
+ 556              		.align	2
+ 557              		.global	VERT_ReadPeriod
+ 558              		.thumb
+ 559              		.thumb_func
+ 560              		.type	VERT_ReadPeriod, %function
+ 561              	VERT_ReadPeriod:
+ 562              	.LFB12:
+ 821:.\Generated_Source\PSoC5/VERT.c **** 
+ 822:.\Generated_Source\PSoC5/VERT.c **** #else
+ 823:.\Generated_Source\PSoC5/VERT.c **** 
+ 824:.\Generated_Source\PSoC5/VERT.c **** 
+ 825:.\Generated_Source\PSoC5/VERT.c ****     /*******************************************************************************
+ 826:.\Generated_Source\PSoC5/VERT.c ****     * Function Name: VERT_ReadCompare1
+ 827:.\Generated_Source\PSoC5/VERT.c ****     ********************************************************************************
+ 828:.\Generated_Source\PSoC5/VERT.c ****     * 
+ 829:.\Generated_Source\PSoC5/VERT.c ****     * Summary:
+ 830:.\Generated_Source\PSoC5/VERT.c ****     *  Reads the compare value for the compare1 output.
+ 831:.\Generated_Source\PSoC5/VERT.c ****     *
+ 832:.\Generated_Source\PSoC5/VERT.c ****     * Parameters:  
+ 833:.\Generated_Source\PSoC5/VERT.c ****     *  None
+ 834:.\Generated_Source\PSoC5/VERT.c ****     *
+ 835:.\Generated_Source\PSoC5/VERT.c ****     * Return: 
+ 836:.\Generated_Source\PSoC5/VERT.c ****     *  uint8/uint16: Current compare value.
+ 837:.\Generated_Source\PSoC5/VERT.c ****     *
+ 838:.\Generated_Source\PSoC5/VERT.c ****     *******************************************************************************/  
+ 839:.\Generated_Source\PSoC5/VERT.c ****     uint16 VERT_ReadCompare1(void) 
+ 840:.\Generated_Source\PSoC5/VERT.c ****     {
+ 841:.\Generated_Source\PSoC5/VERT.c **** 		return (CY_GET_REG16(VERT_COMPARE1_LSB_PTR));
+ 842:.\Generated_Source\PSoC5/VERT.c ****     }
+ 843:.\Generated_Source\PSoC5/VERT.c **** 
+ 844:.\Generated_Source\PSoC5/VERT.c **** 
+ 845:.\Generated_Source\PSoC5/VERT.c ****     /*******************************************************************************
+ 846:.\Generated_Source\PSoC5/VERT.c ****     * Function Name: VERT_ReadCompare2
+ 847:.\Generated_Source\PSoC5/VERT.c ****     ********************************************************************************
+ 848:.\Generated_Source\PSoC5/VERT.c ****     * 
+ 849:.\Generated_Source\PSoC5/VERT.c ****     * Summary:
+ 850:.\Generated_Source\PSoC5/VERT.c ****     *  Reads the compare value for the compare2 output.
+ 851:.\Generated_Source\PSoC5/VERT.c ****     *
+ 852:.\Generated_Source\PSoC5/VERT.c ****     * Parameters:  
+ 853:.\Generated_Source\PSoC5/VERT.c ****     *  None
+ 854:.\Generated_Source\PSoC5/VERT.c ****     *
+ 855:.\Generated_Source\PSoC5/VERT.c ****     * Return: 
+ 856:.\Generated_Source\PSoC5/VERT.c ****     *  uint8/uint16: Current compare value.
+ 857:.\Generated_Source\PSoC5/VERT.c ****     *
+ 858:.\Generated_Source\PSoC5/VERT.c ****     *******************************************************************************/  
+ 859:.\Generated_Source\PSoC5/VERT.c ****     uint16 VERT_ReadCompare2(void)  
+ 860:.\Generated_Source\PSoC5/VERT.c ****     {
+ 861:.\Generated_Source\PSoC5/VERT.c **** 		return (CY_GET_REG16(VERT_COMPARE2_LSB_PTR));
+ 862:.\Generated_Source\PSoC5/VERT.c ****     }
+ 863:.\Generated_Source\PSoC5/VERT.c **** 
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 26
+
+
+ 864:.\Generated_Source\PSoC5/VERT.c **** #endif /* (VERT_UseOneCompareMode) */
+ 865:.\Generated_Source\PSoC5/VERT.c **** 
+ 866:.\Generated_Source\PSoC5/VERT.c **** 
+ 867:.\Generated_Source\PSoC5/VERT.c **** /*******************************************************************************
+ 868:.\Generated_Source\PSoC5/VERT.c **** * Function Name: VERT_ReadPeriod
+ 869:.\Generated_Source\PSoC5/VERT.c **** ********************************************************************************
+ 870:.\Generated_Source\PSoC5/VERT.c **** * 
+ 871:.\Generated_Source\PSoC5/VERT.c **** * Summary:
+ 872:.\Generated_Source\PSoC5/VERT.c **** *  Reads the period value used by the PWM hardware.
+ 873:.\Generated_Source\PSoC5/VERT.c **** *
+ 874:.\Generated_Source\PSoC5/VERT.c **** * Parameters:  
+ 875:.\Generated_Source\PSoC5/VERT.c **** *  None
+ 876:.\Generated_Source\PSoC5/VERT.c **** *
+ 877:.\Generated_Source\PSoC5/VERT.c **** * Return: 
+ 878:.\Generated_Source\PSoC5/VERT.c **** *  uint8/16: Period value
+ 879:.\Generated_Source\PSoC5/VERT.c **** *
+ 880:.\Generated_Source\PSoC5/VERT.c **** *******************************************************************************/ 
+ 881:.\Generated_Source\PSoC5/VERT.c **** uint16 VERT_ReadPeriod(void) 
+ 882:.\Generated_Source\PSoC5/VERT.c **** {
+ 563              		.loc 1 882 0
+ 564              		.cfi_startproc
+ 565              		@ args = 0, pretend = 0, frame = 0
+ 566              		@ frame_needed = 1, uses_anonymous_args = 0
+ 567              		@ link register save eliminated.
+ 568 0000 80B4     		push	{r7}
+ 569              		.cfi_def_cfa_offset 4
+ 570              		.cfi_offset 7, -4
+ 571 0002 00AF     		add	r7, sp, #0
+ 572              		.cfi_def_cfa_register 7
+ 883:.\Generated_Source\PSoC5/VERT.c **** 	#if(VERT_UsingFixedFunction)
+ 884:.\Generated_Source\PSoC5/VERT.c ****         return ((uint16)CY_GET_REG16(VERT_PERIOD_LSB_PTR));
+ 885:.\Generated_Source\PSoC5/VERT.c ****     #else
+ 886:.\Generated_Source\PSoC5/VERT.c ****         return (CY_GET_REG16(VERT_PERIOD_LSB_PTR));
+ 573              		.loc 1 886 0
+ 574 0004 034B     		ldr	r3, .L44
+ 575 0006 1B88     		ldrh	r3, [r3]	@ movhi
+ 576 0008 9BB2     		uxth	r3, r3
+ 887:.\Generated_Source\PSoC5/VERT.c ****     #endif /* (VERT_UsingFixedFunction) */
+ 888:.\Generated_Source\PSoC5/VERT.c **** }
+ 577              		.loc 1 888 0
+ 578 000a 1846     		mov	r0, r3
+ 579 000c BD46     		mov	sp, r7
+ 580              		.cfi_def_cfa_register 13
+ 581              		@ sp needed
+ 582 000e 5DF8047B 		ldr	r7, [sp], #4
+ 583              		.cfi_restore 7
+ 584              		.cfi_def_cfa_offset 0
+ 585 0012 7047     		bx	lr
+ 586              	.L45:
+ 587              		.align	2
+ 588              	.L44:
+ 589 0014 946A0040 		.word	1073769108
+ 590              		.cfi_endproc
+ 591              	.LFE12:
+ 592              		.size	VERT_ReadPeriod, .-VERT_ReadPeriod
+ 593              		.text
+ 594              	.Letext0:
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 27
+
+
+ 595              		.file 2 ".\\Generated_Source\\PSoC5\\cytypes.h"
+ 596              		.section	.debug_info,"",%progbits
+ 597              	.Ldebug_info0:
+ 598 0000 3C020000 		.4byte	0x23c
+ 599 0004 0400     		.2byte	0x4
+ 600 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 601 000a 04       		.byte	0x4
+ 602 000b 01       		.uleb128 0x1
+ 603 000c A5000000 		.4byte	.LASF35
+ 604 0010 01       		.byte	0x1
+ 605 0011 07020000 		.4byte	.LASF36
+ 606 0015 53010000 		.4byte	.LASF37
+ 607 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 608 001d 00000000 		.4byte	0
+ 609 0021 00000000 		.4byte	.Ldebug_line0
+ 610 0025 02       		.uleb128 0x2
+ 611 0026 01       		.byte	0x1
+ 612 0027 06       		.byte	0x6
+ 613 0028 A6020000 		.4byte	.LASF0
+ 614 002c 02       		.uleb128 0x2
+ 615 002d 01       		.byte	0x1
+ 616 002e 08       		.byte	0x8
+ 617 002f 5B000000 		.4byte	.LASF1
+ 618 0033 02       		.uleb128 0x2
+ 619 0034 02       		.byte	0x2
+ 620 0035 05       		.byte	0x5
+ 621 0036 52020000 		.4byte	.LASF2
+ 622 003a 02       		.uleb128 0x2
+ 623 003b 02       		.byte	0x2
+ 624 003c 07       		.byte	0x7
+ 625 003d 29000000 		.4byte	.LASF3
+ 626 0041 02       		.uleb128 0x2
+ 627 0042 04       		.byte	0x4
+ 628 0043 05       		.byte	0x5
+ 629 0044 98020000 		.4byte	.LASF4
+ 630 0048 02       		.uleb128 0x2
+ 631 0049 04       		.byte	0x4
+ 632 004a 07       		.byte	0x7
+ 633 004b 78000000 		.4byte	.LASF5
+ 634 004f 02       		.uleb128 0x2
+ 635 0050 08       		.byte	0x8
+ 636 0051 05       		.byte	0x5
+ 637 0052 27020000 		.4byte	.LASF6
+ 638 0056 02       		.uleb128 0x2
+ 639 0057 08       		.byte	0x8
+ 640 0058 07       		.byte	0x7
+ 641 0059 BA010000 		.4byte	.LASF7
+ 642 005d 03       		.uleb128 0x3
+ 643 005e 04       		.byte	0x4
+ 644 005f 05       		.byte	0x5
+ 645 0060 696E7400 		.ascii	"int\000"
+ 646 0064 02       		.uleb128 0x2
+ 647 0065 04       		.byte	0x4
+ 648 0066 07       		.byte	0x7
+ 649 0067 AD010000 		.4byte	.LASF8
+ 650 006b 04       		.uleb128 0x4
+ 651 006c 8A000000 		.4byte	.LASF9
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 28
+
+
+ 652 0070 02       		.byte	0x2
+ 653 0071 5B       		.byte	0x5b
+ 654 0072 2C000000 		.4byte	0x2c
+ 655 0076 04       		.uleb128 0x4
+ 656 0077 9A010000 		.4byte	.LASF10
+ 657 007b 02       		.byte	0x2
+ 658 007c 5C       		.byte	0x5c
+ 659 007d 3A000000 		.4byte	0x3a
+ 660 0081 02       		.uleb128 0x2
+ 661 0082 04       		.byte	0x4
+ 662 0083 04       		.byte	0x4
+ 663 0084 4D000000 		.4byte	.LASF11
+ 664 0088 02       		.uleb128 0x2
+ 665 0089 08       		.byte	0x8
+ 666 008a 04       		.byte	0x4
+ 667 008b 33010000 		.4byte	.LASF12
+ 668 008f 02       		.uleb128 0x2
+ 669 0090 01       		.byte	0x1
+ 670 0091 08       		.byte	0x8
+ 671 0092 A1020000 		.4byte	.LASF13
+ 672 0096 04       		.uleb128 0x4
+ 673 0097 69000000 		.4byte	.LASF14
+ 674 009b 02       		.byte	0x2
+ 675 009c F0       		.byte	0xf0
+ 676 009d A1000000 		.4byte	0xa1
+ 677 00a1 05       		.uleb128 0x5
+ 678 00a2 6B000000 		.4byte	0x6b
+ 679 00a6 04       		.uleb128 0x4
+ 680 00a7 00000000 		.4byte	.LASF15
+ 681 00ab 02       		.byte	0x2
+ 682 00ac F1       		.byte	0xf1
+ 683 00ad B1000000 		.4byte	0xb1
+ 684 00b1 05       		.uleb128 0x5
+ 685 00b2 76000000 		.4byte	0x76
+ 686 00b6 02       		.uleb128 0x2
+ 687 00b7 04       		.byte	0x4
+ 688 00b8 07       		.byte	0x7
+ 689 00b9 FE010000 		.4byte	.LASF16
+ 690 00bd 06       		.uleb128 0x6
+ 691 00be 47020000 		.4byte	.LASF17
+ 692 00c2 01       		.byte	0x1
+ 693 00c3 32       		.byte	0x32
+ 694 00c4 00000000 		.4byte	.LFB0
+ 695 00c8 20000000 		.4byte	.LFE0-.LFB0
+ 696 00cc 01       		.uleb128 0x1
+ 697 00cd 9C       		.byte	0x9c
+ 698 00ce 07       		.uleb128 0x7
+ 699 00cf 06000000 		.4byte	.LASF20
+ 700 00d3 01       		.byte	0x1
+ 701 00d4 4F       		.byte	0x4f
+ 702 00d5 00000000 		.4byte	.LFB1
+ 703 00d9 68000000 		.4byte	.LFE1-.LFB1
+ 704 00dd 01       		.uleb128 0x1
+ 705 00de 9C       		.byte	0x9c
+ 706 00df F2000000 		.4byte	0xf2
+ 707 00e3 08       		.uleb128 0x8
+ 708 00e4 E9010000 		.4byte	.LASF27
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 29
+
+
+ 709 00e8 01       		.byte	0x1
+ 710 00e9 52       		.byte	0x52
+ 711 00ea 6B000000 		.4byte	0x6b
+ 712 00ee 02       		.uleb128 0x2
+ 713 00ef 91       		.byte	0x91
+ 714 00f0 77       		.sleb128 -9
+ 715 00f1 00       		.byte	0
+ 716 00f2 09       		.uleb128 0x9
+ 717 00f3 A1010000 		.4byte	.LASF18
+ 718 00f7 01       		.byte	0x1
+ 719 00f8 C1       		.byte	0xc1
+ 720 00f9 00000000 		.4byte	.LFB2
+ 721 00fd 20000000 		.4byte	.LFE2-.LFB2
+ 722 0101 01       		.uleb128 0x1
+ 723 0102 9C       		.byte	0x9c
+ 724 0103 09       		.uleb128 0x9
+ 725 0104 6E000000 		.4byte	.LASF19
+ 726 0108 01       		.byte	0x1
+ 727 0109 E3       		.byte	0xe3
+ 728 010a 00000000 		.4byte	.LFB3
+ 729 010e 20000000 		.4byte	.LFE3-.LFB3
+ 730 0112 01       		.uleb128 0x1
+ 731 0113 9C       		.byte	0x9c
+ 732 0114 0A       		.uleb128 0xa
+ 733 0115 10000000 		.4byte	.LASF21
+ 734 0119 01       		.byte	0x1
+ 735 011a 8D01     		.2byte	0x18d
+ 736 011c 00000000 		.4byte	.LFB4
+ 737 0120 20000000 		.4byte	.LFE4-.LFB4
+ 738 0124 01       		.uleb128 0x1
+ 739 0125 9C       		.byte	0x9c
+ 740 0126 3A010000 		.4byte	0x13a
+ 741 012a 0B       		.uleb128 0xb
+ 742 012b 53000000 		.4byte	.LASF23
+ 743 012f 01       		.byte	0x1
+ 744 0130 8D01     		.2byte	0x18d
+ 745 0132 76000000 		.4byte	0x76
+ 746 0136 02       		.uleb128 0x2
+ 747 0137 91       		.byte	0x91
+ 748 0138 76       		.sleb128 -10
+ 749 0139 00       		.byte	0
+ 750 013a 0C       		.uleb128 0xc
+ 751 013b 3C000000 		.4byte	.LASF31
+ 752 013f 01       		.byte	0x1
+ 753 0140 A301     		.2byte	0x1a3
+ 754 0142 76000000 		.4byte	0x76
+ 755 0146 00000000 		.4byte	.LFB5
+ 756 014a 20000000 		.4byte	.LFE5-.LFB5
+ 757 014e 01       		.uleb128 0x1
+ 758 014f 9C       		.byte	0x9c
+ 759 0150 0A       		.uleb128 0xa
+ 760 0151 D8010000 		.4byte	.LASF22
+ 761 0155 01       		.byte	0x1
+ 762 0156 DC01     		.2byte	0x1dc
+ 763 0158 00000000 		.4byte	.LFB6
+ 764 015c 20000000 		.4byte	.LFE6-.LFB6
+ 765 0160 01       		.uleb128 0x1
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 30
+
+
+ 766 0161 9C       		.byte	0x9c
+ 767 0162 76010000 		.4byte	0x176
+ 768 0166 0B       		.uleb128 0xb
+ 769 0167 22000000 		.4byte	.LASF24
+ 770 016b 01       		.byte	0x1
+ 771 016c DC01     		.2byte	0x1dc
+ 772 016e 76000000 		.4byte	0x76
+ 773 0172 02       		.uleb128 0x2
+ 774 0173 91       		.byte	0x91
+ 775 0174 76       		.sleb128 -10
+ 776 0175 00       		.byte	0
+ 777 0176 0A       		.uleb128 0xa
+ 778 0177 35020000 		.4byte	.LASF25
+ 779 017b 01       		.byte	0x1
+ 780 017c FE01     		.2byte	0x1fe
+ 781 017e 00000000 		.4byte	.LFB7
+ 782 0182 20000000 		.4byte	.LFE7-.LFB7
+ 783 0186 01       		.uleb128 0x1
+ 784 0187 9C       		.byte	0x9c
+ 785 0188 9C010000 		.4byte	0x19c
+ 786 018c 0B       		.uleb128 0xb
+ 787 018d B2020000 		.4byte	.LASF26
+ 788 0191 01       		.byte	0x1
+ 789 0192 FE01     		.2byte	0x1fe
+ 790 0194 76000000 		.4byte	0x76
+ 791 0198 02       		.uleb128 0x2
+ 792 0199 91       		.byte	0x91
+ 793 019a 76       		.sleb128 -10
+ 794 019b 00       		.byte	0
+ 795 019c 0D       		.uleb128 0xd
+ 796 019d 3A010000 		.4byte	.LASF38
+ 797 01a1 01       		.byte	0x1
+ 798 01a2 DE02     		.2byte	0x2de
+ 799 01a4 6B000000 		.4byte	0x6b
+ 800 01a8 00000000 		.4byte	.LFB8
+ 801 01ac 20000000 		.4byte	.LFE8-.LFB8
+ 802 01b0 01       		.uleb128 0x1
+ 803 01b1 9C       		.byte	0x9c
+ 804 01b2 C6010000 		.4byte	0x1c6
+ 805 01b6 0E       		.uleb128 0xe
+ 806 01b7 D1010000 		.4byte	.LASF28
+ 807 01bb 01       		.byte	0x1
+ 808 01bc E002     		.2byte	0x2e0
+ 809 01be 6B000000 		.4byte	0x6b
+ 810 01c2 02       		.uleb128 0x2
+ 811 01c3 91       		.byte	0x91
+ 812 01c4 77       		.sleb128 -9
+ 813 01c5 00       		.byte	0
+ 814 01c6 0A       		.uleb128 0xa
+ 815 01c7 6D020000 		.4byte	.LASF29
+ 816 01cb 01       		.byte	0x1
+ 817 01cc FA02     		.2byte	0x2fa
+ 818 01ce 00000000 		.4byte	.LFB9
+ 819 01d2 20000000 		.4byte	.LFE9-.LFB9
+ 820 01d6 01       		.uleb128 0x1
+ 821 01d7 9C       		.byte	0x9c
+ 822 01d8 EC010000 		.4byte	0x1ec
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 31
+
+
+ 823 01dc 0B       		.uleb128 0xb
+ 824 01dd 90000000 		.4byte	.LASF30
+ 825 01e1 01       		.byte	0x1
+ 826 01e2 FA02     		.2byte	0x2fa
+ 827 01e4 6B000000 		.4byte	0x6b
+ 828 01e8 02       		.uleb128 0x2
+ 829 01e9 91       		.byte	0x91
+ 830 01ea 77       		.sleb128 -9
+ 831 01eb 00       		.byte	0
+ 832 01ec 0C       		.uleb128 0xc
+ 833 01ed 87020000 		.4byte	.LASF32
+ 834 01f1 01       		.byte	0x1
+ 835 01f2 1303     		.2byte	0x313
+ 836 01f4 76000000 		.4byte	0x76
+ 837 01f8 00000000 		.4byte	.LFB10
+ 838 01fc 18000000 		.4byte	.LFE10-.LFB10
+ 839 0200 01       		.uleb128 0x1
+ 840 0201 9C       		.byte	0x9c
+ 841 0202 0C       		.uleb128 0xc
+ 842 0203 5C020000 		.4byte	.LASF33
+ 843 0207 01       		.byte	0x1
+ 844 0208 2D03     		.2byte	0x32d
+ 845 020a 76000000 		.4byte	0x76
+ 846 020e 00000000 		.4byte	.LFB11
+ 847 0212 18000000 		.4byte	.LFE11-.LFB11
+ 848 0216 01       		.uleb128 0x1
+ 849 0217 9C       		.byte	0x9c
+ 850 0218 0C       		.uleb128 0xc
+ 851 0219 EE010000 		.4byte	.LASF34
+ 852 021d 01       		.byte	0x1
+ 853 021e 7103     		.2byte	0x371
+ 854 0220 76000000 		.4byte	0x76
+ 855 0224 00000000 		.4byte	.LFB12
+ 856 0228 18000000 		.4byte	.LFE12-.LFB12
+ 857 022c 01       		.uleb128 0x1
+ 858 022d 9C       		.byte	0x9c
+ 859 022e 0F       		.uleb128 0xf
+ 860 022f 98000000 		.4byte	.LASF39
+ 861 0233 01       		.byte	0x1
+ 862 0234 1B       		.byte	0x1b
+ 863 0235 6B000000 		.4byte	0x6b
+ 864 0239 05       		.uleb128 0x5
+ 865 023a 03       		.byte	0x3
+ 866 023b 00000000 		.4byte	VERT_initVar
+ 867 023f 00       		.byte	0
+ 868              		.section	.debug_abbrev,"",%progbits
+ 869              	.Ldebug_abbrev0:
+ 870 0000 01       		.uleb128 0x1
+ 871 0001 11       		.uleb128 0x11
+ 872 0002 01       		.byte	0x1
+ 873 0003 25       		.uleb128 0x25
+ 874 0004 0E       		.uleb128 0xe
+ 875 0005 13       		.uleb128 0x13
+ 876 0006 0B       		.uleb128 0xb
+ 877 0007 03       		.uleb128 0x3
+ 878 0008 0E       		.uleb128 0xe
+ 879 0009 1B       		.uleb128 0x1b
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 32
+
+
+ 880 000a 0E       		.uleb128 0xe
+ 881 000b 55       		.uleb128 0x55
+ 882 000c 17       		.uleb128 0x17
+ 883 000d 11       		.uleb128 0x11
+ 884 000e 01       		.uleb128 0x1
+ 885 000f 10       		.uleb128 0x10
+ 886 0010 17       		.uleb128 0x17
+ 887 0011 00       		.byte	0
+ 888 0012 00       		.byte	0
+ 889 0013 02       		.uleb128 0x2
+ 890 0014 24       		.uleb128 0x24
+ 891 0015 00       		.byte	0
+ 892 0016 0B       		.uleb128 0xb
+ 893 0017 0B       		.uleb128 0xb
+ 894 0018 3E       		.uleb128 0x3e
+ 895 0019 0B       		.uleb128 0xb
+ 896 001a 03       		.uleb128 0x3
+ 897 001b 0E       		.uleb128 0xe
+ 898 001c 00       		.byte	0
+ 899 001d 00       		.byte	0
+ 900 001e 03       		.uleb128 0x3
+ 901 001f 24       		.uleb128 0x24
+ 902 0020 00       		.byte	0
+ 903 0021 0B       		.uleb128 0xb
+ 904 0022 0B       		.uleb128 0xb
+ 905 0023 3E       		.uleb128 0x3e
+ 906 0024 0B       		.uleb128 0xb
+ 907 0025 03       		.uleb128 0x3
+ 908 0026 08       		.uleb128 0x8
+ 909 0027 00       		.byte	0
+ 910 0028 00       		.byte	0
+ 911 0029 04       		.uleb128 0x4
+ 912 002a 16       		.uleb128 0x16
+ 913 002b 00       		.byte	0
+ 914 002c 03       		.uleb128 0x3
+ 915 002d 0E       		.uleb128 0xe
+ 916 002e 3A       		.uleb128 0x3a
+ 917 002f 0B       		.uleb128 0xb
+ 918 0030 3B       		.uleb128 0x3b
+ 919 0031 0B       		.uleb128 0xb
+ 920 0032 49       		.uleb128 0x49
+ 921 0033 13       		.uleb128 0x13
+ 922 0034 00       		.byte	0
+ 923 0035 00       		.byte	0
+ 924 0036 05       		.uleb128 0x5
+ 925 0037 35       		.uleb128 0x35
+ 926 0038 00       		.byte	0
+ 927 0039 49       		.uleb128 0x49
+ 928 003a 13       		.uleb128 0x13
+ 929 003b 00       		.byte	0
+ 930 003c 00       		.byte	0
+ 931 003d 06       		.uleb128 0x6
+ 932 003e 2E       		.uleb128 0x2e
+ 933 003f 00       		.byte	0
+ 934 0040 3F       		.uleb128 0x3f
+ 935 0041 19       		.uleb128 0x19
+ 936 0042 03       		.uleb128 0x3
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 33
+
+
+ 937 0043 0E       		.uleb128 0xe
+ 938 0044 3A       		.uleb128 0x3a
+ 939 0045 0B       		.uleb128 0xb
+ 940 0046 3B       		.uleb128 0x3b
+ 941 0047 0B       		.uleb128 0xb
+ 942 0048 27       		.uleb128 0x27
+ 943 0049 19       		.uleb128 0x19
+ 944 004a 11       		.uleb128 0x11
+ 945 004b 01       		.uleb128 0x1
+ 946 004c 12       		.uleb128 0x12
+ 947 004d 06       		.uleb128 0x6
+ 948 004e 40       		.uleb128 0x40
+ 949 004f 18       		.uleb128 0x18
+ 950 0050 9642     		.uleb128 0x2116
+ 951 0052 19       		.uleb128 0x19
+ 952 0053 00       		.byte	0
+ 953 0054 00       		.byte	0
+ 954 0055 07       		.uleb128 0x7
+ 955 0056 2E       		.uleb128 0x2e
+ 956 0057 01       		.byte	0x1
+ 957 0058 3F       		.uleb128 0x3f
+ 958 0059 19       		.uleb128 0x19
+ 959 005a 03       		.uleb128 0x3
+ 960 005b 0E       		.uleb128 0xe
+ 961 005c 3A       		.uleb128 0x3a
+ 962 005d 0B       		.uleb128 0xb
+ 963 005e 3B       		.uleb128 0x3b
+ 964 005f 0B       		.uleb128 0xb
+ 965 0060 27       		.uleb128 0x27
+ 966 0061 19       		.uleb128 0x19
+ 967 0062 11       		.uleb128 0x11
+ 968 0063 01       		.uleb128 0x1
+ 969 0064 12       		.uleb128 0x12
+ 970 0065 06       		.uleb128 0x6
+ 971 0066 40       		.uleb128 0x40
+ 972 0067 18       		.uleb128 0x18
+ 973 0068 9642     		.uleb128 0x2116
+ 974 006a 19       		.uleb128 0x19
+ 975 006b 01       		.uleb128 0x1
+ 976 006c 13       		.uleb128 0x13
+ 977 006d 00       		.byte	0
+ 978 006e 00       		.byte	0
+ 979 006f 08       		.uleb128 0x8
+ 980 0070 34       		.uleb128 0x34
+ 981 0071 00       		.byte	0
+ 982 0072 03       		.uleb128 0x3
+ 983 0073 0E       		.uleb128 0xe
+ 984 0074 3A       		.uleb128 0x3a
+ 985 0075 0B       		.uleb128 0xb
+ 986 0076 3B       		.uleb128 0x3b
+ 987 0077 0B       		.uleb128 0xb
+ 988 0078 49       		.uleb128 0x49
+ 989 0079 13       		.uleb128 0x13
+ 990 007a 02       		.uleb128 0x2
+ 991 007b 18       		.uleb128 0x18
+ 992 007c 00       		.byte	0
+ 993 007d 00       		.byte	0
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 34
+
+
+ 994 007e 09       		.uleb128 0x9
+ 995 007f 2E       		.uleb128 0x2e
+ 996 0080 00       		.byte	0
+ 997 0081 3F       		.uleb128 0x3f
+ 998 0082 19       		.uleb128 0x19
+ 999 0083 03       		.uleb128 0x3
+ 1000 0084 0E       		.uleb128 0xe
+ 1001 0085 3A       		.uleb128 0x3a
+ 1002 0086 0B       		.uleb128 0xb
+ 1003 0087 3B       		.uleb128 0x3b
+ 1004 0088 0B       		.uleb128 0xb
+ 1005 0089 27       		.uleb128 0x27
+ 1006 008a 19       		.uleb128 0x19
+ 1007 008b 11       		.uleb128 0x11
+ 1008 008c 01       		.uleb128 0x1
+ 1009 008d 12       		.uleb128 0x12
+ 1010 008e 06       		.uleb128 0x6
+ 1011 008f 40       		.uleb128 0x40
+ 1012 0090 18       		.uleb128 0x18
+ 1013 0091 9742     		.uleb128 0x2117
+ 1014 0093 19       		.uleb128 0x19
+ 1015 0094 00       		.byte	0
+ 1016 0095 00       		.byte	0
+ 1017 0096 0A       		.uleb128 0xa
+ 1018 0097 2E       		.uleb128 0x2e
+ 1019 0098 01       		.byte	0x1
+ 1020 0099 3F       		.uleb128 0x3f
+ 1021 009a 19       		.uleb128 0x19
+ 1022 009b 03       		.uleb128 0x3
+ 1023 009c 0E       		.uleb128 0xe
+ 1024 009d 3A       		.uleb128 0x3a
+ 1025 009e 0B       		.uleb128 0xb
+ 1026 009f 3B       		.uleb128 0x3b
+ 1027 00a0 05       		.uleb128 0x5
+ 1028 00a1 27       		.uleb128 0x27
+ 1029 00a2 19       		.uleb128 0x19
+ 1030 00a3 11       		.uleb128 0x11
+ 1031 00a4 01       		.uleb128 0x1
+ 1032 00a5 12       		.uleb128 0x12
+ 1033 00a6 06       		.uleb128 0x6
+ 1034 00a7 40       		.uleb128 0x40
+ 1035 00a8 18       		.uleb128 0x18
+ 1036 00a9 9742     		.uleb128 0x2117
+ 1037 00ab 19       		.uleb128 0x19
+ 1038 00ac 01       		.uleb128 0x1
+ 1039 00ad 13       		.uleb128 0x13
+ 1040 00ae 00       		.byte	0
+ 1041 00af 00       		.byte	0
+ 1042 00b0 0B       		.uleb128 0xb
+ 1043 00b1 05       		.uleb128 0x5
+ 1044 00b2 00       		.byte	0
+ 1045 00b3 03       		.uleb128 0x3
+ 1046 00b4 0E       		.uleb128 0xe
+ 1047 00b5 3A       		.uleb128 0x3a
+ 1048 00b6 0B       		.uleb128 0xb
+ 1049 00b7 3B       		.uleb128 0x3b
+ 1050 00b8 05       		.uleb128 0x5
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 35
+
+
+ 1051 00b9 49       		.uleb128 0x49
+ 1052 00ba 13       		.uleb128 0x13
+ 1053 00bb 02       		.uleb128 0x2
+ 1054 00bc 18       		.uleb128 0x18
+ 1055 00bd 00       		.byte	0
+ 1056 00be 00       		.byte	0
+ 1057 00bf 0C       		.uleb128 0xc
+ 1058 00c0 2E       		.uleb128 0x2e
+ 1059 00c1 00       		.byte	0
+ 1060 00c2 3F       		.uleb128 0x3f
+ 1061 00c3 19       		.uleb128 0x19
+ 1062 00c4 03       		.uleb128 0x3
+ 1063 00c5 0E       		.uleb128 0xe
+ 1064 00c6 3A       		.uleb128 0x3a
+ 1065 00c7 0B       		.uleb128 0xb
+ 1066 00c8 3B       		.uleb128 0x3b
+ 1067 00c9 05       		.uleb128 0x5
+ 1068 00ca 27       		.uleb128 0x27
+ 1069 00cb 19       		.uleb128 0x19
+ 1070 00cc 49       		.uleb128 0x49
+ 1071 00cd 13       		.uleb128 0x13
+ 1072 00ce 11       		.uleb128 0x11
+ 1073 00cf 01       		.uleb128 0x1
+ 1074 00d0 12       		.uleb128 0x12
+ 1075 00d1 06       		.uleb128 0x6
+ 1076 00d2 40       		.uleb128 0x40
+ 1077 00d3 18       		.uleb128 0x18
+ 1078 00d4 9742     		.uleb128 0x2117
+ 1079 00d6 19       		.uleb128 0x19
+ 1080 00d7 00       		.byte	0
+ 1081 00d8 00       		.byte	0
+ 1082 00d9 0D       		.uleb128 0xd
+ 1083 00da 2E       		.uleb128 0x2e
+ 1084 00db 01       		.byte	0x1
+ 1085 00dc 3F       		.uleb128 0x3f
+ 1086 00dd 19       		.uleb128 0x19
+ 1087 00de 03       		.uleb128 0x3
+ 1088 00df 0E       		.uleb128 0xe
+ 1089 00e0 3A       		.uleb128 0x3a
+ 1090 00e1 0B       		.uleb128 0xb
+ 1091 00e2 3B       		.uleb128 0x3b
+ 1092 00e3 05       		.uleb128 0x5
+ 1093 00e4 27       		.uleb128 0x27
+ 1094 00e5 19       		.uleb128 0x19
+ 1095 00e6 49       		.uleb128 0x49
+ 1096 00e7 13       		.uleb128 0x13
+ 1097 00e8 11       		.uleb128 0x11
+ 1098 00e9 01       		.uleb128 0x1
+ 1099 00ea 12       		.uleb128 0x12
+ 1100 00eb 06       		.uleb128 0x6
+ 1101 00ec 40       		.uleb128 0x40
+ 1102 00ed 18       		.uleb128 0x18
+ 1103 00ee 9742     		.uleb128 0x2117
+ 1104 00f0 19       		.uleb128 0x19
+ 1105 00f1 01       		.uleb128 0x1
+ 1106 00f2 13       		.uleb128 0x13
+ 1107 00f3 00       		.byte	0
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 36
+
+
+ 1108 00f4 00       		.byte	0
+ 1109 00f5 0E       		.uleb128 0xe
+ 1110 00f6 34       		.uleb128 0x34
+ 1111 00f7 00       		.byte	0
+ 1112 00f8 03       		.uleb128 0x3
+ 1113 00f9 0E       		.uleb128 0xe
+ 1114 00fa 3A       		.uleb128 0x3a
+ 1115 00fb 0B       		.uleb128 0xb
+ 1116 00fc 3B       		.uleb128 0x3b
+ 1117 00fd 05       		.uleb128 0x5
+ 1118 00fe 49       		.uleb128 0x49
+ 1119 00ff 13       		.uleb128 0x13
+ 1120 0100 02       		.uleb128 0x2
+ 1121 0101 18       		.uleb128 0x18
+ 1122 0102 00       		.byte	0
+ 1123 0103 00       		.byte	0
+ 1124 0104 0F       		.uleb128 0xf
+ 1125 0105 34       		.uleb128 0x34
+ 1126 0106 00       		.byte	0
+ 1127 0107 03       		.uleb128 0x3
+ 1128 0108 0E       		.uleb128 0xe
+ 1129 0109 3A       		.uleb128 0x3a
+ 1130 010a 0B       		.uleb128 0xb
+ 1131 010b 3B       		.uleb128 0x3b
+ 1132 010c 0B       		.uleb128 0xb
+ 1133 010d 49       		.uleb128 0x49
+ 1134 010e 13       		.uleb128 0x13
+ 1135 010f 3F       		.uleb128 0x3f
+ 1136 0110 19       		.uleb128 0x19
+ 1137 0111 02       		.uleb128 0x2
+ 1138 0112 18       		.uleb128 0x18
+ 1139 0113 00       		.byte	0
+ 1140 0114 00       		.byte	0
+ 1141 0115 00       		.byte	0
+ 1142              		.section	.debug_aranges,"",%progbits
+ 1143 0000 7C000000 		.4byte	0x7c
+ 1144 0004 0200     		.2byte	0x2
+ 1145 0006 00000000 		.4byte	.Ldebug_info0
+ 1146 000a 04       		.byte	0x4
+ 1147 000b 00       		.byte	0
+ 1148 000c 0000     		.2byte	0
+ 1149 000e 0000     		.2byte	0
+ 1150 0010 00000000 		.4byte	.LFB0
+ 1151 0014 20000000 		.4byte	.LFE0-.LFB0
+ 1152 0018 00000000 		.4byte	.LFB1
+ 1153 001c 68000000 		.4byte	.LFE1-.LFB1
+ 1154 0020 00000000 		.4byte	.LFB2
+ 1155 0024 20000000 		.4byte	.LFE2-.LFB2
+ 1156 0028 00000000 		.4byte	.LFB3
+ 1157 002c 20000000 		.4byte	.LFE3-.LFB3
+ 1158 0030 00000000 		.4byte	.LFB4
+ 1159 0034 20000000 		.4byte	.LFE4-.LFB4
+ 1160 0038 00000000 		.4byte	.LFB5
+ 1161 003c 20000000 		.4byte	.LFE5-.LFB5
+ 1162 0040 00000000 		.4byte	.LFB6
+ 1163 0044 20000000 		.4byte	.LFE6-.LFB6
+ 1164 0048 00000000 		.4byte	.LFB7
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 37
+
+
+ 1165 004c 20000000 		.4byte	.LFE7-.LFB7
+ 1166 0050 00000000 		.4byte	.LFB8
+ 1167 0054 20000000 		.4byte	.LFE8-.LFB8
+ 1168 0058 00000000 		.4byte	.LFB9
+ 1169 005c 20000000 		.4byte	.LFE9-.LFB9
+ 1170 0060 00000000 		.4byte	.LFB10
+ 1171 0064 18000000 		.4byte	.LFE10-.LFB10
+ 1172 0068 00000000 		.4byte	.LFB11
+ 1173 006c 18000000 		.4byte	.LFE11-.LFB11
+ 1174 0070 00000000 		.4byte	.LFB12
+ 1175 0074 18000000 		.4byte	.LFE12-.LFB12
+ 1176 0078 00000000 		.4byte	0
+ 1177 007c 00000000 		.4byte	0
+ 1178              		.section	.debug_ranges,"",%progbits
+ 1179              	.Ldebug_ranges0:
+ 1180 0000 00000000 		.4byte	.LFB0
+ 1181 0004 20000000 		.4byte	.LFE0
+ 1182 0008 00000000 		.4byte	.LFB1
+ 1183 000c 68000000 		.4byte	.LFE1
+ 1184 0010 00000000 		.4byte	.LFB2
+ 1185 0014 20000000 		.4byte	.LFE2
+ 1186 0018 00000000 		.4byte	.LFB3
+ 1187 001c 20000000 		.4byte	.LFE3
+ 1188 0020 00000000 		.4byte	.LFB4
+ 1189 0024 20000000 		.4byte	.LFE4
+ 1190 0028 00000000 		.4byte	.LFB5
+ 1191 002c 20000000 		.4byte	.LFE5
+ 1192 0030 00000000 		.4byte	.LFB6
+ 1193 0034 20000000 		.4byte	.LFE6
+ 1194 0038 00000000 		.4byte	.LFB7
+ 1195 003c 20000000 		.4byte	.LFE7
+ 1196 0040 00000000 		.4byte	.LFB8
+ 1197 0044 20000000 		.4byte	.LFE8
+ 1198 0048 00000000 		.4byte	.LFB9
+ 1199 004c 20000000 		.4byte	.LFE9
+ 1200 0050 00000000 		.4byte	.LFB10
+ 1201 0054 18000000 		.4byte	.LFE10
+ 1202 0058 00000000 		.4byte	.LFB11
+ 1203 005c 18000000 		.4byte	.LFE11
+ 1204 0060 00000000 		.4byte	.LFB12
+ 1205 0064 18000000 		.4byte	.LFE12
+ 1206 0068 00000000 		.4byte	0
+ 1207 006c 00000000 		.4byte	0
+ 1208              		.section	.debug_line,"",%progbits
+ 1209              	.Ldebug_line0:
+ 1210 0000 47010000 		.section	.debug_str,"MS",%progbits,1
+ 1210      02004300 
+ 1210      00000201 
+ 1210      FB0E0D00 
+ 1210      01010101 
+ 1211              	.LASF15:
+ 1212 0000 72656731 		.ascii	"reg16\000"
+ 1212      3600
+ 1213              	.LASF20:
+ 1214 0006 56455254 		.ascii	"VERT_Init\000"
+ 1214      5F496E69 
+ 1214      7400
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 38
+
+
+ 1215              	.LASF21:
+ 1216 0010 56455254 		.ascii	"VERT_WriteCounter\000"
+ 1216      5F577269 
+ 1216      7465436F 
+ 1216      756E7465 
+ 1216      7200
+ 1217              	.LASF24:
+ 1218 0022 70657269 		.ascii	"period\000"
+ 1218      6F6400
+ 1219              	.LASF3:
+ 1220 0029 73686F72 		.ascii	"short unsigned int\000"
+ 1220      7420756E 
+ 1220      7369676E 
+ 1220      65642069 
+ 1220      6E7400
+ 1221              	.LASF31:
+ 1222 003c 56455254 		.ascii	"VERT_ReadCounter\000"
+ 1222      5F526561 
+ 1222      64436F75 
+ 1222      6E746572 
+ 1222      00
+ 1223              	.LASF11:
+ 1224 004d 666C6F61 		.ascii	"float\000"
+ 1224      7400
+ 1225              	.LASF23:
+ 1226 0053 636F756E 		.ascii	"counter\000"
+ 1226      74657200 
+ 1227              	.LASF1:
+ 1228 005b 756E7369 		.ascii	"unsigned char\000"
+ 1228      676E6564 
+ 1228      20636861 
+ 1228      7200
+ 1229              	.LASF14:
+ 1230 0069 72656738 		.ascii	"reg8\000"
+ 1230      00
+ 1231              	.LASF19:
+ 1232 006e 56455254 		.ascii	"VERT_Stop\000"
+ 1232      5F53746F 
+ 1232      7000
+ 1233              	.LASF5:
+ 1234 0078 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1234      20756E73 
+ 1234      69676E65 
+ 1234      6420696E 
+ 1234      7400
+ 1235              	.LASF9:
+ 1236 008a 75696E74 		.ascii	"uint8\000"
+ 1236      3800
+ 1237              	.LASF30:
+ 1238 0090 636F6E74 		.ascii	"control\000"
+ 1238      726F6C00 
+ 1239              	.LASF39:
+ 1240 0098 56455254 		.ascii	"VERT_initVar\000"
+ 1240      5F696E69 
+ 1240      74566172 
+ 1240      00
+ 1241              	.LASF35:
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 39
+
+
+ 1242 00a5 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 1242      4320342E 
+ 1242      392E3320 
+ 1242      32303135 
+ 1242      30333033 
+ 1243 00d8 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 1243      20726576 
+ 1243      6973696F 
+ 1243      6E203232 
+ 1243      31323230 
+ 1244 010b 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 1244      66756E63 
+ 1244      74696F6E 
+ 1244      2D736563 
+ 1244      74696F6E 
+ 1245              	.LASF12:
+ 1246 0133 646F7562 		.ascii	"double\000"
+ 1246      6C6500
+ 1247              	.LASF38:
+ 1248 013a 56455254 		.ascii	"VERT_ReadControlRegister\000"
+ 1248      5F526561 
+ 1248      64436F6E 
+ 1248      74726F6C 
+ 1248      52656769 
+ 1249              	.LASF37:
+ 1250 0153 433A5C55 		.ascii	"C:\\Users\\ologa\\Documents\\MIT\\Senior S22\\6.115"
+ 1250      73657273 
+ 1250      5C6F6C6F 
+ 1250      67615C44 
+ 1250      6F63756D 
+ 1251 0180 315C4669 		.ascii	"1\\Final Project\\vga.cydsn\000"
+ 1251      6E616C20 
+ 1251      50726F6A 
+ 1251      6563745C 
+ 1251      7667612E 
+ 1252              	.LASF10:
+ 1253 019a 75696E74 		.ascii	"uint16\000"
+ 1253      313600
+ 1254              	.LASF18:
+ 1255 01a1 56455254 		.ascii	"VERT_Enable\000"
+ 1255      5F456E61 
+ 1255      626C6500 
+ 1256              	.LASF8:
+ 1257 01ad 756E7369 		.ascii	"unsigned int\000"
+ 1257      676E6564 
+ 1257      20696E74 
+ 1257      00
+ 1258              	.LASF7:
+ 1259 01ba 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1259      206C6F6E 
+ 1259      6720756E 
+ 1259      7369676E 
+ 1259      65642069 
+ 1260              	.LASF28:
+ 1261 01d1 72657375 		.ascii	"result\000"
+ 1261      6C7400
+ 1262              	.LASF22:
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 40
+
+
+ 1263 01d8 56455254 		.ascii	"VERT_WritePeriod\000"
+ 1263      5F577269 
+ 1263      74655065 
+ 1263      72696F64 
+ 1263      00
+ 1264              	.LASF27:
+ 1265 01e9 6374726C 		.ascii	"ctrl\000"
+ 1265      00
+ 1266              	.LASF34:
+ 1267 01ee 56455254 		.ascii	"VERT_ReadPeriod\000"
+ 1267      5F526561 
+ 1267      64506572 
+ 1267      696F6400 
+ 1268              	.LASF16:
+ 1269 01fe 73697A65 		.ascii	"sizetype\000"
+ 1269      74797065 
+ 1269      00
+ 1270              	.LASF36:
+ 1271 0207 2E5C4765 		.ascii	".\\Generated_Source\\PSoC5\\VERT.c\000"
+ 1271      6E657261 
+ 1271      7465645F 
+ 1271      536F7572 
+ 1271      63655C50 
+ 1272              	.LASF6:
+ 1273 0227 6C6F6E67 		.ascii	"long long int\000"
+ 1273      206C6F6E 
+ 1273      6720696E 
+ 1273      7400
+ 1274              	.LASF25:
+ 1275 0235 56455254 		.ascii	"VERT_WriteCompare\000"
+ 1275      5F577269 
+ 1275      7465436F 
+ 1275      6D706172 
+ 1275      6500
+ 1276              	.LASF17:
+ 1277 0247 56455254 		.ascii	"VERT_Start\000"
+ 1277      5F537461 
+ 1277      727400
+ 1278              	.LASF2:
+ 1279 0252 73686F72 		.ascii	"short int\000"
+ 1279      7420696E 
+ 1279      7400
+ 1280              	.LASF33:
+ 1281 025c 56455254 		.ascii	"VERT_ReadCompare\000"
+ 1281      5F526561 
+ 1281      64436F6D 
+ 1281      70617265 
+ 1281      00
+ 1282              	.LASF29:
+ 1283 026d 56455254 		.ascii	"VERT_WriteControlRegister\000"
+ 1283      5F577269 
+ 1283      7465436F 
+ 1283      6E74726F 
+ 1283      6C526567 
+ 1284              	.LASF32:
+ 1285 0287 56455254 		.ascii	"VERT_ReadCapture\000"
+ 1285      5F526561 
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccRQNpnY.s 			page 41
+
+
+ 1285      64436170 
+ 1285      74757265 
+ 1285      00
+ 1286              	.LASF4:
+ 1287 0298 6C6F6E67 		.ascii	"long int\000"
+ 1287      20696E74 
+ 1287      00
+ 1288              	.LASF13:
+ 1289 02a1 63686172 		.ascii	"char\000"
+ 1289      00
+ 1290              	.LASF0:
+ 1291 02a6 7369676E 		.ascii	"signed char\000"
+ 1291      65642063 
+ 1291      68617200 
+ 1292              	.LASF26:
+ 1293 02b2 636F6D70 		.ascii	"compare\000"
+ 1293      61726500 
+ 1294              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br

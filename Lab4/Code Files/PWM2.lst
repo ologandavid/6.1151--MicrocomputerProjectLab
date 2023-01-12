@@ -1,0 +1,22 @@
+                   main:
+0000: 90 FE 33         mov dptr, #0FE33h       ; Initialize the 8255 for 8 bit
+0003: 74 80            mov a, #80h
+0005: F0               movx @dptr, a
+                       loop:
+0006: 90 FE 30             mov dptr, #0FE30h       ; Logic Level Low
+0009: 74 00                mov a, #00h     
+000B: F0                   movx @dptr, a
+000C: 12 00 1A             lcall delay             ; Call Delay Function
+000F: 90 FE 30             mov dptr, #0FE30h       ; Logic Level High
+0012: 74 01                mov a, #01h             
+0014: F0                   movx @dptr, a
+0015: 12 00 1A             lcall delay             ; Call Delay Function
+0018: 80 EC                sjmp loop               ; Repeat
+                   
+                   
+                   delay:
+001A: 78 FF            mov R0, #0FFh               ; Set Registers with Counter
+001C: 79 28            mov R1, #028h
+                       sups:
+001E: D9 FE                DJNZ R1, sups
+0020: 22               ret

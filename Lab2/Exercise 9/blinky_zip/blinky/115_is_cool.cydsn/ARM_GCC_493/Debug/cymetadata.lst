@@ -1,0 +1,506 @@
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\cc7rRtjq.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"cymetadata.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.global	cy_meta_configecc
+  19              		.section	.cyconfigecc,"a",%progbits
+  20              		.align	2
+  21              		.type	cy_meta_configecc, %object
+  22              		.size	cy_meta_configecc, 16
+  23              	cy_meta_configecc:
+  24 0000 00       		.byte	0
+  25 0001 0F       		.byte	15
+  26 0002 0F       		.byte	15
+  27 0003 00       		.byte	0
+  28 0004 00       		.byte	0
+  29 0005 00       		.byte	0
+  30 0006 00       		.byte	0
+  31 0007 00       		.byte	0
+  32 0008 00       		.byte	0
+  33 0009 0F       		.byte	15
+  34 000a 0F       		.byte	15
+  35 000b 00       		.byte	0
+  36 000c 00       		.byte	0
+  37 000d 00       		.byte	0
+  38 000e 00       		.byte	0
+  39 000f 00       		.byte	0
+  40              		.global	cy_meta_custnvl
+  41              		.section	.cycustnvl,"a",%progbits
+  42              		.align	2
+  43              		.type	cy_meta_custnvl, %object
+  44              		.size	cy_meta_custnvl, 4
+  45              	cy_meta_custnvl:
+  46 0000 00       		.byte	0
+  47 0001 00       		.byte	0
+  48 0002 40       		.byte	64
+  49 0003 05       		.byte	5
+  50              		.global	cy_meta_wonvl
+  51              		.section	.cywolatch,"a",%progbits
+  52              		.align	2
+  53              		.type	cy_meta_wonvl, %object
+  54              		.size	cy_meta_wonvl, 4
+  55              	cy_meta_wonvl:
+  56 0000 BC       		.byte	-68
+  57 0001 90       		.byte	-112
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\cc7rRtjq.s 			page 2
+
+
+  58 0002 AC       		.byte	-84
+  59 0003 AF       		.byte	-81
+  60              		.global	cy_meta_flashprotect
+  61              		.section	.cyflashprotect,"a",%progbits
+  62              		.align	2
+  63              		.type	cy_meta_flashprotect, %object
+  64              		.size	cy_meta_flashprotect, 256
+  65              	cy_meta_flashprotect:
+  66 0000 00000000 		.space	256
+  66      00000000 
+  66      00000000 
+  66      00000000 
+  66      00000000 
+  67              		.global	cy_metadata
+  68              		.section	.cymeta,"a",%progbits
+  69              		.align	2
+  70              		.type	cy_metadata, %object
+  71              		.size	cy_metadata, 12
+  72              	cy_metadata:
+  73 0000 00       		.byte	0
+  74 0001 01       		.byte	1
+  75 0002 2E       		.byte	46
+  76 0003 12       		.byte	18
+  77 0004 30       		.byte	48
+  78 0005 69       		.byte	105
+  79 0006 00       		.byte	0
+  80 0007 01       		.byte	1
+  81 0008 00       		.byte	0
+  82 0009 00       		.byte	0
+  83 000a 00       		.byte	0
+  84 000b 00       		.byte	0
+  85              		.text
+  86              	.Letext0:
+  87              		.file 1 ".\\Generated_Source\\PSoC5\\cymetadata.c"
+  88              		.file 2 ".\\Generated_Source\\PSoC5\\cytypes.h"
+  89              		.section	.debug_info,"",%progbits
+  90              	.Ldebug_info0:
+  91 0000 36010000 		.4byte	0x136
+  92 0004 0400     		.2byte	0x4
+  93 0006 00000000 		.4byte	.Ldebug_abbrev0
+  94 000a 04       		.byte	0x4
+  95 000b 01       		.uleb128 0x1
+  96 000c 00000000 		.4byte	.LASF18
+  97 0010 01       		.byte	0x1
+  98 0011 8E000000 		.4byte	.LASF19
+  99 0015 C0000000 		.4byte	.LASF20
+ 100 0019 00000000 		.4byte	.Ldebug_line0
+ 101 001d 02       		.uleb128 0x2
+ 102 001e 01       		.byte	0x1
+ 103 001f 06       		.byte	0x6
+ 104 0020 01020000 		.4byte	.LASF0
+ 105 0024 02       		.uleb128 0x2
+ 106 0025 01       		.byte	0x1
+ 107 0026 08       		.byte	0x8
+ 108 0027 29010000 		.4byte	.LASF1
+ 109 002b 02       		.uleb128 0x2
+ 110 002c 02       		.byte	0x2
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\cc7rRtjq.s 			page 3
+
+
+ 111 002d 05       		.byte	0x5
+ 112 002e E8010000 		.4byte	.LASF2
+ 113 0032 02       		.uleb128 0x2
+ 114 0033 02       		.byte	0x2
+ 115 0034 07       		.byte	0x7
+ 116 0035 49010000 		.4byte	.LASF3
+ 117 0039 02       		.uleb128 0x2
+ 118 003a 04       		.byte	0x4
+ 119 003b 05       		.byte	0x5
+ 120 003c F8010000 		.4byte	.LASF4
+ 121 0040 02       		.uleb128 0x2
+ 122 0041 04       		.byte	0x4
+ 123 0042 07       		.byte	0x7
+ 124 0043 37010000 		.4byte	.LASF5
+ 125 0047 02       		.uleb128 0x2
+ 126 0048 08       		.byte	0x8
+ 127 0049 05       		.byte	0x5
+ 128 004a D5010000 		.4byte	.LASF6
+ 129 004e 02       		.uleb128 0x2
+ 130 004f 08       		.byte	0x8
+ 131 0050 07       		.byte	0x7
+ 132 0051 92010000 		.4byte	.LASF7
+ 133 0055 03       		.uleb128 0x3
+ 134 0056 04       		.byte	0x4
+ 135 0057 05       		.byte	0x5
+ 136 0058 696E7400 		.ascii	"int\000"
+ 137 005c 02       		.uleb128 0x2
+ 138 005d 04       		.byte	0x4
+ 139 005e 07       		.byte	0x7
+ 140 005f 85010000 		.4byte	.LASF8
+ 141 0063 04       		.uleb128 0x4
+ 142 0064 F2010000 		.4byte	.LASF21
+ 143 0068 02       		.byte	0x2
+ 144 0069 9201     		.2byte	0x192
+ 145 006b 24000000 		.4byte	0x24
+ 146 006f 02       		.uleb128 0x2
+ 147 0070 04       		.byte	0x4
+ 148 0071 04       		.byte	0x4
+ 149 0072 23010000 		.4byte	.LASF9
+ 150 0076 02       		.uleb128 0x2
+ 151 0077 08       		.byte	0x8
+ 152 0078 04       		.byte	0x4
+ 153 0079 5C010000 		.4byte	.LASF10
+ 154 007d 02       		.uleb128 0x2
+ 155 007e 01       		.byte	0x1
+ 156 007f 08       		.byte	0x8
+ 157 0080 E3010000 		.4byte	.LASF11
+ 158 0084 05       		.uleb128 0x5
+ 159 0085 63000000 		.4byte	0x63
+ 160 0089 94000000 		.4byte	0x94
+ 161 008d 06       		.uleb128 0x6
+ 162 008e 94000000 		.4byte	0x94
+ 163 0092 0F       		.byte	0xf
+ 164 0093 00       		.byte	0
+ 165 0094 02       		.uleb128 0x2
+ 166 0095 04       		.byte	0x4
+ 167 0096 07       		.byte	0x7
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\cc7rRtjq.s 			page 4
+
+
+ 168 0097 CC010000 		.4byte	.LASF12
+ 169 009b 07       		.uleb128 0x7
+ 170 009c 73010000 		.4byte	.LASF13
+ 171 00a0 01       		.byte	0x1
+ 172 00a1 1F       		.byte	0x1f
+ 173 00a2 AC000000 		.4byte	0xac
+ 174 00a6 05       		.uleb128 0x5
+ 175 00a7 03       		.byte	0x3
+ 176 00a8 00000000 		.4byte	cy_meta_configecc
+ 177 00ac 08       		.uleb128 0x8
+ 178 00ad 84000000 		.4byte	0x84
+ 179 00b1 05       		.uleb128 0x5
+ 180 00b2 63000000 		.4byte	0x63
+ 181 00b6 C1000000 		.4byte	0xc1
+ 182 00ba 06       		.uleb128 0x6
+ 183 00bb 94000000 		.4byte	0x94
+ 184 00bf 03       		.byte	0x3
+ 185 00c0 00       		.byte	0
+ 186 00c1 07       		.uleb128 0x7
+ 187 00c2 63010000 		.4byte	.LASF14
+ 188 00c6 01       		.byte	0x1
+ 189 00c7 2E       		.byte	0x2e
+ 190 00c8 D2000000 		.4byte	0xd2
+ 191 00cc 05       		.uleb128 0x5
+ 192 00cd 03       		.byte	0x3
+ 193 00ce 00000000 		.4byte	cy_meta_custnvl
+ 194 00d2 08       		.uleb128 0x8
+ 195 00d3 B1000000 		.4byte	0xb1
+ 196 00d7 07       		.uleb128 0x7
+ 197 00d8 BE010000 		.4byte	.LASF15
+ 198 00dc 01       		.byte	0x1
+ 199 00dd 3C       		.byte	0x3c
+ 200 00de E8000000 		.4byte	0xe8
+ 201 00e2 05       		.uleb128 0x5
+ 202 00e3 03       		.byte	0x3
+ 203 00e4 00000000 		.4byte	cy_meta_wonvl
+ 204 00e8 08       		.uleb128 0x8
+ 205 00e9 B1000000 		.4byte	0xb1
+ 206 00ed 05       		.uleb128 0x5
+ 207 00ee 63000000 		.4byte	0x63
+ 208 00f2 FD000000 		.4byte	0xfd
+ 209 00f6 06       		.uleb128 0x6
+ 210 00f7 94000000 		.4byte	0x94
+ 211 00fb FF       		.byte	0xff
+ 212 00fc 00       		.byte	0
+ 213 00fd 07       		.uleb128 0x7
+ 214 00fe A9010000 		.4byte	.LASF16
+ 215 0102 01       		.byte	0x1
+ 216 0103 4A       		.byte	0x4a
+ 217 0104 0E010000 		.4byte	0x10e
+ 218 0108 05       		.uleb128 0x5
+ 219 0109 03       		.byte	0x3
+ 220 010a 00000000 		.4byte	cy_meta_flashprotect
+ 221 010e 08       		.uleb128 0x8
+ 222 010f ED000000 		.4byte	0xed
+ 223 0113 05       		.uleb128 0x5
+ 224 0114 63000000 		.4byte	0x63
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\cc7rRtjq.s 			page 5
+
+
+ 225 0118 23010000 		.4byte	0x123
+ 226 011c 06       		.uleb128 0x6
+ 227 011d 94000000 		.4byte	0x94
+ 228 0121 0B       		.byte	0xb
+ 229 0122 00       		.byte	0
+ 230 0123 07       		.uleb128 0x7
+ 231 0124 B4000000 		.4byte	.LASF17
+ 232 0128 01       		.byte	0x1
+ 233 0129 77       		.byte	0x77
+ 234 012a 34010000 		.4byte	0x134
+ 235 012e 05       		.uleb128 0x5
+ 236 012f 03       		.byte	0x3
+ 237 0130 00000000 		.4byte	cy_metadata
+ 238 0134 08       		.uleb128 0x8
+ 239 0135 13010000 		.4byte	0x113
+ 240 0139 00       		.byte	0
+ 241              		.section	.debug_abbrev,"",%progbits
+ 242              	.Ldebug_abbrev0:
+ 243 0000 01       		.uleb128 0x1
+ 244 0001 11       		.uleb128 0x11
+ 245 0002 01       		.byte	0x1
+ 246 0003 25       		.uleb128 0x25
+ 247 0004 0E       		.uleb128 0xe
+ 248 0005 13       		.uleb128 0x13
+ 249 0006 0B       		.uleb128 0xb
+ 250 0007 03       		.uleb128 0x3
+ 251 0008 0E       		.uleb128 0xe
+ 252 0009 1B       		.uleb128 0x1b
+ 253 000a 0E       		.uleb128 0xe
+ 254 000b 10       		.uleb128 0x10
+ 255 000c 17       		.uleb128 0x17
+ 256 000d 00       		.byte	0
+ 257 000e 00       		.byte	0
+ 258 000f 02       		.uleb128 0x2
+ 259 0010 24       		.uleb128 0x24
+ 260 0011 00       		.byte	0
+ 261 0012 0B       		.uleb128 0xb
+ 262 0013 0B       		.uleb128 0xb
+ 263 0014 3E       		.uleb128 0x3e
+ 264 0015 0B       		.uleb128 0xb
+ 265 0016 03       		.uleb128 0x3
+ 266 0017 0E       		.uleb128 0xe
+ 267 0018 00       		.byte	0
+ 268 0019 00       		.byte	0
+ 269 001a 03       		.uleb128 0x3
+ 270 001b 24       		.uleb128 0x24
+ 271 001c 00       		.byte	0
+ 272 001d 0B       		.uleb128 0xb
+ 273 001e 0B       		.uleb128 0xb
+ 274 001f 3E       		.uleb128 0x3e
+ 275 0020 0B       		.uleb128 0xb
+ 276 0021 03       		.uleb128 0x3
+ 277 0022 08       		.uleb128 0x8
+ 278 0023 00       		.byte	0
+ 279 0024 00       		.byte	0
+ 280 0025 04       		.uleb128 0x4
+ 281 0026 16       		.uleb128 0x16
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\cc7rRtjq.s 			page 6
+
+
+ 282 0027 00       		.byte	0
+ 283 0028 03       		.uleb128 0x3
+ 284 0029 0E       		.uleb128 0xe
+ 285 002a 3A       		.uleb128 0x3a
+ 286 002b 0B       		.uleb128 0xb
+ 287 002c 3B       		.uleb128 0x3b
+ 288 002d 05       		.uleb128 0x5
+ 289 002e 49       		.uleb128 0x49
+ 290 002f 13       		.uleb128 0x13
+ 291 0030 00       		.byte	0
+ 292 0031 00       		.byte	0
+ 293 0032 05       		.uleb128 0x5
+ 294 0033 01       		.uleb128 0x1
+ 295 0034 01       		.byte	0x1
+ 296 0035 49       		.uleb128 0x49
+ 297 0036 13       		.uleb128 0x13
+ 298 0037 01       		.uleb128 0x1
+ 299 0038 13       		.uleb128 0x13
+ 300 0039 00       		.byte	0
+ 301 003a 00       		.byte	0
+ 302 003b 06       		.uleb128 0x6
+ 303 003c 21       		.uleb128 0x21
+ 304 003d 00       		.byte	0
+ 305 003e 49       		.uleb128 0x49
+ 306 003f 13       		.uleb128 0x13
+ 307 0040 2F       		.uleb128 0x2f
+ 308 0041 0B       		.uleb128 0xb
+ 309 0042 00       		.byte	0
+ 310 0043 00       		.byte	0
+ 311 0044 07       		.uleb128 0x7
+ 312 0045 34       		.uleb128 0x34
+ 313 0046 00       		.byte	0
+ 314 0047 03       		.uleb128 0x3
+ 315 0048 0E       		.uleb128 0xe
+ 316 0049 3A       		.uleb128 0x3a
+ 317 004a 0B       		.uleb128 0xb
+ 318 004b 3B       		.uleb128 0x3b
+ 319 004c 0B       		.uleb128 0xb
+ 320 004d 49       		.uleb128 0x49
+ 321 004e 13       		.uleb128 0x13
+ 322 004f 3F       		.uleb128 0x3f
+ 323 0050 19       		.uleb128 0x19
+ 324 0051 02       		.uleb128 0x2
+ 325 0052 18       		.uleb128 0x18
+ 326 0053 00       		.byte	0
+ 327 0054 00       		.byte	0
+ 328 0055 08       		.uleb128 0x8
+ 329 0056 26       		.uleb128 0x26
+ 330 0057 00       		.byte	0
+ 331 0058 49       		.uleb128 0x49
+ 332 0059 13       		.uleb128 0x13
+ 333 005a 00       		.byte	0
+ 334 005b 00       		.byte	0
+ 335 005c 00       		.byte	0
+ 336              		.section	.debug_aranges,"",%progbits
+ 337 0000 14000000 		.4byte	0x14
+ 338 0004 0200     		.2byte	0x2
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\cc7rRtjq.s 			page 7
+
+
+ 339 0006 00000000 		.4byte	.Ldebug_info0
+ 340 000a 04       		.byte	0x4
+ 341 000b 00       		.byte	0
+ 342 000c 0000     		.2byte	0
+ 343 000e 0000     		.2byte	0
+ 344 0010 00000000 		.4byte	0
+ 345 0014 00000000 		.4byte	0
+ 346              		.section	.debug_line,"",%progbits
+ 347              	.Ldebug_line0:
+ 348 0000 4F000000 		.section	.debug_str,"MS",%progbits,1
+ 348      02004900 
+ 348      00000201 
+ 348      FB0E0D00 
+ 348      01010101 
+ 349              	.LASF18:
+ 350 0000 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 350      4320342E 
+ 350      392E3320 
+ 350      32303135 
+ 350      30333033 
+ 351 0033 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 351      20726576 
+ 351      6973696F 
+ 351      6E203232 
+ 351      31323230 
+ 352 0066 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 352      66756E63 
+ 352      74696F6E 
+ 352      2D736563 
+ 352      74696F6E 
+ 353              	.LASF19:
+ 354 008e 2E5C4765 		.ascii	".\\Generated_Source\\PSoC5\\cymetadata.c\000"
+ 354      6E657261 
+ 354      7465645F 
+ 354      536F7572 
+ 354      63655C50 
+ 355              	.LASF17:
+ 356 00b4 63795F6D 		.ascii	"cy_metadata\000"
+ 356      65746164 
+ 356      61746100 
+ 357              	.LASF20:
+ 358 00c0 433A5C55 		.ascii	"C:\\Users\\ologa\\Documents\\MIT\\Senior S22\\6.115"
+ 358      73657273 
+ 358      5C6F6C6F 
+ 358      67615C44 
+ 358      6F63756D 
+ 359 00ed 315C4C61 		.ascii	"1\\Lab2\\Exercise 9\\blinky_zip\\blinky\\115_is_coo"
+ 359      62325C45 
+ 359      78657263 
+ 359      69736520 
+ 359      395C626C 
+ 360 011b 6C2E6379 		.ascii	"l.cydsn\000"
+ 360      64736E00 
+ 361              	.LASF9:
+ 362 0123 666C6F61 		.ascii	"float\000"
+ 362      7400
+ 363              	.LASF1:
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\cc7rRtjq.s 			page 8
+
+
+ 364 0129 756E7369 		.ascii	"unsigned char\000"
+ 364      676E6564 
+ 364      20636861 
+ 364      7200
+ 365              	.LASF5:
+ 366 0137 6C6F6E67 		.ascii	"long unsigned int\000"
+ 366      20756E73 
+ 366      69676E65 
+ 366      6420696E 
+ 366      7400
+ 367              	.LASF3:
+ 368 0149 73686F72 		.ascii	"short unsigned int\000"
+ 368      7420756E 
+ 368      7369676E 
+ 368      65642069 
+ 368      6E7400
+ 369              	.LASF10:
+ 370 015c 646F7562 		.ascii	"double\000"
+ 370      6C6500
+ 371              	.LASF14:
+ 372 0163 63795F6D 		.ascii	"cy_meta_custnvl\000"
+ 372      6574615F 
+ 372      63757374 
+ 372      6E766C00 
+ 373              	.LASF13:
+ 374 0173 63795F6D 		.ascii	"cy_meta_configecc\000"
+ 374      6574615F 
+ 374      636F6E66 
+ 374      69676563 
+ 374      6300
+ 375              	.LASF8:
+ 376 0185 756E7369 		.ascii	"unsigned int\000"
+ 376      676E6564 
+ 376      20696E74 
+ 376      00
+ 377              	.LASF7:
+ 378 0192 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 378      206C6F6E 
+ 378      6720756E 
+ 378      7369676E 
+ 378      65642069 
+ 379              	.LASF16:
+ 380 01a9 63795F6D 		.ascii	"cy_meta_flashprotect\000"
+ 380      6574615F 
+ 380      666C6173 
+ 380      6870726F 
+ 380      74656374 
+ 381              	.LASF15:
+ 382 01be 63795F6D 		.ascii	"cy_meta_wonvl\000"
+ 382      6574615F 
+ 382      776F6E76 
+ 382      6C00
+ 383              	.LASF12:
+ 384 01cc 73697A65 		.ascii	"sizetype\000"
+ 384      74797065 
+ 384      00
+ 385              	.LASF6:
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\cc7rRtjq.s 			page 9
+
+
+ 386 01d5 6C6F6E67 		.ascii	"long long int\000"
+ 386      206C6F6E 
+ 386      6720696E 
+ 386      7400
+ 387              	.LASF11:
+ 388 01e3 63686172 		.ascii	"char\000"
+ 388      00
+ 389              	.LASF2:
+ 390 01e8 73686F72 		.ascii	"short int\000"
+ 390      7420696E 
+ 390      7400
+ 391              	.LASF21:
+ 392 01f2 75696E74 		.ascii	"uint8\000"
+ 392      3800
+ 393              	.LASF4:
+ 394 01f8 6C6F6E67 		.ascii	"long int\000"
+ 394      20696E74 
+ 394      00
+ 395              	.LASF0:
+ 396 0201 7369676E 		.ascii	"signed char\000"
+ 396      65642063 
+ 396      68617200 
+ 397              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br

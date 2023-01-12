@@ -1,0 +1,133 @@
+                            setpup:
+0000: 90 FE 33              MOV DPTR, #0FE33h
+0003: 74 80                 MOV A , #80h  ; Activate 8255
+0005: F0                    MOVX @DPTR, A 
+0006: 12 00 AF              lcall delay
+                   
+                            ; SET Display for 8 but communication 
+                   
+0009: 90 FE 32              MOV DPTR, #0FE32h 
+000C: 74 00                 MOV A , #00h ; lower the E Line 
+000E: F0                    MOVX @DPTR, A 
+000F: 12 00 AF              lcall delay
+                            
+0012: 90 FE 31              MOV DPTR, #0FE31h
+0015: 74 38                 MOV A , #38h
+0017: F0                    MOVX @DPTR, A 
+0018: 12 00 AF              lcall delay
+                   
+001B: 90 FE 32              MOV DPTR, #0FE32h 
+001E: 74 04                 MOV A , #04h ; raise the E Line 
+0020: F0                    MOVX @DPTR, A 
+0021: 12 00 AF              lcall delay
+                            
+0024: 90 FE 32              MOV DPTR, #0FE32h 
+0027: 74 00                 MOV A , #00h ; lower the E Line, latching command 
+0029: F0                    MOVX @DPTR, A 
+002A: 12 00 AF              lcall delay
+                   
+                            ; Turn Display on, Hide Cursor
+002D: 90 FE 31              MOV DPTR, #0FE31h 
+0030: 74 0C                 MOV A , #0Ch 
+0032: F0                    MOVX @DPTR, A 
+0033: 12 00 AF              lcall delay
+                            
+0036: 90 FE 32              MOV DPTR, #0FE32h 
+0039: 74 04                 MOV A , #04h ; raise the E Line 
+003B: F0                    MOVX @DPTR, A 
+003C: 12 00 AF              lcall delay
+                            
+003F: 90 FE 32              MOV DPTR, #0FE32h 
+0042: 74 00                 MOV A , #00h ; lower the E Line, latching command
+0044: F0                    MOVX @DPTR, A 
+0045: 12 00 AF              lcall delay
+                            
+                            
+                            
+                            ; Clear display:
+0048: 90 FE 31              MOV DPTR, #0FE31h 
+004B: 74 01                 MOV A , #01h 
+004D: F0                    MOVX @DPTR, A 
+004E: 12 00 AF              lcall delay
+                            
+0051: 90 FE 32              MOV DPTR, #0FE32h 
+0054: 74 04                 MOV A , #04h ; raise the E Line 
+0056: F0                    MOVX @DPTR, A 
+0057: 12 00 AF              lcall delay
+                            
+005A: 90 FE 32              MOV DPTR, #0FE32h 
+005D: 74 00                 MOV A , #00h ; lower the E Line, latching command
+005F: F0                    MOVX @DPTR, A 
+0060: 12 00 AF              lcall delay
+                   
+                            ;Set RAM address to 0
+                            
+0063: 90 FE 31              MOV DPTR, #0FE31h 
+0066: 74 80                 MOV A , #80h 
+0068: F0                    MOVX @DPTR, A 
+0069: 12 00 AF              lcall delay
+                            
+006C: 90 FE 32              MOV DPTR, #0FE32h 
+006F: 74 04                 MOV A , #04h ; raise the E Line 
+0071: F0                    MOVX @DPTR, A 
+0072: 12 00 AF              lcall delay
+                            
+0075: 90 FE 32              MOV DPTR, #0FE32h
+0078: 74 00                 MOV A , #00h ; lower the E Line 
+007A: F0                    MOVX @DPTR, A 
+007B: 12 00 AF              lcall delay
+                            
+                   
+007E: 79 00        MOV R1, #0h
+                   
+                   main: 
+0080: 90 FE 32              MOV DPTR, #0FE32h 
+0083: 74 01                 MOV A , #01h ; lower the E Line 
+0085: F0                    MOVX @DPTR, A 
+0086: 12 00 AF              lcall delay
+                            
+0089: 90 01 50              MOV DPTR, #message
+008C: E9                    MOV A, R1
+008D: 93                    movc A , @A + DPTR 
+008E: B4 FC 02              CJNE A, #0FCh, display 
+0091: 80 FE                 loop: sjmp loop 
+                            
+                   display:
+0093: 90 FE 31     MOV DPTR, #0FE31h ; location to send to to DPTR
+0096: F0           MOVX @DPTR, A 
+0097: 12 00 AF     lcall delay
+                   
+009A: 90 FE 32     MOV DPTR, #0FE32h 
+009D: 74 05        MOV A , #05h ; raise the E Line 
+009F: F0           MOVX @DPTR, A 
+00A0: 12 00 AF     lcall delay
+                   
+00A3: 90 FE 32     MOV DPTR, #0FE32h 
+00A6: 74 01        MOV A , #01h ; lower the E Line, latching command
+00A8: F0           MOVX @DPTR, A 
+00A9: 12 00 AF     lcall delay
+00AC: 09           inc R1
+                   
+00AD: 80 D1        sjmp main 
+                            
+                   
+                   delay: 
+00AF: 78 FE        MOV R0, #0FEh
+00B1: D8 FE        delayloop: djnz R0, delayloop
+00B3: 22           ret
+                   
+0150:              .org 150h
+                   
+                   message:
+                                    
+0150: 36 2E 31 31 
+      35 3D 53 41 
+      44 FC                 .db 36h, 2Eh, 31h, 31h, 35h,3Dh, 53h, 41h, 44h , 0F
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            

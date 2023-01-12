@@ -1,0 +1,1136 @@
+ARM GAS  C:\Users\Leeb\AppData\Local\Temp\ccliKLuo.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 18, 4
+  12              		.thumb
+  13              		.file	"main.c"
+  14              		.section	.debug_abbrev,"",%progbits
+  15              	.Ldebug_abbrev0:
+  16              		.section	.debug_info,"",%progbits
+  17              	.Ldebug_info0:
+  18              		.section	.debug_line,"",%progbits
+  19              	.Ldebug_line0:
+  20 0000 DD000000 		.text
+  20      02004600 
+  20      00000201 
+  20      FB0E0D00 
+  20      01010101 
+  21              	.Ltext0:
+  22              		.cfi_sections	.debug_frame
+  23              		.section	.text.main,"ax",%progbits
+  24              		.align	2
+  25              		.global	main
+  26              		.thumb
+  27              		.thumb_func
+  28              		.type	main, %function
+  29              	main:
+  30              	.LFB29:
+  31              		.file 1 ".\\main.c"
+   1:.\main.c      **** /* ========================================
+   2:.\main.c      ****  *
+   3:.\main.c      ****  * 6.115 Demo Program
+   4:.\main.c      ****  * All Rights Reserved
+   5:.\main.c      ****  * North and Steven Leeb, 2013
+   6:.\main.c      ****  *
+   7:.\main.c      ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:.\main.c      ****  * WHICH IS THE PROPERTY OF your company.
+   9:.\main.c      ****  *
+  10:.\main.c      ****  * ========================================
+  11:.\main.c      **** */
+  12:.\main.c      **** #include <device.h>
+  13:.\main.c      **** void DigitLED_Write( int);
+  14:.\main.c      **** void DigitLED_WriteHex( int);
+  15:.\main.c      **** 
+  16:.\main.c      **** void main()
+  17:.\main.c      **** {
+  32              		.loc 1 17 0
+  33              		.cfi_startproc
+  34              		@ args = 0, pretend = 0, frame = 0
+  35              		@ frame_needed = 1, uses_anonymous_args = 0
+  36 0000 80B5     		push	{r7, lr}
+ARM GAS  C:\Users\Leeb\AppData\Local\Temp\ccliKLuo.s 			page 2
+
+
+  37              	.LCFI0:
+  38              		.cfi_def_cfa_offset 8
+  39 0002 00AF     		add	r7, sp, #0
+  40              		.cfi_offset 14, -4
+  41              		.cfi_offset 7, -8
+  42              	.LCFI1:
+  43              		.cfi_def_cfa_register 7
+  44              	.L2:
+  18:.\main.c      **** 
+  19:.\main.c      ****     while(1)
+  20:.\main.c      ****     {
+  21:.\main.c      ****         DigitLED_WriteHex(0x06);    // 6
+  45              		.loc 1 21 0
+  46 0004 4FF00600 		mov	r0, #6
+  47 0008 FFF7FEFF 		bl	DigitLED_WriteHex
+  22:.\main.c      ****         CyDelay(500);
+  48              		.loc 1 22 0
+  49 000c 4FF4FA70 		mov	r0, #500
+  50 0010 FFF7FEFF 		bl	CyDelay
+  23:.\main.c      ****         DigitLED_WriteHex(0xff);    // null
+  51              		.loc 1 23 0
+  52 0014 4FF0FF00 		mov	r0, #255
+  53 0018 FFF7FEFF 		bl	DigitLED_WriteHex
+  24:.\main.c      ****         CyDelay(100);
+  54              		.loc 1 24 0
+  55 001c 4FF06400 		mov	r0, #100
+  56 0020 FFF7FEFF 		bl	CyDelay
+  25:.\main.c      ****         DigitLED_WriteHex(0x10);    // .
+  57              		.loc 1 25 0
+  58 0024 4FF01000 		mov	r0, #16
+  59 0028 FFF7FEFF 		bl	DigitLED_WriteHex
+  26:.\main.c      ****         CyDelay(500);
+  60              		.loc 1 26 0
+  61 002c 4FF4FA70 		mov	r0, #500
+  62 0030 FFF7FEFF 		bl	CyDelay
+  27:.\main.c      ****         DigitLED_WriteHex(0xff);    // null
+  63              		.loc 1 27 0
+  64 0034 4FF0FF00 		mov	r0, #255
+  65 0038 FFF7FEFF 		bl	DigitLED_WriteHex
+  28:.\main.c      ****         CyDelay(100);
+  66              		.loc 1 28 0
+  67 003c 4FF06400 		mov	r0, #100
+  68 0040 FFF7FEFF 		bl	CyDelay
+  29:.\main.c      ****         DigitLED_WriteHex(0x01);    // 1
+  69              		.loc 1 29 0
+  70 0044 4FF00100 		mov	r0, #1
+  71 0048 FFF7FEFF 		bl	DigitLED_WriteHex
+  30:.\main.c      ****         CyDelay(500);
+  72              		.loc 1 30 0
+  73 004c 4FF4FA70 		mov	r0, #500
+  74 0050 FFF7FEFF 		bl	CyDelay
+  31:.\main.c      ****         DigitLED_WriteHex(0xff);    // null
+  75              		.loc 1 31 0
+  76 0054 4FF0FF00 		mov	r0, #255
+  77 0058 FFF7FEFF 		bl	DigitLED_WriteHex
+  32:.\main.c      ****         CyDelay(100);
+  78              		.loc 1 32 0
+ARM GAS  C:\Users\Leeb\AppData\Local\Temp\ccliKLuo.s 			page 3
+
+
+  79 005c 4FF06400 		mov	r0, #100
+  80 0060 FFF7FEFF 		bl	CyDelay
+  33:.\main.c      ****         DigitLED_WriteHex(0x01);    // 1
+  81              		.loc 1 33 0
+  82 0064 4FF00100 		mov	r0, #1
+  83 0068 FFF7FEFF 		bl	DigitLED_WriteHex
+  34:.\main.c      ****         CyDelay(500);
+  84              		.loc 1 34 0
+  85 006c 4FF4FA70 		mov	r0, #500
+  86 0070 FFF7FEFF 		bl	CyDelay
+  35:.\main.c      ****         DigitLED_WriteHex(0xff);    // null
+  87              		.loc 1 35 0
+  88 0074 4FF0FF00 		mov	r0, #255
+  89 0078 FFF7FEFF 		bl	DigitLED_WriteHex
+  36:.\main.c      ****         CyDelay(100);
+  90              		.loc 1 36 0
+  91 007c 4FF06400 		mov	r0, #100
+  92 0080 FFF7FEFF 		bl	CyDelay
+  37:.\main.c      ****         DigitLED_WriteHex(0x05);    // 5
+  93              		.loc 1 37 0
+  94 0084 4FF00500 		mov	r0, #5
+  95 0088 FFF7FEFF 		bl	DigitLED_WriteHex
+  38:.\main.c      ****         CyDelay(500);
+  96              		.loc 1 38 0
+  97 008c 4FF4FA70 		mov	r0, #500
+  98 0090 FFF7FEFF 		bl	CyDelay
+  39:.\main.c      ****         DigitLED_WriteHex(0xff);    // null
+  99              		.loc 1 39 0
+ 100 0094 4FF0FF00 		mov	r0, #255
+ 101 0098 FFF7FEFF 		bl	DigitLED_WriteHex
+  40:.\main.c      ****         CyDelay(100);
+ 102              		.loc 1 40 0
+ 103 009c 4FF06400 		mov	r0, #100
+ 104 00a0 FFF7FEFF 		bl	CyDelay
+  41:.\main.c      ****         DigitLED_WriteHex(0xff);    // null
+ 105              		.loc 1 41 0
+ 106 00a4 4FF0FF00 		mov	r0, #255
+ 107 00a8 FFF7FEFF 		bl	DigitLED_WriteHex
+  42:.\main.c      ****         CyDelay(500);
+ 108              		.loc 1 42 0
+ 109 00ac 4FF4FA70 		mov	r0, #500
+ 110 00b0 FFF7FEFF 		bl	CyDelay
+  43:.\main.c      ****         DigitLED_WriteHex(0xff);    // null
+ 111              		.loc 1 43 0
+ 112 00b4 4FF0FF00 		mov	r0, #255
+ 113 00b8 FFF7FEFF 		bl	DigitLED_WriteHex
+  44:.\main.c      ****         CyDelay(100);
+ 114              		.loc 1 44 0
+ 115 00bc 4FF06400 		mov	r0, #100
+ 116 00c0 FFF7FEFF 		bl	CyDelay
+  45:.\main.c      ****         DigitLED_WriteHex(0x01);    // I
+ 117              		.loc 1 45 0
+ 118 00c4 4FF00100 		mov	r0, #1
+ 119 00c8 FFF7FEFF 		bl	DigitLED_WriteHex
+  46:.\main.c      ****         CyDelay(500);
+ 120              		.loc 1 46 0
+ 121 00cc 4FF4FA70 		mov	r0, #500
+ARM GAS  C:\Users\Leeb\AppData\Local\Temp\ccliKLuo.s 			page 4
+
+
+ 122 00d0 FFF7FEFF 		bl	CyDelay
+  47:.\main.c      ****         DigitLED_WriteHex(0xff);    // null
+ 123              		.loc 1 47 0
+ 124 00d4 4FF0FF00 		mov	r0, #255
+ 125 00d8 FFF7FEFF 		bl	DigitLED_WriteHex
+  48:.\main.c      ****         CyDelay(100);
+ 126              		.loc 1 48 0
+ 127 00dc 4FF06400 		mov	r0, #100
+ 128 00e0 FFF7FEFF 		bl	CyDelay
+  49:.\main.c      ****         DigitLED_WriteHex(0x05);    // S
+ 129              		.loc 1 49 0
+ 130 00e4 4FF00500 		mov	r0, #5
+ 131 00e8 FFF7FEFF 		bl	DigitLED_WriteHex
+  50:.\main.c      ****         CyDelay(500);
+ 132              		.loc 1 50 0
+ 133 00ec 4FF4FA70 		mov	r0, #500
+ 134 00f0 FFF7FEFF 		bl	CyDelay
+  51:.\main.c      ****         DigitLED_WriteHex(0xff);    // null
+ 135              		.loc 1 51 0
+ 136 00f4 4FF0FF00 		mov	r0, #255
+ 137 00f8 FFF7FEFF 		bl	DigitLED_WriteHex
+  52:.\main.c      ****         CyDelay(100);
+ 138              		.loc 1 52 0
+ 139 00fc 4FF06400 		mov	r0, #100
+ 140 0100 FFF7FEFF 		bl	CyDelay
+  53:.\main.c      ****         DigitLED_WriteHex(0xff);    // null
+ 141              		.loc 1 53 0
+ 142 0104 4FF0FF00 		mov	r0, #255
+ 143 0108 FFF7FEFF 		bl	DigitLED_WriteHex
+  54:.\main.c      ****         CyDelay(500);
+ 144              		.loc 1 54 0
+ 145 010c 4FF4FA70 		mov	r0, #500
+ 146 0110 FFF7FEFF 		bl	CyDelay
+  55:.\main.c      ****         DigitLED_WriteHex(0xff);    // null
+ 147              		.loc 1 55 0
+ 148 0114 4FF0FF00 		mov	r0, #255
+ 149 0118 FFF7FEFF 		bl	DigitLED_WriteHex
+  56:.\main.c      ****         CyDelay(100);
+ 150              		.loc 1 56 0
+ 151 011c 4FF06400 		mov	r0, #100
+ 152 0120 FFF7FEFF 		bl	CyDelay
+  57:.\main.c      ****         DigitLED_Write(0b01100011); // C
+ 153              		.loc 1 57 0
+ 154 0124 4FF06300 		mov	r0, #99
+ 155 0128 FFF7FEFF 		bl	DigitLED_Write
+  58:.\main.c      ****         CyDelay(500);
+ 156              		.loc 1 58 0
+ 157 012c 4FF4FA70 		mov	r0, #500
+ 158 0130 FFF7FEFF 		bl	CyDelay
+  59:.\main.c      ****         DigitLED_WriteHex(0xff);    // null
+ 159              		.loc 1 59 0
+ 160 0134 4FF0FF00 		mov	r0, #255
+ 161 0138 FFF7FEFF 		bl	DigitLED_WriteHex
+  60:.\main.c      ****         CyDelay(100);
+ 162              		.loc 1 60 0
+ 163 013c 4FF06400 		mov	r0, #100
+ 164 0140 FFF7FEFF 		bl	CyDelay
+ARM GAS  C:\Users\Leeb\AppData\Local\Temp\ccliKLuo.s 			page 5
+
+
+  61:.\main.c      ****         DigitLED_WriteHex(0x00);    // O
+ 165              		.loc 1 61 0
+ 166 0144 4FF00000 		mov	r0, #0
+ 167 0148 FFF7FEFF 		bl	DigitLED_WriteHex
+  62:.\main.c      ****         CyDelay(500);
+ 168              		.loc 1 62 0
+ 169 014c 4FF4FA70 		mov	r0, #500
+ 170 0150 FFF7FEFF 		bl	CyDelay
+  63:.\main.c      ****         DigitLED_WriteHex(0xff);    // null
+ 171              		.loc 1 63 0
+ 172 0154 4FF0FF00 		mov	r0, #255
+ 173 0158 FFF7FEFF 		bl	DigitLED_WriteHex
+  64:.\main.c      ****         CyDelay(100);
+ 174              		.loc 1 64 0
+ 175 015c 4FF06400 		mov	r0, #100
+ 176 0160 FFF7FEFF 		bl	CyDelay
+  65:.\main.c      ****         DigitLED_WriteHex(0x00);    // O
+ 177              		.loc 1 65 0
+ 178 0164 4FF00000 		mov	r0, #0
+ 179 0168 FFF7FEFF 		bl	DigitLED_WriteHex
+  66:.\main.c      ****         CyDelay(500);
+ 180              		.loc 1 66 0
+ 181 016c 4FF4FA70 		mov	r0, #500
+ 182 0170 FFF7FEFF 		bl	CyDelay
+  67:.\main.c      ****         DigitLED_WriteHex(0xff);    // null
+ 183              		.loc 1 67 0
+ 184 0174 4FF0FF00 		mov	r0, #255
+ 185 0178 FFF7FEFF 		bl	DigitLED_WriteHex
+  68:.\main.c      ****         CyDelay(100);
+ 186              		.loc 1 68 0
+ 187 017c 4FF06400 		mov	r0, #100
+ 188 0180 FFF7FEFF 		bl	CyDelay
+  69:.\main.c      ****         DigitLED_Write(0b11100011); // L
+ 189              		.loc 1 69 0
+ 190 0184 4FF0E300 		mov	r0, #227
+ 191 0188 FFF7FEFF 		bl	DigitLED_Write
+  70:.\main.c      ****         CyDelay(500);
+ 192              		.loc 1 70 0
+ 193 018c 4FF4FA70 		mov	r0, #500
+ 194 0190 FFF7FEFF 		bl	CyDelay
+  71:.\main.c      ****         DigitLED_WriteHex(0xff);    // null
+ 195              		.loc 1 71 0
+ 196 0194 4FF0FF00 		mov	r0, #255
+ 197 0198 FFF7FEFF 		bl	DigitLED_WriteHex
+  72:.\main.c      ****         CyDelay(500);
+ 198              		.loc 1 72 0
+ 199 019c 4FF4FA70 		mov	r0, #500
+ 200 01a0 FFF7FEFF 		bl	CyDelay
+  73:.\main.c      ****     }
+ 201              		.loc 1 73 0
+ 202 01a4 2EE7     		b	.L2
+ 203              		.cfi_endproc
+ 204              	.LFE29:
+ 205              		.size	main, .-main
+ 206 01a6 00BF     		.section	.text.DigitLED_Write,"ax",%progbits
+ 207              		.align	2
+ 208              		.global	DigitLED_Write
+ARM GAS  C:\Users\Leeb\AppData\Local\Temp\ccliKLuo.s 			page 6
+
+
+ 209              		.thumb
+ 210              		.thumb_func
+ 211              		.type	DigitLED_Write, %function
+ 212              	DigitLED_Write:
+ 213              	.LFB30:
+  74:.\main.c      **** }
+  75:.\main.c      **** 
+  76:.\main.c      **** // DigitLED_Write will write the binary number "bi" to turn on/off each segment
+  77:.\main.c      **** // of the digit LED. The binary number correspond to 0b000000000 => 0bABCDEGFP
+  78:.\main.c      **** // Make each bit "0" to turn each segment "on"
+  79:.\main.c      **** 
+  80:.\main.c      **** void DigitLED_Write( int bi)
+  81:.\main.c      **** {
+ 214              		.loc 1 81 0
+ 215              		.cfi_startproc
+ 216              		@ args = 0, pretend = 0, frame = 8
+ 217              		@ frame_needed = 1, uses_anonymous_args = 0
+ 218 0000 80B5     		push	{r7, lr}
+ 219              	.LCFI2:
+ 220              		.cfi_def_cfa_offset 8
+ 221 0002 82B0     		sub	sp, sp, #8
+ 222              	.LCFI3:
+ 223              		.cfi_def_cfa_offset 16
+ 224 0004 00AF     		add	r7, sp, #0
+ 225              		.cfi_offset 14, -4
+ 226              		.cfi_offset 7, -8
+ 227              	.LCFI4:
+ 228              		.cfi_def_cfa_register 7
+ 229 0006 7860     		str	r0, [r7, #4]
+  82:.\main.c      ****     A_Write((bi >> 7) & 1);
+ 230              		.loc 1 82 0
+ 231 0008 7B68     		ldr	r3, [r7, #4]
+ 232 000a 4FEAE313 		asr	r3, r3, #7
+ 233 000e DBB2     		uxtb	r3, r3
+ 234 0010 03F00103 		and	r3, r3, #1
+ 235 0014 1846     		mov	r0, r3
+ 236 0016 FFF7FEFF 		bl	A_Write
+  83:.\main.c      ****     B_Write((bi >> 6) & 1);
+ 237              		.loc 1 83 0
+ 238 001a 7B68     		ldr	r3, [r7, #4]
+ 239 001c 4FEAA313 		asr	r3, r3, #6
+ 240 0020 DBB2     		uxtb	r3, r3
+ 241 0022 03F00103 		and	r3, r3, #1
+ 242 0026 1846     		mov	r0, r3
+ 243 0028 FFF7FEFF 		bl	B_Write
+  84:.\main.c      ****     C_Write((bi >> 5) & 1);
+ 244              		.loc 1 84 0
+ 245 002c 7B68     		ldr	r3, [r7, #4]
+ 246 002e 4FEA6313 		asr	r3, r3, #5
+ 247 0032 DBB2     		uxtb	r3, r3
+ 248 0034 03F00103 		and	r3, r3, #1
+ 249 0038 1846     		mov	r0, r3
+ 250 003a FFF7FEFF 		bl	C_Write
+  85:.\main.c      ****     D_Write((bi >> 4) & 1);
+ 251              		.loc 1 85 0
+ 252 003e 7B68     		ldr	r3, [r7, #4]
+ 253 0040 4FEA2313 		asr	r3, r3, #4
+ARM GAS  C:\Users\Leeb\AppData\Local\Temp\ccliKLuo.s 			page 7
+
+
+ 254 0044 DBB2     		uxtb	r3, r3
+ 255 0046 03F00103 		and	r3, r3, #1
+ 256 004a 1846     		mov	r0, r3
+ 257 004c FFF7FEFF 		bl	D_Write
+  86:.\main.c      ****     E_Write((bi >> 3) & 1);
+ 258              		.loc 1 86 0
+ 259 0050 7B68     		ldr	r3, [r7, #4]
+ 260 0052 4FEAE303 		asr	r3, r3, #3
+ 261 0056 DBB2     		uxtb	r3, r3
+ 262 0058 03F00103 		and	r3, r3, #1
+ 263 005c 1846     		mov	r0, r3
+ 264 005e FFF7FEFF 		bl	E_Write
+  87:.\main.c      ****     F_Write((bi >> 2) & 1);
+ 265              		.loc 1 87 0
+ 266 0062 7B68     		ldr	r3, [r7, #4]
+ 267 0064 4FEAA303 		asr	r3, r3, #2
+ 268 0068 DBB2     		uxtb	r3, r3
+ 269 006a 03F00103 		and	r3, r3, #1
+ 270 006e 1846     		mov	r0, r3
+ 271 0070 FFF7FEFF 		bl	F_Write
+  88:.\main.c      ****     G_Write((bi >> 1) & 1);
+ 272              		.loc 1 88 0
+ 273 0074 7B68     		ldr	r3, [r7, #4]
+ 274 0076 4FEA6303 		asr	r3, r3, #1
+ 275 007a DBB2     		uxtb	r3, r3
+ 276 007c 03F00103 		and	r3, r3, #1
+ 277 0080 1846     		mov	r0, r3
+ 278 0082 FFF7FEFF 		bl	G_Write
+  89:.\main.c      ****     P_Write((bi >> 0) & 1);
+ 279              		.loc 1 89 0
+ 280 0086 7B68     		ldr	r3, [r7, #4]
+ 281 0088 DBB2     		uxtb	r3, r3
+ 282 008a 03F00103 		and	r3, r3, #1
+ 283 008e 1846     		mov	r0, r3
+ 284 0090 FFF7FEFF 		bl	P_Write
+  90:.\main.c      **** }
+ 285              		.loc 1 90 0
+ 286 0094 07F10807 		add	r7, r7, #8
+ 287 0098 BD46     		mov	sp, r7
+ 288 009a 80BD     		pop	{r7, pc}
+ 289              		.cfi_endproc
+ 290              	.LFE30:
+ 291              		.size	DigitLED_Write, .-DigitLED_Write
+ 292              		.section	.text.DigitLED_WriteHex,"ax",%progbits
+ 293              		.align	2
+ 294              		.global	DigitLED_WriteHex
+ 295              		.thumb
+ 296              		.thumb_func
+ 297              		.type	DigitLED_WriteHex, %function
+ 298              	DigitLED_WriteHex:
+ 299              	.LFB31:
+  91:.\main.c      **** 
+  92:.\main.c      **** // DigitLED_WriteHex will write the hexadicimal number "hex" to the LED screen
+  93:.\main.c      **** void DigitLED_WriteHex( int hex)
+  94:.\main.c      **** {
+ 300              		.loc 1 94 0
+ 301              		.cfi_startproc
+ARM GAS  C:\Users\Leeb\AppData\Local\Temp\ccliKLuo.s 			page 8
+
+
+ 302              		@ args = 0, pretend = 0, frame = 8
+ 303              		@ frame_needed = 1, uses_anonymous_args = 0
+ 304 0000 80B5     		push	{r7, lr}
+ 305              	.LCFI5:
+ 306              		.cfi_def_cfa_offset 8
+ 307 0002 82B0     		sub	sp, sp, #8
+ 308              	.LCFI6:
+ 309              		.cfi_def_cfa_offset 16
+ 310 0004 00AF     		add	r7, sp, #0
+ 311              		.cfi_offset 14, -4
+ 312              		.cfi_offset 7, -8
+ 313              	.LCFI7:
+ 314              		.cfi_def_cfa_register 7
+ 315 0006 7860     		str	r0, [r7, #4]
+  95:.\main.c      ****     if (hex == 0x00)
+ 316              		.loc 1 95 0
+ 317 0008 7B68     		ldr	r3, [r7, #4]
+ 318 000a 002B     		cmp	r3, #0
+ 319 000c 04D1     		bne	.L7
+  96:.\main.c      ****         DigitLED_Write(0b00000011);
+ 320              		.loc 1 96 0
+ 321 000e 4FF00300 		mov	r0, #3
+ 322 0012 FFF7FEFF 		bl	DigitLED_Write
+ 323 0016 83E0     		b	.L25
+ 324              	.L7:
+  97:.\main.c      ****     else if (hex == 0x01)
+ 325              		.loc 1 97 0
+ 326 0018 7B68     		ldr	r3, [r7, #4]
+ 327 001a 012B     		cmp	r3, #1
+ 328 001c 04D1     		bne	.L9
+  98:.\main.c      ****         DigitLED_Write(0b10011111);
+ 329              		.loc 1 98 0
+ 330 001e 4FF09F00 		mov	r0, #159
+ 331 0022 FFF7FEFF 		bl	DigitLED_Write
+ 332 0026 7BE0     		b	.L25
+ 333              	.L9:
+  99:.\main.c      ****     else if (hex == 0x02)
+ 334              		.loc 1 99 0
+ 335 0028 7B68     		ldr	r3, [r7, #4]
+ 336 002a 022B     		cmp	r3, #2
+ 337 002c 04D1     		bne	.L10
+ 100:.\main.c      ****         DigitLED_Write(0b00100101);  
+ 338              		.loc 1 100 0
+ 339 002e 4FF02500 		mov	r0, #37
+ 340 0032 FFF7FEFF 		bl	DigitLED_Write
+ 341 0036 73E0     		b	.L25
+ 342              	.L10:
+ 101:.\main.c      ****     else if (hex == 0x03)
+ 343              		.loc 1 101 0
+ 344 0038 7B68     		ldr	r3, [r7, #4]
+ 345 003a 032B     		cmp	r3, #3
+ 346 003c 04D1     		bne	.L11
+ 102:.\main.c      ****         DigitLED_Write(0b00001101); 
+ 347              		.loc 1 102 0
+ 348 003e 4FF00D00 		mov	r0, #13
+ 349 0042 FFF7FEFF 		bl	DigitLED_Write
+ 350 0046 6BE0     		b	.L25
+ARM GAS  C:\Users\Leeb\AppData\Local\Temp\ccliKLuo.s 			page 9
+
+
+ 351              	.L11:
+ 103:.\main.c      ****     else if (hex == 0x04)
+ 352              		.loc 1 103 0
+ 353 0048 7B68     		ldr	r3, [r7, #4]
+ 354 004a 042B     		cmp	r3, #4
+ 355 004c 04D1     		bne	.L12
+ 104:.\main.c      ****         DigitLED_Write(0b10011001);
+ 356              		.loc 1 104 0
+ 357 004e 4FF09900 		mov	r0, #153
+ 358 0052 FFF7FEFF 		bl	DigitLED_Write
+ 359 0056 63E0     		b	.L25
+ 360              	.L12:
+ 105:.\main.c      ****     else if (hex == 0x05)
+ 361              		.loc 1 105 0
+ 362 0058 7B68     		ldr	r3, [r7, #4]
+ 363 005a 052B     		cmp	r3, #5
+ 364 005c 04D1     		bne	.L13
+ 106:.\main.c      ****         DigitLED_Write(0b01001001);
+ 365              		.loc 1 106 0
+ 366 005e 4FF04900 		mov	r0, #73
+ 367 0062 FFF7FEFF 		bl	DigitLED_Write
+ 368 0066 5BE0     		b	.L25
+ 369              	.L13:
+ 107:.\main.c      ****     else if (hex == 0x06)
+ 370              		.loc 1 107 0
+ 371 0068 7B68     		ldr	r3, [r7, #4]
+ 372 006a 062B     		cmp	r3, #6
+ 373 006c 04D1     		bne	.L14
+ 108:.\main.c      ****         DigitLED_Write(0b01000001);
+ 374              		.loc 1 108 0
+ 375 006e 4FF04100 		mov	r0, #65
+ 376 0072 FFF7FEFF 		bl	DigitLED_Write
+ 377 0076 53E0     		b	.L25
+ 378              	.L14:
+ 109:.\main.c      ****     else if (hex == 0x07)
+ 379              		.loc 1 109 0
+ 380 0078 7B68     		ldr	r3, [r7, #4]
+ 381 007a 072B     		cmp	r3, #7
+ 382 007c 04D1     		bne	.L15
+ 110:.\main.c      ****         DigitLED_Write(0b00011111); 
+ 383              		.loc 1 110 0
+ 384 007e 4FF01F00 		mov	r0, #31
+ 385 0082 FFF7FEFF 		bl	DigitLED_Write
+ 386 0086 4BE0     		b	.L25
+ 387              	.L15:
+ 111:.\main.c      ****     else if (hex == 0x08)
+ 388              		.loc 1 111 0
+ 389 0088 7B68     		ldr	r3, [r7, #4]
+ 390 008a 082B     		cmp	r3, #8
+ 391 008c 04D1     		bne	.L16
+ 112:.\main.c      ****         DigitLED_Write(0b00000001);
+ 392              		.loc 1 112 0
+ 393 008e 4FF00100 		mov	r0, #1
+ 394 0092 FFF7FEFF 		bl	DigitLED_Write
+ 395 0096 43E0     		b	.L25
+ 396              	.L16:
+ 113:.\main.c      ****     else if (hex == 0x09)
+ARM GAS  C:\Users\Leeb\AppData\Local\Temp\ccliKLuo.s 			page 10
+
+
+ 397              		.loc 1 113 0
+ 398 0098 7B68     		ldr	r3, [r7, #4]
+ 399 009a 092B     		cmp	r3, #9
+ 400 009c 04D1     		bne	.L17
+ 114:.\main.c      ****         DigitLED_Write(0b00011001);
+ 401              		.loc 1 114 0
+ 402 009e 4FF01900 		mov	r0, #25
+ 403 00a2 FFF7FEFF 		bl	DigitLED_Write
+ 404 00a6 3BE0     		b	.L25
+ 405              	.L17:
+ 115:.\main.c      ****     else if (hex == 0x0a)
+ 406              		.loc 1 115 0
+ 407 00a8 7B68     		ldr	r3, [r7, #4]
+ 408 00aa 0A2B     		cmp	r3, #10
+ 409 00ac 04D1     		bne	.L18
+ 116:.\main.c      ****         DigitLED_Write(0b00010001);
+ 410              		.loc 1 116 0
+ 411 00ae 4FF01100 		mov	r0, #17
+ 412 00b2 FFF7FEFF 		bl	DigitLED_Write
+ 413 00b6 33E0     		b	.L25
+ 414              	.L18:
+ 117:.\main.c      ****     else if (hex == 0x0b)
+ 415              		.loc 1 117 0
+ 416 00b8 7B68     		ldr	r3, [r7, #4]
+ 417 00ba 0B2B     		cmp	r3, #11
+ 418 00bc 04D1     		bne	.L19
+ 118:.\main.c      ****         DigitLED_Write(0b11000001);
+ 419              		.loc 1 118 0
+ 420 00be 4FF0C100 		mov	r0, #193
+ 421 00c2 FFF7FEFF 		bl	DigitLED_Write
+ 422 00c6 2BE0     		b	.L25
+ 423              	.L19:
+ 119:.\main.c      ****     else if (hex == 0x0c)
+ 424              		.loc 1 119 0
+ 425 00c8 7B68     		ldr	r3, [r7, #4]
+ 426 00ca 0C2B     		cmp	r3, #12
+ 427 00cc 04D1     		bne	.L20
+ 120:.\main.c      ****         DigitLED_Write(0b01100011);
+ 428              		.loc 1 120 0
+ 429 00ce 4FF06300 		mov	r0, #99
+ 430 00d2 FFF7FEFF 		bl	DigitLED_Write
+ 431 00d6 23E0     		b	.L25
+ 432              	.L20:
+ 121:.\main.c      ****     else if (hex == 0x0d)
+ 433              		.loc 1 121 0
+ 434 00d8 7B68     		ldr	r3, [r7, #4]
+ 435 00da 0D2B     		cmp	r3, #13
+ 436 00dc 04D1     		bne	.L21
+ 122:.\main.c      ****         DigitLED_Write(0b10000101);
+ 437              		.loc 1 122 0
+ 438 00de 4FF08500 		mov	r0, #133
+ 439 00e2 FFF7FEFF 		bl	DigitLED_Write
+ 440 00e6 1BE0     		b	.L25
+ 441              	.L21:
+ 123:.\main.c      ****     else if (hex == 0x0e)
+ 442              		.loc 1 123 0
+ 443 00e8 7B68     		ldr	r3, [r7, #4]
+ARM GAS  C:\Users\Leeb\AppData\Local\Temp\ccliKLuo.s 			page 11
+
+
+ 444 00ea 0E2B     		cmp	r3, #14
+ 445 00ec 04D1     		bne	.L22
+ 124:.\main.c      ****         DigitLED_Write(0b01100001);
+ 446              		.loc 1 124 0
+ 447 00ee 4FF06100 		mov	r0, #97
+ 448 00f2 FFF7FEFF 		bl	DigitLED_Write
+ 449 00f6 13E0     		b	.L25
+ 450              	.L22:
+ 125:.\main.c      ****     else if (hex == 0x0f)
+ 451              		.loc 1 125 0
+ 452 00f8 7B68     		ldr	r3, [r7, #4]
+ 453 00fa 0F2B     		cmp	r3, #15
+ 454 00fc 04D1     		bne	.L23
+ 126:.\main.c      ****         DigitLED_Write(0b01110001);
+ 455              		.loc 1 126 0
+ 456 00fe 4FF07100 		mov	r0, #113
+ 457 0102 FFF7FEFF 		bl	DigitLED_Write
+ 458 0106 0BE0     		b	.L25
+ 459              	.L23:
+ 127:.\main.c      ****     else if (hex == 0x10)
+ 460              		.loc 1 127 0
+ 461 0108 7B68     		ldr	r3, [r7, #4]
+ 462 010a 102B     		cmp	r3, #16
+ 463 010c 04D1     		bne	.L24
+ 128:.\main.c      ****         DigitLED_Write(0b11111110);
+ 464              		.loc 1 128 0
+ 465 010e 4FF0FE00 		mov	r0, #254
+ 466 0112 FFF7FEFF 		bl	DigitLED_Write
+ 467 0116 03E0     		b	.L25
+ 468              	.L24:
+ 129:.\main.c      ****     else
+ 130:.\main.c      ****         DigitLED_Write(0b11111111);
+ 469              		.loc 1 130 0
+ 470 0118 4FF0FF00 		mov	r0, #255
+ 471 011c FFF7FEFF 		bl	DigitLED_Write
+ 472              	.L25:
+ 131:.\main.c      **** }
+ 473              		.loc 1 131 0
+ 474 0120 07F10807 		add	r7, r7, #8
+ 475 0124 BD46     		mov	sp, r7
+ 476 0126 80BD     		pop	{r7, pc}
+ 477              		.cfi_endproc
+ 478              	.LFE31:
+ 479              		.size	DigitLED_WriteHex, .-DigitLED_WriteHex
+ 480              		.text
+ 481              	.Letext0:
+ 482              		.section	.debug_loc,"",%progbits
+ 483              	.Ldebug_loc0:
+ 484              	.LLST0:
+ 485 0000 00000000 		.4byte	.LFB29
+ 486 0004 02000000 		.4byte	.LCFI0
+ 487 0008 0100     		.2byte	0x1
+ 488 000a 5D       		.byte	0x5d
+ 489 000b 02000000 		.4byte	.LCFI0
+ 490 000f 04000000 		.4byte	.LCFI1
+ 491 0013 0200     		.2byte	0x2
+ 492 0015 7D       		.byte	0x7d
+ARM GAS  C:\Users\Leeb\AppData\Local\Temp\ccliKLuo.s 			page 12
+
+
+ 493 0016 08       		.sleb128 8
+ 494 0017 04000000 		.4byte	.LCFI1
+ 495 001b A6010000 		.4byte	.LFE29
+ 496 001f 0200     		.2byte	0x2
+ 497 0021 77       		.byte	0x77
+ 498 0022 08       		.sleb128 8
+ 499 0023 00000000 		.4byte	0x0
+ 500 0027 00000000 		.4byte	0x0
+ 501              	.LLST1:
+ 502 002b 00000000 		.4byte	.LFB30
+ 503 002f 02000000 		.4byte	.LCFI2
+ 504 0033 0100     		.2byte	0x1
+ 505 0035 5D       		.byte	0x5d
+ 506 0036 02000000 		.4byte	.LCFI2
+ 507 003a 04000000 		.4byte	.LCFI3
+ 508 003e 0200     		.2byte	0x2
+ 509 0040 7D       		.byte	0x7d
+ 510 0041 08       		.sleb128 8
+ 511 0042 04000000 		.4byte	.LCFI3
+ 512 0046 06000000 		.4byte	.LCFI4
+ 513 004a 0200     		.2byte	0x2
+ 514 004c 7D       		.byte	0x7d
+ 515 004d 10       		.sleb128 16
+ 516 004e 06000000 		.4byte	.LCFI4
+ 517 0052 9C000000 		.4byte	.LFE30
+ 518 0056 0200     		.2byte	0x2
+ 519 0058 77       		.byte	0x77
+ 520 0059 10       		.sleb128 16
+ 521 005a 00000000 		.4byte	0x0
+ 522 005e 00000000 		.4byte	0x0
+ 523              	.LLST2:
+ 524 0062 00000000 		.4byte	.LFB31
+ 525 0066 02000000 		.4byte	.LCFI5
+ 526 006a 0100     		.2byte	0x1
+ 527 006c 5D       		.byte	0x5d
+ 528 006d 02000000 		.4byte	.LCFI5
+ 529 0071 04000000 		.4byte	.LCFI6
+ 530 0075 0200     		.2byte	0x2
+ 531 0077 7D       		.byte	0x7d
+ 532 0078 08       		.sleb128 8
+ 533 0079 04000000 		.4byte	.LCFI6
+ 534 007d 06000000 		.4byte	.LCFI7
+ 535 0081 0200     		.2byte	0x2
+ 536 0083 7D       		.byte	0x7d
+ 537 0084 10       		.sleb128 16
+ 538 0085 06000000 		.4byte	.LCFI7
+ 539 0089 28010000 		.4byte	.LFE31
+ 540 008d 0200     		.2byte	0x2
+ 541 008f 77       		.byte	0x77
+ 542 0090 10       		.sleb128 16
+ 543 0091 00000000 		.4byte	0x0
+ 544 0095 00000000 		.4byte	0x0
+ 545              		.file 2 "./Generated_Source/PSoC5/core_cm3.h"
+ 546              		.section	.debug_info
+ 547 0000 FA000000 		.4byte	0xfa
+ 548 0004 0200     		.2byte	0x2
+ 549 0006 00000000 		.4byte	.Ldebug_abbrev0
+ARM GAS  C:\Users\Leeb\AppData\Local\Temp\ccliKLuo.s 			page 13
+
+
+ 550 000a 04       		.byte	0x4
+ 551 000b 01       		.uleb128 0x1
+ 552 000c 8A000000 		.4byte	.LASF14
+ 553 0010 01       		.byte	0x1
+ 554 0011 07010000 		.4byte	.LASF15
+ 555 0015 58000000 		.4byte	.LASF16
+ 556 0019 00000000 		.4byte	0x0
+ 557 001d 00000000 		.4byte	0x0
+ 558 0021 00000000 		.4byte	.Ldebug_ranges0+0x0
+ 559 0025 00000000 		.4byte	.Ldebug_line0
+ 560 0029 02       		.uleb128 0x2
+ 561 002a 01       		.byte	0x1
+ 562 002b 06       		.byte	0x6
+ 563 002c F5000000 		.4byte	.LASF0
+ 564 0030 02       		.uleb128 0x2
+ 565 0031 01       		.byte	0x1
+ 566 0032 08       		.byte	0x8
+ 567 0033 96000000 		.4byte	.LASF1
+ 568 0037 02       		.uleb128 0x2
+ 569 0038 02       		.byte	0x2
+ 570 0039 05       		.byte	0x5
+ 571 003a B6000000 		.4byte	.LASF2
+ 572 003e 02       		.uleb128 0x2
+ 573 003f 02       		.byte	0x2
+ 574 0040 07       		.byte	0x7
+ 575 0041 E2000000 		.4byte	.LASF3
+ 576 0045 02       		.uleb128 0x2
+ 577 0046 04       		.byte	0x4
+ 578 0047 05       		.byte	0x5
+ 579 0048 D9000000 		.4byte	.LASF4
+ 580 004c 02       		.uleb128 0x2
+ 581 004d 04       		.byte	0x4
+ 582 004e 07       		.byte	0x7
+ 583 004f C0000000 		.4byte	.LASF5
+ 584 0053 02       		.uleb128 0x2
+ 585 0054 08       		.byte	0x8
+ 586 0055 05       		.byte	0x5
+ 587 0056 00000000 		.4byte	.LASF6
+ 588 005a 02       		.uleb128 0x2
+ 589 005b 08       		.byte	0x8
+ 590 005c 07       		.byte	0x7
+ 591 005d 41000000 		.4byte	.LASF7
+ 592 0061 03       		.uleb128 0x3
+ 593 0062 04       		.byte	0x4
+ 594 0063 05       		.byte	0x5
+ 595 0064 696E7400 		.ascii	"int\000"
+ 596 0068 02       		.uleb128 0x2
+ 597 0069 04       		.byte	0x4
+ 598 006a 07       		.byte	0x7
+ 599 006b 0E000000 		.4byte	.LASF8
+ 600 006f 02       		.uleb128 0x2
+ 601 0070 04       		.byte	0x4
+ 602 0071 04       		.byte	0x4
+ 603 0072 01010000 		.4byte	.LASF9
+ 604 0076 02       		.uleb128 0x2
+ 605 0077 08       		.byte	0x8
+ 606 0078 04       		.byte	0x4
+ARM GAS  C:\Users\Leeb\AppData\Local\Temp\ccliKLuo.s 			page 14
+
+
+ 607 0079 D2000000 		.4byte	.LASF10
+ 608 007d 02       		.uleb128 0x2
+ 609 007e 01       		.byte	0x1
+ 610 007f 08       		.byte	0x8
+ 611 0080 A4000000 		.4byte	.LASF11
+ 612 0084 04       		.uleb128 0x4
+ 613 0085 04       		.byte	0x4
+ 614 0086 07       		.byte	0x7
+ 615 0087 05       		.uleb128 0x5
+ 616 0088 01       		.byte	0x1
+ 617 0089 1B000000 		.4byte	.LASF17
+ 618 008d 01       		.byte	0x1
+ 619 008e 10       		.byte	0x10
+ 620 008f 00000000 		.4byte	.LFB29
+ 621 0093 A6010000 		.4byte	.LFE29
+ 622 0097 00000000 		.4byte	.LLST0
+ 623 009b 06       		.uleb128 0x6
+ 624 009c 01       		.byte	0x1
+ 625 009d 32000000 		.4byte	.LASF12
+ 626 00a1 01       		.byte	0x1
+ 627 00a2 50       		.byte	0x50
+ 628 00a3 01       		.byte	0x1
+ 629 00a4 00000000 		.4byte	.LFB30
+ 630 00a8 9C000000 		.4byte	.LFE30
+ 631 00ac 2B000000 		.4byte	.LLST1
+ 632 00b0 C2000000 		.4byte	0xc2
+ 633 00b4 07       		.uleb128 0x7
+ 634 00b5 626900   		.ascii	"bi\000"
+ 635 00b8 01       		.byte	0x1
+ 636 00b9 50       		.byte	0x50
+ 637 00ba 61000000 		.4byte	0x61
+ 638 00be 02       		.byte	0x2
+ 639 00bf 91       		.byte	0x91
+ 640 00c0 74       		.sleb128 -12
+ 641 00c1 00       		.byte	0x0
+ 642 00c2 06       		.uleb128 0x6
+ 643 00c3 01       		.byte	0x1
+ 644 00c4 20000000 		.4byte	.LASF13
+ 645 00c8 01       		.byte	0x1
+ 646 00c9 5D       		.byte	0x5d
+ 647 00ca 01       		.byte	0x1
+ 648 00cb 00000000 		.4byte	.LFB31
+ 649 00cf 28010000 		.4byte	.LFE31
+ 650 00d3 62000000 		.4byte	.LLST2
+ 651 00d7 EA000000 		.4byte	0xea
+ 652 00db 07       		.uleb128 0x7
+ 653 00dc 68657800 		.ascii	"hex\000"
+ 654 00e0 01       		.byte	0x1
+ 655 00e1 5D       		.byte	0x5d
+ 656 00e2 61000000 		.4byte	0x61
+ 657 00e6 02       		.byte	0x2
+ 658 00e7 91       		.byte	0x91
+ 659 00e8 74       		.sleb128 -12
+ 660 00e9 00       		.byte	0x0
+ 661 00ea 08       		.uleb128 0x8
+ 662 00eb A9000000 		.4byte	.LASF18
+ 663 00ef 02       		.byte	0x2
+ARM GAS  C:\Users\Leeb\AppData\Local\Temp\ccliKLuo.s 			page 15
+
+
+ 664 00f0 CE06     		.2byte	0x6ce
+ 665 00f2 F8000000 		.4byte	0xf8
+ 666 00f6 01       		.byte	0x1
+ 667 00f7 01       		.byte	0x1
+ 668 00f8 09       		.uleb128 0x9
+ 669 00f9 61000000 		.4byte	0x61
+ 670 00fd 00       		.byte	0x0
+ 671              		.section	.debug_abbrev
+ 672 0000 01       		.uleb128 0x1
+ 673 0001 11       		.uleb128 0x11
+ 674 0002 01       		.byte	0x1
+ 675 0003 25       		.uleb128 0x25
+ 676 0004 0E       		.uleb128 0xe
+ 677 0005 13       		.uleb128 0x13
+ 678 0006 0B       		.uleb128 0xb
+ 679 0007 03       		.uleb128 0x3
+ 680 0008 0E       		.uleb128 0xe
+ 681 0009 1B       		.uleb128 0x1b
+ 682 000a 0E       		.uleb128 0xe
+ 683 000b 11       		.uleb128 0x11
+ 684 000c 01       		.uleb128 0x1
+ 685 000d 52       		.uleb128 0x52
+ 686 000e 01       		.uleb128 0x1
+ 687 000f 55       		.uleb128 0x55
+ 688 0010 06       		.uleb128 0x6
+ 689 0011 10       		.uleb128 0x10
+ 690 0012 06       		.uleb128 0x6
+ 691 0013 00       		.byte	0x0
+ 692 0014 00       		.byte	0x0
+ 693 0015 02       		.uleb128 0x2
+ 694 0016 24       		.uleb128 0x24
+ 695 0017 00       		.byte	0x0
+ 696 0018 0B       		.uleb128 0xb
+ 697 0019 0B       		.uleb128 0xb
+ 698 001a 3E       		.uleb128 0x3e
+ 699 001b 0B       		.uleb128 0xb
+ 700 001c 03       		.uleb128 0x3
+ 701 001d 0E       		.uleb128 0xe
+ 702 001e 00       		.byte	0x0
+ 703 001f 00       		.byte	0x0
+ 704 0020 03       		.uleb128 0x3
+ 705 0021 24       		.uleb128 0x24
+ 706 0022 00       		.byte	0x0
+ 707 0023 0B       		.uleb128 0xb
+ 708 0024 0B       		.uleb128 0xb
+ 709 0025 3E       		.uleb128 0x3e
+ 710 0026 0B       		.uleb128 0xb
+ 711 0027 03       		.uleb128 0x3
+ 712 0028 08       		.uleb128 0x8
+ 713 0029 00       		.byte	0x0
+ 714 002a 00       		.byte	0x0
+ 715 002b 04       		.uleb128 0x4
+ 716 002c 24       		.uleb128 0x24
+ 717 002d 00       		.byte	0x0
+ 718 002e 0B       		.uleb128 0xb
+ 719 002f 0B       		.uleb128 0xb
+ 720 0030 3E       		.uleb128 0x3e
+ARM GAS  C:\Users\Leeb\AppData\Local\Temp\ccliKLuo.s 			page 16
+
+
+ 721 0031 0B       		.uleb128 0xb
+ 722 0032 00       		.byte	0x0
+ 723 0033 00       		.byte	0x0
+ 724 0034 05       		.uleb128 0x5
+ 725 0035 2E       		.uleb128 0x2e
+ 726 0036 00       		.byte	0x0
+ 727 0037 3F       		.uleb128 0x3f
+ 728 0038 0C       		.uleb128 0xc
+ 729 0039 03       		.uleb128 0x3
+ 730 003a 0E       		.uleb128 0xe
+ 731 003b 3A       		.uleb128 0x3a
+ 732 003c 0B       		.uleb128 0xb
+ 733 003d 3B       		.uleb128 0x3b
+ 734 003e 0B       		.uleb128 0xb
+ 735 003f 11       		.uleb128 0x11
+ 736 0040 01       		.uleb128 0x1
+ 737 0041 12       		.uleb128 0x12
+ 738 0042 01       		.uleb128 0x1
+ 739 0043 40       		.uleb128 0x40
+ 740 0044 06       		.uleb128 0x6
+ 741 0045 00       		.byte	0x0
+ 742 0046 00       		.byte	0x0
+ 743 0047 06       		.uleb128 0x6
+ 744 0048 2E       		.uleb128 0x2e
+ 745 0049 01       		.byte	0x1
+ 746 004a 3F       		.uleb128 0x3f
+ 747 004b 0C       		.uleb128 0xc
+ 748 004c 03       		.uleb128 0x3
+ 749 004d 0E       		.uleb128 0xe
+ 750 004e 3A       		.uleb128 0x3a
+ 751 004f 0B       		.uleb128 0xb
+ 752 0050 3B       		.uleb128 0x3b
+ 753 0051 0B       		.uleb128 0xb
+ 754 0052 27       		.uleb128 0x27
+ 755 0053 0C       		.uleb128 0xc
+ 756 0054 11       		.uleb128 0x11
+ 757 0055 01       		.uleb128 0x1
+ 758 0056 12       		.uleb128 0x12
+ 759 0057 01       		.uleb128 0x1
+ 760 0058 40       		.uleb128 0x40
+ 761 0059 06       		.uleb128 0x6
+ 762 005a 01       		.uleb128 0x1
+ 763 005b 13       		.uleb128 0x13
+ 764 005c 00       		.byte	0x0
+ 765 005d 00       		.byte	0x0
+ 766 005e 07       		.uleb128 0x7
+ 767 005f 05       		.uleb128 0x5
+ 768 0060 00       		.byte	0x0
+ 769 0061 03       		.uleb128 0x3
+ 770 0062 08       		.uleb128 0x8
+ 771 0063 3A       		.uleb128 0x3a
+ 772 0064 0B       		.uleb128 0xb
+ 773 0065 3B       		.uleb128 0x3b
+ 774 0066 0B       		.uleb128 0xb
+ 775 0067 49       		.uleb128 0x49
+ 776 0068 13       		.uleb128 0x13
+ 777 0069 02       		.uleb128 0x2
+ARM GAS  C:\Users\Leeb\AppData\Local\Temp\ccliKLuo.s 			page 17
+
+
+ 778 006a 0A       		.uleb128 0xa
+ 779 006b 00       		.byte	0x0
+ 780 006c 00       		.byte	0x0
+ 781 006d 08       		.uleb128 0x8
+ 782 006e 34       		.uleb128 0x34
+ 783 006f 00       		.byte	0x0
+ 784 0070 03       		.uleb128 0x3
+ 785 0071 0E       		.uleb128 0xe
+ 786 0072 3A       		.uleb128 0x3a
+ 787 0073 0B       		.uleb128 0xb
+ 788 0074 3B       		.uleb128 0x3b
+ 789 0075 05       		.uleb128 0x5
+ 790 0076 49       		.uleb128 0x49
+ 791 0077 13       		.uleb128 0x13
+ 792 0078 3F       		.uleb128 0x3f
+ 793 0079 0C       		.uleb128 0xc
+ 794 007a 3C       		.uleb128 0x3c
+ 795 007b 0C       		.uleb128 0xc
+ 796 007c 00       		.byte	0x0
+ 797 007d 00       		.byte	0x0
+ 798 007e 09       		.uleb128 0x9
+ 799 007f 35       		.uleb128 0x35
+ 800 0080 00       		.byte	0x0
+ 801 0081 49       		.uleb128 0x49
+ 802 0082 13       		.uleb128 0x13
+ 803 0083 00       		.byte	0x0
+ 804 0084 00       		.byte	0x0
+ 805 0085 00       		.byte	0x0
+ 806              		.section	.debug_pubnames,"",%progbits
+ 807 0000 40000000 		.4byte	0x40
+ 808 0004 0200     		.2byte	0x2
+ 809 0006 00000000 		.4byte	.Ldebug_info0
+ 810 000a FE000000 		.4byte	0xfe
+ 811 000e 87000000 		.4byte	0x87
+ 812 0012 6D61696E 		.ascii	"main\000"
+ 812      00
+ 813 0017 9B000000 		.4byte	0x9b
+ 814 001b 44696769 		.ascii	"DigitLED_Write\000"
+ 814      744C4544 
+ 814      5F577269 
+ 814      746500
+ 815 002a C2000000 		.4byte	0xc2
+ 816 002e 44696769 		.ascii	"DigitLED_WriteHex\000"
+ 816      744C4544 
+ 816      5F577269 
+ 816      74654865 
+ 816      7800
+ 817 0040 00000000 		.4byte	0x0
+ 818              		.section	.debug_aranges,"",%progbits
+ 819 0000 2C000000 		.4byte	0x2c
+ 820 0004 0200     		.2byte	0x2
+ 821 0006 00000000 		.4byte	.Ldebug_info0
+ 822 000a 04       		.byte	0x4
+ 823 000b 00       		.byte	0x0
+ 824 000c 0000     		.2byte	0x0
+ 825 000e 0000     		.2byte	0x0
+ 826 0010 00000000 		.4byte	.LFB29
+ARM GAS  C:\Users\Leeb\AppData\Local\Temp\ccliKLuo.s 			page 18
+
+
+ 827 0014 A6010000 		.4byte	.LFE29-.LFB29
+ 828 0018 00000000 		.4byte	.LFB30
+ 829 001c 9C000000 		.4byte	.LFE30-.LFB30
+ 830 0020 00000000 		.4byte	.LFB31
+ 831 0024 28010000 		.4byte	.LFE31-.LFB31
+ 832 0028 00000000 		.4byte	0x0
+ 833 002c 00000000 		.4byte	0x0
+ 834              		.section	.debug_ranges,"",%progbits
+ 835              	.Ldebug_ranges0:
+ 836 0000 00000000 		.4byte	.Ltext0
+ 837 0004 00000000 		.4byte	.Letext0
+ 838 0008 00000000 		.4byte	.LFB29
+ 839 000c A6010000 		.4byte	.LFE29
+ 840 0010 00000000 		.4byte	.LFB30
+ 841 0014 9C000000 		.4byte	.LFE30
+ 842 0018 00000000 		.4byte	.LFB31
+ 843 001c 28010000 		.4byte	.LFE31
+ 844 0020 00000000 		.4byte	0x0
+ 845 0024 00000000 		.4byte	0x0
+ 846              		.section	.debug_str,"MS",%progbits,1
+ 847              	.LASF6:
+ 848 0000 6C6F6E67 		.ascii	"long long int\000"
+ 848      206C6F6E 
+ 848      6720696E 
+ 848      7400
+ 849              	.LASF8:
+ 850 000e 756E7369 		.ascii	"unsigned int\000"
+ 850      676E6564 
+ 850      20696E74 
+ 850      00
+ 851              	.LASF17:
+ 852 001b 6D61696E 		.ascii	"main\000"
+ 852      00
+ 853              	.LASF13:
+ 854 0020 44696769 		.ascii	"DigitLED_WriteHex\000"
+ 854      744C4544 
+ 854      5F577269 
+ 854      74654865 
+ 854      7800
+ 855              	.LASF12:
+ 856 0032 44696769 		.ascii	"DigitLED_Write\000"
+ 856      744C4544 
+ 856      5F577269 
+ 856      746500
+ 857              	.LASF7:
+ 858 0041 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 858      206C6F6E 
+ 858      6720756E 
+ 858      7369676E 
+ 858      65642069 
+ 859              	.LASF16:
+ 860 0058 433A5C43 		.ascii	"C:\\CLASS\\6.115\\psoc\\lizi\\blinky\\115_is_cool.c"
+ 860      4C415353 
+ 860      5C362E31 
+ 860      31355C70 
+ 860      736F635C 
+ 861 0085 7964736E 		.ascii	"ydsn\000"
+ARM GAS  C:\Users\Leeb\AppData\Local\Temp\ccliKLuo.s 			page 19
+
+
+ 861      00
+ 862              	.LASF14:
+ 863 008a 474E5520 		.ascii	"GNU C 4.4.1\000"
+ 863      4320342E 
+ 863      342E3100 
+ 864              	.LASF1:
+ 865 0096 756E7369 		.ascii	"unsigned char\000"
+ 865      676E6564 
+ 865      20636861 
+ 865      7200
+ 866              	.LASF11:
+ 867 00a4 63686172 		.ascii	"char\000"
+ 867      00
+ 868              	.LASF18:
+ 869 00a9 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 869      52784275 
+ 869      66666572 
+ 869      00
+ 870              	.LASF2:
+ 871 00b6 73686F72 		.ascii	"short int\000"
+ 871      7420696E 
+ 871      7400
+ 872              	.LASF5:
+ 873 00c0 6C6F6E67 		.ascii	"long unsigned int\000"
+ 873      20756E73 
+ 873      69676E65 
+ 873      6420696E 
+ 873      7400
+ 874              	.LASF10:
+ 875 00d2 646F7562 		.ascii	"double\000"
+ 875      6C6500
+ 876              	.LASF4:
+ 877 00d9 6C6F6E67 		.ascii	"long int\000"
+ 877      20696E74 
+ 877      00
+ 878              	.LASF3:
+ 879 00e2 73686F72 		.ascii	"short unsigned int\000"
+ 879      7420756E 
+ 879      7369676E 
+ 879      65642069 
+ 879      6E7400
+ 880              	.LASF0:
+ 881 00f5 7369676E 		.ascii	"signed char\000"
+ 881      65642063 
+ 881      68617200 
+ 882              	.LASF9:
+ 883 0101 666C6F61 		.ascii	"float\000"
+ 883      7400
+ 884              	.LASF15:
+ 885 0107 2E5C6D61 		.ascii	".\\main.c\000"
+ 885      696E2E63 
+ 885      00
+ 886              		.ident	"GCC: (Sourcery G++ Lite 2010q1-188) 4.4.1"

@@ -1,0 +1,1169 @@
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\cciH0f3t.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"main.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.comm	buf,12288,4
+  19              		.global	vbuf
+  20              		.section	.vram,"aw",%progbits
+  21              		.align	2
+  22              		.type	vbuf, %object
+  23              		.size	vbuf, 12288
+  24              	vbuf:
+  25 0000 00000000 		.space	12288
+  25      00000000 
+  25      00000000 
+  25      00000000 
+  25      00000000 
+  26              		.comm	dma_chan,1,1
+  27              		.comm	dma_td,1,1
+  28              		.global	flag
+  29              		.data
+  30              		.align	2
+  31              		.type	flag, %object
+  32              		.size	flag, 4
+  33              	flag:
+  34 0000 01000000 		.word	1
+  35              		.section	.text.newline,"ax",%progbits
+  36              		.align	2
+  37              		.global	newline
+  38              		.thumb
+  39              		.thumb_func
+  40              		.type	newline, %function
+  41              	newline:
+  42              	.LFB56:
+  43              		.file 1 ".\\main.c"
+   1:.\main.c      **** #include <device.h>
+   2:.\main.c      **** 
+   3:.\main.c      **** // Video buffer gets its own SRAM to prevent bus contention.
+   4:.\main.c      **** // The user-facing buffer is in regular system RAM.
+   5:.\main.c      **** // This is set in the custom linker script (custom.ld).
+   6:.\main.c      **** uint8 buf[96][128], vbuf[96][128] __attribute__ ((section(".vram")));
+   7:.\main.c      **** 
+   8:.\main.c      **** // Now we set up the DMA to copy pixels from vbuf to the screen.
+   9:.\main.c      **** // For timing, we rely on the fact that it takes the DMA exactly
+  10:.\main.c      **** // 8 clocks to move each byte. After each line the DMA is updated
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\cciH0f3t.s 			page 2
+
+
+  11:.\main.c      **** // to point to the next line in vbuf.
+  12:.\main.c      **** uint8 dma_chan, dma_td;
+  13:.\main.c      **** volatile int flag = 1;
+  14:.\main.c      **** CY_ISR(newline) {
+  44              		.loc 1 14 0
+  45              		.cfi_startproc
+  46              		@ args = 0, pretend = 0, frame = 8
+  47              		@ frame_needed = 1, uses_anonymous_args = 0
+  48 0000 80B5     		push	{r7, lr}
+  49              		.cfi_def_cfa_offset 8
+  50              		.cfi_offset 7, -8
+  51              		.cfi_offset 14, -4
+  52 0002 82B0     		sub	sp, sp, #8
+  53              		.cfi_def_cfa_offset 16
+  54 0004 00AF     		add	r7, sp, #0
+  55              		.cfi_def_cfa_register 7
+  15:.\main.c      ****     uint16 line = 805 - VERT_ReadCounter();
+  56              		.loc 1 15 0
+  57 0006 FFF7FEFF 		bl	VERT_ReadCounter
+  58 000a 0346     		mov	r3, r0
+  59 000c C3F54973 		rsb	r3, r3, #804
+  60 0010 0133     		adds	r3, r3, #1
+  61 0012 FB80     		strh	r3, [r7, #6]	@ movhi
+  16:.\main.c      ****     if (line % 8 == 0) {
+  62              		.loc 1 16 0
+  63 0014 FB88     		ldrh	r3, [r7, #6]	@ movhi
+  64 0016 03F00703 		and	r3, r3, #7
+  65 001a 9BB2     		uxth	r3, r3
+  66 001c 002B     		cmp	r3, #0
+  67 001e 39D1     		bne	.L1
+  17:.\main.c      ****         if (line < 768) {
+  68              		.loc 1 17 0
+  69 0020 FB88     		ldrh	r3, [r7, #6]
+  70 0022 B3F5407F 		cmp	r3, #768
+  71 0026 10D2     		bcs	.L3
+  18:.\main.c      ****             CY_SET_REG16(CY_DMA_TDMEM_STRUCT_PTR[dma_td].TD1,
+  72              		.loc 1 18 0
+  73 0028 1C4B     		ldr	r3, .L5
+  74 002a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  75 002c DB00     		lsls	r3, r3, #3
+  76 002e 03F18043 		add	r3, r3, #1073741824
+  77 0032 03F5F043 		add	r3, r3, #30720
+  78 0036 0433     		adds	r3, r3, #4
+  79 0038 FA88     		ldrh	r2, [r7, #6]
+  80 003a D208     		lsrs	r2, r2, #3
+  81 003c 92B2     		uxth	r2, r2
+  82 003e D201     		lsls	r2, r2, #7
+  83 0040 1749     		ldr	r1, .L5+4
+  84 0042 0A44     		add	r2, r2, r1
+  85 0044 92B2     		uxth	r2, r2
+  86 0046 1A80     		strh	r2, [r3]	@ movhi
+  87 0048 24E0     		b	.L1
+  88              	.L3:
+  19:.\main.c      ****                          LO16((uint32) vbuf[line / 8]));
+  20:.\main.c      ****         } else if (line == 768 && flag) {  // refresh the buffer during vsync
+  89              		.loc 1 20 0
+  90 004a FB88     		ldrh	r3, [r7, #6]
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\cciH0f3t.s 			page 3
+
+
+  91 004c B3F5407F 		cmp	r3, #768
+  92 0050 20D1     		bne	.L1
+  93              		.loc 1 20 0 is_stmt 0 discriminator 1
+  94 0052 144B     		ldr	r3, .L5+8
+  95 0054 1B68     		ldr	r3, [r3]
+  96 0056 002B     		cmp	r3, #0
+  97 0058 1CD0     		beq	.L1
+  21:.\main.c      ****             CyDmaChDisable(dma_chan);
+  98              		.loc 1 21 0 is_stmt 1
+  99 005a 134B     		ldr	r3, .L5+12
+ 100 005c 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 101 005e 1846     		mov	r0, r3
+ 102 0060 FFF7FEFF 		bl	CyDmaChDisable
+  22:.\main.c      ****             if (flag) {
+ 103              		.loc 1 22 0
+ 104 0064 0F4B     		ldr	r3, .L5+8
+ 105 0066 1B68     		ldr	r3, [r3]
+ 106 0068 002B     		cmp	r3, #0
+ 107 006a 0DD0     		beq	.L4
+  23:.\main.c      ****                 memcpy(*vbuf, *buf, 96 * 128);
+ 108              		.loc 1 23 0
+ 109 006c 0C4A     		ldr	r2, .L5+4
+ 110 006e 0F4B     		ldr	r3, .L5+16
+ 111 0070 1146     		mov	r1, r2
+ 112 0072 1A46     		mov	r2, r3
+ 113 0074 4FF44053 		mov	r3, #12288
+ 114 0078 0846     		mov	r0, r1
+ 115 007a 1146     		mov	r1, r2
+ 116 007c 1A46     		mov	r2, r3
+ 117 007e FFF7FEFF 		bl	memcpy
+  24:.\main.c      ****                 flag = 0;
+ 118              		.loc 1 24 0
+ 119 0082 084B     		ldr	r3, .L5+8
+ 120 0084 0022     		movs	r2, #0
+ 121 0086 1A60     		str	r2, [r3]
+ 122              	.L4:
+  25:.\main.c      ****             }
+  26:.\main.c      ****             CyDmaChEnable(dma_chan, 1);
+ 123              		.loc 1 26 0
+ 124 0088 074B     		ldr	r3, .L5+12
+ 125 008a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 126 008c 1846     		mov	r0, r3
+ 127 008e 0121     		movs	r1, #1
+ 128 0090 FFF7FEFF 		bl	CyDmaChEnable
+ 129              	.L1:
+  27:.\main.c      ****         }
+  28:.\main.c      ****     }
+  29:.\main.c      **** }
+ 130              		.loc 1 29 0
+ 131 0094 0837     		adds	r7, r7, #8
+ 132              		.cfi_def_cfa_offset 8
+ 133 0096 BD46     		mov	sp, r7
+ 134              		.cfi_def_cfa_register 13
+ 135              		@ sp needed
+ 136 0098 80BD     		pop	{r7, pc}
+ 137              	.L6:
+ 138 009a 00BF     		.align	2
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\cciH0f3t.s 			page 4
+
+
+ 139              	.L5:
+ 140 009c 00000000 		.word	dma_td
+ 141 00a0 00000000 		.word	vbuf
+ 142 00a4 00000000 		.word	flag
+ 143 00a8 00000000 		.word	dma_chan
+ 144 00ac 00000000 		.word	buf
+ 145              		.cfi_endproc
+ 146              	.LFE56:
+ 147              		.size	newline, .-newline
+ 148              		.section	.text.update,"ax",%progbits
+ 149              		.align	2
+ 150              		.global	update
+ 151              		.thumb
+ 152              		.thumb_func
+ 153              		.type	update, %function
+ 154              	update:
+ 155              	.LFB57:
+  30:.\main.c      **** inline void update() {
+ 156              		.loc 1 30 0
+ 157              		.cfi_startproc
+ 158              		@ args = 0, pretend = 0, frame = 0
+ 159              		@ frame_needed = 1, uses_anonymous_args = 0
+ 160              		@ link register save eliminated.
+ 161 0000 80B4     		push	{r7}
+ 162              		.cfi_def_cfa_offset 4
+ 163              		.cfi_offset 7, -4
+ 164 0002 00AF     		add	r7, sp, #0
+ 165              		.cfi_def_cfa_register 7
+  31:.\main.c      ****     flag = 1;
+ 166              		.loc 1 31 0
+ 167 0004 054B     		ldr	r3, .L9
+ 168 0006 0122     		movs	r2, #1
+ 169 0008 1A60     		str	r2, [r3]
+  32:.\main.c      ****     while (flag);
+ 170              		.loc 1 32 0
+ 171 000a 00BF     		nop
+ 172              	.L8:
+ 173              		.loc 1 32 0 is_stmt 0 discriminator 1
+ 174 000c 034B     		ldr	r3, .L9
+ 175 000e 1B68     		ldr	r3, [r3]
+ 176 0010 002B     		cmp	r3, #0
+ 177 0012 FBD1     		bne	.L8
+  33:.\main.c      **** }
+ 178              		.loc 1 33 0 is_stmt 1
+ 179 0014 BD46     		mov	sp, r7
+ 180              		.cfi_def_cfa_register 13
+ 181              		@ sp needed
+ 182 0016 5DF8047B 		ldr	r7, [sp], #4
+ 183              		.cfi_restore 7
+ 184              		.cfi_def_cfa_offset 0
+ 185 001a 7047     		bx	lr
+ 186              	.L10:
+ 187              		.align	2
+ 188              	.L9:
+ 189 001c 00000000 		.word	flag
+ 190              		.cfi_endproc
+ 191              	.LFE57:
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\cciH0f3t.s 			page 5
+
+
+ 192              		.size	update, .-update
+ 193              		.section	.text.main,"ax",%progbits
+ 194              		.align	2
+ 195              		.global	main
+ 196              		.thumb
+ 197              		.thumb_func
+ 198              		.type	main, %function
+ 199              	main:
+ 200              	.LFB58:
+  34:.\main.c      **** 
+  35:.\main.c      **** void main() {
+ 201              		.loc 1 35 0
+ 202              		.cfi_startproc
+ 203              		@ args = 0, pretend = 0, frame = 8
+ 204              		@ frame_needed = 1, uses_anonymous_args = 0
+ 205 0000 80B5     		push	{r7, lr}
+ 206              		.cfi_def_cfa_offset 8
+ 207              		.cfi_offset 7, -8
+ 208              		.cfi_offset 14, -4
+ 209 0002 82B0     		sub	sp, sp, #8
+ 210              		.cfi_def_cfa_offset 16
+ 211 0004 00AF     		add	r7, sp, #0
+ 212              		.cfi_def_cfa_register 7
+  36:.\main.c      ****     // Initialize the DMA.
+  37:.\main.c      ****     dma_td = CyDmaTdAllocate();
+ 213              		.loc 1 37 0
+ 214 0006 FFF7FEFF 		bl	CyDmaTdAllocate
+ 215 000a 0346     		mov	r3, r0
+ 216 000c 1A46     		mov	r2, r3
+ 217 000e 2D4B     		ldr	r3, .L14
+ 218 0010 1A70     		strb	r2, [r3]
+  38:.\main.c      ****     dma_chan = DMA_DmaInitialize(1, 0, HI16(CYDEV_SRAM_BASE), HI16(CYDEV_PERIPH_BASE));
+ 219              		.loc 1 38 0
+ 220 0012 0120     		movs	r0, #1
+ 221 0014 0021     		movs	r1, #0
+ 222 0016 41F6FF72 		movw	r2, #8191
+ 223 001a 4FF48043 		mov	r3, #16384
+ 224 001e FFF7FEFF 		bl	DMA_DmaInitialize
+ 225 0022 0346     		mov	r3, r0
+ 226 0024 1A46     		mov	r2, r3
+ 227 0026 284B     		ldr	r3, .L14+4
+ 228 0028 1A70     		strb	r2, [r3]
+  39:.\main.c      ****     CyDmaTdSetConfiguration(dma_td, 128, dma_td, DMA__TD_TERMOUT_EN | TD_INC_SRC_ADR);
+ 229              		.loc 1 39 0
+ 230 002a 264B     		ldr	r3, .L14
+ 231 002c 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 232 002e 254B     		ldr	r3, .L14
+ 233 0030 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 234 0032 1046     		mov	r0, r2
+ 235 0034 8021     		movs	r1, #128
+ 236 0036 1A46     		mov	r2, r3
+ 237 0038 0523     		movs	r3, #5
+ 238 003a FFF7FEFF 		bl	CyDmaTdSetConfiguration
+  40:.\main.c      ****     CyDmaTdSetAddress(dma_td, 0, LO16((uint32) PIXEL_Control_PTR));
+ 239              		.loc 1 40 0
+ 240 003e 214B     		ldr	r3, .L14
+ 241 0040 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\cciH0f3t.s 			page 6
+
+
+ 242 0042 1846     		mov	r0, r3
+ 243 0044 0021     		movs	r1, #0
+ 244 0046 46F27952 		movw	r2, #25977
+ 245 004a FFF7FEFF 		bl	CyDmaTdSetAddress
+  41:.\main.c      ****     CyDmaChSetInitialTd(dma_chan, dma_td);
+ 246              		.loc 1 41 0
+ 247 004e 1E4B     		ldr	r3, .L14+4
+ 248 0050 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 249 0052 1C4B     		ldr	r3, .L14
+ 250 0054 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 251 0056 1046     		mov	r0, r2
+ 252 0058 1946     		mov	r1, r3
+ 253 005a FFF7FEFF 		bl	CyDmaChSetInitialTd
+  42:.\main.c      ****     CyDmaChEnable(dma_chan, 1);
+ 254              		.loc 1 42 0
+ 255 005e 1A4B     		ldr	r3, .L14+4
+ 256 0060 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 257 0062 1846     		mov	r0, r3
+ 258 0064 0121     		movs	r1, #1
+ 259 0066 FFF7FEFF 		bl	CyDmaChEnable
+  43:.\main.c      ****     
+  44:.\main.c      ****     // Start all of the timing counters and the UART.
+  45:.\main.c      ****     HORIZ_Start();
+ 260              		.loc 1 45 0
+ 261 006a FFF7FEFF 		bl	HORIZ_Start
+  46:.\main.c      ****     VERT_Start();
+ 262              		.loc 1 46 0
+ 263 006e FFF7FEFF 		bl	VERT_Start
+  47:.\main.c      ****     HSYNC_Start();
+ 264              		.loc 1 47 0
+ 265 0072 FFF7FEFF 		bl	HSYNC_Start
+  48:.\main.c      ****     VSYNC_Start();
+ 266              		.loc 1 48 0
+ 267 0076 FFF7FEFF 		bl	VSYNC_Start
+  49:.\main.c      ****     NEWLINE_StartEx(newline);
+ 268              		.loc 1 49 0
+ 269 007a 1448     		ldr	r0, .L14+8
+ 270 007c FFF7FEFF 		bl	NEWLINE_StartEx
+  50:.\main.c      ****     UART_Start();
+ 271              		.loc 1 50 0
+ 272 0080 FFF7FEFF 		bl	UART_Start
+  51:.\main.c      ****     CyGlobalIntEnable;
+ 273              		.loc 1 51 0
+ 274              	@ 51 ".\main.c" 1
+ 275 0084 62B6     		CPSIE   i
+ 276              	@ 0 "" 2
+  52:.\main.c      ****     
+  53:.\main.c      ****     //BASIC OUTPUT OF ORANGE COLOR ON SCREEN
+  54:.\main.c      ****         int x = 0, y = 0;
+ 277              		.loc 1 54 0
+ 278              		.thumb
+ 279 0086 0023     		movs	r3, #0
+ 280 0088 7B60     		str	r3, [r7, #4]
+ 281 008a 0023     		movs	r3, #0
+ 282 008c 3B60     		str	r3, [r7]
+ 283              	.L13:
+  55:.\main.c      ****     for(;;) {
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\cciH0f3t.s 			page 7
+
+
+  56:.\main.c      ****         buf[y][x] = 0x07; // set the RGB value at x, y pixel in buffer
+ 284              		.loc 1 56 0
+ 285 008e 1049     		ldr	r1, .L14+12
+ 286 0090 3B68     		ldr	r3, [r7]
+ 287 0092 DA01     		lsls	r2, r3, #7
+ 288 0094 7B68     		ldr	r3, [r7, #4]
+ 289 0096 1344     		add	r3, r3, r2
+ 290 0098 0B44     		add	r3, r3, r1
+ 291 009a 0722     		movs	r2, #7
+ 292 009c 1A70     		strb	r2, [r3]
+  57:.\main.c      ****         x += 1;
+ 293              		.loc 1 57 0
+ 294 009e 7B68     		ldr	r3, [r7, #4]
+ 295 00a0 0133     		adds	r3, r3, #1
+ 296 00a2 7B60     		str	r3, [r7, #4]
+  58:.\main.c      ****         if (x == 128){
+ 297              		.loc 1 58 0
+ 298 00a4 7B68     		ldr	r3, [r7, #4]
+ 299 00a6 802B     		cmp	r3, #128
+ 300 00a8 0BD1     		bne	.L12
+  59:.\main.c      ****             x = 0;
+ 301              		.loc 1 59 0
+ 302 00aa 0023     		movs	r3, #0
+ 303 00ac 7B60     		str	r3, [r7, #4]
+  60:.\main.c      ****             y += 1;
+ 304              		.loc 1 60 0
+ 305 00ae 3B68     		ldr	r3, [r7]
+ 306 00b0 0133     		adds	r3, r3, #1
+ 307 00b2 3B60     		str	r3, [r7]
+  61:.\main.c      ****             if (y == 96){
+ 308              		.loc 1 61 0
+ 309 00b4 3B68     		ldr	r3, [r7]
+ 310 00b6 602B     		cmp	r3, #96
+ 311 00b8 03D1     		bne	.L12
+  62:.\main.c      ****                 y = 0;
+ 312              		.loc 1 62 0
+ 313 00ba 0023     		movs	r3, #0
+ 314 00bc 3B60     		str	r3, [r7]
+  63:.\main.c      ****                 update();
+ 315              		.loc 1 63 0
+ 316 00be FFF7FEFF 		bl	update
+ 317              	.L12:
+  64:.\main.c      ****             }
+  65:.\main.c      ****         }
+  66:.\main.c      ****     }
+ 318              		.loc 1 66 0
+ 319 00c2 E4E7     		b	.L13
+ 320              	.L15:
+ 321              		.align	2
+ 322              	.L14:
+ 323 00c4 00000000 		.word	dma_td
+ 324 00c8 00000000 		.word	dma_chan
+ 325 00cc 00000000 		.word	newline
+ 326 00d0 00000000 		.word	buf
+ 327              		.cfi_endproc
+ 328              	.LFE58:
+ 329              		.size	main, .-main
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\cciH0f3t.s 			page 8
+
+
+ 330              		.text
+ 331              	.Letext0:
+ 332              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\3.3\\psoc creator\\import\\gnu\\arm\\4.9.
+ 333              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\3.3\\psoc creator\\import\\gnu\\arm\\4.9.
+ 334              		.file 4 "Generated_Source\\PSoC5/cytypes.h"
+ 335              		.file 5 "Generated_Source\\PSoC5/CYDMAC.H"
+ 336              		.file 6 "Generated_Source\\PSoC5/core_cm3.h"
+ 337              		.section	.debug_info,"",%progbits
+ 338              	.Ldebug_info0:
+ 339 0000 09020000 		.4byte	0x209
+ 340 0004 0400     		.2byte	0x4
+ 341 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 342 000a 04       		.byte	0x4
+ 343 000b 01       		.uleb128 0x1
+ 344 000c 19000000 		.4byte	.LASF27
+ 345 0010 01       		.byte	0x1
+ 346 0011 B5000000 		.4byte	.LASF28
+ 347 0015 16010000 		.4byte	.LASF29
+ 348 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 349 001d 00000000 		.4byte	0
+ 350 0021 00000000 		.4byte	.Ldebug_line0
+ 351 0025 02       		.uleb128 0x2
+ 352 0026 01       		.byte	0x1
+ 353 0027 06       		.byte	0x6
+ 354 0028 F7010000 		.4byte	.LASF0
+ 355 002c 02       		.uleb128 0x2
+ 356 002d 01       		.byte	0x1
+ 357 002e 08       		.byte	0x8
+ 358 002f CA000000 		.4byte	.LASF1
+ 359 0033 02       		.uleb128 0x2
+ 360 0034 02       		.byte	0x2
+ 361 0035 05       		.byte	0x5
+ 362 0036 DF010000 		.4byte	.LASF2
+ 363 003a 02       		.uleb128 0x2
+ 364 003b 02       		.byte	0x2
+ 365 003c 07       		.byte	0x7
+ 366 003d EF000000 		.4byte	.LASF3
+ 367 0041 03       		.uleb128 0x3
+ 368 0042 06000000 		.4byte	.LASF9
+ 369 0046 02       		.byte	0x2
+ 370 0047 3F       		.byte	0x3f
+ 371 0048 4C000000 		.4byte	0x4c
+ 372 004c 02       		.uleb128 0x2
+ 373 004d 04       		.byte	0x4
+ 374 004e 05       		.byte	0x5
+ 375 004f E9010000 		.4byte	.LASF4
+ 376 0053 02       		.uleb128 0x2
+ 377 0054 04       		.byte	0x4
+ 378 0055 07       		.byte	0x7
+ 379 0056 DD000000 		.4byte	.LASF5
+ 380 005a 02       		.uleb128 0x2
+ 381 005b 08       		.byte	0x8
+ 382 005c 05       		.byte	0x5
+ 383 005d BA010000 		.4byte	.LASF6
+ 384 0061 02       		.uleb128 0x2
+ 385 0062 08       		.byte	0x8
+ 386 0063 07       		.byte	0x7
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\cciH0f3t.s 			page 9
+
+
+ 387 0064 82010000 		.4byte	.LASF7
+ 388 0068 04       		.uleb128 0x4
+ 389 0069 04       		.byte	0x4
+ 390 006a 05       		.byte	0x5
+ 391 006b 696E7400 		.ascii	"int\000"
+ 392 006f 02       		.uleb128 0x2
+ 393 0070 04       		.byte	0x4
+ 394 0071 07       		.byte	0x7
+ 395 0072 75010000 		.4byte	.LASF8
+ 396 0076 03       		.uleb128 0x3
+ 397 0077 9E010000 		.4byte	.LASF10
+ 398 007b 03       		.byte	0x3
+ 399 007c 2C       		.byte	0x2c
+ 400 007d 41000000 		.4byte	0x41
+ 401 0081 03       		.uleb128 0x3
+ 402 0082 C4000000 		.4byte	.LASF11
+ 403 0086 04       		.byte	0x4
+ 404 0087 5B       		.byte	0x5b
+ 405 0088 2C000000 		.4byte	0x2c
+ 406 008c 03       		.uleb128 0x3
+ 407 008d 5D010000 		.4byte	.LASF12
+ 408 0091 04       		.byte	0x4
+ 409 0092 5C       		.byte	0x5c
+ 410 0093 3A000000 		.4byte	0x3a
+ 411 0097 03       		.uleb128 0x3
+ 412 0098 64010000 		.4byte	.LASF13
+ 413 009c 04       		.byte	0x4
+ 414 009d 5D       		.byte	0x5d
+ 415 009e 53000000 		.4byte	0x53
+ 416 00a2 02       		.uleb128 0x2
+ 417 00a3 04       		.byte	0x4
+ 418 00a4 04       		.byte	0x4
+ 419 00a5 BE000000 		.4byte	.LASF14
+ 420 00a9 02       		.uleb128 0x2
+ 421 00aa 08       		.byte	0x8
+ 422 00ab 04       		.byte	0x4
+ 423 00ac 0F010000 		.4byte	.LASF15
+ 424 00b0 02       		.uleb128 0x2
+ 425 00b1 01       		.byte	0x1
+ 426 00b2 08       		.byte	0x8
+ 427 00b3 C8010000 		.4byte	.LASF16
+ 428 00b7 03       		.uleb128 0x3
+ 429 00b8 D8000000 		.4byte	.LASF17
+ 430 00bc 04       		.byte	0x4
+ 431 00bd F0       		.byte	0xf0
+ 432 00be C2000000 		.4byte	0xc2
+ 433 00c2 05       		.uleb128 0x5
+ 434 00c3 81000000 		.4byte	0x81
+ 435 00c7 03       		.uleb128 0x3
+ 436 00c8 00000000 		.4byte	.LASF18
+ 437 00cc 04       		.byte	0x4
+ 438 00cd F1       		.byte	0xf1
+ 439 00ce D2000000 		.4byte	0xd2
+ 440 00d2 05       		.uleb128 0x5
+ 441 00d3 8C000000 		.4byte	0x8c
+ 442 00d7 02       		.uleb128 0x2
+ 443 00d8 04       		.byte	0x4
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\cciH0f3t.s 			page 10
+
+
+ 444 00d9 07       		.byte	0x7
+ 445 00da A6010000 		.4byte	.LASF19
+ 446 00de 06       		.uleb128 0x6
+ 447 00df 81000000 		.4byte	0x81
+ 448 00e3 EE000000 		.4byte	0xee
+ 449 00e7 07       		.uleb128 0x7
+ 450 00e8 D7000000 		.4byte	0xd7
+ 451 00ec 03       		.byte	0x3
+ 452 00ed 00       		.byte	0
+ 453 00ee 08       		.uleb128 0x8
+ 454 00ef CD010000 		.4byte	.LASF30
+ 455 00f3 08       		.byte	0x8
+ 456 00f4 05       		.byte	0x5
+ 457 00f5 5A       		.byte	0x5a
+ 458 00f6 13010000 		.4byte	0x113
+ 459 00fa 09       		.uleb128 0x9
+ 460 00fb 54443000 		.ascii	"TD0\000"
+ 461 00ff 05       		.byte	0x5
+ 462 0100 5C       		.byte	0x5c
+ 463 0101 13010000 		.4byte	0x113
+ 464 0105 00       		.byte	0
+ 465 0106 09       		.uleb128 0x9
+ 466 0107 54443100 		.ascii	"TD1\000"
+ 467 010b 05       		.byte	0x5
+ 468 010c 5D       		.byte	0x5d
+ 469 010d 18010000 		.4byte	0x118
+ 470 0111 04       		.byte	0x4
+ 471 0112 00       		.byte	0
+ 472 0113 05       		.uleb128 0x5
+ 473 0114 DE000000 		.4byte	0xde
+ 474 0118 05       		.uleb128 0x5
+ 475 0119 DE000000 		.4byte	0xde
+ 476 011d 03       		.uleb128 0x3
+ 477 011e AF010000 		.4byte	.LASF20
+ 478 0122 05       		.byte	0x5
+ 479 0123 5F       		.byte	0x5f
+ 480 0124 EE000000 		.4byte	0xee
+ 481 0128 0A       		.uleb128 0xa
+ 482 0129 03020000 		.4byte	.LASF31
+ 483 012d 01       		.byte	0x1
+ 484 012e 0E       		.byte	0xe
+ 485 012f 00000000 		.4byte	.LFB56
+ 486 0133 B0000000 		.4byte	.LFE56-.LFB56
+ 487 0137 01       		.uleb128 0x1
+ 488 0138 9C       		.byte	0x9c
+ 489 0139 4C010000 		.4byte	0x14c
+ 490 013d 0B       		.uleb128 0xb
+ 491 013e 99010000 		.4byte	.LASF21
+ 492 0142 01       		.byte	0x1
+ 493 0143 0F       		.byte	0xf
+ 494 0144 8C000000 		.4byte	0x8c
+ 495 0148 02       		.uleb128 0x2
+ 496 0149 91       		.byte	0x91
+ 497 014a 76       		.sleb128 -10
+ 498 014b 00       		.byte	0
+ 499 014c 0C       		.uleb128 0xc
+ 500 014d AE000000 		.4byte	.LASF32
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\cciH0f3t.s 			page 11
+
+
+ 501 0151 01       		.byte	0x1
+ 502 0152 1E       		.byte	0x1e
+ 503 0153 00000000 		.4byte	.LFB57
+ 504 0157 20000000 		.4byte	.LFE57-.LFB57
+ 505 015b 01       		.uleb128 0x1
+ 506 015c 9C       		.byte	0x9c
+ 507 015d 0D       		.uleb128 0xd
+ 508 015e 6B010000 		.4byte	.LASF33
+ 509 0162 01       		.byte	0x1
+ 510 0163 23       		.byte	0x23
+ 511 0164 00000000 		.4byte	.LFB58
+ 512 0168 D4000000 		.4byte	.LFE58-.LFB58
+ 513 016c 01       		.uleb128 0x1
+ 514 016d 9C       		.byte	0x9c
+ 515 016e 8B010000 		.4byte	0x18b
+ 516 0172 0E       		.uleb128 0xe
+ 517 0173 7800     		.ascii	"x\000"
+ 518 0175 01       		.byte	0x1
+ 519 0176 36       		.byte	0x36
+ 520 0177 68000000 		.4byte	0x68
+ 521 017b 02       		.uleb128 0x2
+ 522 017c 91       		.byte	0x91
+ 523 017d 74       		.sleb128 -12
+ 524 017e 0E       		.uleb128 0xe
+ 525 017f 7900     		.ascii	"y\000"
+ 526 0181 01       		.byte	0x1
+ 527 0182 36       		.byte	0x36
+ 528 0183 68000000 		.4byte	0x68
+ 529 0187 02       		.uleb128 0x2
+ 530 0188 91       		.byte	0x91
+ 531 0189 70       		.sleb128 -16
+ 532 018a 00       		.byte	0
+ 533 018b 0F       		.uleb128 0xf
+ 534 018c 02010000 		.4byte	.LASF22
+ 535 0190 06       		.byte	0x6
+ 536 0191 1606     		.2byte	0x616
+ 537 0193 97010000 		.4byte	0x197
+ 538 0197 05       		.uleb128 0x5
+ 539 0198 76000000 		.4byte	0x76
+ 540 019c 06       		.uleb128 0x6
+ 541 019d 81000000 		.4byte	0x81
+ 542 01a1 B2010000 		.4byte	0x1b2
+ 543 01a5 07       		.uleb128 0x7
+ 544 01a6 D7000000 		.4byte	0xd7
+ 545 01aa 5F       		.byte	0x5f
+ 546 01ab 07       		.uleb128 0x7
+ 547 01ac D7000000 		.4byte	0xd7
+ 548 01b0 7F       		.byte	0x7f
+ 549 01b1 00       		.byte	0
+ 550 01b2 10       		.uleb128 0x10
+ 551 01b3 62756600 		.ascii	"buf\000"
+ 552 01b7 01       		.byte	0x1
+ 553 01b8 06       		.byte	0x6
+ 554 01b9 9C010000 		.4byte	0x19c
+ 555 01bd 05       		.uleb128 0x5
+ 556 01be 03       		.byte	0x3
+ 557 01bf 00000000 		.4byte	buf
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\cciH0f3t.s 			page 12
+
+
+ 558 01c3 11       		.uleb128 0x11
+ 559 01c4 F2010000 		.4byte	.LASF23
+ 560 01c8 01       		.byte	0x1
+ 561 01c9 06       		.byte	0x6
+ 562 01ca 9C010000 		.4byte	0x19c
+ 563 01ce 05       		.uleb128 0x5
+ 564 01cf 03       		.byte	0x3
+ 565 01d0 00000000 		.4byte	vbuf
+ 566 01d4 11       		.uleb128 0x11
+ 567 01d5 10000000 		.4byte	.LASF24
+ 568 01d9 01       		.byte	0x1
+ 569 01da 0C       		.byte	0xc
+ 570 01db 81000000 		.4byte	0x81
+ 571 01df 05       		.uleb128 0x5
+ 572 01e0 03       		.byte	0x3
+ 573 01e1 00000000 		.4byte	dma_chan
+ 574 01e5 11       		.uleb128 0x11
+ 575 01e6 A7000000 		.4byte	.LASF25
+ 576 01ea 01       		.byte	0x1
+ 577 01eb 0C       		.byte	0xc
+ 578 01ec 81000000 		.4byte	0x81
+ 579 01f0 05       		.uleb128 0x5
+ 580 01f1 03       		.byte	0x3
+ 581 01f2 00000000 		.4byte	dma_td
+ 582 01f6 11       		.uleb128 0x11
+ 583 01f7 70010000 		.4byte	.LASF26
+ 584 01fb 01       		.byte	0x1
+ 585 01fc 0D       		.byte	0xd
+ 586 01fd 07020000 		.4byte	0x207
+ 587 0201 05       		.uleb128 0x5
+ 588 0202 03       		.byte	0x3
+ 589 0203 00000000 		.4byte	flag
+ 590 0207 05       		.uleb128 0x5
+ 591 0208 68000000 		.4byte	0x68
+ 592 020c 00       		.byte	0
+ 593              		.section	.debug_abbrev,"",%progbits
+ 594              	.Ldebug_abbrev0:
+ 595 0000 01       		.uleb128 0x1
+ 596 0001 11       		.uleb128 0x11
+ 597 0002 01       		.byte	0x1
+ 598 0003 25       		.uleb128 0x25
+ 599 0004 0E       		.uleb128 0xe
+ 600 0005 13       		.uleb128 0x13
+ 601 0006 0B       		.uleb128 0xb
+ 602 0007 03       		.uleb128 0x3
+ 603 0008 0E       		.uleb128 0xe
+ 604 0009 1B       		.uleb128 0x1b
+ 605 000a 0E       		.uleb128 0xe
+ 606 000b 55       		.uleb128 0x55
+ 607 000c 17       		.uleb128 0x17
+ 608 000d 11       		.uleb128 0x11
+ 609 000e 01       		.uleb128 0x1
+ 610 000f 10       		.uleb128 0x10
+ 611 0010 17       		.uleb128 0x17
+ 612 0011 00       		.byte	0
+ 613 0012 00       		.byte	0
+ 614 0013 02       		.uleb128 0x2
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\cciH0f3t.s 			page 13
+
+
+ 615 0014 24       		.uleb128 0x24
+ 616 0015 00       		.byte	0
+ 617 0016 0B       		.uleb128 0xb
+ 618 0017 0B       		.uleb128 0xb
+ 619 0018 3E       		.uleb128 0x3e
+ 620 0019 0B       		.uleb128 0xb
+ 621 001a 03       		.uleb128 0x3
+ 622 001b 0E       		.uleb128 0xe
+ 623 001c 00       		.byte	0
+ 624 001d 00       		.byte	0
+ 625 001e 03       		.uleb128 0x3
+ 626 001f 16       		.uleb128 0x16
+ 627 0020 00       		.byte	0
+ 628 0021 03       		.uleb128 0x3
+ 629 0022 0E       		.uleb128 0xe
+ 630 0023 3A       		.uleb128 0x3a
+ 631 0024 0B       		.uleb128 0xb
+ 632 0025 3B       		.uleb128 0x3b
+ 633 0026 0B       		.uleb128 0xb
+ 634 0027 49       		.uleb128 0x49
+ 635 0028 13       		.uleb128 0x13
+ 636 0029 00       		.byte	0
+ 637 002a 00       		.byte	0
+ 638 002b 04       		.uleb128 0x4
+ 639 002c 24       		.uleb128 0x24
+ 640 002d 00       		.byte	0
+ 641 002e 0B       		.uleb128 0xb
+ 642 002f 0B       		.uleb128 0xb
+ 643 0030 3E       		.uleb128 0x3e
+ 644 0031 0B       		.uleb128 0xb
+ 645 0032 03       		.uleb128 0x3
+ 646 0033 08       		.uleb128 0x8
+ 647 0034 00       		.byte	0
+ 648 0035 00       		.byte	0
+ 649 0036 05       		.uleb128 0x5
+ 650 0037 35       		.uleb128 0x35
+ 651 0038 00       		.byte	0
+ 652 0039 49       		.uleb128 0x49
+ 653 003a 13       		.uleb128 0x13
+ 654 003b 00       		.byte	0
+ 655 003c 00       		.byte	0
+ 656 003d 06       		.uleb128 0x6
+ 657 003e 01       		.uleb128 0x1
+ 658 003f 01       		.byte	0x1
+ 659 0040 49       		.uleb128 0x49
+ 660 0041 13       		.uleb128 0x13
+ 661 0042 01       		.uleb128 0x1
+ 662 0043 13       		.uleb128 0x13
+ 663 0044 00       		.byte	0
+ 664 0045 00       		.byte	0
+ 665 0046 07       		.uleb128 0x7
+ 666 0047 21       		.uleb128 0x21
+ 667 0048 00       		.byte	0
+ 668 0049 49       		.uleb128 0x49
+ 669 004a 13       		.uleb128 0x13
+ 670 004b 2F       		.uleb128 0x2f
+ 671 004c 0B       		.uleb128 0xb
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\cciH0f3t.s 			page 14
+
+
+ 672 004d 00       		.byte	0
+ 673 004e 00       		.byte	0
+ 674 004f 08       		.uleb128 0x8
+ 675 0050 13       		.uleb128 0x13
+ 676 0051 01       		.byte	0x1
+ 677 0052 03       		.uleb128 0x3
+ 678 0053 0E       		.uleb128 0xe
+ 679 0054 0B       		.uleb128 0xb
+ 680 0055 0B       		.uleb128 0xb
+ 681 0056 3A       		.uleb128 0x3a
+ 682 0057 0B       		.uleb128 0xb
+ 683 0058 3B       		.uleb128 0x3b
+ 684 0059 0B       		.uleb128 0xb
+ 685 005a 01       		.uleb128 0x1
+ 686 005b 13       		.uleb128 0x13
+ 687 005c 00       		.byte	0
+ 688 005d 00       		.byte	0
+ 689 005e 09       		.uleb128 0x9
+ 690 005f 0D       		.uleb128 0xd
+ 691 0060 00       		.byte	0
+ 692 0061 03       		.uleb128 0x3
+ 693 0062 08       		.uleb128 0x8
+ 694 0063 3A       		.uleb128 0x3a
+ 695 0064 0B       		.uleb128 0xb
+ 696 0065 3B       		.uleb128 0x3b
+ 697 0066 0B       		.uleb128 0xb
+ 698 0067 49       		.uleb128 0x49
+ 699 0068 13       		.uleb128 0x13
+ 700 0069 38       		.uleb128 0x38
+ 701 006a 0B       		.uleb128 0xb
+ 702 006b 00       		.byte	0
+ 703 006c 00       		.byte	0
+ 704 006d 0A       		.uleb128 0xa
+ 705 006e 2E       		.uleb128 0x2e
+ 706 006f 01       		.byte	0x1
+ 707 0070 3F       		.uleb128 0x3f
+ 708 0071 19       		.uleb128 0x19
+ 709 0072 03       		.uleb128 0x3
+ 710 0073 0E       		.uleb128 0xe
+ 711 0074 3A       		.uleb128 0x3a
+ 712 0075 0B       		.uleb128 0xb
+ 713 0076 3B       		.uleb128 0x3b
+ 714 0077 0B       		.uleb128 0xb
+ 715 0078 27       		.uleb128 0x27
+ 716 0079 19       		.uleb128 0x19
+ 717 007a 11       		.uleb128 0x11
+ 718 007b 01       		.uleb128 0x1
+ 719 007c 12       		.uleb128 0x12
+ 720 007d 06       		.uleb128 0x6
+ 721 007e 40       		.uleb128 0x40
+ 722 007f 18       		.uleb128 0x18
+ 723 0080 9642     		.uleb128 0x2116
+ 724 0082 19       		.uleb128 0x19
+ 725 0083 01       		.uleb128 0x1
+ 726 0084 13       		.uleb128 0x13
+ 727 0085 00       		.byte	0
+ 728 0086 00       		.byte	0
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\cciH0f3t.s 			page 15
+
+
+ 729 0087 0B       		.uleb128 0xb
+ 730 0088 34       		.uleb128 0x34
+ 731 0089 00       		.byte	0
+ 732 008a 03       		.uleb128 0x3
+ 733 008b 0E       		.uleb128 0xe
+ 734 008c 3A       		.uleb128 0x3a
+ 735 008d 0B       		.uleb128 0xb
+ 736 008e 3B       		.uleb128 0x3b
+ 737 008f 0B       		.uleb128 0xb
+ 738 0090 49       		.uleb128 0x49
+ 739 0091 13       		.uleb128 0x13
+ 740 0092 02       		.uleb128 0x2
+ 741 0093 18       		.uleb128 0x18
+ 742 0094 00       		.byte	0
+ 743 0095 00       		.byte	0
+ 744 0096 0C       		.uleb128 0xc
+ 745 0097 2E       		.uleb128 0x2e
+ 746 0098 00       		.byte	0
+ 747 0099 3F       		.uleb128 0x3f
+ 748 009a 19       		.uleb128 0x19
+ 749 009b 03       		.uleb128 0x3
+ 750 009c 0E       		.uleb128 0xe
+ 751 009d 3A       		.uleb128 0x3a
+ 752 009e 0B       		.uleb128 0xb
+ 753 009f 3B       		.uleb128 0x3b
+ 754 00a0 0B       		.uleb128 0xb
+ 755 00a1 11       		.uleb128 0x11
+ 756 00a2 01       		.uleb128 0x1
+ 757 00a3 12       		.uleb128 0x12
+ 758 00a4 06       		.uleb128 0x6
+ 759 00a5 40       		.uleb128 0x40
+ 760 00a6 18       		.uleb128 0x18
+ 761 00a7 9742     		.uleb128 0x2117
+ 762 00a9 19       		.uleb128 0x19
+ 763 00aa 00       		.byte	0
+ 764 00ab 00       		.byte	0
+ 765 00ac 0D       		.uleb128 0xd
+ 766 00ad 2E       		.uleb128 0x2e
+ 767 00ae 01       		.byte	0x1
+ 768 00af 3F       		.uleb128 0x3f
+ 769 00b0 19       		.uleb128 0x19
+ 770 00b1 03       		.uleb128 0x3
+ 771 00b2 0E       		.uleb128 0xe
+ 772 00b3 3A       		.uleb128 0x3a
+ 773 00b4 0B       		.uleb128 0xb
+ 774 00b5 3B       		.uleb128 0x3b
+ 775 00b6 0B       		.uleb128 0xb
+ 776 00b7 11       		.uleb128 0x11
+ 777 00b8 01       		.uleb128 0x1
+ 778 00b9 12       		.uleb128 0x12
+ 779 00ba 06       		.uleb128 0x6
+ 780 00bb 40       		.uleb128 0x40
+ 781 00bc 18       		.uleb128 0x18
+ 782 00bd 9642     		.uleb128 0x2116
+ 783 00bf 19       		.uleb128 0x19
+ 784 00c0 01       		.uleb128 0x1
+ 785 00c1 13       		.uleb128 0x13
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\cciH0f3t.s 			page 16
+
+
+ 786 00c2 00       		.byte	0
+ 787 00c3 00       		.byte	0
+ 788 00c4 0E       		.uleb128 0xe
+ 789 00c5 34       		.uleb128 0x34
+ 790 00c6 00       		.byte	0
+ 791 00c7 03       		.uleb128 0x3
+ 792 00c8 08       		.uleb128 0x8
+ 793 00c9 3A       		.uleb128 0x3a
+ 794 00ca 0B       		.uleb128 0xb
+ 795 00cb 3B       		.uleb128 0x3b
+ 796 00cc 0B       		.uleb128 0xb
+ 797 00cd 49       		.uleb128 0x49
+ 798 00ce 13       		.uleb128 0x13
+ 799 00cf 02       		.uleb128 0x2
+ 800 00d0 18       		.uleb128 0x18
+ 801 00d1 00       		.byte	0
+ 802 00d2 00       		.byte	0
+ 803 00d3 0F       		.uleb128 0xf
+ 804 00d4 34       		.uleb128 0x34
+ 805 00d5 00       		.byte	0
+ 806 00d6 03       		.uleb128 0x3
+ 807 00d7 0E       		.uleb128 0xe
+ 808 00d8 3A       		.uleb128 0x3a
+ 809 00d9 0B       		.uleb128 0xb
+ 810 00da 3B       		.uleb128 0x3b
+ 811 00db 05       		.uleb128 0x5
+ 812 00dc 49       		.uleb128 0x49
+ 813 00dd 13       		.uleb128 0x13
+ 814 00de 3F       		.uleb128 0x3f
+ 815 00df 19       		.uleb128 0x19
+ 816 00e0 3C       		.uleb128 0x3c
+ 817 00e1 19       		.uleb128 0x19
+ 818 00e2 00       		.byte	0
+ 819 00e3 00       		.byte	0
+ 820 00e4 10       		.uleb128 0x10
+ 821 00e5 34       		.uleb128 0x34
+ 822 00e6 00       		.byte	0
+ 823 00e7 03       		.uleb128 0x3
+ 824 00e8 08       		.uleb128 0x8
+ 825 00e9 3A       		.uleb128 0x3a
+ 826 00ea 0B       		.uleb128 0xb
+ 827 00eb 3B       		.uleb128 0x3b
+ 828 00ec 0B       		.uleb128 0xb
+ 829 00ed 49       		.uleb128 0x49
+ 830 00ee 13       		.uleb128 0x13
+ 831 00ef 3F       		.uleb128 0x3f
+ 832 00f0 19       		.uleb128 0x19
+ 833 00f1 02       		.uleb128 0x2
+ 834 00f2 18       		.uleb128 0x18
+ 835 00f3 00       		.byte	0
+ 836 00f4 00       		.byte	0
+ 837 00f5 11       		.uleb128 0x11
+ 838 00f6 34       		.uleb128 0x34
+ 839 00f7 00       		.byte	0
+ 840 00f8 03       		.uleb128 0x3
+ 841 00f9 0E       		.uleb128 0xe
+ 842 00fa 3A       		.uleb128 0x3a
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\cciH0f3t.s 			page 17
+
+
+ 843 00fb 0B       		.uleb128 0xb
+ 844 00fc 3B       		.uleb128 0x3b
+ 845 00fd 0B       		.uleb128 0xb
+ 846 00fe 49       		.uleb128 0x49
+ 847 00ff 13       		.uleb128 0x13
+ 848 0100 3F       		.uleb128 0x3f
+ 849 0101 19       		.uleb128 0x19
+ 850 0102 02       		.uleb128 0x2
+ 851 0103 18       		.uleb128 0x18
+ 852 0104 00       		.byte	0
+ 853 0105 00       		.byte	0
+ 854 0106 00       		.byte	0
+ 855              		.section	.debug_aranges,"",%progbits
+ 856 0000 2C000000 		.4byte	0x2c
+ 857 0004 0200     		.2byte	0x2
+ 858 0006 00000000 		.4byte	.Ldebug_info0
+ 859 000a 04       		.byte	0x4
+ 860 000b 00       		.byte	0
+ 861 000c 0000     		.2byte	0
+ 862 000e 0000     		.2byte	0
+ 863 0010 00000000 		.4byte	.LFB56
+ 864 0014 B0000000 		.4byte	.LFE56-.LFB56
+ 865 0018 00000000 		.4byte	.LFB57
+ 866 001c 20000000 		.4byte	.LFE57-.LFB57
+ 867 0020 00000000 		.4byte	.LFB58
+ 868 0024 D4000000 		.4byte	.LFE58-.LFB58
+ 869 0028 00000000 		.4byte	0
+ 870 002c 00000000 		.4byte	0
+ 871              		.section	.debug_ranges,"",%progbits
+ 872              	.Ldebug_ranges0:
+ 873 0000 00000000 		.4byte	.LFB56
+ 874 0004 B0000000 		.4byte	.LFE56
+ 875 0008 00000000 		.4byte	.LFB57
+ 876 000c 20000000 		.4byte	.LFE57
+ 877 0010 00000000 		.4byte	.LFB58
+ 878 0014 D4000000 		.4byte	.LFE58
+ 879 0018 00000000 		.4byte	0
+ 880 001c 00000000 		.4byte	0
+ 881              		.section	.debug_line,"",%progbits
+ 882              	.Ldebug_line0:
+ 883 0000 BC010000 		.section	.debug_str,"MS",%progbits,1
+ 883      02005501 
+ 883      00000201 
+ 883      FB0E0D00 
+ 883      01010101 
+ 884              	.LASF18:
+ 885 0000 72656731 		.ascii	"reg16\000"
+ 885      3600
+ 886              	.LASF9:
+ 887 0006 5F5F696E 		.ascii	"__int32_t\000"
+ 887      7433325F 
+ 887      7400
+ 888              	.LASF24:
+ 889 0010 646D615F 		.ascii	"dma_chan\000"
+ 889      6368616E 
+ 889      00
+ 890              	.LASF27:
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\cciH0f3t.s 			page 18
+
+
+ 891 0019 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 891      4320342E 
+ 891      392E3320 
+ 891      32303135 
+ 891      30333033 
+ 892 004c 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 892      20726576 
+ 892      6973696F 
+ 892      6E203232 
+ 892      31323230 
+ 893 007f 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 893      66756E63 
+ 893      74696F6E 
+ 893      2D736563 
+ 893      74696F6E 
+ 894              	.LASF25:
+ 895 00a7 646D615F 		.ascii	"dma_td\000"
+ 895      746400
+ 896              	.LASF32:
+ 897 00ae 75706461 		.ascii	"update\000"
+ 897      746500
+ 898              	.LASF28:
+ 899 00b5 2E5C6D61 		.ascii	".\\main.c\000"
+ 899      696E2E63 
+ 899      00
+ 900              	.LASF14:
+ 901 00be 666C6F61 		.ascii	"float\000"
+ 901      7400
+ 902              	.LASF11:
+ 903 00c4 75696E74 		.ascii	"uint8\000"
+ 903      3800
+ 904              	.LASF1:
+ 905 00ca 756E7369 		.ascii	"unsigned char\000"
+ 905      676E6564 
+ 905      20636861 
+ 905      7200
+ 906              	.LASF17:
+ 907 00d8 72656738 		.ascii	"reg8\000"
+ 907      00
+ 908              	.LASF5:
+ 909 00dd 6C6F6E67 		.ascii	"long unsigned int\000"
+ 909      20756E73 
+ 909      69676E65 
+ 909      6420696E 
+ 909      7400
+ 910              	.LASF3:
+ 911 00ef 73686F72 		.ascii	"short unsigned int\000"
+ 911      7420756E 
+ 911      7369676E 
+ 911      65642069 
+ 911      6E7400
+ 912              	.LASF22:
+ 913 0102 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 913      52784275 
+ 913      66666572 
+ 913      00
+ 914              	.LASF15:
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\cciH0f3t.s 			page 19
+
+
+ 915 010f 646F7562 		.ascii	"double\000"
+ 915      6C6500
+ 916              	.LASF29:
+ 917 0116 433A5C55 		.ascii	"C:\\Users\\ologa\\Documents\\MIT\\Senior S22\\6.115"
+ 917      73657273 
+ 917      5C6F6C6F 
+ 917      67615C44 
+ 917      6F63756D 
+ 918 0143 315C4669 		.ascii	"1\\Final Project\\vga.cydsn\000"
+ 918      6E616C20 
+ 918      50726F6A 
+ 918      6563745C 
+ 918      7667612E 
+ 919              	.LASF12:
+ 920 015d 75696E74 		.ascii	"uint16\000"
+ 920      313600
+ 921              	.LASF13:
+ 922 0164 75696E74 		.ascii	"uint32\000"
+ 922      333200
+ 923              	.LASF33:
+ 924 016b 6D61696E 		.ascii	"main\000"
+ 924      00
+ 925              	.LASF26:
+ 926 0170 666C6167 		.ascii	"flag\000"
+ 926      00
+ 927              	.LASF8:
+ 928 0175 756E7369 		.ascii	"unsigned int\000"
+ 928      676E6564 
+ 928      20696E74 
+ 928      00
+ 929              	.LASF7:
+ 930 0182 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 930      206C6F6E 
+ 930      6720756E 
+ 930      7369676E 
+ 930      65642069 
+ 931              	.LASF21:
+ 932 0199 6C696E65 		.ascii	"line\000"
+ 932      00
+ 933              	.LASF10:
+ 934 019e 696E7433 		.ascii	"int32_t\000"
+ 934      325F7400 
+ 935              	.LASF19:
+ 936 01a6 73697A65 		.ascii	"sizetype\000"
+ 936      74797065 
+ 936      00
+ 937              	.LASF20:
+ 938 01af 646D6163 		.ascii	"dmac_tdmem\000"
+ 938      5F74646D 
+ 938      656D00
+ 939              	.LASF6:
+ 940 01ba 6C6F6E67 		.ascii	"long long int\000"
+ 940      206C6F6E 
+ 940      6720696E 
+ 940      7400
+ 941              	.LASF16:
+ 942 01c8 63686172 		.ascii	"char\000"
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\cciH0f3t.s 			page 20
+
+
+ 942      00
+ 943              	.LASF30:
+ 944 01cd 646D6163 		.ascii	"dmac_tdmem_struct\000"
+ 944      5F74646D 
+ 944      656D5F73 
+ 944      74727563 
+ 944      7400
+ 945              	.LASF2:
+ 946 01df 73686F72 		.ascii	"short int\000"
+ 946      7420696E 
+ 946      7400
+ 947              	.LASF4:
+ 948 01e9 6C6F6E67 		.ascii	"long int\000"
+ 948      20696E74 
+ 948      00
+ 949              	.LASF23:
+ 950 01f2 76627566 		.ascii	"vbuf\000"
+ 950      00
+ 951              	.LASF0:
+ 952 01f7 7369676E 		.ascii	"signed char\000"
+ 952      65642063 
+ 952      68617200 
+ 953              	.LASF31:
+ 954 0203 6E65776C 		.ascii	"newline\000"
+ 954      696E6500 
+ 955              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br

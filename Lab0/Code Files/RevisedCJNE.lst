@@ -1,0 +1,23 @@
+0000: 79 10        mov R1, #10h;
+                   main:
+                            s1:
+0002: B8 01 03              CJNE R0, #01h, s2;
+0005: 75 90 AA              mov P1, #0AAh;
+                            s2:
+0008: B8 02 03              CJNE R0, #02h, s3;
+000B: 75 90 B0              mov P1, #0B0h;
+                            s3:
+000E: B8 03 09              CJNE R0, #03h, s4;
+                            loop:   
+0011: C2 87                         CLR P0.7; DAC Turn On
+0013: 75 90 80                      mov P1, #80h;   
+0016: D9 F9                         DJNZ R1, loop
+0018: D2 87                         SETB P0.7;
+                            s4:
+001A: B8 04 E5              CJNE R0, #04h, s1;
+                            loop1:  
+001D: C2 87                         CLR P0.7; DAC Turn On
+001F: 75 90 CC                      mov P1, #0CCh;  
+0022: D9 F9                         DJNZ R1, loop1
+0024: D2 87                         SETB P0.7;
+0026: 80 DA                 sjmp main;

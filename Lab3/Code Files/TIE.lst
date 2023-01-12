@@ -1,0 +1,134 @@
+0000:              .org 00h
+0000: 02 00 30     ljmp main
+                   
+000B:              .org 00Bh   
+                   
+                   T0ISR:              ; Interrupt Service Routine
+000B: 12 06 00         lcall draw
+000E: 32               reti
+                   
+0030:              .org 0030h
+                   
+                   main:
+0030: 75 89 02         mov TMOD, #02h      ; Set Mode, Initialize the Interrupt
+0033: 75 8C 4C         mov TH0, #4Ch       ; Set Count
+0036: D2 8C            setb TR0            
+0038: 75 A8 82         mov IE, #82h
+003B: 7C 00            mov R4, #00h        ; DAC 1 Current Position High Byte
+003D: 7D 00            mov R5, #00h        ; DAC 1 Current Position Low Byte
+003F: 7E C0            mov R6, #0C0h        ; DAC 2 Current Position High Byte
+0041: 7F 00            mov R7, #00h        ; DAC 2 Current Position Low Byte
+                       loop:
+0043: 80 FE                sjmp loop       ; Loop Back
+                   
+                   
+0500:              .org 0500h
+                   sine:
+0500: 80 83 86 89 
+      8C 8F 92 95 
+      98 9C 9F A2 
+      A5 A8 AB AE 
+      B0 B3 B6 B9 
+      BC BF C1 C4 
+      C7 C9 CC CE 
+      D1 D3 D5 D8 
+      DA DC DE E0 
+      E2 E4 E6 E8 
+      EA EB ED EF 
+      F0 F2 F3 F4 
+      F6 F7 F8 F9 
+      FA FB FB FC 
+      FD FD FE FE 
+      FE FF FF FF 
+      FF FF FF FF 
+      FE FE FD FD 
+      FC FC FB FA 
+      F9 F8 F7 F6 
+      F5 F4 F2 F1 
+      EF EE EC EB 
+      E9 E7 E5 E3 
+      E1 DF DD DB 
+      D9 D7 D4 D2 
+      CF CD CA C8 
+      C5 C3 C0 BD 
+      BA B8 B5 B2 
+      AF AC A9 A6 
+      A3 A0 9D 9A 
+      97 94 91 8E 
+      8A 87 84 81 
+      7E 7B 78 75 
+      71 6E 6B 68 
+      65 62 5F 5C 
+      59 56 53 50 
+      4D 4A 47 45 
+      42 3F 3C 3A 
+      37 35 32 30 
+      2D 2B 28 26 
+      24 22 20 1E 
+      1C 1A 18 16 
+      14 13 11 10 
+      0E 0D 0B 0A 
+      09 08 07 06 
+      05 04 03 03 
+      02 02 01 01 
+      00 00 00 00 
+      00 00 00 01 
+      01 01 02 02 
+      03 04 04 05 
+      06 07 08 09 
+      0B 0C 0D 0F 
+      10 12 14 15 
+      17 19 1B 1D 
+      1F 21 23 25 
+      27 2A 2C 2E 
+      31 33 36 38 
+      3B 3E 40 43 
+      46 49 4C 4F 
+      51 54 57 5A 
+      5D 60 63 67 
+      6A 6D 70 73 
+      76 79 7C 7F 
+                       .db 128,131,134,137,140,143,146,149,152,156,159,162,165,
+                   
+                   draw:
+0600: 78 03            mov R0, #03h        ; DAC 1 Counter High Byte
+0602: 79 00            mov R1, #00h        ; DAC 1 Counter Low Byte
+                   
+0604: 7A 01            mov R2, #01h        ; DAC 2 Counter High Byte
+0606: 7B 00            mov R3, #00h        ; DAC 2 Counter Low Byte
+                   
+0608: C3               clr C               ; DAC 1 Calculation
+0609: ED               mov a, R5           ; Move low byte current position int
+060A: 29               add a, R1           ; Add low byte first
+060B: FD               mov R5, a           ; Update with the  result of the low
+060C: EC               mov a, R4           ; Move the high byte current positio
+060D: 38               addc a, R0          ; Add to High 
+060E: FC               mov R4, a           ; Update with the result of the high
+                   
+060F: C3               clr C               ; DAC 2 Calculation 
+0610: EF               mov a, R7           ; Move low byte Current Position int
+0611: 2B               add a, R3           ; Add low byte firstlow
+0612: FF               mov R7, a           ; Update with the result of the low 
+0613: EE               mov a, R6           ; Move high byte current position in
+0614: 3A               addc a, R2          ; Add to High
+0615: FE               mov R6, a           ; Update with the result of the high
+                   
+                                           ; Loading DAC 1
+0616: EC               mov a, R4           ; Obtain integer of high byte positi
+0617: 90 05 00         mov dptr, #sine     ; Move address of data table into dp
+061A: 93               movc A, @A+dptr     ; Load acc with the correct position
+061B: 90 FE 10         mov dptr, #0FE10h   ; Load dptr with the DAC location
+061E: F0               movx @dptr, a       ; Load sine value into DAC 1
+                   
+                                           ; Loading DAC 2
+061F: EE               mov a, R6           ; Obtain integer of high byte positi
+0620: 90 05 00         mov dptr, #sine     ; Move address of data table into dp
+0623: 93               movc A, @A+dptr     ; Loadd acc with the correct positio
+0624: 90 FE 20         mov dptr, #0FE20h   ; Load dptr with the DAC location
+0627: F0               movx @dptr, a       ; Load sine value into DAC 2
+0628: 22               ret                 ; Return to ISR
+                   
+                   
+                   
+                   
+                   

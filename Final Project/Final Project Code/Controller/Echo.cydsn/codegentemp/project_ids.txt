@@ -1,0 +1,5 @@
+C:\Users\ologa\Documents\MIT\Senior S22\6.1151\Final Project\HC06_Examples\Echo.cydsn\Echo.cyprj|e9382a01-a121-4773-887e-ca765cd249d8
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|a858ed8c-6b72-48c3-b1cd-6d1533d81ace
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|3e64ce83-4d6d-4e14-93f9-a78921e730b9
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|c1f07003-2fdd-45c3-830b-b3176df32677
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|6401fce3-9fd0-47e1-b324-3f37203ad101

@@ -1,0 +1,2533 @@
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"HORIZ.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.global	HORIZ_initVar
+  19              		.bss
+  20              		.type	HORIZ_initVar, %object
+  21              		.size	HORIZ_initVar, 1
+  22              	HORIZ_initVar:
+  23 0000 00       		.space	1
+  24              		.section	.text.HORIZ_Start,"ax",%progbits
+  25              		.align	2
+  26              		.global	HORIZ_Start
+  27              		.thumb
+  28              		.thumb_func
+  29              		.type	HORIZ_Start, %function
+  30              	HORIZ_Start:
+  31              	.LFB0:
+  32              		.file 1 ".\\Generated_Source\\PSoC5\\HORIZ.c"
+   1:.\Generated_Source\PSoC5/HORIZ.c **** /*******************************************************************************
+   2:.\Generated_Source\PSoC5/HORIZ.c **** * File Name: HORIZ.c  
+   3:.\Generated_Source\PSoC5/HORIZ.c **** * Version 3.0
+   4:.\Generated_Source\PSoC5/HORIZ.c **** *
+   5:.\Generated_Source\PSoC5/HORIZ.c **** * Description:
+   6:.\Generated_Source\PSoC5/HORIZ.c **** *  The PWM User Module consist of an 8 or 16-bit counter with two 8 or 16-bit
+   7:.\Generated_Source\PSoC5/HORIZ.c **** *  comparitors. Each instance of this user module is capable of generating
+   8:.\Generated_Source\PSoC5/HORIZ.c **** *  two PWM outputs with the same period. The pulse width is selectable between
+   9:.\Generated_Source\PSoC5/HORIZ.c **** *  1 and 255/65535. The period is selectable between 2 and 255/65536 clocks. 
+  10:.\Generated_Source\PSoC5/HORIZ.c **** *  The compare value output may be configured to be active when the present 
+  11:.\Generated_Source\PSoC5/HORIZ.c **** *  counter is less than or less than/equal to the compare value.
+  12:.\Generated_Source\PSoC5/HORIZ.c **** *  A terminal count output is also provided. It generates a pulse one clock
+  13:.\Generated_Source\PSoC5/HORIZ.c **** *  width wide when the counter is equal to zero.
+  14:.\Generated_Source\PSoC5/HORIZ.c **** *
+  15:.\Generated_Source\PSoC5/HORIZ.c **** * Note:
+  16:.\Generated_Source\PSoC5/HORIZ.c **** *
+  17:.\Generated_Source\PSoC5/HORIZ.c **** *******************************************************************************
+  18:.\Generated_Source\PSoC5/HORIZ.c **** * Copyright 2008-2012, Cypress Semiconductor Corporation.  All rights reserved.
+  19:.\Generated_Source\PSoC5/HORIZ.c **** * You may use this file only in accordance with the license, terms, conditions, 
+  20:.\Generated_Source\PSoC5/HORIZ.c **** * disclaimers, and limitations in the end user license agreement accompanying 
+  21:.\Generated_Source\PSoC5/HORIZ.c **** * the software package with which this file was provided.
+  22:.\Generated_Source\PSoC5/HORIZ.c **** ********************************************************************************/
+  23:.\Generated_Source\PSoC5/HORIZ.c **** 
+  24:.\Generated_Source\PSoC5/HORIZ.c **** #include "cytypes.h"
+  25:.\Generated_Source\PSoC5/HORIZ.c **** #include "HORIZ.h"
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 2
+
+
+  26:.\Generated_Source\PSoC5/HORIZ.c **** 
+  27:.\Generated_Source\PSoC5/HORIZ.c **** uint8 HORIZ_initVar = 0u;
+  28:.\Generated_Source\PSoC5/HORIZ.c **** 
+  29:.\Generated_Source\PSoC5/HORIZ.c **** 
+  30:.\Generated_Source\PSoC5/HORIZ.c **** /*******************************************************************************
+  31:.\Generated_Source\PSoC5/HORIZ.c **** * Function Name: HORIZ_Start
+  32:.\Generated_Source\PSoC5/HORIZ.c **** ********************************************************************************
+  33:.\Generated_Source\PSoC5/HORIZ.c **** *
+  34:.\Generated_Source\PSoC5/HORIZ.c **** * Summary:
+  35:.\Generated_Source\PSoC5/HORIZ.c **** *  The start function initializes the pwm with the default values, the 
+  36:.\Generated_Source\PSoC5/HORIZ.c **** *  enables the counter to begin counting.  It does not enable interrupts,
+  37:.\Generated_Source\PSoC5/HORIZ.c **** *  the EnableInt command should be called if interrupt generation is required.
+  38:.\Generated_Source\PSoC5/HORIZ.c **** *
+  39:.\Generated_Source\PSoC5/HORIZ.c **** * Parameters:  
+  40:.\Generated_Source\PSoC5/HORIZ.c **** *  None  
+  41:.\Generated_Source\PSoC5/HORIZ.c **** *
+  42:.\Generated_Source\PSoC5/HORIZ.c **** * Return: 
+  43:.\Generated_Source\PSoC5/HORIZ.c **** *  None
+  44:.\Generated_Source\PSoC5/HORIZ.c **** *
+  45:.\Generated_Source\PSoC5/HORIZ.c **** * Global variables:
+  46:.\Generated_Source\PSoC5/HORIZ.c **** *  HORIZ_initVar: Is modified when this function is called for the 
+  47:.\Generated_Source\PSoC5/HORIZ.c **** *   first time. Is used to ensure that initialization happens only once.
+  48:.\Generated_Source\PSoC5/HORIZ.c **** *
+  49:.\Generated_Source\PSoC5/HORIZ.c **** *******************************************************************************/
+  50:.\Generated_Source\PSoC5/HORIZ.c **** void HORIZ_Start(void) 
+  51:.\Generated_Source\PSoC5/HORIZ.c **** {
+  33              		.loc 1 51 0
+  34              		.cfi_startproc
+  35              		@ args = 0, pretend = 0, frame = 0
+  36              		@ frame_needed = 1, uses_anonymous_args = 0
+  37 0000 80B5     		push	{r7, lr}
+  38              		.cfi_def_cfa_offset 8
+  39              		.cfi_offset 7, -8
+  40              		.cfi_offset 14, -4
+  41 0002 00AF     		add	r7, sp, #0
+  42              		.cfi_def_cfa_register 7
+  52:.\Generated_Source\PSoC5/HORIZ.c ****     /* If not Initialized then initialize all required hardware and software */
+  53:.\Generated_Source\PSoC5/HORIZ.c ****     if(HORIZ_initVar == 0u)
+  43              		.loc 1 53 0
+  44 0004 054B     		ldr	r3, .L3
+  45 0006 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  46 0008 002B     		cmp	r3, #0
+  47 000a 04D1     		bne	.L2
+  54:.\Generated_Source\PSoC5/HORIZ.c ****     {
+  55:.\Generated_Source\PSoC5/HORIZ.c ****         HORIZ_Init();
+  48              		.loc 1 55 0
+  49 000c FFF7FEFF 		bl	HORIZ_Init
+  56:.\Generated_Source\PSoC5/HORIZ.c ****         HORIZ_initVar = 1u;
+  50              		.loc 1 56 0
+  51 0010 024B     		ldr	r3, .L3
+  52 0012 0122     		movs	r2, #1
+  53 0014 1A70     		strb	r2, [r3]
+  54              	.L2:
+  57:.\Generated_Source\PSoC5/HORIZ.c ****     }
+  58:.\Generated_Source\PSoC5/HORIZ.c ****     HORIZ_Enable();
+  55              		.loc 1 58 0
+  56 0016 FFF7FEFF 		bl	HORIZ_Enable
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 3
+
+
+  59:.\Generated_Source\PSoC5/HORIZ.c **** 
+  60:.\Generated_Source\PSoC5/HORIZ.c **** }
+  57              		.loc 1 60 0
+  58 001a 80BD     		pop	{r7, pc}
+  59              	.L4:
+  60              		.align	2
+  61              	.L3:
+  62 001c 00000000 		.word	HORIZ_initVar
+  63              		.cfi_endproc
+  64              	.LFE0:
+  65              		.size	HORIZ_Start, .-HORIZ_Start
+  66              		.section	.text.HORIZ_Init,"ax",%progbits
+  67              		.align	2
+  68              		.global	HORIZ_Init
+  69              		.thumb
+  70              		.thumb_func
+  71              		.type	HORIZ_Init, %function
+  72              	HORIZ_Init:
+  73              	.LFB1:
+  61:.\Generated_Source\PSoC5/HORIZ.c **** 
+  62:.\Generated_Source\PSoC5/HORIZ.c **** 
+  63:.\Generated_Source\PSoC5/HORIZ.c **** /*******************************************************************************
+  64:.\Generated_Source\PSoC5/HORIZ.c **** * Function Name: HORIZ_Init
+  65:.\Generated_Source\PSoC5/HORIZ.c **** ********************************************************************************
+  66:.\Generated_Source\PSoC5/HORIZ.c **** *
+  67:.\Generated_Source\PSoC5/HORIZ.c **** * Summary:
+  68:.\Generated_Source\PSoC5/HORIZ.c **** *  Initialize component's parameters to the parameters set by user in the 
+  69:.\Generated_Source\PSoC5/HORIZ.c **** *  customizer of the component placed onto schematic. Usually called in 
+  70:.\Generated_Source\PSoC5/HORIZ.c **** *  HORIZ_Start().
+  71:.\Generated_Source\PSoC5/HORIZ.c **** *
+  72:.\Generated_Source\PSoC5/HORIZ.c **** * Parameters:  
+  73:.\Generated_Source\PSoC5/HORIZ.c **** *  None
+  74:.\Generated_Source\PSoC5/HORIZ.c **** *
+  75:.\Generated_Source\PSoC5/HORIZ.c **** * Return: 
+  76:.\Generated_Source\PSoC5/HORIZ.c **** *  None
+  77:.\Generated_Source\PSoC5/HORIZ.c **** *
+  78:.\Generated_Source\PSoC5/HORIZ.c **** *******************************************************************************/
+  79:.\Generated_Source\PSoC5/HORIZ.c **** void HORIZ_Init(void) 
+  80:.\Generated_Source\PSoC5/HORIZ.c **** {
+  74              		.loc 1 80 0
+  75              		.cfi_startproc
+  76              		@ args = 0, pretend = 0, frame = 8
+  77              		@ frame_needed = 1, uses_anonymous_args = 0
+  78 0000 80B5     		push	{r7, lr}
+  79              		.cfi_def_cfa_offset 8
+  80              		.cfi_offset 7, -8
+  81              		.cfi_offset 14, -4
+  82 0002 82B0     		sub	sp, sp, #8
+  83              		.cfi_def_cfa_offset 16
+  84 0004 00AF     		add	r7, sp, #0
+  85              		.cfi_def_cfa_register 7
+  81:.\Generated_Source\PSoC5/HORIZ.c ****     #if (HORIZ_UsingFixedFunction || HORIZ_UseControl)
+  82:.\Generated_Source\PSoC5/HORIZ.c ****         uint8 ctrl;
+  83:.\Generated_Source\PSoC5/HORIZ.c ****     #endif /* (HORIZ_UsingFixedFunction || HORIZ_UseControl) */
+  84:.\Generated_Source\PSoC5/HORIZ.c ****     
+  85:.\Generated_Source\PSoC5/HORIZ.c ****     #if(!HORIZ_UsingFixedFunction) 
+  86:.\Generated_Source\PSoC5/HORIZ.c ****         #if(HORIZ_UseStatus)
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 4
+
+
+  87:.\Generated_Source\PSoC5/HORIZ.c ****             /* Interrupt State Backup for Critical Region*/
+  88:.\Generated_Source\PSoC5/HORIZ.c ****             uint8 HORIZ_interruptState;
+  89:.\Generated_Source\PSoC5/HORIZ.c ****         #endif /* (HORIZ_UseStatus) */
+  90:.\Generated_Source\PSoC5/HORIZ.c ****     #endif /* (!HORIZ_UsingFixedFunction) */
+  91:.\Generated_Source\PSoC5/HORIZ.c ****     
+  92:.\Generated_Source\PSoC5/HORIZ.c ****     #if (HORIZ_UsingFixedFunction)
+  93:.\Generated_Source\PSoC5/HORIZ.c ****         /* You are allowed to write the compare value (FF only) */
+  94:.\Generated_Source\PSoC5/HORIZ.c ****         HORIZ_CONTROL |= HORIZ_CFG0_MODE;
+  95:.\Generated_Source\PSoC5/HORIZ.c ****         #if (HORIZ_DeadBand2_4)
+  96:.\Generated_Source\PSoC5/HORIZ.c ****             HORIZ_CONTROL |= HORIZ_CFG0_DB;
+  97:.\Generated_Source\PSoC5/HORIZ.c ****         #endif /* (HORIZ_DeadBand2_4) */
+  98:.\Generated_Source\PSoC5/HORIZ.c ****                 
+  99:.\Generated_Source\PSoC5/HORIZ.c ****         ctrl = HORIZ_CONTROL3 & ((uint8 )(~HORIZ_CTRL_CMPMODE1_MASK));
+ 100:.\Generated_Source\PSoC5/HORIZ.c ****         HORIZ_CONTROL3 = ctrl | HORIZ_DEFAULT_COMPARE1_MODE;
+ 101:.\Generated_Source\PSoC5/HORIZ.c ****         
+ 102:.\Generated_Source\PSoC5/HORIZ.c ****          /* Clear and Set SYNCTC and SYNCCMP bits of RT1 register */
+ 103:.\Generated_Source\PSoC5/HORIZ.c ****         HORIZ_RT1 &= ((uint8)(~HORIZ_RT1_MASK));
+ 104:.\Generated_Source\PSoC5/HORIZ.c ****         HORIZ_RT1 |= HORIZ_SYNC;     
+ 105:.\Generated_Source\PSoC5/HORIZ.c ****                 
+ 106:.\Generated_Source\PSoC5/HORIZ.c ****         /*Enable DSI Sync all all inputs of the PWM*/
+ 107:.\Generated_Source\PSoC5/HORIZ.c ****         HORIZ_RT1 &= ((uint8)(~HORIZ_SYNCDSI_MASK));
+ 108:.\Generated_Source\PSoC5/HORIZ.c ****         HORIZ_RT1 |= HORIZ_SYNCDSI_EN;
+ 109:.\Generated_Source\PSoC5/HORIZ.c ****        
+ 110:.\Generated_Source\PSoC5/HORIZ.c ****     #elif (HORIZ_UseControl)
+ 111:.\Generated_Source\PSoC5/HORIZ.c ****         /* Set the default compare mode defined in the parameter */
+ 112:.\Generated_Source\PSoC5/HORIZ.c ****         ctrl = HORIZ_CONTROL & ((uint8)(~HORIZ_CTRL_CMPMODE2_MASK)) & ((uint8)(~HORIZ_CTRL_CMPMODE1
+  86              		.loc 1 112 0
+  87 0006 114B     		ldr	r3, .L6
+  88 0008 1B78     		ldrb	r3, [r3]
+  89 000a DBB2     		uxtb	r3, r3
+  90 000c 23F03F03 		bic	r3, r3, #63
+  91 0010 FB71     		strb	r3, [r7, #7]
+ 113:.\Generated_Source\PSoC5/HORIZ.c ****         HORIZ_CONTROL = ctrl | HORIZ_DEFAULT_COMPARE2_MODE | 
+  92              		.loc 1 113 0
+  93 0012 0E4A     		ldr	r2, .L6
+  94 0014 FB79     		ldrb	r3, [r7, #7]
+  95 0016 43F00A03 		orr	r3, r3, #10
+  96 001a DBB2     		uxtb	r3, r3
+  97 001c 1370     		strb	r3, [r2]
+ 114:.\Generated_Source\PSoC5/HORIZ.c ****                                    HORIZ_DEFAULT_COMPARE1_MODE;
+ 115:.\Generated_Source\PSoC5/HORIZ.c ****     #endif /* (HORIZ_UsingFixedFunction) */
+ 116:.\Generated_Source\PSoC5/HORIZ.c ****         
+ 117:.\Generated_Source\PSoC5/HORIZ.c ****     #if (!HORIZ_UsingFixedFunction)
+ 118:.\Generated_Source\PSoC5/HORIZ.c ****         #if (HORIZ_Resolution == 8)
+ 119:.\Generated_Source\PSoC5/HORIZ.c ****             /* Set FIFO 0 to 1 byte register for period*/
+ 120:.\Generated_Source\PSoC5/HORIZ.c ****             HORIZ_AUX_CONTROLDP0 |= (HORIZ_AUX_CTRL_FIFO0_CLR);
+  98              		.loc 1 120 0
+  99 001e 0C4A     		ldr	r2, .L6+4
+ 100 0020 0B4B     		ldr	r3, .L6+4
+ 101 0022 1B78     		ldrb	r3, [r3]
+ 102 0024 DBB2     		uxtb	r3, r3
+ 103 0026 43F00103 		orr	r3, r3, #1
+ 104 002a DBB2     		uxtb	r3, r3
+ 105 002c 1370     		strb	r3, [r2]
+ 121:.\Generated_Source\PSoC5/HORIZ.c ****         #else /* (HORIZ_Resolution == 16)*/
+ 122:.\Generated_Source\PSoC5/HORIZ.c ****             /* Set FIFO 0 to 1 byte register for period */
+ 123:.\Generated_Source\PSoC5/HORIZ.c ****             HORIZ_AUX_CONTROLDP0 |= (HORIZ_AUX_CTRL_FIFO0_CLR);
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 5
+
+
+ 124:.\Generated_Source\PSoC5/HORIZ.c ****             HORIZ_AUX_CONTROLDP1 |= (HORIZ_AUX_CTRL_FIFO0_CLR);
+ 125:.\Generated_Source\PSoC5/HORIZ.c ****         #endif /* (HORIZ_Resolution == 8) */
+ 126:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 127:.\Generated_Source\PSoC5/HORIZ.c ****         HORIZ_WriteCounter(HORIZ_INIT_PERIOD_VALUE);
+ 106              		.loc 1 127 0
+ 107 002e A720     		movs	r0, #167
+ 108 0030 FFF7FEFF 		bl	HORIZ_WriteCounter
+ 128:.\Generated_Source\PSoC5/HORIZ.c ****     #endif /* (!HORIZ_UsingFixedFunction) */
+ 129:.\Generated_Source\PSoC5/HORIZ.c ****         
+ 130:.\Generated_Source\PSoC5/HORIZ.c ****     HORIZ_WritePeriod(HORIZ_INIT_PERIOD_VALUE);
+ 109              		.loc 1 130 0
+ 110 0034 A720     		movs	r0, #167
+ 111 0036 FFF7FEFF 		bl	HORIZ_WritePeriod
+ 131:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 132:.\Generated_Source\PSoC5/HORIZ.c ****         #if (HORIZ_UseOneCompareMode)
+ 133:.\Generated_Source\PSoC5/HORIZ.c ****             HORIZ_WriteCompare(HORIZ_INIT_COMPARE_VALUE1);
+ 134:.\Generated_Source\PSoC5/HORIZ.c ****         #else
+ 135:.\Generated_Source\PSoC5/HORIZ.c ****             HORIZ_WriteCompare1(HORIZ_INIT_COMPARE_VALUE1);
+ 112              		.loc 1 135 0
+ 113 003a 0120     		movs	r0, #1
+ 114 003c FFF7FEFF 		bl	HORIZ_WriteCompare1
+ 136:.\Generated_Source\PSoC5/HORIZ.c ****             HORIZ_WriteCompare2(HORIZ_INIT_COMPARE_VALUE2);
+ 115              		.loc 1 136 0
+ 116 0040 2820     		movs	r0, #40
+ 117 0042 FFF7FEFF 		bl	HORIZ_WriteCompare2
+ 137:.\Generated_Source\PSoC5/HORIZ.c ****         #endif /* (HORIZ_UseOneCompareMode) */
+ 138:.\Generated_Source\PSoC5/HORIZ.c ****         
+ 139:.\Generated_Source\PSoC5/HORIZ.c ****         #if (HORIZ_KillModeMinTime)
+ 140:.\Generated_Source\PSoC5/HORIZ.c ****             HORIZ_WriteKillTime(HORIZ_MinimumKillTime);
+ 141:.\Generated_Source\PSoC5/HORIZ.c ****         #endif /* (HORIZ_KillModeMinTime) */
+ 142:.\Generated_Source\PSoC5/HORIZ.c ****         
+ 143:.\Generated_Source\PSoC5/HORIZ.c ****         #if (HORIZ_DeadBandUsed)
+ 144:.\Generated_Source\PSoC5/HORIZ.c ****             HORIZ_WriteDeadTime(HORIZ_INIT_DEAD_TIME);
+ 145:.\Generated_Source\PSoC5/HORIZ.c ****         #endif /* (HORIZ_DeadBandUsed) */
+ 146:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 147:.\Generated_Source\PSoC5/HORIZ.c ****     #if (HORIZ_UseStatus || HORIZ_UsingFixedFunction)
+ 148:.\Generated_Source\PSoC5/HORIZ.c ****         HORIZ_SetInterruptMode(HORIZ_INIT_INTERRUPTS_MODE);
+ 149:.\Generated_Source\PSoC5/HORIZ.c ****     #endif /* (HORIZ_UseStatus || HORIZ_UsingFixedFunction) */
+ 150:.\Generated_Source\PSoC5/HORIZ.c ****         
+ 151:.\Generated_Source\PSoC5/HORIZ.c ****     #if (HORIZ_UsingFixedFunction)
+ 152:.\Generated_Source\PSoC5/HORIZ.c ****         /* Globally Enable the Fixed Function Block chosen */
+ 153:.\Generated_Source\PSoC5/HORIZ.c ****         HORIZ_GLOBAL_ENABLE |= HORIZ_BLOCK_EN_MASK;
+ 154:.\Generated_Source\PSoC5/HORIZ.c ****         /* Set the Interrupt source to come from the status register */
+ 155:.\Generated_Source\PSoC5/HORIZ.c ****         HORIZ_CONTROL2 |= HORIZ_CTRL2_IRQ_SEL;
+ 156:.\Generated_Source\PSoC5/HORIZ.c ****     #else
+ 157:.\Generated_Source\PSoC5/HORIZ.c ****         #if(HORIZ_UseStatus)
+ 158:.\Generated_Source\PSoC5/HORIZ.c ****             
+ 159:.\Generated_Source\PSoC5/HORIZ.c ****             /* CyEnterCriticalRegion and CyExitCriticalRegion are used to mark following region cri
+ 160:.\Generated_Source\PSoC5/HORIZ.c ****             /* Enter Critical Region*/
+ 161:.\Generated_Source\PSoC5/HORIZ.c ****             HORIZ_interruptState = CyEnterCriticalSection();
+ 162:.\Generated_Source\PSoC5/HORIZ.c ****             /* Use the interrupt output of the status register for IRQ output */
+ 163:.\Generated_Source\PSoC5/HORIZ.c ****             HORIZ_STATUS_AUX_CTRL |= HORIZ_STATUS_ACTL_INT_EN_MASK;
+ 164:.\Generated_Source\PSoC5/HORIZ.c ****             
+ 165:.\Generated_Source\PSoC5/HORIZ.c ****              /* Exit Critical Region*/
+ 166:.\Generated_Source\PSoC5/HORIZ.c ****             CyExitCriticalSection(HORIZ_interruptState);
+ 167:.\Generated_Source\PSoC5/HORIZ.c ****             
+ 168:.\Generated_Source\PSoC5/HORIZ.c ****             /* Clear the FIFO to enable the HORIZ_STATUS_FIFOFULL
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 6
+
+
+ 169:.\Generated_Source\PSoC5/HORIZ.c ****                    bit to be set on FIFO full. */
+ 170:.\Generated_Source\PSoC5/HORIZ.c ****             HORIZ_ClearFIFO();
+ 171:.\Generated_Source\PSoC5/HORIZ.c ****         #endif /* (HORIZ_UseStatus) */
+ 172:.\Generated_Source\PSoC5/HORIZ.c ****     #endif /* (HORIZ_UsingFixedFunction) */
+ 173:.\Generated_Source\PSoC5/HORIZ.c **** }
+ 118              		.loc 1 173 0
+ 119 0046 0837     		adds	r7, r7, #8
+ 120              		.cfi_def_cfa_offset 8
+ 121 0048 BD46     		mov	sp, r7
+ 122              		.cfi_def_cfa_register 13
+ 123              		@ sp needed
+ 124 004a 80BD     		pop	{r7, pc}
+ 125              	.L7:
+ 126              		.align	2
+ 127              	.L6:
+ 128 004c 78640040 		.word	1073767544
+ 129 0050 98640040 		.word	1073767576
+ 130              		.cfi_endproc
+ 131              	.LFE1:
+ 132              		.size	HORIZ_Init, .-HORIZ_Init
+ 133              		.section	.text.HORIZ_Enable,"ax",%progbits
+ 134              		.align	2
+ 135              		.global	HORIZ_Enable
+ 136              		.thumb
+ 137              		.thumb_func
+ 138              		.type	HORIZ_Enable, %function
+ 139              	HORIZ_Enable:
+ 140              	.LFB2:
+ 174:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 175:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 176:.\Generated_Source\PSoC5/HORIZ.c **** /*******************************************************************************
+ 177:.\Generated_Source\PSoC5/HORIZ.c **** * Function Name: HORIZ_Enable
+ 178:.\Generated_Source\PSoC5/HORIZ.c **** ********************************************************************************
+ 179:.\Generated_Source\PSoC5/HORIZ.c **** *
+ 180:.\Generated_Source\PSoC5/HORIZ.c **** * Summary: 
+ 181:.\Generated_Source\PSoC5/HORIZ.c **** *  Enables the PWM block operation
+ 182:.\Generated_Source\PSoC5/HORIZ.c **** *
+ 183:.\Generated_Source\PSoC5/HORIZ.c **** * Parameters:  
+ 184:.\Generated_Source\PSoC5/HORIZ.c **** *  None
+ 185:.\Generated_Source\PSoC5/HORIZ.c **** *
+ 186:.\Generated_Source\PSoC5/HORIZ.c **** * Return: 
+ 187:.\Generated_Source\PSoC5/HORIZ.c **** *  None
+ 188:.\Generated_Source\PSoC5/HORIZ.c **** *
+ 189:.\Generated_Source\PSoC5/HORIZ.c **** * Side Effects: 
+ 190:.\Generated_Source\PSoC5/HORIZ.c **** *  This works only if software enable mode is chosen
+ 191:.\Generated_Source\PSoC5/HORIZ.c **** *
+ 192:.\Generated_Source\PSoC5/HORIZ.c **** *******************************************************************************/
+ 193:.\Generated_Source\PSoC5/HORIZ.c **** void HORIZ_Enable(void) 
+ 194:.\Generated_Source\PSoC5/HORIZ.c **** {
+ 141              		.loc 1 194 0
+ 142              		.cfi_startproc
+ 143              		@ args = 0, pretend = 0, frame = 0
+ 144              		@ frame_needed = 1, uses_anonymous_args = 0
+ 145              		@ link register save eliminated.
+ 146 0000 80B4     		push	{r7}
+ 147              		.cfi_def_cfa_offset 4
+ 148              		.cfi_offset 7, -4
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 7
+
+
+ 149 0002 00AF     		add	r7, sp, #0
+ 150              		.cfi_def_cfa_register 7
+ 195:.\Generated_Source\PSoC5/HORIZ.c ****     /* Globally Enable the Fixed Function Block chosen */
+ 196:.\Generated_Source\PSoC5/HORIZ.c ****     #if (HORIZ_UsingFixedFunction)
+ 197:.\Generated_Source\PSoC5/HORIZ.c ****         HORIZ_GLOBAL_ENABLE |= HORIZ_BLOCK_EN_MASK;
+ 198:.\Generated_Source\PSoC5/HORIZ.c ****         HORIZ_GLOBAL_STBY_ENABLE |= HORIZ_BLOCK_STBY_EN_MASK;
+ 199:.\Generated_Source\PSoC5/HORIZ.c ****     #endif /* (HORIZ_UsingFixedFunction) */
+ 200:.\Generated_Source\PSoC5/HORIZ.c ****     
+ 201:.\Generated_Source\PSoC5/HORIZ.c ****     /* Enable the PWM from the control register  */
+ 202:.\Generated_Source\PSoC5/HORIZ.c ****     #if (HORIZ_UseControl || HORIZ_UsingFixedFunction)
+ 203:.\Generated_Source\PSoC5/HORIZ.c ****         HORIZ_CONTROL |= HORIZ_CTRL_ENABLE;
+ 151              		.loc 1 203 0
+ 152 0004 054A     		ldr	r2, .L9
+ 153 0006 054B     		ldr	r3, .L9
+ 154 0008 1B78     		ldrb	r3, [r3]
+ 155 000a DBB2     		uxtb	r3, r3
+ 156 000c 63F07F03 		orn	r3, r3, #127
+ 157 0010 DBB2     		uxtb	r3, r3
+ 158 0012 1370     		strb	r3, [r2]
+ 204:.\Generated_Source\PSoC5/HORIZ.c ****     #endif /* (HORIZ_UseControl || HORIZ_UsingFixedFunction) */
+ 205:.\Generated_Source\PSoC5/HORIZ.c **** }
+ 159              		.loc 1 205 0
+ 160 0014 BD46     		mov	sp, r7
+ 161              		.cfi_def_cfa_register 13
+ 162              		@ sp needed
+ 163 0016 5DF8047B 		ldr	r7, [sp], #4
+ 164              		.cfi_restore 7
+ 165              		.cfi_def_cfa_offset 0
+ 166 001a 7047     		bx	lr
+ 167              	.L10:
+ 168              		.align	2
+ 169              	.L9:
+ 170 001c 78640040 		.word	1073767544
+ 171              		.cfi_endproc
+ 172              	.LFE2:
+ 173              		.size	HORIZ_Enable, .-HORIZ_Enable
+ 174              		.section	.text.HORIZ_Stop,"ax",%progbits
+ 175              		.align	2
+ 176              		.global	HORIZ_Stop
+ 177              		.thumb
+ 178              		.thumb_func
+ 179              		.type	HORIZ_Stop, %function
+ 180              	HORIZ_Stop:
+ 181              	.LFB3:
+ 206:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 207:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 208:.\Generated_Source\PSoC5/HORIZ.c **** /*******************************************************************************
+ 209:.\Generated_Source\PSoC5/HORIZ.c **** * Function Name: HORIZ_Stop
+ 210:.\Generated_Source\PSoC5/HORIZ.c **** ********************************************************************************
+ 211:.\Generated_Source\PSoC5/HORIZ.c **** *
+ 212:.\Generated_Source\PSoC5/HORIZ.c **** * Summary:
+ 213:.\Generated_Source\PSoC5/HORIZ.c **** *  The stop function halts the PWM, but does not change any modes or disable
+ 214:.\Generated_Source\PSoC5/HORIZ.c **** *  interrupts.
+ 215:.\Generated_Source\PSoC5/HORIZ.c **** *
+ 216:.\Generated_Source\PSoC5/HORIZ.c **** * Parameters:  
+ 217:.\Generated_Source\PSoC5/HORIZ.c **** *  None  
+ 218:.\Generated_Source\PSoC5/HORIZ.c **** *
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 8
+
+
+ 219:.\Generated_Source\PSoC5/HORIZ.c **** * Return: 
+ 220:.\Generated_Source\PSoC5/HORIZ.c **** *  None
+ 221:.\Generated_Source\PSoC5/HORIZ.c **** *
+ 222:.\Generated_Source\PSoC5/HORIZ.c **** * Side Effects:
+ 223:.\Generated_Source\PSoC5/HORIZ.c **** *  If the Enable mode is set to Hardware only then this function
+ 224:.\Generated_Source\PSoC5/HORIZ.c **** *  has no effect on the operation of the PWM
+ 225:.\Generated_Source\PSoC5/HORIZ.c **** *
+ 226:.\Generated_Source\PSoC5/HORIZ.c **** *******************************************************************************/
+ 227:.\Generated_Source\PSoC5/HORIZ.c **** void HORIZ_Stop(void) 
+ 228:.\Generated_Source\PSoC5/HORIZ.c **** {
+ 182              		.loc 1 228 0
+ 183              		.cfi_startproc
+ 184              		@ args = 0, pretend = 0, frame = 0
+ 185              		@ frame_needed = 1, uses_anonymous_args = 0
+ 186              		@ link register save eliminated.
+ 187 0000 80B4     		push	{r7}
+ 188              		.cfi_def_cfa_offset 4
+ 189              		.cfi_offset 7, -4
+ 190 0002 00AF     		add	r7, sp, #0
+ 191              		.cfi_def_cfa_register 7
+ 229:.\Generated_Source\PSoC5/HORIZ.c ****     #if (HORIZ_UseControl || HORIZ_UsingFixedFunction)
+ 230:.\Generated_Source\PSoC5/HORIZ.c ****         HORIZ_CONTROL &= ((uint8)(~HORIZ_CTRL_ENABLE));
+ 192              		.loc 1 230 0
+ 193 0004 054A     		ldr	r2, .L12
+ 194 0006 054B     		ldr	r3, .L12
+ 195 0008 1B78     		ldrb	r3, [r3]
+ 196 000a DBB2     		uxtb	r3, r3
+ 197 000c 03F07F03 		and	r3, r3, #127
+ 198 0010 DBB2     		uxtb	r3, r3
+ 199 0012 1370     		strb	r3, [r2]
+ 231:.\Generated_Source\PSoC5/HORIZ.c ****     #endif /* (HORIZ_UseControl || HORIZ_UsingFixedFunction) */
+ 232:.\Generated_Source\PSoC5/HORIZ.c ****     
+ 233:.\Generated_Source\PSoC5/HORIZ.c ****     /* Globally disable the Fixed Function Block chosen */
+ 234:.\Generated_Source\PSoC5/HORIZ.c ****     #if (HORIZ_UsingFixedFunction)
+ 235:.\Generated_Source\PSoC5/HORIZ.c ****         HORIZ_GLOBAL_ENABLE &= ((uint8)(~HORIZ_BLOCK_EN_MASK));
+ 236:.\Generated_Source\PSoC5/HORIZ.c ****         HORIZ_GLOBAL_STBY_ENABLE &= ((uint8)(~HORIZ_BLOCK_STBY_EN_MASK));
+ 237:.\Generated_Source\PSoC5/HORIZ.c ****     #endif /* (HORIZ_UsingFixedFunction) */
+ 238:.\Generated_Source\PSoC5/HORIZ.c **** }
+ 200              		.loc 1 238 0
+ 201 0014 BD46     		mov	sp, r7
+ 202              		.cfi_def_cfa_register 13
+ 203              		@ sp needed
+ 204 0016 5DF8047B 		ldr	r7, [sp], #4
+ 205              		.cfi_restore 7
+ 206              		.cfi_def_cfa_offset 0
+ 207 001a 7047     		bx	lr
+ 208              	.L13:
+ 209              		.align	2
+ 210              	.L12:
+ 211 001c 78640040 		.word	1073767544
+ 212              		.cfi_endproc
+ 213              	.LFE3:
+ 214              		.size	HORIZ_Stop, .-HORIZ_Stop
+ 215              		.section	.text.HORIZ_WriteCounter,"ax",%progbits
+ 216              		.align	2
+ 217              		.global	HORIZ_WriteCounter
+ 218              		.thumb
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 9
+
+
+ 219              		.thumb_func
+ 220              		.type	HORIZ_WriteCounter, %function
+ 221              	HORIZ_WriteCounter:
+ 222              	.LFB4:
+ 239:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 240:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 241:.\Generated_Source\PSoC5/HORIZ.c **** #if (HORIZ_UseOneCompareMode)
+ 242:.\Generated_Source\PSoC5/HORIZ.c **** 	#if (HORIZ_CompareMode1SW)
+ 243:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 244:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 245:.\Generated_Source\PSoC5/HORIZ.c **** 		/*******************************************************************************
+ 246:.\Generated_Source\PSoC5/HORIZ.c **** 		* Function Name: HORIZ_SetCompareMode
+ 247:.\Generated_Source\PSoC5/HORIZ.c **** 		********************************************************************************
+ 248:.\Generated_Source\PSoC5/HORIZ.c **** 		* 
+ 249:.\Generated_Source\PSoC5/HORIZ.c **** 		* Summary:
+ 250:.\Generated_Source\PSoC5/HORIZ.c **** 		*  This function writes the Compare Mode for the pwm output when in Dither mode,
+ 251:.\Generated_Source\PSoC5/HORIZ.c **** 		*  Center Align Mode or One Output Mode.
+ 252:.\Generated_Source\PSoC5/HORIZ.c **** 		*
+ 253:.\Generated_Source\PSoC5/HORIZ.c **** 		* Parameters:
+ 254:.\Generated_Source\PSoC5/HORIZ.c **** 		*  comparemode:  The new compare mode for the PWM output. Use the compare types
+ 255:.\Generated_Source\PSoC5/HORIZ.c **** 		*                defined in the H file as input arguments.
+ 256:.\Generated_Source\PSoC5/HORIZ.c **** 		*
+ 257:.\Generated_Source\PSoC5/HORIZ.c **** 		* Return:
+ 258:.\Generated_Source\PSoC5/HORIZ.c **** 		*  None
+ 259:.\Generated_Source\PSoC5/HORIZ.c **** 		*
+ 260:.\Generated_Source\PSoC5/HORIZ.c **** 		*******************************************************************************/
+ 261:.\Generated_Source\PSoC5/HORIZ.c **** 		void HORIZ_SetCompareMode(uint8 comparemode) 
+ 262:.\Generated_Source\PSoC5/HORIZ.c **** 		{
+ 263:.\Generated_Source\PSoC5/HORIZ.c **** 		    #if(HORIZ_UsingFixedFunction)
+ 264:.\Generated_Source\PSoC5/HORIZ.c ****             
+ 265:.\Generated_Source\PSoC5/HORIZ.c ****                 #if(0 != HORIZ_CTRL_CMPMODE1_SHIFT)
+ 266:.\Generated_Source\PSoC5/HORIZ.c ****                     uint8 comparemodemasked = ((uint8)((uint8)comparemode << HORIZ_CTRL_CMPMODE1_SH
+ 267:.\Generated_Source\PSoC5/HORIZ.c ****                 #else
+ 268:.\Generated_Source\PSoC5/HORIZ.c ****                     uint8 comparemodemasked = comparemode;
+ 269:.\Generated_Source\PSoC5/HORIZ.c ****                 #endif /* (0 != HORIZ_CTRL_CMPMODE1_SHIFT) */
+ 270:.\Generated_Source\PSoC5/HORIZ.c ****             
+ 271:.\Generated_Source\PSoC5/HORIZ.c **** 	            HORIZ_CONTROL3 &= ((uint8)(~HORIZ_CTRL_CMPMODE1_MASK)); /*Clear Existing Data */
+ 272:.\Generated_Source\PSoC5/HORIZ.c **** 	            HORIZ_CONTROL3 |= comparemodemasked;     
+ 273:.\Generated_Source\PSoC5/HORIZ.c **** 		                
+ 274:.\Generated_Source\PSoC5/HORIZ.c **** 		    #elif (HORIZ_UseControl)
+ 275:.\Generated_Source\PSoC5/HORIZ.c **** 		        
+ 276:.\Generated_Source\PSoC5/HORIZ.c ****                 #if(0 != HORIZ_CTRL_CMPMODE1_SHIFT)
+ 277:.\Generated_Source\PSoC5/HORIZ.c ****                     uint8 comparemode1masked = ((uint8)((uint8)comparemode << HORIZ_CTRL_CMPMODE1_S
+ 278:.\Generated_Source\PSoC5/HORIZ.c ****     		                                    HORIZ_CTRL_CMPMODE1_MASK;
+ 279:.\Generated_Source\PSoC5/HORIZ.c ****                 #else
+ 280:.\Generated_Source\PSoC5/HORIZ.c ****                     uint8 comparemode1masked = comparemode & HORIZ_CTRL_CMPMODE1_MASK;             
+ 281:.\Generated_Source\PSoC5/HORIZ.c ****                 #endif /* (0 != HORIZ_CTRL_CMPMODE1_SHIFT) */
+ 282:.\Generated_Source\PSoC5/HORIZ.c ****                 
+ 283:.\Generated_Source\PSoC5/HORIZ.c ****                 #if(0 != HORIZ_CTRL_CMPMODE2_SHIFT)                            
+ 284:.\Generated_Source\PSoC5/HORIZ.c ****     		        uint8 comparemode2masked = ((uint8)((uint8)comparemode << HORIZ_CTRL_CMPMODE2_SHIFT))
+ 285:.\Generated_Source\PSoC5/HORIZ.c ****     		                                   HORIZ_CTRL_CMPMODE2_MASK;
+ 286:.\Generated_Source\PSoC5/HORIZ.c ****                 #else
+ 287:.\Generated_Source\PSoC5/HORIZ.c ****     		        uint8 comparemode2masked = comparemode & HORIZ_CTRL_CMPMODE2_MASK;                
+ 288:.\Generated_Source\PSoC5/HORIZ.c ****                 #endif /* (0 != HORIZ_CTRL_CMPMODE2_SHIFT) */
+ 289:.\Generated_Source\PSoC5/HORIZ.c ****                 
+ 290:.\Generated_Source\PSoC5/HORIZ.c **** 		        /*Clear existing mode */
+ 291:.\Generated_Source\PSoC5/HORIZ.c **** 		        HORIZ_CONTROL &= ((uint8)(~(HORIZ_CTRL_CMPMODE1_MASK | HORIZ_CTRL_CMPMODE2_MASK))); 
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 10
+
+
+ 292:.\Generated_Source\PSoC5/HORIZ.c **** 		        HORIZ_CONTROL |= (comparemode1masked | comparemode2masked);
+ 293:.\Generated_Source\PSoC5/HORIZ.c **** 		        
+ 294:.\Generated_Source\PSoC5/HORIZ.c **** 		    #else
+ 295:.\Generated_Source\PSoC5/HORIZ.c **** 		        uint8 temp = comparemode;
+ 296:.\Generated_Source\PSoC5/HORIZ.c **** 		    #endif /* (HORIZ_UsingFixedFunction) */
+ 297:.\Generated_Source\PSoC5/HORIZ.c **** 		}
+ 298:.\Generated_Source\PSoC5/HORIZ.c **** 	#endif /* HORIZ_CompareMode1SW */
+ 299:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 300:.\Generated_Source\PSoC5/HORIZ.c **** #else /* UseOneCompareMode */
+ 301:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 302:.\Generated_Source\PSoC5/HORIZ.c **** 	#if (HORIZ_CompareMode1SW)
+ 303:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 304:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 305:.\Generated_Source\PSoC5/HORIZ.c **** 		/*******************************************************************************
+ 306:.\Generated_Source\PSoC5/HORIZ.c **** 		* Function Name: HORIZ_SetCompareMode1
+ 307:.\Generated_Source\PSoC5/HORIZ.c **** 		********************************************************************************
+ 308:.\Generated_Source\PSoC5/HORIZ.c **** 		* 
+ 309:.\Generated_Source\PSoC5/HORIZ.c **** 		* Summary:
+ 310:.\Generated_Source\PSoC5/HORIZ.c **** 		*  This function writes the Compare Mode for the pwm or pwm1 output
+ 311:.\Generated_Source\PSoC5/HORIZ.c **** 		*
+ 312:.\Generated_Source\PSoC5/HORIZ.c **** 		* Parameters:  
+ 313:.\Generated_Source\PSoC5/HORIZ.c **** 		*  comparemode:  The new compare mode for the PWM output. Use the compare types
+ 314:.\Generated_Source\PSoC5/HORIZ.c **** 		*                defined in the H file as input arguments.
+ 315:.\Generated_Source\PSoC5/HORIZ.c **** 		*
+ 316:.\Generated_Source\PSoC5/HORIZ.c **** 		* Return: 
+ 317:.\Generated_Source\PSoC5/HORIZ.c **** 		*  None
+ 318:.\Generated_Source\PSoC5/HORIZ.c **** 		*
+ 319:.\Generated_Source\PSoC5/HORIZ.c **** 		*******************************************************************************/
+ 320:.\Generated_Source\PSoC5/HORIZ.c **** 		void HORIZ_SetCompareMode1(uint8 comparemode) 
+ 321:.\Generated_Source\PSoC5/HORIZ.c **** 		{
+ 322:.\Generated_Source\PSoC5/HORIZ.c **** 		    #if(0 != HORIZ_CTRL_CMPMODE1_SHIFT)
+ 323:.\Generated_Source\PSoC5/HORIZ.c ****                 uint8 comparemodemasked = ((uint8)((uint8)comparemode << HORIZ_CTRL_CMPMODE1_SHIFT)
+ 324:.\Generated_Source\PSoC5/HORIZ.c ****     		                               HORIZ_CTRL_CMPMODE1_MASK;
+ 325:.\Generated_Source\PSoC5/HORIZ.c **** 		    #else
+ 326:.\Generated_Source\PSoC5/HORIZ.c ****                 uint8 comparemodemasked = comparemode & HORIZ_CTRL_CMPMODE1_MASK;                
+ 327:.\Generated_Source\PSoC5/HORIZ.c ****             #endif /* (0 != HORIZ_CTRL_CMPMODE1_SHIFT) */
+ 328:.\Generated_Source\PSoC5/HORIZ.c ****                    
+ 329:.\Generated_Source\PSoC5/HORIZ.c **** 		    #if (HORIZ_UseControl)
+ 330:.\Generated_Source\PSoC5/HORIZ.c **** 		        HORIZ_CONTROL &= ((uint8)(~HORIZ_CTRL_CMPMODE1_MASK)); /*Clear existing mode */
+ 331:.\Generated_Source\PSoC5/HORIZ.c **** 		        HORIZ_CONTROL |= comparemodemasked;
+ 332:.\Generated_Source\PSoC5/HORIZ.c **** 		    #endif /* (HORIZ_UseControl) */
+ 333:.\Generated_Source\PSoC5/HORIZ.c **** 		}
+ 334:.\Generated_Source\PSoC5/HORIZ.c **** 	#endif /* HORIZ_CompareMode1SW */
+ 335:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 336:.\Generated_Source\PSoC5/HORIZ.c **** #if (HORIZ_CompareMode2SW)
+ 337:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 338:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 339:.\Generated_Source\PSoC5/HORIZ.c ****     /*******************************************************************************
+ 340:.\Generated_Source\PSoC5/HORIZ.c ****     * Function Name: HORIZ_SetCompareMode2
+ 341:.\Generated_Source\PSoC5/HORIZ.c ****     ********************************************************************************
+ 342:.\Generated_Source\PSoC5/HORIZ.c ****     * 
+ 343:.\Generated_Source\PSoC5/HORIZ.c ****     * Summary:
+ 344:.\Generated_Source\PSoC5/HORIZ.c ****     *  This function writes the Compare Mode for the pwm or pwm2 output
+ 345:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 346:.\Generated_Source\PSoC5/HORIZ.c ****     * Parameters:  
+ 347:.\Generated_Source\PSoC5/HORIZ.c ****     *  comparemode:  The new compare mode for the PWM output. Use the compare types
+ 348:.\Generated_Source\PSoC5/HORIZ.c ****     *                defined in the H file as input arguments.
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 11
+
+
+ 349:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 350:.\Generated_Source\PSoC5/HORIZ.c ****     * Return: 
+ 351:.\Generated_Source\PSoC5/HORIZ.c ****     *  None
+ 352:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 353:.\Generated_Source\PSoC5/HORIZ.c ****     *******************************************************************************/
+ 354:.\Generated_Source\PSoC5/HORIZ.c ****     void HORIZ_SetCompareMode2(uint8 comparemode) 
+ 355:.\Generated_Source\PSoC5/HORIZ.c ****     {
+ 356:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 357:.\Generated_Source\PSoC5/HORIZ.c ****         #if(0 != HORIZ_CTRL_CMPMODE2_SHIFT)
+ 358:.\Generated_Source\PSoC5/HORIZ.c ****             uint8 comparemodemasked = ((uint8)((uint8)comparemode << HORIZ_CTRL_CMPMODE2_SHIFT)) & 
+ 359:.\Generated_Source\PSoC5/HORIZ.c ****                                                  HORIZ_CTRL_CMPMODE2_MASK;
+ 360:.\Generated_Source\PSoC5/HORIZ.c ****         #else
+ 361:.\Generated_Source\PSoC5/HORIZ.c ****             uint8 comparemodemasked = comparemode & HORIZ_CTRL_CMPMODE2_MASK;            
+ 362:.\Generated_Source\PSoC5/HORIZ.c ****         #endif /* (0 != HORIZ_CTRL_CMPMODE2_SHIFT) */
+ 363:.\Generated_Source\PSoC5/HORIZ.c ****         
+ 364:.\Generated_Source\PSoC5/HORIZ.c ****         #if (HORIZ_UseControl)
+ 365:.\Generated_Source\PSoC5/HORIZ.c ****             HORIZ_CONTROL &= ((uint8)(~HORIZ_CTRL_CMPMODE2_MASK)); /*Clear existing mode */
+ 366:.\Generated_Source\PSoC5/HORIZ.c ****             HORIZ_CONTROL |= comparemodemasked;
+ 367:.\Generated_Source\PSoC5/HORIZ.c ****         #endif /* (HORIZ_UseControl) */
+ 368:.\Generated_Source\PSoC5/HORIZ.c ****     }
+ 369:.\Generated_Source\PSoC5/HORIZ.c ****     #endif /*HORIZ_CompareMode2SW */
+ 370:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 371:.\Generated_Source\PSoC5/HORIZ.c **** #endif /* UseOneCompareMode */
+ 372:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 373:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 374:.\Generated_Source\PSoC5/HORIZ.c **** #if (!HORIZ_UsingFixedFunction)
+ 375:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 376:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 377:.\Generated_Source\PSoC5/HORIZ.c ****     /*******************************************************************************
+ 378:.\Generated_Source\PSoC5/HORIZ.c ****     * Function Name: HORIZ_WriteCounter
+ 379:.\Generated_Source\PSoC5/HORIZ.c ****     ********************************************************************************
+ 380:.\Generated_Source\PSoC5/HORIZ.c ****     * 
+ 381:.\Generated_Source\PSoC5/HORIZ.c ****     * Summary:
+ 382:.\Generated_Source\PSoC5/HORIZ.c ****     *  Writes a new counter value directly to the counter register. This will be 
+ 383:.\Generated_Source\PSoC5/HORIZ.c ****     *  implemented for that currently running period and only that period. This API 
+ 384:.\Generated_Source\PSoC5/HORIZ.c ****     *  is valid only for UDB implementation and not available for fixed function 
+ 385:.\Generated_Source\PSoC5/HORIZ.c ****     *  PWM implementation.    
+ 386:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 387:.\Generated_Source\PSoC5/HORIZ.c ****     * Parameters:  
+ 388:.\Generated_Source\PSoC5/HORIZ.c ****     *  counter:  The period new period counter value.
+ 389:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 390:.\Generated_Source\PSoC5/HORIZ.c ****     * Return: 
+ 391:.\Generated_Source\PSoC5/HORIZ.c ****     *  None
+ 392:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 393:.\Generated_Source\PSoC5/HORIZ.c ****     * Side Effects: 
+ 394:.\Generated_Source\PSoC5/HORIZ.c ****     *  The PWM Period will be reloaded when a counter value will be a zero
+ 395:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 396:.\Generated_Source\PSoC5/HORIZ.c ****     *******************************************************************************/
+ 397:.\Generated_Source\PSoC5/HORIZ.c ****     void HORIZ_WriteCounter(uint8 counter) \
+ 398:.\Generated_Source\PSoC5/HORIZ.c ****                                        
+ 399:.\Generated_Source\PSoC5/HORIZ.c ****     {
+ 223              		.loc 1 399 0
+ 224              		.cfi_startproc
+ 225              		@ args = 0, pretend = 0, frame = 8
+ 226              		@ frame_needed = 1, uses_anonymous_args = 0
+ 227              		@ link register save eliminated.
+ 228 0000 80B4     		push	{r7}
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 12
+
+
+ 229              		.cfi_def_cfa_offset 4
+ 230              		.cfi_offset 7, -4
+ 231 0002 83B0     		sub	sp, sp, #12
+ 232              		.cfi_def_cfa_offset 16
+ 233 0004 00AF     		add	r7, sp, #0
+ 234              		.cfi_def_cfa_register 7
+ 235 0006 0346     		mov	r3, r0
+ 236 0008 FB71     		strb	r3, [r7, #7]
+ 400:.\Generated_Source\PSoC5/HORIZ.c ****         CY_SET_REG8(HORIZ_COUNTER_LSB_PTR, counter);
+ 237              		.loc 1 400 0
+ 238 000a 044A     		ldr	r2, .L15
+ 239 000c FB79     		ldrb	r3, [r7, #7]
+ 240 000e 1370     		strb	r3, [r2]
+ 401:.\Generated_Source\PSoC5/HORIZ.c ****     }
+ 241              		.loc 1 401 0
+ 242 0010 0C37     		adds	r7, r7, #12
+ 243              		.cfi_def_cfa_offset 4
+ 244 0012 BD46     		mov	sp, r7
+ 245              		.cfi_def_cfa_register 13
+ 246              		@ sp needed
+ 247 0014 5DF8047B 		ldr	r7, [sp], #4
+ 248              		.cfi_restore 7
+ 249              		.cfi_def_cfa_offset 0
+ 250 0018 7047     		bx	lr
+ 251              	.L16:
+ 252 001a 00BF     		.align	2
+ 253              	.L15:
+ 254 001c 08640040 		.word	1073767432
+ 255              		.cfi_endproc
+ 256              	.LFE4:
+ 257              		.size	HORIZ_WriteCounter, .-HORIZ_WriteCounter
+ 258              		.section	.text.HORIZ_ReadCounter,"ax",%progbits
+ 259              		.align	2
+ 260              		.global	HORIZ_ReadCounter
+ 261              		.thumb
+ 262              		.thumb_func
+ 263              		.type	HORIZ_ReadCounter, %function
+ 264              	HORIZ_ReadCounter:
+ 265              	.LFB5:
+ 402:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 403:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 404:.\Generated_Source\PSoC5/HORIZ.c ****     /*******************************************************************************
+ 405:.\Generated_Source\PSoC5/HORIZ.c ****     * Function Name: HORIZ_ReadCounter
+ 406:.\Generated_Source\PSoC5/HORIZ.c ****     ********************************************************************************
+ 407:.\Generated_Source\PSoC5/HORIZ.c ****     * 
+ 408:.\Generated_Source\PSoC5/HORIZ.c ****     * Summary:
+ 409:.\Generated_Source\PSoC5/HORIZ.c ****     *  This function returns the current value of the counter.  It doesn't matter
+ 410:.\Generated_Source\PSoC5/HORIZ.c ****     *  if the counter is enabled or running.
+ 411:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 412:.\Generated_Source\PSoC5/HORIZ.c ****     * Parameters:  
+ 413:.\Generated_Source\PSoC5/HORIZ.c ****     *  None  
+ 414:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 415:.\Generated_Source\PSoC5/HORIZ.c ****     * Return: 
+ 416:.\Generated_Source\PSoC5/HORIZ.c ****     *  The current value of the counter.
+ 417:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 418:.\Generated_Source\PSoC5/HORIZ.c ****     *******************************************************************************/
+ 419:.\Generated_Source\PSoC5/HORIZ.c ****     uint8 HORIZ_ReadCounter(void) 
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 13
+
+
+ 420:.\Generated_Source\PSoC5/HORIZ.c ****     {
+ 266              		.loc 1 420 0
+ 267              		.cfi_startproc
+ 268              		@ args = 0, pretend = 0, frame = 0
+ 269              		@ frame_needed = 1, uses_anonymous_args = 0
+ 270              		@ link register save eliminated.
+ 271 0000 80B4     		push	{r7}
+ 272              		.cfi_def_cfa_offset 4
+ 273              		.cfi_offset 7, -4
+ 274 0002 00AF     		add	r7, sp, #0
+ 275              		.cfi_def_cfa_register 7
+ 421:.\Generated_Source\PSoC5/HORIZ.c ****         /* Force capture by reading Accumulator */
+ 422:.\Generated_Source\PSoC5/HORIZ.c ****         /* Must first do a software capture to be able to read the counter */
+ 423:.\Generated_Source\PSoC5/HORIZ.c ****         /* It is up to the user code to make sure there isn't already captured data in the FIFO */
+ 424:.\Generated_Source\PSoC5/HORIZ.c ****         (void)HORIZ_COUNTERCAP_LSB;
+ 276              		.loc 1 424 0
+ 277 0004 044B     		ldr	r3, .L19
+ 278 0006 1B78     		ldrb	r3, [r3]
+ 425:.\Generated_Source\PSoC5/HORIZ.c ****         
+ 426:.\Generated_Source\PSoC5/HORIZ.c ****         /* Read the data from the FIFO (or capture register for Fixed Function)*/
+ 427:.\Generated_Source\PSoC5/HORIZ.c ****         return (CY_GET_REG8(HORIZ_CAPTURE_LSB_PTR));
+ 279              		.loc 1 427 0
+ 280 0008 044B     		ldr	r3, .L19+4
+ 281 000a 1B78     		ldrb	r3, [r3]
+ 282 000c DBB2     		uxtb	r3, r3
+ 428:.\Generated_Source\PSoC5/HORIZ.c ****     }
+ 283              		.loc 1 428 0
+ 284 000e 1846     		mov	r0, r3
+ 285 0010 BD46     		mov	sp, r7
+ 286              		.cfi_def_cfa_register 13
+ 287              		@ sp needed
+ 288 0012 5DF8047B 		ldr	r7, [sp], #4
+ 289              		.cfi_restore 7
+ 290              		.cfi_def_cfa_offset 0
+ 291 0016 7047     		bx	lr
+ 292              	.L20:
+ 293              		.align	2
+ 294              	.L19:
+ 295 0018 18640040 		.word	1073767448
+ 296 001c 58640040 		.word	1073767512
+ 297              		.cfi_endproc
+ 298              	.LFE5:
+ 299              		.size	HORIZ_ReadCounter, .-HORIZ_ReadCounter
+ 300              		.section	.text.HORIZ_WritePeriod,"ax",%progbits
+ 301              		.align	2
+ 302              		.global	HORIZ_WritePeriod
+ 303              		.thumb
+ 304              		.thumb_func
+ 305              		.type	HORIZ_WritePeriod, %function
+ 306              	HORIZ_WritePeriod:
+ 307              	.LFB6:
+ 429:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 430:.\Generated_Source\PSoC5/HORIZ.c ****         #if (HORIZ_UseStatus)
+ 431:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 432:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 433:.\Generated_Source\PSoC5/HORIZ.c ****             /*******************************************************************************
+ 434:.\Generated_Source\PSoC5/HORIZ.c ****             * Function Name: HORIZ_ClearFIFO
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 14
+
+
+ 435:.\Generated_Source\PSoC5/HORIZ.c ****             ********************************************************************************
+ 436:.\Generated_Source\PSoC5/HORIZ.c ****             * 
+ 437:.\Generated_Source\PSoC5/HORIZ.c ****             * Summary:
+ 438:.\Generated_Source\PSoC5/HORIZ.c ****             *  This function clears all capture data from the capture FIFO
+ 439:.\Generated_Source\PSoC5/HORIZ.c ****             *
+ 440:.\Generated_Source\PSoC5/HORIZ.c ****             * Parameters:  
+ 441:.\Generated_Source\PSoC5/HORIZ.c ****             *  None
+ 442:.\Generated_Source\PSoC5/HORIZ.c ****             *
+ 443:.\Generated_Source\PSoC5/HORIZ.c ****             * Return: 
+ 444:.\Generated_Source\PSoC5/HORIZ.c ****             *  None
+ 445:.\Generated_Source\PSoC5/HORIZ.c ****             *
+ 446:.\Generated_Source\PSoC5/HORIZ.c ****             *******************************************************************************/
+ 447:.\Generated_Source\PSoC5/HORIZ.c ****             void HORIZ_ClearFIFO(void) 
+ 448:.\Generated_Source\PSoC5/HORIZ.c ****             {
+ 449:.\Generated_Source\PSoC5/HORIZ.c ****                 while(0u != (HORIZ_ReadStatusRegister() & HORIZ_STATUS_FIFONEMPTY))
+ 450:.\Generated_Source\PSoC5/HORIZ.c ****                 {
+ 451:.\Generated_Source\PSoC5/HORIZ.c ****                     (void)HORIZ_ReadCapture();
+ 452:.\Generated_Source\PSoC5/HORIZ.c ****                 }
+ 453:.\Generated_Source\PSoC5/HORIZ.c ****             }
+ 454:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 455:.\Generated_Source\PSoC5/HORIZ.c ****         #endif /* HORIZ_UseStatus */
+ 456:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 457:.\Generated_Source\PSoC5/HORIZ.c **** #endif /* !HORIZ_UsingFixedFunction */
+ 458:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 459:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 460:.\Generated_Source\PSoC5/HORIZ.c **** /*******************************************************************************
+ 461:.\Generated_Source\PSoC5/HORIZ.c **** * Function Name: HORIZ_WritePeriod
+ 462:.\Generated_Source\PSoC5/HORIZ.c **** ********************************************************************************
+ 463:.\Generated_Source\PSoC5/HORIZ.c **** * 
+ 464:.\Generated_Source\PSoC5/HORIZ.c **** * Summary:
+ 465:.\Generated_Source\PSoC5/HORIZ.c **** *  This function is used to change the period of the counter.  The new period 
+ 466:.\Generated_Source\PSoC5/HORIZ.c **** *  will be loaded the next time terminal count is detected.
+ 467:.\Generated_Source\PSoC5/HORIZ.c **** *
+ 468:.\Generated_Source\PSoC5/HORIZ.c **** * Parameters:  
+ 469:.\Generated_Source\PSoC5/HORIZ.c **** *  period:  Period value. May be between 1 and (2^Resolution)-1.  A value of 0 
+ 470:.\Generated_Source\PSoC5/HORIZ.c **** *           will result in the counter remaining at zero.
+ 471:.\Generated_Source\PSoC5/HORIZ.c **** *
+ 472:.\Generated_Source\PSoC5/HORIZ.c **** * Return: 
+ 473:.\Generated_Source\PSoC5/HORIZ.c **** *  None
+ 474:.\Generated_Source\PSoC5/HORIZ.c **** *
+ 475:.\Generated_Source\PSoC5/HORIZ.c **** *******************************************************************************/
+ 476:.\Generated_Source\PSoC5/HORIZ.c **** void HORIZ_WritePeriod(uint8 period) 
+ 477:.\Generated_Source\PSoC5/HORIZ.c **** {
+ 308              		.loc 1 477 0
+ 309              		.cfi_startproc
+ 310              		@ args = 0, pretend = 0, frame = 8
+ 311              		@ frame_needed = 1, uses_anonymous_args = 0
+ 312              		@ link register save eliminated.
+ 313 0000 80B4     		push	{r7}
+ 314              		.cfi_def_cfa_offset 4
+ 315              		.cfi_offset 7, -4
+ 316 0002 83B0     		sub	sp, sp, #12
+ 317              		.cfi_def_cfa_offset 16
+ 318 0004 00AF     		add	r7, sp, #0
+ 319              		.cfi_def_cfa_register 7
+ 320 0006 0346     		mov	r3, r0
+ 321 0008 FB71     		strb	r3, [r7, #7]
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 15
+
+
+ 478:.\Generated_Source\PSoC5/HORIZ.c ****     #if(HORIZ_UsingFixedFunction)
+ 479:.\Generated_Source\PSoC5/HORIZ.c ****         CY_SET_REG16(HORIZ_PERIOD_LSB_PTR, (uint16)period);
+ 480:.\Generated_Source\PSoC5/HORIZ.c ****     #else
+ 481:.\Generated_Source\PSoC5/HORIZ.c ****         CY_SET_REG8(HORIZ_PERIOD_LSB_PTR, period);
+ 322              		.loc 1 481 0
+ 323 000a 044A     		ldr	r2, .L22
+ 324 000c FB79     		ldrb	r3, [r7, #7]
+ 325 000e 1370     		strb	r3, [r2]
+ 482:.\Generated_Source\PSoC5/HORIZ.c ****     #endif /* (HORIZ_UsingFixedFunction) */
+ 483:.\Generated_Source\PSoC5/HORIZ.c **** }
+ 326              		.loc 1 483 0
+ 327 0010 0C37     		adds	r7, r7, #12
+ 328              		.cfi_def_cfa_offset 4
+ 329 0012 BD46     		mov	sp, r7
+ 330              		.cfi_def_cfa_register 13
+ 331              		@ sp needed
+ 332 0014 5DF8047B 		ldr	r7, [sp], #4
+ 333              		.cfi_restore 7
+ 334              		.cfi_def_cfa_offset 0
+ 335 0018 7047     		bx	lr
+ 336              	.L23:
+ 337 001a 00BF     		.align	2
+ 338              	.L22:
+ 339 001c 48640040 		.word	1073767496
+ 340              		.cfi_endproc
+ 341              	.LFE6:
+ 342              		.size	HORIZ_WritePeriod, .-HORIZ_WritePeriod
+ 343              		.section	.text.HORIZ_WriteCompare1,"ax",%progbits
+ 344              		.align	2
+ 345              		.global	HORIZ_WriteCompare1
+ 346              		.thumb
+ 347              		.thumb_func
+ 348              		.type	HORIZ_WriteCompare1, %function
+ 349              	HORIZ_WriteCompare1:
+ 350              	.LFB7:
+ 484:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 485:.\Generated_Source\PSoC5/HORIZ.c **** #if (HORIZ_UseOneCompareMode)
+ 486:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 487:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 488:.\Generated_Source\PSoC5/HORIZ.c ****     /*******************************************************************************
+ 489:.\Generated_Source\PSoC5/HORIZ.c ****     * Function Name: HORIZ_WriteCompare
+ 490:.\Generated_Source\PSoC5/HORIZ.c ****     ********************************************************************************
+ 491:.\Generated_Source\PSoC5/HORIZ.c ****     * 
+ 492:.\Generated_Source\PSoC5/HORIZ.c ****     * Summary:
+ 493:.\Generated_Source\PSoC5/HORIZ.c ****     *  This funtion is used to change the compare1 value when the PWM is in Dither
+ 494:.\Generated_Source\PSoC5/HORIZ.c ****     *  mode. The compare output will reflect the new value on the next UDB clock. 
+ 495:.\Generated_Source\PSoC5/HORIZ.c ****     *  The compare output will be driven high when the present counter value is 
+ 496:.\Generated_Source\PSoC5/HORIZ.c ****     *  compared to the compare value based on the compare mode defined in 
+ 497:.\Generated_Source\PSoC5/HORIZ.c ****     *  Dither Mode.
+ 498:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 499:.\Generated_Source\PSoC5/HORIZ.c ****     * Parameters:  
+ 500:.\Generated_Source\PSoC5/HORIZ.c ****     *  compare:  New compare value.  
+ 501:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 502:.\Generated_Source\PSoC5/HORIZ.c ****     * Return: 
+ 503:.\Generated_Source\PSoC5/HORIZ.c ****     *  None
+ 504:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 505:.\Generated_Source\PSoC5/HORIZ.c ****     * Side Effects:
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 16
+
+
+ 506:.\Generated_Source\PSoC5/HORIZ.c ****     *  This function is only available if the PWM mode parameter is set to
+ 507:.\Generated_Source\PSoC5/HORIZ.c ****     *  Dither Mode, Center Aligned Mode or One Output Mode
+ 508:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 509:.\Generated_Source\PSoC5/HORIZ.c ****     *******************************************************************************/
+ 510:.\Generated_Source\PSoC5/HORIZ.c ****     void HORIZ_WriteCompare(uint8 compare) \
+ 511:.\Generated_Source\PSoC5/HORIZ.c ****                                        
+ 512:.\Generated_Source\PSoC5/HORIZ.c ****     {	
+ 513:.\Generated_Source\PSoC5/HORIZ.c **** 		#if(HORIZ_UsingFixedFunction)
+ 514:.\Generated_Source\PSoC5/HORIZ.c **** 			CY_SET_REG16(HORIZ_COMPARE1_LSB_PTR, (uint16)compare);
+ 515:.\Generated_Source\PSoC5/HORIZ.c **** 		#else
+ 516:.\Generated_Source\PSoC5/HORIZ.c **** 	        CY_SET_REG8(HORIZ_COMPARE1_LSB_PTR, compare);	
+ 517:.\Generated_Source\PSoC5/HORIZ.c **** 		#endif /* (HORIZ_UsingFixedFunction) */
+ 518:.\Generated_Source\PSoC5/HORIZ.c ****         
+ 519:.\Generated_Source\PSoC5/HORIZ.c ****         #if (HORIZ_PWMMode == HORIZ__B_PWM__DITHER)
+ 520:.\Generated_Source\PSoC5/HORIZ.c ****             #if(HORIZ_UsingFixedFunction)
+ 521:.\Generated_Source\PSoC5/HORIZ.c ****     			CY_SET_REG16(HORIZ_COMPARE2_LSB_PTR, (uint16)(compare + 1u));
+ 522:.\Generated_Source\PSoC5/HORIZ.c ****     		#else
+ 523:.\Generated_Source\PSoC5/HORIZ.c ****     	        CY_SET_REG8(HORIZ_COMPARE2_LSB_PTR, (compare + 1u));	
+ 524:.\Generated_Source\PSoC5/HORIZ.c ****     		#endif /* (HORIZ_UsingFixedFunction) */
+ 525:.\Generated_Source\PSoC5/HORIZ.c ****         #endif /* (HORIZ_PWMMode == HORIZ__B_PWM__DITHER) */
+ 526:.\Generated_Source\PSoC5/HORIZ.c ****     }
+ 527:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 528:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 529:.\Generated_Source\PSoC5/HORIZ.c **** #else
+ 530:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 531:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 532:.\Generated_Source\PSoC5/HORIZ.c ****     /*******************************************************************************
+ 533:.\Generated_Source\PSoC5/HORIZ.c ****     * Function Name: HORIZ_WriteCompare1
+ 534:.\Generated_Source\PSoC5/HORIZ.c ****     ********************************************************************************
+ 535:.\Generated_Source\PSoC5/HORIZ.c ****     * 
+ 536:.\Generated_Source\PSoC5/HORIZ.c ****     * Summary:
+ 537:.\Generated_Source\PSoC5/HORIZ.c ****     *  This funtion is used to change the compare1 value.  The compare output will 
+ 538:.\Generated_Source\PSoC5/HORIZ.c ****     *  reflect the new value on the next UDB clock.  The compare output will be 
+ 539:.\Generated_Source\PSoC5/HORIZ.c ****     *  driven high when the present counter value is less than or less than or 
+ 540:.\Generated_Source\PSoC5/HORIZ.c ****     *  equal to the compare register, depending on the mode.
+ 541:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 542:.\Generated_Source\PSoC5/HORIZ.c ****     * Parameters:  
+ 543:.\Generated_Source\PSoC5/HORIZ.c ****     *  compare:  New compare value.  
+ 544:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 545:.\Generated_Source\PSoC5/HORIZ.c ****     * Return: 
+ 546:.\Generated_Source\PSoC5/HORIZ.c ****     *  None
+ 547:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 548:.\Generated_Source\PSoC5/HORIZ.c ****     *******************************************************************************/
+ 549:.\Generated_Source\PSoC5/HORIZ.c ****     void HORIZ_WriteCompare1(uint8 compare) \
+ 550:.\Generated_Source\PSoC5/HORIZ.c ****                                         
+ 551:.\Generated_Source\PSoC5/HORIZ.c ****     {
+ 351              		.loc 1 551 0
+ 352              		.cfi_startproc
+ 353              		@ args = 0, pretend = 0, frame = 8
+ 354              		@ frame_needed = 1, uses_anonymous_args = 0
+ 355              		@ link register save eliminated.
+ 356 0000 80B4     		push	{r7}
+ 357              		.cfi_def_cfa_offset 4
+ 358              		.cfi_offset 7, -4
+ 359 0002 83B0     		sub	sp, sp, #12
+ 360              		.cfi_def_cfa_offset 16
+ 361 0004 00AF     		add	r7, sp, #0
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 17
+
+
+ 362              		.cfi_def_cfa_register 7
+ 363 0006 0346     		mov	r3, r0
+ 364 0008 FB71     		strb	r3, [r7, #7]
+ 552:.\Generated_Source\PSoC5/HORIZ.c ****         #if(HORIZ_UsingFixedFunction)
+ 553:.\Generated_Source\PSoC5/HORIZ.c ****             CY_SET_REG16(HORIZ_COMPARE1_LSB_PTR, (uint16)compare);
+ 554:.\Generated_Source\PSoC5/HORIZ.c ****         #else
+ 555:.\Generated_Source\PSoC5/HORIZ.c ****             CY_SET_REG8(HORIZ_COMPARE1_LSB_PTR, compare);
+ 365              		.loc 1 555 0
+ 366 000a 044A     		ldr	r2, .L25
+ 367 000c FB79     		ldrb	r3, [r7, #7]
+ 368 000e 1370     		strb	r3, [r2]
+ 556:.\Generated_Source\PSoC5/HORIZ.c ****         #endif /* (HORIZ_UsingFixedFunction) */
+ 557:.\Generated_Source\PSoC5/HORIZ.c ****     }
+ 369              		.loc 1 557 0
+ 370 0010 0C37     		adds	r7, r7, #12
+ 371              		.cfi_def_cfa_offset 4
+ 372 0012 BD46     		mov	sp, r7
+ 373              		.cfi_def_cfa_register 13
+ 374              		@ sp needed
+ 375 0014 5DF8047B 		ldr	r7, [sp], #4
+ 376              		.cfi_restore 7
+ 377              		.cfi_def_cfa_offset 0
+ 378 0018 7047     		bx	lr
+ 379              	.L26:
+ 380 001a 00BF     		.align	2
+ 381              	.L25:
+ 382 001c 28640040 		.word	1073767464
+ 383              		.cfi_endproc
+ 384              	.LFE7:
+ 385              		.size	HORIZ_WriteCompare1, .-HORIZ_WriteCompare1
+ 386              		.section	.text.HORIZ_WriteCompare2,"ax",%progbits
+ 387              		.align	2
+ 388              		.global	HORIZ_WriteCompare2
+ 389              		.thumb
+ 390              		.thumb_func
+ 391              		.type	HORIZ_WriteCompare2, %function
+ 392              	HORIZ_WriteCompare2:
+ 393              	.LFB8:
+ 558:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 559:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 560:.\Generated_Source\PSoC5/HORIZ.c ****     /*******************************************************************************
+ 561:.\Generated_Source\PSoC5/HORIZ.c ****     * Function Name: HORIZ_WriteCompare2
+ 562:.\Generated_Source\PSoC5/HORIZ.c ****     ********************************************************************************
+ 563:.\Generated_Source\PSoC5/HORIZ.c ****     * 
+ 564:.\Generated_Source\PSoC5/HORIZ.c ****     * Summary:
+ 565:.\Generated_Source\PSoC5/HORIZ.c ****     *  This funtion is used to change the compare value, for compare1 output.  
+ 566:.\Generated_Source\PSoC5/HORIZ.c ****     *  The compare output will reflect the new value on the next UDB clock.  
+ 567:.\Generated_Source\PSoC5/HORIZ.c ****     *  The compare output will be driven high when the present counter value is 
+ 568:.\Generated_Source\PSoC5/HORIZ.c ****     *  less than or less than or equal to the compare register, depending on the 
+ 569:.\Generated_Source\PSoC5/HORIZ.c ****     *  mode.
+ 570:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 571:.\Generated_Source\PSoC5/HORIZ.c ****     * Parameters:  
+ 572:.\Generated_Source\PSoC5/HORIZ.c ****     *  compare:  New compare value.  
+ 573:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 574:.\Generated_Source\PSoC5/HORIZ.c ****     * Return: 
+ 575:.\Generated_Source\PSoC5/HORIZ.c ****     *  None
+ 576:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 18
+
+
+ 577:.\Generated_Source\PSoC5/HORIZ.c ****     *******************************************************************************/
+ 578:.\Generated_Source\PSoC5/HORIZ.c ****     void HORIZ_WriteCompare2(uint8 compare) \
+ 579:.\Generated_Source\PSoC5/HORIZ.c ****                                         
+ 580:.\Generated_Source\PSoC5/HORIZ.c ****     {
+ 394              		.loc 1 580 0
+ 395              		.cfi_startproc
+ 396              		@ args = 0, pretend = 0, frame = 8
+ 397              		@ frame_needed = 1, uses_anonymous_args = 0
+ 398              		@ link register save eliminated.
+ 399 0000 80B4     		push	{r7}
+ 400              		.cfi_def_cfa_offset 4
+ 401              		.cfi_offset 7, -4
+ 402 0002 83B0     		sub	sp, sp, #12
+ 403              		.cfi_def_cfa_offset 16
+ 404 0004 00AF     		add	r7, sp, #0
+ 405              		.cfi_def_cfa_register 7
+ 406 0006 0346     		mov	r3, r0
+ 407 0008 FB71     		strb	r3, [r7, #7]
+ 581:.\Generated_Source\PSoC5/HORIZ.c ****         #if(HORIZ_UsingFixedFunction)
+ 582:.\Generated_Source\PSoC5/HORIZ.c ****             CY_SET_REG16(HORIZ_COMPARE2_LSB_PTR, compare);
+ 583:.\Generated_Source\PSoC5/HORIZ.c ****         #else
+ 584:.\Generated_Source\PSoC5/HORIZ.c ****             CY_SET_REG8(HORIZ_COMPARE2_LSB_PTR, compare);
+ 408              		.loc 1 584 0
+ 409 000a 044A     		ldr	r2, .L28
+ 410 000c FB79     		ldrb	r3, [r7, #7]
+ 411 000e 1370     		strb	r3, [r2]
+ 585:.\Generated_Source\PSoC5/HORIZ.c ****         #endif /* (HORIZ_UsingFixedFunction) */
+ 586:.\Generated_Source\PSoC5/HORIZ.c ****     }
+ 412              		.loc 1 586 0
+ 413 0010 0C37     		adds	r7, r7, #12
+ 414              		.cfi_def_cfa_offset 4
+ 415 0012 BD46     		mov	sp, r7
+ 416              		.cfi_def_cfa_register 13
+ 417              		@ sp needed
+ 418 0014 5DF8047B 		ldr	r7, [sp], #4
+ 419              		.cfi_restore 7
+ 420              		.cfi_def_cfa_offset 0
+ 421 0018 7047     		bx	lr
+ 422              	.L29:
+ 423 001a 00BF     		.align	2
+ 424              	.L28:
+ 425 001c 38640040 		.word	1073767480
+ 426              		.cfi_endproc
+ 427              	.LFE8:
+ 428              		.size	HORIZ_WriteCompare2, .-HORIZ_WriteCompare2
+ 429              		.section	.text.HORIZ_ReadControlRegister,"ax",%progbits
+ 430              		.align	2
+ 431              		.global	HORIZ_ReadControlRegister
+ 432              		.thumb
+ 433              		.thumb_func
+ 434              		.type	HORIZ_ReadControlRegister, %function
+ 435              	HORIZ_ReadControlRegister:
+ 436              	.LFB9:
+ 587:.\Generated_Source\PSoC5/HORIZ.c **** #endif /* UseOneCompareMode */
+ 588:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 589:.\Generated_Source\PSoC5/HORIZ.c **** #if (HORIZ_DeadBandUsed)
+ 590:.\Generated_Source\PSoC5/HORIZ.c **** 
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 19
+
+
+ 591:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 592:.\Generated_Source\PSoC5/HORIZ.c ****     /*******************************************************************************
+ 593:.\Generated_Source\PSoC5/HORIZ.c ****     * Function Name: HORIZ_WriteDeadTime
+ 594:.\Generated_Source\PSoC5/HORIZ.c ****     ********************************************************************************
+ 595:.\Generated_Source\PSoC5/HORIZ.c ****     * 
+ 596:.\Generated_Source\PSoC5/HORIZ.c ****     * Summary:
+ 597:.\Generated_Source\PSoC5/HORIZ.c ****     *  This function writes the dead-band counts to the corresponding register
+ 598:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 599:.\Generated_Source\PSoC5/HORIZ.c ****     * Parameters:  
+ 600:.\Generated_Source\PSoC5/HORIZ.c ****     *  deadtime:  Number of counts for dead time 
+ 601:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 602:.\Generated_Source\PSoC5/HORIZ.c ****     * Return: 
+ 603:.\Generated_Source\PSoC5/HORIZ.c ****     *  None
+ 604:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 605:.\Generated_Source\PSoC5/HORIZ.c ****     *******************************************************************************/
+ 606:.\Generated_Source\PSoC5/HORIZ.c ****     void HORIZ_WriteDeadTime(uint8 deadtime) 
+ 607:.\Generated_Source\PSoC5/HORIZ.c ****     {
+ 608:.\Generated_Source\PSoC5/HORIZ.c ****         /* If using the Dead Band 1-255 mode then just write the register */
+ 609:.\Generated_Source\PSoC5/HORIZ.c ****         #if(!HORIZ_DeadBand2_4)
+ 610:.\Generated_Source\PSoC5/HORIZ.c ****             CY_SET_REG8(HORIZ_DEADBAND_COUNT_PTR, deadtime);
+ 611:.\Generated_Source\PSoC5/HORIZ.c ****         #else
+ 612:.\Generated_Source\PSoC5/HORIZ.c ****             /* Otherwise the data has to be masked and offset */        
+ 613:.\Generated_Source\PSoC5/HORIZ.c ****             /* Clear existing data */
+ 614:.\Generated_Source\PSoC5/HORIZ.c ****             HORIZ_DEADBAND_COUNT &= ((uint8)(~HORIZ_DEADBAND_COUNT_MASK));
+ 615:.\Generated_Source\PSoC5/HORIZ.c ****             
+ 616:.\Generated_Source\PSoC5/HORIZ.c ****             /* Set new dead time */
+ 617:.\Generated_Source\PSoC5/HORIZ.c ****             #if(HORIZ_DEADBAND_COUNT_SHIFT)        
+ 618:.\Generated_Source\PSoC5/HORIZ.c ****                 HORIZ_DEADBAND_COUNT |= ((uint8)((uint8)deadtime << HORIZ_DEADBAND_COUNT_SHIFT)) & 
+ 619:.\Generated_Source\PSoC5/HORIZ.c ****                                                     HORIZ_DEADBAND_COUNT_MASK;
+ 620:.\Generated_Source\PSoC5/HORIZ.c ****             #else
+ 621:.\Generated_Source\PSoC5/HORIZ.c ****                 HORIZ_DEADBAND_COUNT |= deadtime & HORIZ_DEADBAND_COUNT_MASK;        
+ 622:.\Generated_Source\PSoC5/HORIZ.c ****             #endif /* (HORIZ_DEADBAND_COUNT_SHIFT) */
+ 623:.\Generated_Source\PSoC5/HORIZ.c ****         
+ 624:.\Generated_Source\PSoC5/HORIZ.c ****         #endif /* (!HORIZ_DeadBand2_4) */
+ 625:.\Generated_Source\PSoC5/HORIZ.c ****     }
+ 626:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 627:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 628:.\Generated_Source\PSoC5/HORIZ.c ****     /*******************************************************************************
+ 629:.\Generated_Source\PSoC5/HORIZ.c ****     * Function Name: HORIZ_ReadDeadTime
+ 630:.\Generated_Source\PSoC5/HORIZ.c ****     ********************************************************************************
+ 631:.\Generated_Source\PSoC5/HORIZ.c ****     * 
+ 632:.\Generated_Source\PSoC5/HORIZ.c ****     * Summary:
+ 633:.\Generated_Source\PSoC5/HORIZ.c ****     *  This function reads the dead-band counts from the corresponding register
+ 634:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 635:.\Generated_Source\PSoC5/HORIZ.c ****     * Parameters:  
+ 636:.\Generated_Source\PSoC5/HORIZ.c ****     *  None
+ 637:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 638:.\Generated_Source\PSoC5/HORIZ.c ****     * Return: 
+ 639:.\Generated_Source\PSoC5/HORIZ.c ****     *  Dead Band Counts
+ 640:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 641:.\Generated_Source\PSoC5/HORIZ.c ****     *******************************************************************************/
+ 642:.\Generated_Source\PSoC5/HORIZ.c ****     uint8 HORIZ_ReadDeadTime(void) 
+ 643:.\Generated_Source\PSoC5/HORIZ.c ****     {
+ 644:.\Generated_Source\PSoC5/HORIZ.c ****         /* If using the Dead Band 1-255 mode then just read the register */
+ 645:.\Generated_Source\PSoC5/HORIZ.c ****         #if(!HORIZ_DeadBand2_4)
+ 646:.\Generated_Source\PSoC5/HORIZ.c ****             return (CY_GET_REG8(HORIZ_DEADBAND_COUNT_PTR));
+ 647:.\Generated_Source\PSoC5/HORIZ.c ****         #else
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 20
+
+
+ 648:.\Generated_Source\PSoC5/HORIZ.c ****         
+ 649:.\Generated_Source\PSoC5/HORIZ.c ****             /* Otherwise the data has to be masked and offset */
+ 650:.\Generated_Source\PSoC5/HORIZ.c ****             #if(HORIZ_DEADBAND_COUNT_SHIFT)      
+ 651:.\Generated_Source\PSoC5/HORIZ.c ****                 return ((uint8)(((uint8)(HORIZ_DEADBAND_COUNT & HORIZ_DEADBAND_COUNT_MASK)) >> 
+ 652:.\Generated_Source\PSoC5/HORIZ.c ****                                                                            HORIZ_DEADBAND_COUNT_SHI
+ 653:.\Generated_Source\PSoC5/HORIZ.c ****             #else
+ 654:.\Generated_Source\PSoC5/HORIZ.c ****                 return (HORIZ_DEADBAND_COUNT & HORIZ_DEADBAND_COUNT_MASK);
+ 655:.\Generated_Source\PSoC5/HORIZ.c ****             #endif /* (HORIZ_DEADBAND_COUNT_SHIFT) */
+ 656:.\Generated_Source\PSoC5/HORIZ.c ****         #endif /* (!HORIZ_DeadBand2_4) */
+ 657:.\Generated_Source\PSoC5/HORIZ.c ****     }
+ 658:.\Generated_Source\PSoC5/HORIZ.c **** #endif /* DeadBandUsed */
+ 659:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 660:.\Generated_Source\PSoC5/HORIZ.c **** #if (HORIZ_UseStatus || HORIZ_UsingFixedFunction)
+ 661:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 662:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 663:.\Generated_Source\PSoC5/HORIZ.c ****     /*******************************************************************************
+ 664:.\Generated_Source\PSoC5/HORIZ.c ****     * Function Name: HORIZ_SetInterruptMode
+ 665:.\Generated_Source\PSoC5/HORIZ.c ****     ********************************************************************************
+ 666:.\Generated_Source\PSoC5/HORIZ.c ****     * 
+ 667:.\Generated_Source\PSoC5/HORIZ.c ****     * Summary:
+ 668:.\Generated_Source\PSoC5/HORIZ.c ****     *  This function configures the interrupts mask control of theinterrupt 
+ 669:.\Generated_Source\PSoC5/HORIZ.c ****     *  source status register.
+ 670:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 671:.\Generated_Source\PSoC5/HORIZ.c ****     * Parameters:  
+ 672:.\Generated_Source\PSoC5/HORIZ.c ****     *  uint8 interruptMode: Bit field containing the interrupt sources enabled 
+ 673:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 674:.\Generated_Source\PSoC5/HORIZ.c ****     * Return: 
+ 675:.\Generated_Source\PSoC5/HORIZ.c ****     *  None
+ 676:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 677:.\Generated_Source\PSoC5/HORIZ.c ****     *******************************************************************************/
+ 678:.\Generated_Source\PSoC5/HORIZ.c ****     void HORIZ_SetInterruptMode(uint8 interruptMode)  
+ 679:.\Generated_Source\PSoC5/HORIZ.c ****     {
+ 680:.\Generated_Source\PSoC5/HORIZ.c ****     	CY_SET_REG8(HORIZ_STATUS_MASK_PTR, interruptMode);
+ 681:.\Generated_Source\PSoC5/HORIZ.c ****     }
+ 682:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 683:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 684:.\Generated_Source\PSoC5/HORIZ.c ****     /*******************************************************************************
+ 685:.\Generated_Source\PSoC5/HORIZ.c ****     * Function Name: HORIZ_ReadStatusRegister
+ 686:.\Generated_Source\PSoC5/HORIZ.c ****     ********************************************************************************
+ 687:.\Generated_Source\PSoC5/HORIZ.c ****     * 
+ 688:.\Generated_Source\PSoC5/HORIZ.c ****     * Summary:
+ 689:.\Generated_Source\PSoC5/HORIZ.c ****     *  This function returns the current state of the status register. 
+ 690:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 691:.\Generated_Source\PSoC5/HORIZ.c ****     * Parameters:  
+ 692:.\Generated_Source\PSoC5/HORIZ.c ****     *  None
+ 693:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 694:.\Generated_Source\PSoC5/HORIZ.c ****     * Return: 
+ 695:.\Generated_Source\PSoC5/HORIZ.c ****     *  uint8 : Current status register value. The status register bits are:
+ 696:.\Generated_Source\PSoC5/HORIZ.c ****     *  [7:6] : Unused(0)
+ 697:.\Generated_Source\PSoC5/HORIZ.c ****     *  [5]   : Kill event output
+ 698:.\Generated_Source\PSoC5/HORIZ.c ****     *  [4]   : FIFO not empty
+ 699:.\Generated_Source\PSoC5/HORIZ.c ****     *  [3]   : FIFO full
+ 700:.\Generated_Source\PSoC5/HORIZ.c ****     *  [2]   : Terminal count
+ 701:.\Generated_Source\PSoC5/HORIZ.c ****     *  [1]   : Compare output 2
+ 702:.\Generated_Source\PSoC5/HORIZ.c ****     *  [0]   : Compare output 1
+ 703:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 704:.\Generated_Source\PSoC5/HORIZ.c ****     *******************************************************************************/
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 21
+
+
+ 705:.\Generated_Source\PSoC5/HORIZ.c ****     uint8 HORIZ_ReadStatusRegister(void)   
+ 706:.\Generated_Source\PSoC5/HORIZ.c ****     {
+ 707:.\Generated_Source\PSoC5/HORIZ.c ****     	uint8 result;
+ 708:.\Generated_Source\PSoC5/HORIZ.c ****     	
+ 709:.\Generated_Source\PSoC5/HORIZ.c ****     	result = CY_GET_REG8(HORIZ_STATUS_PTR);
+ 710:.\Generated_Source\PSoC5/HORIZ.c ****     	return (result);
+ 711:.\Generated_Source\PSoC5/HORIZ.c ****     }
+ 712:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 713:.\Generated_Source\PSoC5/HORIZ.c **** #endif /* (HORIZ_UseStatus || HORIZ_UsingFixedFunction) */
+ 714:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 715:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 716:.\Generated_Source\PSoC5/HORIZ.c **** #if (HORIZ_UseControl)
+ 717:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 718:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 719:.\Generated_Source\PSoC5/HORIZ.c ****     /*******************************************************************************
+ 720:.\Generated_Source\PSoC5/HORIZ.c ****     * Function Name: HORIZ_ReadControlRegister
+ 721:.\Generated_Source\PSoC5/HORIZ.c ****     ********************************************************************************
+ 722:.\Generated_Source\PSoC5/HORIZ.c ****     * 
+ 723:.\Generated_Source\PSoC5/HORIZ.c ****     * Summary:
+ 724:.\Generated_Source\PSoC5/HORIZ.c ****     *  Returns the current state of the control register. This API is available 
+ 725:.\Generated_Source\PSoC5/HORIZ.c ****     *  only if the control register is not removed.
+ 726:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 727:.\Generated_Source\PSoC5/HORIZ.c ****     * Parameters:  
+ 728:.\Generated_Source\PSoC5/HORIZ.c ****     *  None 
+ 729:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 730:.\Generated_Source\PSoC5/HORIZ.c ****     * Return: 
+ 731:.\Generated_Source\PSoC5/HORIZ.c ****     *  uint8 : Current control register value
+ 732:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 733:.\Generated_Source\PSoC5/HORIZ.c ****     *******************************************************************************/    
+ 734:.\Generated_Source\PSoC5/HORIZ.c ****     uint8 HORIZ_ReadControlRegister(void) 
+ 735:.\Generated_Source\PSoC5/HORIZ.c ****     {
+ 437              		.loc 1 735 0
+ 438              		.cfi_startproc
+ 439              		@ args = 0, pretend = 0, frame = 8
+ 440              		@ frame_needed = 1, uses_anonymous_args = 0
+ 441              		@ link register save eliminated.
+ 442 0000 80B4     		push	{r7}
+ 443              		.cfi_def_cfa_offset 4
+ 444              		.cfi_offset 7, -4
+ 445 0002 83B0     		sub	sp, sp, #12
+ 446              		.cfi_def_cfa_offset 16
+ 447 0004 00AF     		add	r7, sp, #0
+ 448              		.cfi_def_cfa_register 7
+ 736:.\Generated_Source\PSoC5/HORIZ.c ****     	uint8 result;
+ 737:.\Generated_Source\PSoC5/HORIZ.c ****     	
+ 738:.\Generated_Source\PSoC5/HORIZ.c ****     	result = CY_GET_REG8(HORIZ_CONTROL_PTR);
+ 449              		.loc 1 738 0
+ 450 0006 054B     		ldr	r3, .L32
+ 451 0008 1B78     		ldrb	r3, [r3]
+ 452 000a FB71     		strb	r3, [r7, #7]
+ 739:.\Generated_Source\PSoC5/HORIZ.c ****     	return (result);
+ 453              		.loc 1 739 0
+ 454 000c FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 740:.\Generated_Source\PSoC5/HORIZ.c ****     }
+ 455              		.loc 1 740 0
+ 456 000e 1846     		mov	r0, r3
+ 457 0010 0C37     		adds	r7, r7, #12
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 22
+
+
+ 458              		.cfi_def_cfa_offset 4
+ 459 0012 BD46     		mov	sp, r7
+ 460              		.cfi_def_cfa_register 13
+ 461              		@ sp needed
+ 462 0014 5DF8047B 		ldr	r7, [sp], #4
+ 463              		.cfi_restore 7
+ 464              		.cfi_def_cfa_offset 0
+ 465 0018 7047     		bx	lr
+ 466              	.L33:
+ 467 001a 00BF     		.align	2
+ 468              	.L32:
+ 469 001c 78640040 		.word	1073767544
+ 470              		.cfi_endproc
+ 471              	.LFE9:
+ 472              		.size	HORIZ_ReadControlRegister, .-HORIZ_ReadControlRegister
+ 473              		.section	.text.HORIZ_WriteControlRegister,"ax",%progbits
+ 474              		.align	2
+ 475              		.global	HORIZ_WriteControlRegister
+ 476              		.thumb
+ 477              		.thumb_func
+ 478              		.type	HORIZ_WriteControlRegister, %function
+ 479              	HORIZ_WriteControlRegister:
+ 480              	.LFB10:
+ 741:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 742:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 743:.\Generated_Source\PSoC5/HORIZ.c ****     /*******************************************************************************
+ 744:.\Generated_Source\PSoC5/HORIZ.c ****     * Function Name: HORIZ_WriteControlRegister
+ 745:.\Generated_Source\PSoC5/HORIZ.c ****     ********************************************************************************
+ 746:.\Generated_Source\PSoC5/HORIZ.c ****     * 
+ 747:.\Generated_Source\PSoC5/HORIZ.c ****     * Summary:
+ 748:.\Generated_Source\PSoC5/HORIZ.c ****     *  Sets the bit field of the control register. This API is available only if 
+ 749:.\Generated_Source\PSoC5/HORIZ.c ****     *  the control register is not removed.
+ 750:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 751:.\Generated_Source\PSoC5/HORIZ.c ****     * Parameters:  
+ 752:.\Generated_Source\PSoC5/HORIZ.c ****     *  uint8 control: Control register bit field, The status register bits are:
+ 753:.\Generated_Source\PSoC5/HORIZ.c ****     *  [7]   : PWM Enable
+ 754:.\Generated_Source\PSoC5/HORIZ.c ****     *  [6]   : Reset
+ 755:.\Generated_Source\PSoC5/HORIZ.c ****     *  [5:3] : Compare Mode2
+ 756:.\Generated_Source\PSoC5/HORIZ.c ****     *  [2:0] : Compare Mode2
+ 757:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 758:.\Generated_Source\PSoC5/HORIZ.c ****     * Return: 
+ 759:.\Generated_Source\PSoC5/HORIZ.c ****     *  None
+ 760:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 761:.\Generated_Source\PSoC5/HORIZ.c ****     *******************************************************************************/  
+ 762:.\Generated_Source\PSoC5/HORIZ.c ****     void HORIZ_WriteControlRegister(uint8 control) 
+ 763:.\Generated_Source\PSoC5/HORIZ.c ****     {
+ 481              		.loc 1 763 0
+ 482              		.cfi_startproc
+ 483              		@ args = 0, pretend = 0, frame = 8
+ 484              		@ frame_needed = 1, uses_anonymous_args = 0
+ 485              		@ link register save eliminated.
+ 486 0000 80B4     		push	{r7}
+ 487              		.cfi_def_cfa_offset 4
+ 488              		.cfi_offset 7, -4
+ 489 0002 83B0     		sub	sp, sp, #12
+ 490              		.cfi_def_cfa_offset 16
+ 491 0004 00AF     		add	r7, sp, #0
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 23
+
+
+ 492              		.cfi_def_cfa_register 7
+ 493 0006 0346     		mov	r3, r0
+ 494 0008 FB71     		strb	r3, [r7, #7]
+ 764:.\Generated_Source\PSoC5/HORIZ.c ****     	CY_SET_REG8(HORIZ_CONTROL_PTR, control);
+ 495              		.loc 1 764 0
+ 496 000a 044A     		ldr	r2, .L35
+ 497 000c FB79     		ldrb	r3, [r7, #7]
+ 498 000e 1370     		strb	r3, [r2]
+ 765:.\Generated_Source\PSoC5/HORIZ.c ****     }
+ 499              		.loc 1 765 0
+ 500 0010 0C37     		adds	r7, r7, #12
+ 501              		.cfi_def_cfa_offset 4
+ 502 0012 BD46     		mov	sp, r7
+ 503              		.cfi_def_cfa_register 13
+ 504              		@ sp needed
+ 505 0014 5DF8047B 		ldr	r7, [sp], #4
+ 506              		.cfi_restore 7
+ 507              		.cfi_def_cfa_offset 0
+ 508 0018 7047     		bx	lr
+ 509              	.L36:
+ 510 001a 00BF     		.align	2
+ 511              	.L35:
+ 512 001c 78640040 		.word	1073767544
+ 513              		.cfi_endproc
+ 514              	.LFE10:
+ 515              		.size	HORIZ_WriteControlRegister, .-HORIZ_WriteControlRegister
+ 516              		.section	.text.HORIZ_ReadCapture,"ax",%progbits
+ 517              		.align	2
+ 518              		.global	HORIZ_ReadCapture
+ 519              		.thumb
+ 520              		.thumb_func
+ 521              		.type	HORIZ_ReadCapture, %function
+ 522              	HORIZ_ReadCapture:
+ 523              	.LFB11:
+ 766:.\Generated_Source\PSoC5/HORIZ.c **** 	
+ 767:.\Generated_Source\PSoC5/HORIZ.c **** #endif /* (HORIZ_UseControl) */
+ 768:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 769:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 770:.\Generated_Source\PSoC5/HORIZ.c **** #if (!HORIZ_UsingFixedFunction)
+ 771:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 772:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 773:.\Generated_Source\PSoC5/HORIZ.c ****     /*******************************************************************************
+ 774:.\Generated_Source\PSoC5/HORIZ.c ****     * Function Name: HORIZ_ReadCapture
+ 775:.\Generated_Source\PSoC5/HORIZ.c ****     ********************************************************************************
+ 776:.\Generated_Source\PSoC5/HORIZ.c ****     * 
+ 777:.\Generated_Source\PSoC5/HORIZ.c ****     * Summary:
+ 778:.\Generated_Source\PSoC5/HORIZ.c ****     *  Reads the capture value from the capture FIFO.
+ 779:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 780:.\Generated_Source\PSoC5/HORIZ.c ****     * Parameters:  
+ 781:.\Generated_Source\PSoC5/HORIZ.c ****     *  None
+ 782:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 783:.\Generated_Source\PSoC5/HORIZ.c ****     * Return: 
+ 784:.\Generated_Source\PSoC5/HORIZ.c ****     *  uint8/uint16: The current capture value
+ 785:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 786:.\Generated_Source\PSoC5/HORIZ.c ****     *******************************************************************************/  
+ 787:.\Generated_Source\PSoC5/HORIZ.c ****     uint8 HORIZ_ReadCapture(void)  
+ 788:.\Generated_Source\PSoC5/HORIZ.c ****     {
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 24
+
+
+ 524              		.loc 1 788 0
+ 525              		.cfi_startproc
+ 526              		@ args = 0, pretend = 0, frame = 0
+ 527              		@ frame_needed = 1, uses_anonymous_args = 0
+ 528              		@ link register save eliminated.
+ 529 0000 80B4     		push	{r7}
+ 530              		.cfi_def_cfa_offset 4
+ 531              		.cfi_offset 7, -4
+ 532 0002 00AF     		add	r7, sp, #0
+ 533              		.cfi_def_cfa_register 7
+ 789:.\Generated_Source\PSoC5/HORIZ.c ****     	return (CY_GET_REG8(HORIZ_CAPTURE_LSB_PTR));
+ 534              		.loc 1 789 0
+ 535 0004 034B     		ldr	r3, .L39
+ 536 0006 1B78     		ldrb	r3, [r3]
+ 537 0008 DBB2     		uxtb	r3, r3
+ 790:.\Generated_Source\PSoC5/HORIZ.c ****     }
+ 538              		.loc 1 790 0
+ 539 000a 1846     		mov	r0, r3
+ 540 000c BD46     		mov	sp, r7
+ 541              		.cfi_def_cfa_register 13
+ 542              		@ sp needed
+ 543 000e 5DF8047B 		ldr	r7, [sp], #4
+ 544              		.cfi_restore 7
+ 545              		.cfi_def_cfa_offset 0
+ 546 0012 7047     		bx	lr
+ 547              	.L40:
+ 548              		.align	2
+ 549              	.L39:
+ 550 0014 58640040 		.word	1073767512
+ 551              		.cfi_endproc
+ 552              	.LFE11:
+ 553              		.size	HORIZ_ReadCapture, .-HORIZ_ReadCapture
+ 554              		.section	.text.HORIZ_ReadCompare1,"ax",%progbits
+ 555              		.align	2
+ 556              		.global	HORIZ_ReadCompare1
+ 557              		.thumb
+ 558              		.thumb_func
+ 559              		.type	HORIZ_ReadCompare1, %function
+ 560              	HORIZ_ReadCompare1:
+ 561              	.LFB12:
+ 791:.\Generated_Source\PSoC5/HORIZ.c **** 	
+ 792:.\Generated_Source\PSoC5/HORIZ.c **** #endif /* (!HORIZ_UsingFixedFunction) */
+ 793:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 794:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 795:.\Generated_Source\PSoC5/HORIZ.c **** #if (HORIZ_UseOneCompareMode)
+ 796:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 797:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 798:.\Generated_Source\PSoC5/HORIZ.c ****     /*******************************************************************************
+ 799:.\Generated_Source\PSoC5/HORIZ.c ****     * Function Name: HORIZ_ReadCompare
+ 800:.\Generated_Source\PSoC5/HORIZ.c ****     ********************************************************************************
+ 801:.\Generated_Source\PSoC5/HORIZ.c ****     * 
+ 802:.\Generated_Source\PSoC5/HORIZ.c ****     * Summary:
+ 803:.\Generated_Source\PSoC5/HORIZ.c ****     *  Reads the compare value for the compare output when the PWM Mode parameter is 
+ 804:.\Generated_Source\PSoC5/HORIZ.c ****     *  set to Dither mode, Center Aligned mode, or One Output mode.
+ 805:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 806:.\Generated_Source\PSoC5/HORIZ.c ****     * Parameters:  
+ 807:.\Generated_Source\PSoC5/HORIZ.c ****     *  None
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 25
+
+
+ 808:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 809:.\Generated_Source\PSoC5/HORIZ.c ****     * Return: 
+ 810:.\Generated_Source\PSoC5/HORIZ.c ****     *  uint8/uint16: Current compare value
+ 811:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 812:.\Generated_Source\PSoC5/HORIZ.c ****     *******************************************************************************/  
+ 813:.\Generated_Source\PSoC5/HORIZ.c ****     uint8 HORIZ_ReadCompare(void)  
+ 814:.\Generated_Source\PSoC5/HORIZ.c ****     {
+ 815:.\Generated_Source\PSoC5/HORIZ.c **** 		#if(HORIZ_UsingFixedFunction)
+ 816:.\Generated_Source\PSoC5/HORIZ.c ****             return ((uint8)CY_GET_REG16(HORIZ_COMPARE1_LSB_PTR));
+ 817:.\Generated_Source\PSoC5/HORIZ.c ****         #else
+ 818:.\Generated_Source\PSoC5/HORIZ.c ****             return (CY_GET_REG8(HORIZ_COMPARE1_LSB_PTR));
+ 819:.\Generated_Source\PSoC5/HORIZ.c ****         #endif /* (HORIZ_UsingFixedFunction) */
+ 820:.\Generated_Source\PSoC5/HORIZ.c ****     }
+ 821:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 822:.\Generated_Source\PSoC5/HORIZ.c **** #else
+ 823:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 824:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 825:.\Generated_Source\PSoC5/HORIZ.c ****     /*******************************************************************************
+ 826:.\Generated_Source\PSoC5/HORIZ.c ****     * Function Name: HORIZ_ReadCompare1
+ 827:.\Generated_Source\PSoC5/HORIZ.c ****     ********************************************************************************
+ 828:.\Generated_Source\PSoC5/HORIZ.c ****     * 
+ 829:.\Generated_Source\PSoC5/HORIZ.c ****     * Summary:
+ 830:.\Generated_Source\PSoC5/HORIZ.c ****     *  Reads the compare value for the compare1 output.
+ 831:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 832:.\Generated_Source\PSoC5/HORIZ.c ****     * Parameters:  
+ 833:.\Generated_Source\PSoC5/HORIZ.c ****     *  None
+ 834:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 835:.\Generated_Source\PSoC5/HORIZ.c ****     * Return: 
+ 836:.\Generated_Source\PSoC5/HORIZ.c ****     *  uint8/uint16: Current compare value.
+ 837:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 838:.\Generated_Source\PSoC5/HORIZ.c ****     *******************************************************************************/  
+ 839:.\Generated_Source\PSoC5/HORIZ.c ****     uint8 HORIZ_ReadCompare1(void) 
+ 840:.\Generated_Source\PSoC5/HORIZ.c ****     {
+ 562              		.loc 1 840 0
+ 563              		.cfi_startproc
+ 564              		@ args = 0, pretend = 0, frame = 0
+ 565              		@ frame_needed = 1, uses_anonymous_args = 0
+ 566              		@ link register save eliminated.
+ 567 0000 80B4     		push	{r7}
+ 568              		.cfi_def_cfa_offset 4
+ 569              		.cfi_offset 7, -4
+ 570 0002 00AF     		add	r7, sp, #0
+ 571              		.cfi_def_cfa_register 7
+ 841:.\Generated_Source\PSoC5/HORIZ.c **** 		return (CY_GET_REG8(HORIZ_COMPARE1_LSB_PTR));
+ 572              		.loc 1 841 0
+ 573 0004 034B     		ldr	r3, .L43
+ 574 0006 1B78     		ldrb	r3, [r3]
+ 575 0008 DBB2     		uxtb	r3, r3
+ 842:.\Generated_Source\PSoC5/HORIZ.c ****     }
+ 576              		.loc 1 842 0
+ 577 000a 1846     		mov	r0, r3
+ 578 000c BD46     		mov	sp, r7
+ 579              		.cfi_def_cfa_register 13
+ 580              		@ sp needed
+ 581 000e 5DF8047B 		ldr	r7, [sp], #4
+ 582              		.cfi_restore 7
+ 583              		.cfi_def_cfa_offset 0
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 26
+
+
+ 584 0012 7047     		bx	lr
+ 585              	.L44:
+ 586              		.align	2
+ 587              	.L43:
+ 588 0014 28640040 		.word	1073767464
+ 589              		.cfi_endproc
+ 590              	.LFE12:
+ 591              		.size	HORIZ_ReadCompare1, .-HORIZ_ReadCompare1
+ 592              		.section	.text.HORIZ_ReadCompare2,"ax",%progbits
+ 593              		.align	2
+ 594              		.global	HORIZ_ReadCompare2
+ 595              		.thumb
+ 596              		.thumb_func
+ 597              		.type	HORIZ_ReadCompare2, %function
+ 598              	HORIZ_ReadCompare2:
+ 599              	.LFB13:
+ 843:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 844:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 845:.\Generated_Source\PSoC5/HORIZ.c ****     /*******************************************************************************
+ 846:.\Generated_Source\PSoC5/HORIZ.c ****     * Function Name: HORIZ_ReadCompare2
+ 847:.\Generated_Source\PSoC5/HORIZ.c ****     ********************************************************************************
+ 848:.\Generated_Source\PSoC5/HORIZ.c ****     * 
+ 849:.\Generated_Source\PSoC5/HORIZ.c ****     * Summary:
+ 850:.\Generated_Source\PSoC5/HORIZ.c ****     *  Reads the compare value for the compare2 output.
+ 851:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 852:.\Generated_Source\PSoC5/HORIZ.c ****     * Parameters:  
+ 853:.\Generated_Source\PSoC5/HORIZ.c ****     *  None
+ 854:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 855:.\Generated_Source\PSoC5/HORIZ.c ****     * Return: 
+ 856:.\Generated_Source\PSoC5/HORIZ.c ****     *  uint8/uint16: Current compare value.
+ 857:.\Generated_Source\PSoC5/HORIZ.c ****     *
+ 858:.\Generated_Source\PSoC5/HORIZ.c ****     *******************************************************************************/  
+ 859:.\Generated_Source\PSoC5/HORIZ.c ****     uint8 HORIZ_ReadCompare2(void)  
+ 860:.\Generated_Source\PSoC5/HORIZ.c ****     {
+ 600              		.loc 1 860 0
+ 601              		.cfi_startproc
+ 602              		@ args = 0, pretend = 0, frame = 0
+ 603              		@ frame_needed = 1, uses_anonymous_args = 0
+ 604              		@ link register save eliminated.
+ 605 0000 80B4     		push	{r7}
+ 606              		.cfi_def_cfa_offset 4
+ 607              		.cfi_offset 7, -4
+ 608 0002 00AF     		add	r7, sp, #0
+ 609              		.cfi_def_cfa_register 7
+ 861:.\Generated_Source\PSoC5/HORIZ.c **** 		return (CY_GET_REG8(HORIZ_COMPARE2_LSB_PTR));
+ 610              		.loc 1 861 0
+ 611 0004 034B     		ldr	r3, .L47
+ 612 0006 1B78     		ldrb	r3, [r3]
+ 613 0008 DBB2     		uxtb	r3, r3
+ 862:.\Generated_Source\PSoC5/HORIZ.c ****     }
+ 614              		.loc 1 862 0
+ 615 000a 1846     		mov	r0, r3
+ 616 000c BD46     		mov	sp, r7
+ 617              		.cfi_def_cfa_register 13
+ 618              		@ sp needed
+ 619 000e 5DF8047B 		ldr	r7, [sp], #4
+ 620              		.cfi_restore 7
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 27
+
+
+ 621              		.cfi_def_cfa_offset 0
+ 622 0012 7047     		bx	lr
+ 623              	.L48:
+ 624              		.align	2
+ 625              	.L47:
+ 626 0014 38640040 		.word	1073767480
+ 627              		.cfi_endproc
+ 628              	.LFE13:
+ 629              		.size	HORIZ_ReadCompare2, .-HORIZ_ReadCompare2
+ 630              		.section	.text.HORIZ_ReadPeriod,"ax",%progbits
+ 631              		.align	2
+ 632              		.global	HORIZ_ReadPeriod
+ 633              		.thumb
+ 634              		.thumb_func
+ 635              		.type	HORIZ_ReadPeriod, %function
+ 636              	HORIZ_ReadPeriod:
+ 637              	.LFB14:
+ 863:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 864:.\Generated_Source\PSoC5/HORIZ.c **** #endif /* (HORIZ_UseOneCompareMode) */
+ 865:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 866:.\Generated_Source\PSoC5/HORIZ.c **** 
+ 867:.\Generated_Source\PSoC5/HORIZ.c **** /*******************************************************************************
+ 868:.\Generated_Source\PSoC5/HORIZ.c **** * Function Name: HORIZ_ReadPeriod
+ 869:.\Generated_Source\PSoC5/HORIZ.c **** ********************************************************************************
+ 870:.\Generated_Source\PSoC5/HORIZ.c **** * 
+ 871:.\Generated_Source\PSoC5/HORIZ.c **** * Summary:
+ 872:.\Generated_Source\PSoC5/HORIZ.c **** *  Reads the period value used by the PWM hardware.
+ 873:.\Generated_Source\PSoC5/HORIZ.c **** *
+ 874:.\Generated_Source\PSoC5/HORIZ.c **** * Parameters:  
+ 875:.\Generated_Source\PSoC5/HORIZ.c **** *  None
+ 876:.\Generated_Source\PSoC5/HORIZ.c **** *
+ 877:.\Generated_Source\PSoC5/HORIZ.c **** * Return: 
+ 878:.\Generated_Source\PSoC5/HORIZ.c **** *  uint8/16: Period value
+ 879:.\Generated_Source\PSoC5/HORIZ.c **** *
+ 880:.\Generated_Source\PSoC5/HORIZ.c **** *******************************************************************************/ 
+ 881:.\Generated_Source\PSoC5/HORIZ.c **** uint8 HORIZ_ReadPeriod(void) 
+ 882:.\Generated_Source\PSoC5/HORIZ.c **** {
+ 638              		.loc 1 882 0
+ 639              		.cfi_startproc
+ 640              		@ args = 0, pretend = 0, frame = 0
+ 641              		@ frame_needed = 1, uses_anonymous_args = 0
+ 642              		@ link register save eliminated.
+ 643 0000 80B4     		push	{r7}
+ 644              		.cfi_def_cfa_offset 4
+ 645              		.cfi_offset 7, -4
+ 646 0002 00AF     		add	r7, sp, #0
+ 647              		.cfi_def_cfa_register 7
+ 883:.\Generated_Source\PSoC5/HORIZ.c **** 	#if(HORIZ_UsingFixedFunction)
+ 884:.\Generated_Source\PSoC5/HORIZ.c ****         return ((uint8)CY_GET_REG16(HORIZ_PERIOD_LSB_PTR));
+ 885:.\Generated_Source\PSoC5/HORIZ.c ****     #else
+ 886:.\Generated_Source\PSoC5/HORIZ.c ****         return (CY_GET_REG8(HORIZ_PERIOD_LSB_PTR));
+ 648              		.loc 1 886 0
+ 649 0004 034B     		ldr	r3, .L51
+ 650 0006 1B78     		ldrb	r3, [r3]
+ 651 0008 DBB2     		uxtb	r3, r3
+ 887:.\Generated_Source\PSoC5/HORIZ.c ****     #endif /* (HORIZ_UsingFixedFunction) */
+ 888:.\Generated_Source\PSoC5/HORIZ.c **** }
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 28
+
+
+ 652              		.loc 1 888 0
+ 653 000a 1846     		mov	r0, r3
+ 654 000c BD46     		mov	sp, r7
+ 655              		.cfi_def_cfa_register 13
+ 656              		@ sp needed
+ 657 000e 5DF8047B 		ldr	r7, [sp], #4
+ 658              		.cfi_restore 7
+ 659              		.cfi_def_cfa_offset 0
+ 660 0012 7047     		bx	lr
+ 661              	.L52:
+ 662              		.align	2
+ 663              	.L51:
+ 664 0014 48640040 		.word	1073767496
+ 665              		.cfi_endproc
+ 666              	.LFE14:
+ 667              		.size	HORIZ_ReadPeriod, .-HORIZ_ReadPeriod
+ 668              		.text
+ 669              	.Letext0:
+ 670              		.file 2 ".\\Generated_Source\\PSoC5\\cytypes.h"
+ 671              		.section	.debug_info,"",%progbits
+ 672              	.Ldebug_info0:
+ 673 0000 5D020000 		.4byte	0x25d
+ 674 0004 0400     		.2byte	0x4
+ 675 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 676 000a 04       		.byte	0x4
+ 677 000b 01       		.uleb128 0x1
+ 678 000c C6000000 		.4byte	.LASF35
+ 679 0010 01       		.byte	0x1
+ 680 0011 5B010000 		.4byte	.LASF36
+ 681 0015 7C010000 		.4byte	.LASF37
+ 682 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 683 001d 00000000 		.4byte	0
+ 684 0021 00000000 		.4byte	.Ldebug_line0
+ 685 0025 02       		.uleb128 0x2
+ 686 0026 01       		.byte	0x1
+ 687 0027 06       		.byte	0x6
+ 688 0028 9E020000 		.4byte	.LASF0
+ 689 002c 02       		.uleb128 0x2
+ 690 002d 01       		.byte	0x1
+ 691 002e 08       		.byte	0x8
+ 692 002f 82000000 		.4byte	.LASF1
+ 693 0033 02       		.uleb128 0x2
+ 694 0034 02       		.byte	0x2
+ 695 0035 05       		.byte	0x5
+ 696 0036 65020000 		.4byte	.LASF2
+ 697 003a 02       		.uleb128 0x2
+ 698 003b 02       		.byte	0x2
+ 699 003c 07       		.byte	0x7
+ 700 003d 4D000000 		.4byte	.LASF3
+ 701 0041 02       		.uleb128 0x2
+ 702 0042 04       		.byte	0x4
+ 703 0043 05       		.byte	0x5
+ 704 0044 95020000 		.4byte	.LASF4
+ 705 0048 02       		.uleb128 0x2
+ 706 0049 04       		.byte	0x4
+ 707 004a 07       		.byte	0x7
+ 708 004b A6000000 		.4byte	.LASF5
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 29
+
+
+ 709 004f 02       		.uleb128 0x2
+ 710 0050 08       		.byte	0x8
+ 711 0051 05       		.byte	0x5
+ 712 0052 52020000 		.4byte	.LASF6
+ 713 0056 02       		.uleb128 0x2
+ 714 0057 08       		.byte	0x8
+ 715 0058 07       		.byte	0x7
+ 716 0059 FA010000 		.4byte	.LASF7
+ 717 005d 03       		.uleb128 0x3
+ 718 005e 04       		.byte	0x4
+ 719 005f 05       		.byte	0x5
+ 720 0060 696E7400 		.ascii	"int\000"
+ 721 0064 02       		.uleb128 0x2
+ 722 0065 04       		.byte	0x4
+ 723 0066 07       		.byte	0x7
+ 724 0067 D6010000 		.4byte	.LASF8
+ 725 006b 04       		.uleb128 0x4
+ 726 006c B8000000 		.4byte	.LASF12
+ 727 0070 02       		.byte	0x2
+ 728 0071 5B       		.byte	0x5b
+ 729 0072 2C000000 		.4byte	0x2c
+ 730 0076 02       		.uleb128 0x2
+ 731 0077 04       		.byte	0x4
+ 732 0078 04       		.byte	0x4
+ 733 0079 60000000 		.4byte	.LASF9
+ 734 007d 02       		.uleb128 0x2
+ 735 007e 08       		.byte	0x8
+ 736 007f 04       		.byte	0x4
+ 737 0080 54010000 		.4byte	.LASF10
+ 738 0084 02       		.uleb128 0x2
+ 739 0085 01       		.byte	0x1
+ 740 0086 08       		.byte	0x8
+ 741 0087 60020000 		.4byte	.LASF11
+ 742 008b 04       		.uleb128 0x4
+ 743 008c A1000000 		.4byte	.LASF13
+ 744 0090 02       		.byte	0x2
+ 745 0091 F0       		.byte	0xf0
+ 746 0092 96000000 		.4byte	0x96
+ 747 0096 05       		.uleb128 0x5
+ 748 0097 6B000000 		.4byte	0x6b
+ 749 009b 02       		.uleb128 0x2
+ 750 009c 04       		.byte	0x4
+ 751 009d 07       		.byte	0x7
+ 752 009e 2F020000 		.4byte	.LASF14
+ 753 00a2 06       		.uleb128 0x6
+ 754 00a3 E3010000 		.4byte	.LASF15
+ 755 00a7 01       		.byte	0x1
+ 756 00a8 32       		.byte	0x32
+ 757 00a9 00000000 		.4byte	.LFB0
+ 758 00ad 20000000 		.4byte	.LFE0-.LFB0
+ 759 00b1 01       		.uleb128 0x1
+ 760 00b2 9C       		.byte	0x9c
+ 761 00b3 07       		.uleb128 0x7
+ 762 00b4 EF010000 		.4byte	.LASF18
+ 763 00b8 01       		.byte	0x1
+ 764 00b9 4F       		.byte	0x4f
+ 765 00ba 00000000 		.4byte	.LFB1
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 30
+
+
+ 766 00be 54000000 		.4byte	.LFE1-.LFB1
+ 767 00c2 01       		.uleb128 0x1
+ 768 00c3 9C       		.byte	0x9c
+ 769 00c4 D7000000 		.4byte	0xd7
+ 770 00c8 08       		.uleb128 0x8
+ 771 00c9 2A020000 		.4byte	.LASF26
+ 772 00cd 01       		.byte	0x1
+ 773 00ce 52       		.byte	0x52
+ 774 00cf 6B000000 		.4byte	0x6b
+ 775 00d3 02       		.uleb128 0x2
+ 776 00d4 91       		.byte	0x91
+ 777 00d5 77       		.sleb128 -9
+ 778 00d6 00       		.byte	0
+ 779 00d7 09       		.uleb128 0x9
+ 780 00d8 39000000 		.4byte	.LASF16
+ 781 00dc 01       		.byte	0x1
+ 782 00dd C1       		.byte	0xc1
+ 783 00de 00000000 		.4byte	.LFB2
+ 784 00e2 20000000 		.4byte	.LFE2-.LFB2
+ 785 00e6 01       		.uleb128 0x1
+ 786 00e7 9C       		.byte	0x9c
+ 787 00e8 09       		.uleb128 0x9
+ 788 00e9 00000000 		.4byte	.LASF17
+ 789 00ed 01       		.byte	0x1
+ 790 00ee E3       		.byte	0xe3
+ 791 00ef 00000000 		.4byte	.LFB3
+ 792 00f3 20000000 		.4byte	.LFE3-.LFB3
+ 793 00f7 01       		.uleb128 0x1
+ 794 00f8 9C       		.byte	0x9c
+ 795 00f9 0A       		.uleb128 0xa
+ 796 00fa D2020000 		.4byte	.LASF19
+ 797 00fe 01       		.byte	0x1
+ 798 00ff 8D01     		.2byte	0x18d
+ 799 0101 00000000 		.4byte	.LFB4
+ 800 0105 20000000 		.4byte	.LFE4-.LFB4
+ 801 0109 01       		.uleb128 0x1
+ 802 010a 9C       		.byte	0x9c
+ 803 010b 1F010000 		.4byte	0x11f
+ 804 010f 0B       		.uleb128 0xb
+ 805 0110 66000000 		.4byte	.LASF21
+ 806 0114 01       		.byte	0x1
+ 807 0115 8D01     		.2byte	0x18d
+ 808 0117 6B000000 		.4byte	0x6b
+ 809 011b 02       		.uleb128 0x2
+ 810 011c 91       		.byte	0x91
+ 811 011d 77       		.sleb128 -9
+ 812 011e 00       		.byte	0
+ 813 011f 0C       		.uleb128 0xc
+ 814 0120 18020000 		.4byte	.LASF30
+ 815 0124 01       		.byte	0x1
+ 816 0125 A301     		.2byte	0x1a3
+ 817 0127 6B000000 		.4byte	0x6b
+ 818 012b 00000000 		.4byte	.LFB5
+ 819 012f 20000000 		.4byte	.LFE5-.LFB5
+ 820 0133 01       		.uleb128 0x1
+ 821 0134 9C       		.byte	0x9c
+ 822 0135 0A       		.uleb128 0xa
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 31
+
+
+ 823 0136 83020000 		.4byte	.LASF20
+ 824 013a 01       		.byte	0x1
+ 825 013b DC01     		.2byte	0x1dc
+ 826 013d 00000000 		.4byte	.LFB6
+ 827 0141 20000000 		.4byte	.LFE6-.LFB6
+ 828 0145 01       		.uleb128 0x1
+ 829 0146 9C       		.byte	0x9c
+ 830 0147 5B010000 		.4byte	0x15b
+ 831 014b 0B       		.uleb128 0xb
+ 832 014c 46000000 		.4byte	.LASF22
+ 833 0150 01       		.byte	0x1
+ 834 0151 DC01     		.2byte	0x1dc
+ 835 0153 6B000000 		.4byte	0x6b
+ 836 0157 02       		.uleb128 0x2
+ 837 0158 91       		.byte	0x91
+ 838 0159 77       		.sleb128 -9
+ 839 015a 00       		.byte	0
+ 840 015b 0A       		.uleb128 0xa
+ 841 015c 6F020000 		.4byte	.LASF23
+ 842 0160 01       		.byte	0x1
+ 843 0161 2502     		.2byte	0x225
+ 844 0163 00000000 		.4byte	.LFB7
+ 845 0167 20000000 		.4byte	.LFE7-.LFB7
+ 846 016b 01       		.uleb128 0x1
+ 847 016c 9C       		.byte	0x9c
+ 848 016d 81010000 		.4byte	0x181
+ 849 0171 0B       		.uleb128 0xb
+ 850 0172 AA020000 		.4byte	.LASF24
+ 851 0176 01       		.byte	0x1
+ 852 0177 2502     		.2byte	0x225
+ 853 0179 6B000000 		.4byte	0x6b
+ 854 017d 02       		.uleb128 0x2
+ 855 017e 91       		.byte	0x91
+ 856 017f 77       		.sleb128 -9
+ 857 0180 00       		.byte	0
+ 858 0181 0A       		.uleb128 0xa
+ 859 0182 6E000000 		.4byte	.LASF25
+ 860 0186 01       		.byte	0x1
+ 861 0187 4202     		.2byte	0x242
+ 862 0189 00000000 		.4byte	.LFB8
+ 863 018d 20000000 		.4byte	.LFE8-.LFB8
+ 864 0191 01       		.uleb128 0x1
+ 865 0192 9C       		.byte	0x9c
+ 866 0193 A7010000 		.4byte	0x1a7
+ 867 0197 0B       		.uleb128 0xb
+ 868 0198 AA020000 		.4byte	.LASF24
+ 869 019c 01       		.byte	0x1
+ 870 019d 4202     		.2byte	0x242
+ 871 019f 6B000000 		.4byte	0x6b
+ 872 01a3 02       		.uleb128 0x2
+ 873 01a4 91       		.byte	0x91
+ 874 01a5 77       		.sleb128 -9
+ 875 01a6 00       		.byte	0
+ 876 01a7 0D       		.uleb128 0xd
+ 877 01a8 38020000 		.4byte	.LASF38
+ 878 01ac 01       		.byte	0x1
+ 879 01ad DE02     		.2byte	0x2de
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 32
+
+
+ 880 01af 6B000000 		.4byte	0x6b
+ 881 01b3 00000000 		.4byte	.LFB9
+ 882 01b7 20000000 		.4byte	.LFE9-.LFB9
+ 883 01bb 01       		.uleb128 0x1
+ 884 01bc 9C       		.byte	0x9c
+ 885 01bd D1010000 		.4byte	0x1d1
+ 886 01c1 0E       		.uleb128 0xe
+ 887 01c2 11020000 		.4byte	.LASF27
+ 888 01c6 01       		.byte	0x1
+ 889 01c7 E002     		.2byte	0x2e0
+ 890 01c9 6B000000 		.4byte	0x6b
+ 891 01cd 02       		.uleb128 0x2
+ 892 01ce 91       		.byte	0x91
+ 893 01cf 77       		.sleb128 -9
+ 894 01d0 00       		.byte	0
+ 895 01d1 0A       		.uleb128 0xa
+ 896 01d2 1E000000 		.4byte	.LASF28
+ 897 01d6 01       		.byte	0x1
+ 898 01d7 FA02     		.2byte	0x2fa
+ 899 01d9 00000000 		.4byte	.LFB10
+ 900 01dd 20000000 		.4byte	.LFE10-.LFB10
+ 901 01e1 01       		.uleb128 0x1
+ 902 01e2 9C       		.byte	0x9c
+ 903 01e3 F7010000 		.4byte	0x1f7
+ 904 01e7 0B       		.uleb128 0xb
+ 905 01e8 BE000000 		.4byte	.LASF29
+ 906 01ec 01       		.byte	0x1
+ 907 01ed FA02     		.2byte	0x2fa
+ 908 01ef 6B000000 		.4byte	0x6b
+ 909 01f3 02       		.uleb128 0x2
+ 910 01f4 91       		.byte	0x91
+ 911 01f5 77       		.sleb128 -9
+ 912 01f6 00       		.byte	0
+ 913 01f7 0C       		.uleb128 0xc
+ 914 01f8 B2020000 		.4byte	.LASF31
+ 915 01fc 01       		.byte	0x1
+ 916 01fd 1303     		.2byte	0x313
+ 917 01ff 6B000000 		.4byte	0x6b
+ 918 0203 00000000 		.4byte	.LFB11
+ 919 0207 18000000 		.4byte	.LFE11-.LFB11
+ 920 020b 01       		.uleb128 0x1
+ 921 020c 9C       		.byte	0x9c
+ 922 020d 0C       		.uleb128 0xc
+ 923 020e 0B000000 		.4byte	.LASF32
+ 924 0212 01       		.byte	0x1
+ 925 0213 4703     		.2byte	0x347
+ 926 0215 6B000000 		.4byte	0x6b
+ 927 0219 00000000 		.4byte	.LFB12
+ 928 021d 18000000 		.4byte	.LFE12-.LFB12
+ 929 0221 01       		.uleb128 0x1
+ 930 0222 9C       		.byte	0x9c
+ 931 0223 0C       		.uleb128 0xc
+ 932 0224 C3010000 		.4byte	.LASF33
+ 933 0228 01       		.byte	0x1
+ 934 0229 5B03     		.2byte	0x35b
+ 935 022b 6B000000 		.4byte	0x6b
+ 936 022f 00000000 		.4byte	.LFB13
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 33
+
+
+ 937 0233 18000000 		.4byte	.LFE13-.LFB13
+ 938 0237 01       		.uleb128 0x1
+ 939 0238 9C       		.byte	0x9c
+ 940 0239 0C       		.uleb128 0xc
+ 941 023a 90000000 		.4byte	.LASF34
+ 942 023e 01       		.byte	0x1
+ 943 023f 7103     		.2byte	0x371
+ 944 0241 6B000000 		.4byte	0x6b
+ 945 0245 00000000 		.4byte	.LFB14
+ 946 0249 18000000 		.4byte	.LFE14-.LFB14
+ 947 024d 01       		.uleb128 0x1
+ 948 024e 9C       		.byte	0x9c
+ 949 024f 0F       		.uleb128 0xf
+ 950 0250 C4020000 		.4byte	.LASF39
+ 951 0254 01       		.byte	0x1
+ 952 0255 1B       		.byte	0x1b
+ 953 0256 6B000000 		.4byte	0x6b
+ 954 025a 05       		.uleb128 0x5
+ 955 025b 03       		.byte	0x3
+ 956 025c 00000000 		.4byte	HORIZ_initVar
+ 957 0260 00       		.byte	0
+ 958              		.section	.debug_abbrev,"",%progbits
+ 959              	.Ldebug_abbrev0:
+ 960 0000 01       		.uleb128 0x1
+ 961 0001 11       		.uleb128 0x11
+ 962 0002 01       		.byte	0x1
+ 963 0003 25       		.uleb128 0x25
+ 964 0004 0E       		.uleb128 0xe
+ 965 0005 13       		.uleb128 0x13
+ 966 0006 0B       		.uleb128 0xb
+ 967 0007 03       		.uleb128 0x3
+ 968 0008 0E       		.uleb128 0xe
+ 969 0009 1B       		.uleb128 0x1b
+ 970 000a 0E       		.uleb128 0xe
+ 971 000b 55       		.uleb128 0x55
+ 972 000c 17       		.uleb128 0x17
+ 973 000d 11       		.uleb128 0x11
+ 974 000e 01       		.uleb128 0x1
+ 975 000f 10       		.uleb128 0x10
+ 976 0010 17       		.uleb128 0x17
+ 977 0011 00       		.byte	0
+ 978 0012 00       		.byte	0
+ 979 0013 02       		.uleb128 0x2
+ 980 0014 24       		.uleb128 0x24
+ 981 0015 00       		.byte	0
+ 982 0016 0B       		.uleb128 0xb
+ 983 0017 0B       		.uleb128 0xb
+ 984 0018 3E       		.uleb128 0x3e
+ 985 0019 0B       		.uleb128 0xb
+ 986 001a 03       		.uleb128 0x3
+ 987 001b 0E       		.uleb128 0xe
+ 988 001c 00       		.byte	0
+ 989 001d 00       		.byte	0
+ 990 001e 03       		.uleb128 0x3
+ 991 001f 24       		.uleb128 0x24
+ 992 0020 00       		.byte	0
+ 993 0021 0B       		.uleb128 0xb
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 34
+
+
+ 994 0022 0B       		.uleb128 0xb
+ 995 0023 3E       		.uleb128 0x3e
+ 996 0024 0B       		.uleb128 0xb
+ 997 0025 03       		.uleb128 0x3
+ 998 0026 08       		.uleb128 0x8
+ 999 0027 00       		.byte	0
+ 1000 0028 00       		.byte	0
+ 1001 0029 04       		.uleb128 0x4
+ 1002 002a 16       		.uleb128 0x16
+ 1003 002b 00       		.byte	0
+ 1004 002c 03       		.uleb128 0x3
+ 1005 002d 0E       		.uleb128 0xe
+ 1006 002e 3A       		.uleb128 0x3a
+ 1007 002f 0B       		.uleb128 0xb
+ 1008 0030 3B       		.uleb128 0x3b
+ 1009 0031 0B       		.uleb128 0xb
+ 1010 0032 49       		.uleb128 0x49
+ 1011 0033 13       		.uleb128 0x13
+ 1012 0034 00       		.byte	0
+ 1013 0035 00       		.byte	0
+ 1014 0036 05       		.uleb128 0x5
+ 1015 0037 35       		.uleb128 0x35
+ 1016 0038 00       		.byte	0
+ 1017 0039 49       		.uleb128 0x49
+ 1018 003a 13       		.uleb128 0x13
+ 1019 003b 00       		.byte	0
+ 1020 003c 00       		.byte	0
+ 1021 003d 06       		.uleb128 0x6
+ 1022 003e 2E       		.uleb128 0x2e
+ 1023 003f 00       		.byte	0
+ 1024 0040 3F       		.uleb128 0x3f
+ 1025 0041 19       		.uleb128 0x19
+ 1026 0042 03       		.uleb128 0x3
+ 1027 0043 0E       		.uleb128 0xe
+ 1028 0044 3A       		.uleb128 0x3a
+ 1029 0045 0B       		.uleb128 0xb
+ 1030 0046 3B       		.uleb128 0x3b
+ 1031 0047 0B       		.uleb128 0xb
+ 1032 0048 27       		.uleb128 0x27
+ 1033 0049 19       		.uleb128 0x19
+ 1034 004a 11       		.uleb128 0x11
+ 1035 004b 01       		.uleb128 0x1
+ 1036 004c 12       		.uleb128 0x12
+ 1037 004d 06       		.uleb128 0x6
+ 1038 004e 40       		.uleb128 0x40
+ 1039 004f 18       		.uleb128 0x18
+ 1040 0050 9642     		.uleb128 0x2116
+ 1041 0052 19       		.uleb128 0x19
+ 1042 0053 00       		.byte	0
+ 1043 0054 00       		.byte	0
+ 1044 0055 07       		.uleb128 0x7
+ 1045 0056 2E       		.uleb128 0x2e
+ 1046 0057 01       		.byte	0x1
+ 1047 0058 3F       		.uleb128 0x3f
+ 1048 0059 19       		.uleb128 0x19
+ 1049 005a 03       		.uleb128 0x3
+ 1050 005b 0E       		.uleb128 0xe
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 35
+
+
+ 1051 005c 3A       		.uleb128 0x3a
+ 1052 005d 0B       		.uleb128 0xb
+ 1053 005e 3B       		.uleb128 0x3b
+ 1054 005f 0B       		.uleb128 0xb
+ 1055 0060 27       		.uleb128 0x27
+ 1056 0061 19       		.uleb128 0x19
+ 1057 0062 11       		.uleb128 0x11
+ 1058 0063 01       		.uleb128 0x1
+ 1059 0064 12       		.uleb128 0x12
+ 1060 0065 06       		.uleb128 0x6
+ 1061 0066 40       		.uleb128 0x40
+ 1062 0067 18       		.uleb128 0x18
+ 1063 0068 9642     		.uleb128 0x2116
+ 1064 006a 19       		.uleb128 0x19
+ 1065 006b 01       		.uleb128 0x1
+ 1066 006c 13       		.uleb128 0x13
+ 1067 006d 00       		.byte	0
+ 1068 006e 00       		.byte	0
+ 1069 006f 08       		.uleb128 0x8
+ 1070 0070 34       		.uleb128 0x34
+ 1071 0071 00       		.byte	0
+ 1072 0072 03       		.uleb128 0x3
+ 1073 0073 0E       		.uleb128 0xe
+ 1074 0074 3A       		.uleb128 0x3a
+ 1075 0075 0B       		.uleb128 0xb
+ 1076 0076 3B       		.uleb128 0x3b
+ 1077 0077 0B       		.uleb128 0xb
+ 1078 0078 49       		.uleb128 0x49
+ 1079 0079 13       		.uleb128 0x13
+ 1080 007a 02       		.uleb128 0x2
+ 1081 007b 18       		.uleb128 0x18
+ 1082 007c 00       		.byte	0
+ 1083 007d 00       		.byte	0
+ 1084 007e 09       		.uleb128 0x9
+ 1085 007f 2E       		.uleb128 0x2e
+ 1086 0080 00       		.byte	0
+ 1087 0081 3F       		.uleb128 0x3f
+ 1088 0082 19       		.uleb128 0x19
+ 1089 0083 03       		.uleb128 0x3
+ 1090 0084 0E       		.uleb128 0xe
+ 1091 0085 3A       		.uleb128 0x3a
+ 1092 0086 0B       		.uleb128 0xb
+ 1093 0087 3B       		.uleb128 0x3b
+ 1094 0088 0B       		.uleb128 0xb
+ 1095 0089 27       		.uleb128 0x27
+ 1096 008a 19       		.uleb128 0x19
+ 1097 008b 11       		.uleb128 0x11
+ 1098 008c 01       		.uleb128 0x1
+ 1099 008d 12       		.uleb128 0x12
+ 1100 008e 06       		.uleb128 0x6
+ 1101 008f 40       		.uleb128 0x40
+ 1102 0090 18       		.uleb128 0x18
+ 1103 0091 9742     		.uleb128 0x2117
+ 1104 0093 19       		.uleb128 0x19
+ 1105 0094 00       		.byte	0
+ 1106 0095 00       		.byte	0
+ 1107 0096 0A       		.uleb128 0xa
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 36
+
+
+ 1108 0097 2E       		.uleb128 0x2e
+ 1109 0098 01       		.byte	0x1
+ 1110 0099 3F       		.uleb128 0x3f
+ 1111 009a 19       		.uleb128 0x19
+ 1112 009b 03       		.uleb128 0x3
+ 1113 009c 0E       		.uleb128 0xe
+ 1114 009d 3A       		.uleb128 0x3a
+ 1115 009e 0B       		.uleb128 0xb
+ 1116 009f 3B       		.uleb128 0x3b
+ 1117 00a0 05       		.uleb128 0x5
+ 1118 00a1 27       		.uleb128 0x27
+ 1119 00a2 19       		.uleb128 0x19
+ 1120 00a3 11       		.uleb128 0x11
+ 1121 00a4 01       		.uleb128 0x1
+ 1122 00a5 12       		.uleb128 0x12
+ 1123 00a6 06       		.uleb128 0x6
+ 1124 00a7 40       		.uleb128 0x40
+ 1125 00a8 18       		.uleb128 0x18
+ 1126 00a9 9742     		.uleb128 0x2117
+ 1127 00ab 19       		.uleb128 0x19
+ 1128 00ac 01       		.uleb128 0x1
+ 1129 00ad 13       		.uleb128 0x13
+ 1130 00ae 00       		.byte	0
+ 1131 00af 00       		.byte	0
+ 1132 00b0 0B       		.uleb128 0xb
+ 1133 00b1 05       		.uleb128 0x5
+ 1134 00b2 00       		.byte	0
+ 1135 00b3 03       		.uleb128 0x3
+ 1136 00b4 0E       		.uleb128 0xe
+ 1137 00b5 3A       		.uleb128 0x3a
+ 1138 00b6 0B       		.uleb128 0xb
+ 1139 00b7 3B       		.uleb128 0x3b
+ 1140 00b8 05       		.uleb128 0x5
+ 1141 00b9 49       		.uleb128 0x49
+ 1142 00ba 13       		.uleb128 0x13
+ 1143 00bb 02       		.uleb128 0x2
+ 1144 00bc 18       		.uleb128 0x18
+ 1145 00bd 00       		.byte	0
+ 1146 00be 00       		.byte	0
+ 1147 00bf 0C       		.uleb128 0xc
+ 1148 00c0 2E       		.uleb128 0x2e
+ 1149 00c1 00       		.byte	0
+ 1150 00c2 3F       		.uleb128 0x3f
+ 1151 00c3 19       		.uleb128 0x19
+ 1152 00c4 03       		.uleb128 0x3
+ 1153 00c5 0E       		.uleb128 0xe
+ 1154 00c6 3A       		.uleb128 0x3a
+ 1155 00c7 0B       		.uleb128 0xb
+ 1156 00c8 3B       		.uleb128 0x3b
+ 1157 00c9 05       		.uleb128 0x5
+ 1158 00ca 27       		.uleb128 0x27
+ 1159 00cb 19       		.uleb128 0x19
+ 1160 00cc 49       		.uleb128 0x49
+ 1161 00cd 13       		.uleb128 0x13
+ 1162 00ce 11       		.uleb128 0x11
+ 1163 00cf 01       		.uleb128 0x1
+ 1164 00d0 12       		.uleb128 0x12
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 37
+
+
+ 1165 00d1 06       		.uleb128 0x6
+ 1166 00d2 40       		.uleb128 0x40
+ 1167 00d3 18       		.uleb128 0x18
+ 1168 00d4 9742     		.uleb128 0x2117
+ 1169 00d6 19       		.uleb128 0x19
+ 1170 00d7 00       		.byte	0
+ 1171 00d8 00       		.byte	0
+ 1172 00d9 0D       		.uleb128 0xd
+ 1173 00da 2E       		.uleb128 0x2e
+ 1174 00db 01       		.byte	0x1
+ 1175 00dc 3F       		.uleb128 0x3f
+ 1176 00dd 19       		.uleb128 0x19
+ 1177 00de 03       		.uleb128 0x3
+ 1178 00df 0E       		.uleb128 0xe
+ 1179 00e0 3A       		.uleb128 0x3a
+ 1180 00e1 0B       		.uleb128 0xb
+ 1181 00e2 3B       		.uleb128 0x3b
+ 1182 00e3 05       		.uleb128 0x5
+ 1183 00e4 27       		.uleb128 0x27
+ 1184 00e5 19       		.uleb128 0x19
+ 1185 00e6 49       		.uleb128 0x49
+ 1186 00e7 13       		.uleb128 0x13
+ 1187 00e8 11       		.uleb128 0x11
+ 1188 00e9 01       		.uleb128 0x1
+ 1189 00ea 12       		.uleb128 0x12
+ 1190 00eb 06       		.uleb128 0x6
+ 1191 00ec 40       		.uleb128 0x40
+ 1192 00ed 18       		.uleb128 0x18
+ 1193 00ee 9742     		.uleb128 0x2117
+ 1194 00f0 19       		.uleb128 0x19
+ 1195 00f1 01       		.uleb128 0x1
+ 1196 00f2 13       		.uleb128 0x13
+ 1197 00f3 00       		.byte	0
+ 1198 00f4 00       		.byte	0
+ 1199 00f5 0E       		.uleb128 0xe
+ 1200 00f6 34       		.uleb128 0x34
+ 1201 00f7 00       		.byte	0
+ 1202 00f8 03       		.uleb128 0x3
+ 1203 00f9 0E       		.uleb128 0xe
+ 1204 00fa 3A       		.uleb128 0x3a
+ 1205 00fb 0B       		.uleb128 0xb
+ 1206 00fc 3B       		.uleb128 0x3b
+ 1207 00fd 05       		.uleb128 0x5
+ 1208 00fe 49       		.uleb128 0x49
+ 1209 00ff 13       		.uleb128 0x13
+ 1210 0100 02       		.uleb128 0x2
+ 1211 0101 18       		.uleb128 0x18
+ 1212 0102 00       		.byte	0
+ 1213 0103 00       		.byte	0
+ 1214 0104 0F       		.uleb128 0xf
+ 1215 0105 34       		.uleb128 0x34
+ 1216 0106 00       		.byte	0
+ 1217 0107 03       		.uleb128 0x3
+ 1218 0108 0E       		.uleb128 0xe
+ 1219 0109 3A       		.uleb128 0x3a
+ 1220 010a 0B       		.uleb128 0xb
+ 1221 010b 3B       		.uleb128 0x3b
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 38
+
+
+ 1222 010c 0B       		.uleb128 0xb
+ 1223 010d 49       		.uleb128 0x49
+ 1224 010e 13       		.uleb128 0x13
+ 1225 010f 3F       		.uleb128 0x3f
+ 1226 0110 19       		.uleb128 0x19
+ 1227 0111 02       		.uleb128 0x2
+ 1228 0112 18       		.uleb128 0x18
+ 1229 0113 00       		.byte	0
+ 1230 0114 00       		.byte	0
+ 1231 0115 00       		.byte	0
+ 1232              		.section	.debug_aranges,"",%progbits
+ 1233 0000 8C000000 		.4byte	0x8c
+ 1234 0004 0200     		.2byte	0x2
+ 1235 0006 00000000 		.4byte	.Ldebug_info0
+ 1236 000a 04       		.byte	0x4
+ 1237 000b 00       		.byte	0
+ 1238 000c 0000     		.2byte	0
+ 1239 000e 0000     		.2byte	0
+ 1240 0010 00000000 		.4byte	.LFB0
+ 1241 0014 20000000 		.4byte	.LFE0-.LFB0
+ 1242 0018 00000000 		.4byte	.LFB1
+ 1243 001c 54000000 		.4byte	.LFE1-.LFB1
+ 1244 0020 00000000 		.4byte	.LFB2
+ 1245 0024 20000000 		.4byte	.LFE2-.LFB2
+ 1246 0028 00000000 		.4byte	.LFB3
+ 1247 002c 20000000 		.4byte	.LFE3-.LFB3
+ 1248 0030 00000000 		.4byte	.LFB4
+ 1249 0034 20000000 		.4byte	.LFE4-.LFB4
+ 1250 0038 00000000 		.4byte	.LFB5
+ 1251 003c 20000000 		.4byte	.LFE5-.LFB5
+ 1252 0040 00000000 		.4byte	.LFB6
+ 1253 0044 20000000 		.4byte	.LFE6-.LFB6
+ 1254 0048 00000000 		.4byte	.LFB7
+ 1255 004c 20000000 		.4byte	.LFE7-.LFB7
+ 1256 0050 00000000 		.4byte	.LFB8
+ 1257 0054 20000000 		.4byte	.LFE8-.LFB8
+ 1258 0058 00000000 		.4byte	.LFB9
+ 1259 005c 20000000 		.4byte	.LFE9-.LFB9
+ 1260 0060 00000000 		.4byte	.LFB10
+ 1261 0064 20000000 		.4byte	.LFE10-.LFB10
+ 1262 0068 00000000 		.4byte	.LFB11
+ 1263 006c 18000000 		.4byte	.LFE11-.LFB11
+ 1264 0070 00000000 		.4byte	.LFB12
+ 1265 0074 18000000 		.4byte	.LFE12-.LFB12
+ 1266 0078 00000000 		.4byte	.LFB13
+ 1267 007c 18000000 		.4byte	.LFE13-.LFB13
+ 1268 0080 00000000 		.4byte	.LFB14
+ 1269 0084 18000000 		.4byte	.LFE14-.LFB14
+ 1270 0088 00000000 		.4byte	0
+ 1271 008c 00000000 		.4byte	0
+ 1272              		.section	.debug_ranges,"",%progbits
+ 1273              	.Ldebug_ranges0:
+ 1274 0000 00000000 		.4byte	.LFB0
+ 1275 0004 20000000 		.4byte	.LFE0
+ 1276 0008 00000000 		.4byte	.LFB1
+ 1277 000c 54000000 		.4byte	.LFE1
+ 1278 0010 00000000 		.4byte	.LFB2
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 39
+
+
+ 1279 0014 20000000 		.4byte	.LFE2
+ 1280 0018 00000000 		.4byte	.LFB3
+ 1281 001c 20000000 		.4byte	.LFE3
+ 1282 0020 00000000 		.4byte	.LFB4
+ 1283 0024 20000000 		.4byte	.LFE4
+ 1284 0028 00000000 		.4byte	.LFB5
+ 1285 002c 20000000 		.4byte	.LFE5
+ 1286 0030 00000000 		.4byte	.LFB6
+ 1287 0034 20000000 		.4byte	.LFE6
+ 1288 0038 00000000 		.4byte	.LFB7
+ 1289 003c 20000000 		.4byte	.LFE7
+ 1290 0040 00000000 		.4byte	.LFB8
+ 1291 0044 20000000 		.4byte	.LFE8
+ 1292 0048 00000000 		.4byte	.LFB9
+ 1293 004c 20000000 		.4byte	.LFE9
+ 1294 0050 00000000 		.4byte	.LFB10
+ 1295 0054 20000000 		.4byte	.LFE10
+ 1296 0058 00000000 		.4byte	.LFB11
+ 1297 005c 18000000 		.4byte	.LFE11
+ 1298 0060 00000000 		.4byte	.LFB12
+ 1299 0064 18000000 		.4byte	.LFE12
+ 1300 0068 00000000 		.4byte	.LFB13
+ 1301 006c 18000000 		.4byte	.LFE13
+ 1302 0070 00000000 		.4byte	.LFB14
+ 1303 0074 18000000 		.4byte	.LFE14
+ 1304 0078 00000000 		.4byte	0
+ 1305 007c 00000000 		.4byte	0
+ 1306              		.section	.debug_line,"",%progbits
+ 1307              	.Ldebug_line0:
+ 1308 0000 68010000 		.section	.debug_str,"MS",%progbits,1
+ 1308      02004400 
+ 1308      00000201 
+ 1308      FB0E0D00 
+ 1308      01010101 
+ 1309              	.LASF17:
+ 1310 0000 484F5249 		.ascii	"HORIZ_Stop\000"
+ 1310      5A5F5374 
+ 1310      6F7000
+ 1311              	.LASF32:
+ 1312 000b 484F5249 		.ascii	"HORIZ_ReadCompare1\000"
+ 1312      5A5F5265 
+ 1312      6164436F 
+ 1312      6D706172 
+ 1312      653100
+ 1313              	.LASF28:
+ 1314 001e 484F5249 		.ascii	"HORIZ_WriteControlRegister\000"
+ 1314      5A5F5772 
+ 1314      69746543 
+ 1314      6F6E7472 
+ 1314      6F6C5265 
+ 1315              	.LASF16:
+ 1316 0039 484F5249 		.ascii	"HORIZ_Enable\000"
+ 1316      5A5F456E 
+ 1316      61626C65 
+ 1316      00
+ 1317              	.LASF22:
+ 1318 0046 70657269 		.ascii	"period\000"
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 40
+
+
+ 1318      6F6400
+ 1319              	.LASF3:
+ 1320 004d 73686F72 		.ascii	"short unsigned int\000"
+ 1320      7420756E 
+ 1320      7369676E 
+ 1320      65642069 
+ 1320      6E7400
+ 1321              	.LASF9:
+ 1322 0060 666C6F61 		.ascii	"float\000"
+ 1322      7400
+ 1323              	.LASF21:
+ 1324 0066 636F756E 		.ascii	"counter\000"
+ 1324      74657200 
+ 1325              	.LASF25:
+ 1326 006e 484F5249 		.ascii	"HORIZ_WriteCompare2\000"
+ 1326      5A5F5772 
+ 1326      69746543 
+ 1326      6F6D7061 
+ 1326      72653200 
+ 1327              	.LASF1:
+ 1328 0082 756E7369 		.ascii	"unsigned char\000"
+ 1328      676E6564 
+ 1328      20636861 
+ 1328      7200
+ 1329              	.LASF34:
+ 1330 0090 484F5249 		.ascii	"HORIZ_ReadPeriod\000"
+ 1330      5A5F5265 
+ 1330      61645065 
+ 1330      72696F64 
+ 1330      00
+ 1331              	.LASF13:
+ 1332 00a1 72656738 		.ascii	"reg8\000"
+ 1332      00
+ 1333              	.LASF5:
+ 1334 00a6 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1334      20756E73 
+ 1334      69676E65 
+ 1334      6420696E 
+ 1334      7400
+ 1335              	.LASF12:
+ 1336 00b8 75696E74 		.ascii	"uint8\000"
+ 1336      3800
+ 1337              	.LASF29:
+ 1338 00be 636F6E74 		.ascii	"control\000"
+ 1338      726F6C00 
+ 1339              	.LASF35:
+ 1340 00c6 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 1340      4320342E 
+ 1340      392E3320 
+ 1340      32303135 
+ 1340      30333033 
+ 1341 00f9 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 1341      20726576 
+ 1341      6973696F 
+ 1341      6E203232 
+ 1341      31323230 
+ 1342 012c 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 41
+
+
+ 1342      66756E63 
+ 1342      74696F6E 
+ 1342      2D736563 
+ 1342      74696F6E 
+ 1343              	.LASF10:
+ 1344 0154 646F7562 		.ascii	"double\000"
+ 1344      6C6500
+ 1345              	.LASF36:
+ 1346 015b 2E5C4765 		.ascii	".\\Generated_Source\\PSoC5\\HORIZ.c\000"
+ 1346      6E657261 
+ 1346      7465645F 
+ 1346      536F7572 
+ 1346      63655C50 
+ 1347              	.LASF37:
+ 1348 017c 433A5C55 		.ascii	"C:\\Users\\ologa\\Documents\\MIT\\Senior S22\\6.115"
+ 1348      73657273 
+ 1348      5C6F6C6F 
+ 1348      67615C44 
+ 1348      6F63756D 
+ 1349 01a9 315C4669 		.ascii	"1\\Final Project\\vga.cydsn\000"
+ 1349      6E616C20 
+ 1349      50726F6A 
+ 1349      6563745C 
+ 1349      7667612E 
+ 1350              	.LASF33:
+ 1351 01c3 484F5249 		.ascii	"HORIZ_ReadCompare2\000"
+ 1351      5A5F5265 
+ 1351      6164436F 
+ 1351      6D706172 
+ 1351      653200
+ 1352              	.LASF8:
+ 1353 01d6 756E7369 		.ascii	"unsigned int\000"
+ 1353      676E6564 
+ 1353      20696E74 
+ 1353      00
+ 1354              	.LASF15:
+ 1355 01e3 484F5249 		.ascii	"HORIZ_Start\000"
+ 1355      5A5F5374 
+ 1355      61727400 
+ 1356              	.LASF18:
+ 1357 01ef 484F5249 		.ascii	"HORIZ_Init\000"
+ 1357      5A5F496E 
+ 1357      697400
+ 1358              	.LASF7:
+ 1359 01fa 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1359      206C6F6E 
+ 1359      6720756E 
+ 1359      7369676E 
+ 1359      65642069 
+ 1360              	.LASF27:
+ 1361 0211 72657375 		.ascii	"result\000"
+ 1361      6C7400
+ 1362              	.LASF30:
+ 1363 0218 484F5249 		.ascii	"HORIZ_ReadCounter\000"
+ 1363      5A5F5265 
+ 1363      6164436F 
+ 1363      756E7465 
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 42
+
+
+ 1363      7200
+ 1364              	.LASF26:
+ 1365 022a 6374726C 		.ascii	"ctrl\000"
+ 1365      00
+ 1366              	.LASF14:
+ 1367 022f 73697A65 		.ascii	"sizetype\000"
+ 1367      74797065 
+ 1367      00
+ 1368              	.LASF38:
+ 1369 0238 484F5249 		.ascii	"HORIZ_ReadControlRegister\000"
+ 1369      5A5F5265 
+ 1369      6164436F 
+ 1369      6E74726F 
+ 1369      6C526567 
+ 1370              	.LASF6:
+ 1371 0252 6C6F6E67 		.ascii	"long long int\000"
+ 1371      206C6F6E 
+ 1371      6720696E 
+ 1371      7400
+ 1372              	.LASF11:
+ 1373 0260 63686172 		.ascii	"char\000"
+ 1373      00
+ 1374              	.LASF2:
+ 1375 0265 73686F72 		.ascii	"short int\000"
+ 1375      7420696E 
+ 1375      7400
+ 1376              	.LASF23:
+ 1377 026f 484F5249 		.ascii	"HORIZ_WriteCompare1\000"
+ 1377      5A5F5772 
+ 1377      69746543 
+ 1377      6F6D7061 
+ 1377      72653100 
+ 1378              	.LASF20:
+ 1379 0283 484F5249 		.ascii	"HORIZ_WritePeriod\000"
+ 1379      5A5F5772 
+ 1379      69746550 
+ 1379      6572696F 
+ 1379      6400
+ 1380              	.LASF4:
+ 1381 0295 6C6F6E67 		.ascii	"long int\000"
+ 1381      20696E74 
+ 1381      00
+ 1382              	.LASF0:
+ 1383 029e 7369676E 		.ascii	"signed char\000"
+ 1383      65642063 
+ 1383      68617200 
+ 1384              	.LASF24:
+ 1385 02aa 636F6D70 		.ascii	"compare\000"
+ 1385      61726500 
+ 1386              	.LASF31:
+ 1387 02b2 484F5249 		.ascii	"HORIZ_ReadCapture\000"
+ 1387      5A5F5265 
+ 1387      61644361 
+ 1387      70747572 
+ 1387      6500
+ 1388              	.LASF39:
+ 1389 02c4 484F5249 		.ascii	"HORIZ_initVar\000"
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccbXB27g.s 			page 43
+
+
+ 1389      5A5F696E 
+ 1389      69745661 
+ 1389      7200
+ 1390              	.LASF19:
+ 1391 02d2 484F5249 		.ascii	"HORIZ_WriteCounter\000"
+ 1391      5A5F5772 
+ 1391      69746543 
+ 1391      6F756E74 
+ 1391      657200
+ 1392              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br

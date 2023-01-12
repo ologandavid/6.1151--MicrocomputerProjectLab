@@ -1,0 +1,6 @@
+C:\Users\ologa\Documents\PSoC Creator\LAB2.cydsn\LAB2.cyprj|8eb9d00c-6818-4d86-aa5e-f8d13c59a30c
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|41d2d480-9d18-4fd3-be9c-26030f74001d
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\default\CyReferenceLibrary\CyReferenceLibrary.cylib\CyReferenceLibrary.cyprj|ae6ab4ed-f88d-416c-bca9-367d2597e58b
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|4560e78b-529a-49b6-89ea-b94b77c8870f
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|e958b8e7-7291-4efd-bd42-8cc180ff4ef9
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|688fa3f7-e8f2-4c28-b1a6-fd529b30dd9e

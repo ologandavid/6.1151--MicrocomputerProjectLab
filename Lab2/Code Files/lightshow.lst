@@ -1,0 +1,118 @@
+0000:              .org 00h 
+0000: 02 00 30     ljmp main
+                   
+000B:              .org 00Bh   
+                   T0ISR:
+000B: B2 90            cpl P1.0        ; Interrupt Service Routine, Complement 
+000D: 32               reti            ; reti to return to main loop
+0030:              .org 0030h
+                   
+                   main:
+0030: 12 00 47         lcall init
+                       loop:
+0033: 12 00 57             lcall getkey        ; Get a Button Press, R0 used to
+0036: 79 04                mov R1, #04h
+0038: 99                   SUBB A, R1
+0039: 60 4A                JZ Aef
+                   
+                           ;SUBB A, R1
+                           ;JZ, A, #00h, B_f
+                   
+                           ;SUBB A, R1
+                           ;JZ, A, #00h, C_f
+                           ;ADD A, #0Ch
+003B: 24 04                ADD A, #04h
+                           
+                           norm:
+003D: 12 00 68                 lcall fix           ; Obtain the freq hex code i
+0040: 12 00 7B                 lcall num
+0043: 80 EE                    sjmp loop
+                           endloop:
+0045: 80 EC                    sjmp loop
+                   
+                   init:
+0047: 90 FE 03         mov dptr, #0FE03h
+004A: 74 36            mov A, #36h
+004C: F0               movx @dptr, A     ; Update Control Byte with 36
+004D: 75 89 02         mov TMOD, #02h  ; Set Mode
+0050: 88 8C            mov TH0, R0     ; Set Count
+0052: D2 8C            setb TR0
+0054: 75 A8 82         mov IE, #82h 
+                   
+                   getkey:
+0057: 30 B3 FD         jnb P3.3, getkey        ; Jump if bit not set, wait for 
+005A: 75 90 FF         mov P1, #0FFh           ; Set Port 1 high to be read
+                       pressdone:              
+005D: 20 B3 FD             jb P3.3, pressdone  ; If press detected, wait for it
+0060: E5 90                mov a, P1           ; Reading to Port 1
+0062: C3                   clr C             
+0063: 94 F0                SUBB A, #0F0h       ; Make first nibble 0s
+0065: F5 90                mov P1, a; Writing to Port 1
+                           ;clr P1
+0067: 22                   ret
+                   
+                   fix:
+0068: 04               inc a                   ; increment acc
+0069: 83               movc a, @a+pc           ; get correct ASCII translation 
+006A: 22               ret
+006B: 00 00 09 00 
+      00 45 39 36 
+      00 30 27 20 
+      45 1C 15 11 
+                       .db 00h, 00h, 09h, 00h, 00h, 45h, 39h, 36h, 00h, 30h, 27
+                   
+                   num:
+007B: 90 FE 00         mov dptr, #0FE00h
+007E: F0               movx @dptr, A       ; Move in the low byte to #FE00h
+007F: 90 FE 00         mov dptr, #0FE00h
+0082: 74 01            mov a, #01h
+0084: F0               movx @dptr, A       ; Move in the high byte to #FE00h
+                   
+                   Aef:                    ; Ramps the Light from Level 9 to Le
+0085: 24 0C            ADD A, #0Ch
+0087: F8               mov R0, A
+0088: 12 00 68         lcall fix           ; Retrieve High Frequency from Level
+                   
+008B: 90 FE 00         mov dptr, #0FE00h   ; Initialize the lights to high
+008E: F0               movx @dptr, A       ; Move in the low byte to #FE00h
+008F: F9               mov R1, A
+0090: 90 FE 00         mov dptr, #0FE00h
+0093: 74 01            mov a, #01h
+0095: F0               movx @dptr, A       ; Move in the high byte to #FE00h
+                   
+                       counterinit:
+                   
+0096: 7D FF            mov R5, #0FFh
+0098: ED               mov A, R5
+                       counter:
+0099: 7A FF                mov R2, #0FFh
+009B: 7B FF                mov R3, #0FFh
+009D: 7C FF                mov R4, #0FFh
+009F: 60 09                jz here 
+                           lvl1:
+00A1: DA FE                DJNZ R2, lvl1
+                               lvl2:
+00A3: DA FE                    DJNZ R2, lvl2
+                                   lvl3:
+00A5: DB FE                            DJNZ R3, lvl3
+00A7: 14                               dec A
+00A8: 80 EF                    sjmp counter
+                   
+                       here:
+00AA: E9                   mov A, R1               ; Move Low byte into acc
+00AB: 94 05                SUBB A, #05h
+00AD: 60 0D                jz exit
+00AF: 90 FE 00             mov dptr, #0FE00h   ; Initialize the lights to high
+00B2: F0                   movx @dptr, A       ; Move in the low byte to #FE00h
+00B3: F9                   mov R1, A
+00B4: 90 FE 00             mov dptr, #0FE00h
+00B7: 74 01                mov a, #01h
+00B9: F0                   movx @dptr, A
+                   
+00BA: 80 DA                sjmp counterinit
+                   
+                       exit:
+00BC: E8                   mov A, R0
+00BD: 80 86                sjmp endloop
+                   
+                   

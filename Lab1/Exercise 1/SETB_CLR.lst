@@ -1,0 +1,7 @@
+                   main:
+0000: E4           CLR A;
+0001: D2 E0        SETB ACC.0;
+0003: F5 90        mov P1, A        ; Set Value of P1.0
+                   loop:
+0005: 80 FE                 sjmp loop
+                            

@@ -1,0 +1,182 @@
+                   ; Calculator program
+                   
+0000:              .org 00h
+0000: 02 01 00         ljmp start ; power up and reset vector
+                   
+0100:              .org 100h
+                   
+                   start:
+0100: 12 01 59         lcall init ;Run init to start serial
+                       start2:
+0103: 78 03            mov R0, #03h ;Initialize counter for 3 characters
+0105: 79 02            mov R1, #02h; Initialize counter for both numbers
+                       ;mov R2, #01h; Initialize counter for operation
+                       loop:
+0107: 12 01 66             lcall getchr
+010A: 12 01 70             lcall sndchr
+                           ;mov P1, a; Read letter output to the LED
+010D: 12 01 85             lcall cnvrt; converts ASCII to hex, pushes to stack
+0110: D8 F5                DJNZ R0, loop; decrement R0, if not 0 go to loop, te
+0112: 12 01 78             lcall crlf; If so new line protocol, start with next
+0115: D9 F0                DJNZ R1, loop; decrement R1, if not 0 go to loop, if
+0117: 12 01 95             lcall two ; leave me with two 8 bit numbers on the s
+                           ;loop2:
+011A: 12 01 66                 lcall getchr
+011D: 12 01 70                 lcall sndchr ; wait for operation entry
+0120: B4 2B 1A                 CJNE A, #2Bh, subtract;
+                   
+                               addition:
+0123: D0 03                        pop 03
+0125: D0 04                        pop 04; Pop Off both binary numbers, R4 is t
+                                   ;mov P1, R4
+0127: EB                           mov A, R3
+0128: 2C                           ADD A, R4; Add R3, and R4
+                                   ;mov P1, A; Send binary number into the LED
+0129: 12 01 CE                     lcall reverse ; Convert binary number into A
+012C: 12 01 78                     lcall crlf
+012F: EF                           mov A, R7 
+0130: 12 01 70                     lcall sndchr
+0133: EE                           mov A, R6 
+0134: 12 01 70                     lcall sndchr
+0137: ED                           mov A, R5
+0138: 12 01 70                     lcall sndchr ; Starting with the 100ths plac
+013B: 80 1A                        sjmp endArithmetic
+                               subtract:
+013D: D0 03                        pop 03
+013F: D0 04                        pop 04
+0141: EC                           mov A, R4
+0142: 9B                           SUBB A,R3 ; Subtract R3 from R4 which we jus
+                                   ;mov P1, A
+0143: 12 01 CE                     lcall reverse
+0146: 12 01 78                     lcall crlf
+0149: EF                           mov A, R7
+014A: 12 01 70                     lcall sndchr
+014D: EE                           mov A, R6
+014E: 12 01 70                     lcall sndchr
+0151: ED                           mov A, R5
+0152: 12 01 70                     lcall sndchr ; Starting with the 100ths plac
+0155: 80 00                        sjmp endArithmetic
+                               endArithmetic:
+0157: 80 AA                        sjmp start2; reset the program start back at
+                               ;sjmp loop2
+                   
+                   init:
+0159: 75 89 20         mov tmod, #20h
+015C: 75 88 40         mov tcon, #40h
+015F: 75 8D FD         mov th1, #0fdh
+0162: 75 98 50         mov scon, #50h
+0165: 22               ret
+                   
+                   getchr:
+0166: 30 98 FD         jnb ri, getchr
+0169: E5 99            mov a, sbuf
+016B: 54 7F            anl a, #7fh
+016D: C2 98            clr ri
+016F: 22               ret
+                   
+                   sndchr:
+0170: C2 99            clr scon.1
+0172: F5 99            mov sbuf, a; Move contents of the accummulator into sbuf
+                       txloop:
+0174: 30 99 FD             jnb scon.1, txloop
+0177: 22               ret
+                   
+                   crlf:
+0178: 74 0D            mov A, #0Dh; Carriage Return #13d, #0Dh
+017A: 12 01 70         lcall sndchr 
+017D: 74 0A            mov A, #0Ah; Linefeed #10d,#0Ah 
+017F: 12 01 70         lcall sndchr
+0182: 78 03            mov R0, #03h; Reset the Counter to 3
+0184: 22               ret; return to DJNZ call
+                   
+                   cnvrt:              ;convert input into binary, push to stac
+0185: D0 03            pop 03
+0187: D0 04            pop 04          ;Pop off the return address
+0189: AD E0            mov R5, acc     ;move ASCII number from accumulator into
+018B: 74 D0            mov A, #0d0h    ;Convert ASCII to Hex
+018D: 2D               ADD A, R5       ;Move Hex value into accumulator
+018E: C0 E0            push acc        ;Push the number into the stack
+0190: C0 04            push 04
+0192: C0 03            push 03         ;Reload return address
+0194: 22               ret
+                   
+                   
+                   two:
+                   ;The stack has 6 hex numbers that need to be converted into 
+0195: D0 03            pop 03
+0197: D0 04            pop 04      ;Pop off return address
+                       ;second number
+0199: D0 05            pop 05      ;ones place
+019B: D0 06            pop 06      ;tens place
+019D: D0 07            pop 07      ;hundreds place
+                   
+019F: 74 64            mov A, #64h
+01A1: 8F F0            mov B, R7
+01A3: A4               MUL AB 
+01A4: FF               mov R7, A   ;convert the hundreds place by multiplying b
+                   
+01A5: 74 0A            mov A, #0Ah
+01A7: 8E F0            mov B, R6
+01A9: A4               MUL AB 
+01AA: FE               mov R6, A   ;convert the tens place by multiplying by 10
+                   
+01AB: ED               mov A, R5
+01AC: 2E               ADD A, R6
+01AD: 2F               ADD A, R7
+01AE: FA               mov R2, A   ; A
+                   
+                       ; first number
+01AF: D0 05            pop 05; ones place
+01B1: D0 06            pop 06; tens place
+01B3: D0 07            pop 07; hundreds place
+                   
+01B5: 74 64            mov A, #64h
+01B7: 8F F0            mov B, R7
+01B9: A4               MUL AB 
+01BA: FF               mov R7, A
+                   
+01BB: 74 0A            mov A, #0Ah
+01BD: 8E F0            mov B, R6
+01BF: A4               MUL AB 
+01C0: FE               mov R6, A
+                   
+01C1: ED               mov A, R5
+01C2: 2E               ADD A, R6
+01C3: 2F               ADD A, R7
+01C4: C0 E0            push acc; first number added to the stack first 
+01C6: EA               mov A, R2
+                       ;mov P1, a
+01C7: C0 E0            push acc; second number added to the stack next
+01C9: C0 04            push 04
+01CB: C0 03            push 03
+01CD: 22               ret
+                   
+                   reverse:
+                       ;takes answer and returns it as three ASCII characters
+                       ;start with 8-bit answer in accumulator, push three hex 
+                       ; A has the number
+                       
+01CE: 75 F0 64         mov B, #64h
+01D1: 84               DIV AB
+01D2: 94 D0            SUBB A, #0d0h
+01D4: FF               mov R7, A ; A has the hundreds place
+                   
+01D5: E5 F0            mov A, B
+01D7: 75 F0 0A         mov B, #0Ah
+01DA: 84               DIV AB
+01DB: 94 D0            SUBB A, #0d0h
+01DD: FE               mov R6, a ; tens place
+                   
+01DE: E5 F0            mov A, B
+01E0: F5 90            mov P1, A
+01E2: 94 D0            SUBB A, #0d0h
+01E4: 24 01            ADD A, #01h
+01E6: FD               mov R5, A; ones place
+01E7: 22               ret
+                   
+                   
+                   
+                   
+                   
+                       
+                   

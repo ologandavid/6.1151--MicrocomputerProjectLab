@@ -1,0 +1,69 @@
+                   main:
+0000: 90 FE 33         mov dptr, #0FE33h       ; Initialize the 8255 for 8 bit
+0003: 74 80            mov a, #80h
+0005: F0               movx @dptr, a
+0006: 7B 0C            mov R3, #0Ch
+0008: 12 00 4D         lcall init
+000B: 12 00 5A         lcall getchr
+000E: 12 00 64         lcall sndchr
+                   
+                       loop:
+0011: 90 FE 30         mov dptr, #0FE30h       ; Initialize the 8255 for 8 bit
+0014: 74 01            mov a, #01h
+0016: F0               movx @dptr, a
+0017: 12 00 3C         lcall delay
+                   
+001A: 90 FE 30         mov dptr, #0FE30h       ; Initialize the 8255 for 8 bit
+001D: 74 04            mov a, #04h
+001F: F0               movx @dptr, a
+0020: 12 00 3C         lcall delay
+                   
+0023: 90 FE 30         mov dptr, #0FE30h       ; Initialize the 8255 for 8 bit
+0026: 74 02            mov a, #02h
+0028: F0               movx @dptr, a
+0029: 12 00 3C         lcall delay
+                   
+002C: 90 FE 30         mov dptr, #0FE30h       ; Initialize the 8255 for 8 bit
+002F: 74 08            mov a, #08h
+0031: F0               movx @dptr, a
+0032: 12 00 3C         lcall delay
+                   
+0035: DB DA            DJNZ R3, loop
+                   
+                       loop2:
+0037: 75 90 55         mov P1, #55h
+003A: 80 FB            sjmp loop2
+                   
+                   delay:
+003C: 78 FF            mov R0, #0FFh               ; Set Registers with Counter
+003E: 79 FF            mov R1, #0FFh
+0040: 7A 07            mov R2, #07h
+                       sups:
+0042: D8 FE                DJNZ R0, sups           ; Nested DJNZ to Count out T
+0044: 78 FF                mov R0, #0FFh
+0046: D9 FA                DJNZ R1, sups
+0048: 79 FF                mov R1, #0FFh
+004A: DA F6                DJNZ R2, sups
+004C: 22               ret
+                   
+                   init:
+004D: 75 89 20         mov tmod, #20h
+0050: 75 88 40         mov tcon, #40h
+0053: 75 8D FD         mov th1, #0fdh
+0056: 75 98 50         mov scon, #50h
+0059: 22               ret
+                   
+                   getchr:
+005A: 30 98 FD         jnb ri, getchr
+005D: E5 99            mov a, sbuf
+005F: 54 7F            anl a, #7fh
+0061: C2 98            clr ri
+0063: 22               ret
+                   
+                   sndchr:
+0064: C2 99            clr scon.1
+0066: F5 99            mov sbuf, a; Move contents of the accummulator into sbuf
+                       txloop:
+0068: 30 99 FD             jnb scon.1, txloop
+006B: 22               ret
+                   

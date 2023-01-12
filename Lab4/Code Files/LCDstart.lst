@@ -1,0 +1,114 @@
+                   
+                   main:
+0000: 90 FE 33         mov dptr, #0FE33h
+0003: 74 80            mov a, #80h
+0005: F0               movx @dptr, a
+0006: 12 00 AD         lcall delay
+                   
+                       ; Set display for 8 bit communication
+0009: 90 FE 32         mov dptr, #0FE32h
+000C: 74 00            mov a, #00h
+000E: F0               movx @dptr, a
+000F: 12 00 AD         lcall delay
+                   
+0012: 90 FE 31         mov dptr, #0FE31h
+0015: 74 38            mov a, #38h
+0017: F0               movx @dptr, a
+0018: 12 00 AD         lcall delay
+                   
+001B: 90 FE 32         mov dptr, #0FE32h
+001E: 74 04            mov a, #04h
+0020: F0               movx @dptr, a
+0021: 12 00 AD         lcall delay
+                   
+0024: 90 FE 32         mov dptr, #0FE32h
+0027: 74 00            mov a, #00h
+0029: F0               movx @dptr, a
+002A: 12 00 AD         lcall delay
+                   
+                       ; Turn display on, hide cursor
+002D: 90 FE 31         mov dptr, #0FE31h
+0030: 74 0C            mov a, #0Ch
+0032: F0               movx @dptr, a
+0033: 12 00 AD         lcall delay
+                   
+0036: 90 FE 32         mov dptr, #0FE32h
+0039: 74 04            mov a, #04h
+003B: F0               movx @dptr, a
+003C: 12 00 AD         lcall delay
+                   
+003F: 90 FE 32         mov dptr, #0FE32h
+0042: 74 00            mov a, #00h
+0044: F0               movx @dptr, a
+0045: 12 00 AD         lcall delay
+                   
+                       ; Clear display
+0048: 90 FE 31         mov dptr, #0FE31h
+004B: 74 01            mov a, #01h
+004D: F0               movx @dptr, a
+004E: 12 00 AD         lcall delay
+                       
+0051: 90 FE 32         mov dptr, #0FE32h
+0054: 74 04            mov a, #04h
+0056: F0               movx @dptr, a
+0057: 12 00 AD         lcall delay
+                   
+005A: 90 FE 32         mov dptr, #0FE32h
+005D: 74 00            mov a, #00h
+005F: F0               movx @dptr, a
+0060: 12 00 AD         lcall delay
+                   
+                       ; Set RAM address to zero
+0063: 90 FE 32         mov dptr, #0FE32h
+0066: 74 00            mov a, #00h
+0068: F0               movx @dptr, a
+0069: 12 00 AD         lcall delay
+                   
+006C: 90 FE 31         mov dptr, #0FE31h
+006F: 74 80            mov a, #80h
+0071: F0               movx @dptr, a
+0072: 12 00 AD         lcall delay
+                   
+0075: 90 FE 32         mov dptr, #0FE32h
+0078: 74 04            mov a, #04h
+007A: F0               movx @dptr, a
+007B: 12 00 AD         lcall delay
+                   
+007E: 90 FE 32         mov dptr, #0FE32h
+0081: 74 00            mov a, #00h
+0083: F0               movx @dptr, a
+0084: 12 00 AD         lcall delay
+                   
+                       ;Display Characters
+0087: 90 FE 32         mov dptr, #0FE32h
+008A: 74 01            mov a, #01h
+008C: F0               movx @dptr, a
+008D: 12 00 AD         lcall delay
+                       
+0090: 90 FE 31         mov dptr, #0FE31h
+0093: 74 39            mov a, #39h
+0095: F0               movx @dptr, a
+0096: 12 00 AD         lcall delay
+                   
+0099: 90 FE 32         mov dptr, #0FE32h
+009C: 74 05            mov a, #05h
+009E: F0               movx @dptr, a
+009F: 12 00 AD         lcall delay
+                   
+00A2: 90 FE 32         mov dptr, #0FE32h
+00A5: 74 01            mov a, #01h
+00A7: F0               movx @dptr, a
+00A8: 12 00 AD         lcall delay
+                   
+                       loop:
+00AB: 80 FE            sjmp loop
+                   
+                   delay:
+00AD: 78 FF            mov R0, #0FFh
+                       sups:
+00AF: D8 FE            DJNZ R0, sups
+00B1: 79 FF            mov R1, #0FFh
+                       sups2:
+00B3: D9 FE            DJNZ R1, sups2
+00B5: 22               ret
+                   

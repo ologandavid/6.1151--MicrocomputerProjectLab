@@ -1,0 +1,6 @@
+C:\Users\ologa\Documents\MIT\Senior S22\6.1151\Lab2\Exercise 9\blinky_zip\blinky\115_is_cool.cydsn\115_is_cool.cyprj|06bfb873-deaa-471b-a3c2-35544df5c20d
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|49c35195-881d-41ad-a466-c69d78f6edde
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\default\CyReferenceLibrary\CyReferenceLibrary.cylib\CyReferenceLibrary.cyprj|e69a836b-76b9-4d56-a3c0-87cf008bcf80
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|c12cfaa9-7434-417a-96b5-92388b553a01
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|129316f6-6c30-4aba-abb4-7b402436e2d1
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|9156c0a5-ddef-4629-a98a-52c6c44f4675

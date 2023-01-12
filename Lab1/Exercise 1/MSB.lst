@@ -1,0 +1,7 @@
+                   ; This little program turns an LED on. 
+                   
+0000: 75 90 00     mov P1, #00h     ; Clear the LED Bank
+0003: 75 90 80     mov P1, #80h     ; Turn on a Single Light
+                   loop:
+0006: 80 FE                 sjmp loop
+                            

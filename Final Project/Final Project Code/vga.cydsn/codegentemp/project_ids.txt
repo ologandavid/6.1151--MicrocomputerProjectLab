@@ -1,0 +1,6 @@
+C:\Users\ologa\Documents\MIT\Senior S22\6.1151\Final Project\vga.cydsn\vga.cyprj|dec78b5f-86da-41d8-b7db-25be4233fe83
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|f1df4039-23a7-4bb5-8b5b-2bc30bfc003b
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\default\CyReferenceLibrary\CyReferenceLibrary.cylib\CyReferenceLibrary.cyprj|63735dbd-38dc-4106-a396-771a13aa1ce3
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|3dfc9f70-fa84-4275-931f-3f41e6d23c5d
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|b30b5bb0-ba21-4c90-8702-4c032c10af98
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|34967676-c4ba-44d8-8bca-a873413eefa8

@@ -1,0 +1,8 @@
+                   main:
+0000: 75 90 FF              mov P1, #0FFh;
+                            loop:
+0003: C2 87                 CLR P0.7;
+0005: 15 90                 DEC P1          
+0007: D2 87                 SETB P0.7;
+                                    
+0009: 80 F8                 sjmp loop

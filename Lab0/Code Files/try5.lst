@@ -1,0 +1,8 @@
+                   main:
+0000: 75 90 FF              mov P1, #0FFh; initialize P1 at max, FFh
+0003: 78 62                 mov R0, #62h; use register to store a reasonable de
+                            loop:
+0005: 15 90                         dec P1; decrement P1 by 1
+0007: D8 FC                         DJNZ R0, loop; implement the delay
+0009: 80 FA                 sjmp loop; return to loop, repeat decrement step
+                            

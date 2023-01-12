@@ -1,0 +1,2393 @@
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"VSYNC.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.global	VSYNC_initVar
+  19              		.bss
+  20              		.type	VSYNC_initVar, %object
+  21              		.size	VSYNC_initVar, 1
+  22              	VSYNC_initVar:
+  23 0000 00       		.space	1
+  24              		.section	.text.VSYNC_Start,"ax",%progbits
+  25              		.align	2
+  26              		.global	VSYNC_Start
+  27              		.thumb
+  28              		.thumb_func
+  29              		.type	VSYNC_Start, %function
+  30              	VSYNC_Start:
+  31              	.LFB0:
+  32              		.file 1 ".\\Generated_Source\\PSoC5\\VSYNC.c"
+   1:.\Generated_Source\PSoC5/VSYNC.c **** /*******************************************************************************
+   2:.\Generated_Source\PSoC5/VSYNC.c **** * File Name: VSYNC.c  
+   3:.\Generated_Source\PSoC5/VSYNC.c **** * Version 3.0
+   4:.\Generated_Source\PSoC5/VSYNC.c **** *
+   5:.\Generated_Source\PSoC5/VSYNC.c **** * Description:
+   6:.\Generated_Source\PSoC5/VSYNC.c **** *  The PWM User Module consist of an 8 or 16-bit counter with two 8 or 16-bit
+   7:.\Generated_Source\PSoC5/VSYNC.c **** *  comparitors. Each instance of this user module is capable of generating
+   8:.\Generated_Source\PSoC5/VSYNC.c **** *  two PWM outputs with the same period. The pulse width is selectable between
+   9:.\Generated_Source\PSoC5/VSYNC.c **** *  1 and 255/65535. The period is selectable between 2 and 255/65536 clocks. 
+  10:.\Generated_Source\PSoC5/VSYNC.c **** *  The compare value output may be configured to be active when the present 
+  11:.\Generated_Source\PSoC5/VSYNC.c **** *  counter is less than or less than/equal to the compare value.
+  12:.\Generated_Source\PSoC5/VSYNC.c **** *  A terminal count output is also provided. It generates a pulse one clock
+  13:.\Generated_Source\PSoC5/VSYNC.c **** *  width wide when the counter is equal to zero.
+  14:.\Generated_Source\PSoC5/VSYNC.c **** *
+  15:.\Generated_Source\PSoC5/VSYNC.c **** * Note:
+  16:.\Generated_Source\PSoC5/VSYNC.c **** *
+  17:.\Generated_Source\PSoC5/VSYNC.c **** *******************************************************************************
+  18:.\Generated_Source\PSoC5/VSYNC.c **** * Copyright 2008-2012, Cypress Semiconductor Corporation.  All rights reserved.
+  19:.\Generated_Source\PSoC5/VSYNC.c **** * You may use this file only in accordance with the license, terms, conditions, 
+  20:.\Generated_Source\PSoC5/VSYNC.c **** * disclaimers, and limitations in the end user license agreement accompanying 
+  21:.\Generated_Source\PSoC5/VSYNC.c **** * the software package with which this file was provided.
+  22:.\Generated_Source\PSoC5/VSYNC.c **** ********************************************************************************/
+  23:.\Generated_Source\PSoC5/VSYNC.c **** 
+  24:.\Generated_Source\PSoC5/VSYNC.c **** #include "cytypes.h"
+  25:.\Generated_Source\PSoC5/VSYNC.c **** #include "VSYNC.h"
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 2
+
+
+  26:.\Generated_Source\PSoC5/VSYNC.c **** 
+  27:.\Generated_Source\PSoC5/VSYNC.c **** uint8 VSYNC_initVar = 0u;
+  28:.\Generated_Source\PSoC5/VSYNC.c **** 
+  29:.\Generated_Source\PSoC5/VSYNC.c **** 
+  30:.\Generated_Source\PSoC5/VSYNC.c **** /*******************************************************************************
+  31:.\Generated_Source\PSoC5/VSYNC.c **** * Function Name: VSYNC_Start
+  32:.\Generated_Source\PSoC5/VSYNC.c **** ********************************************************************************
+  33:.\Generated_Source\PSoC5/VSYNC.c **** *
+  34:.\Generated_Source\PSoC5/VSYNC.c **** * Summary:
+  35:.\Generated_Source\PSoC5/VSYNC.c **** *  The start function initializes the pwm with the default values, the 
+  36:.\Generated_Source\PSoC5/VSYNC.c **** *  enables the counter to begin counting.  It does not enable interrupts,
+  37:.\Generated_Source\PSoC5/VSYNC.c **** *  the EnableInt command should be called if interrupt generation is required.
+  38:.\Generated_Source\PSoC5/VSYNC.c **** *
+  39:.\Generated_Source\PSoC5/VSYNC.c **** * Parameters:  
+  40:.\Generated_Source\PSoC5/VSYNC.c **** *  None  
+  41:.\Generated_Source\PSoC5/VSYNC.c **** *
+  42:.\Generated_Source\PSoC5/VSYNC.c **** * Return: 
+  43:.\Generated_Source\PSoC5/VSYNC.c **** *  None
+  44:.\Generated_Source\PSoC5/VSYNC.c **** *
+  45:.\Generated_Source\PSoC5/VSYNC.c **** * Global variables:
+  46:.\Generated_Source\PSoC5/VSYNC.c **** *  VSYNC_initVar: Is modified when this function is called for the 
+  47:.\Generated_Source\PSoC5/VSYNC.c **** *   first time. Is used to ensure that initialization happens only once.
+  48:.\Generated_Source\PSoC5/VSYNC.c **** *
+  49:.\Generated_Source\PSoC5/VSYNC.c **** *******************************************************************************/
+  50:.\Generated_Source\PSoC5/VSYNC.c **** void VSYNC_Start(void) 
+  51:.\Generated_Source\PSoC5/VSYNC.c **** {
+  33              		.loc 1 51 0
+  34              		.cfi_startproc
+  35              		@ args = 0, pretend = 0, frame = 0
+  36              		@ frame_needed = 1, uses_anonymous_args = 0
+  37 0000 80B5     		push	{r7, lr}
+  38              		.cfi_def_cfa_offset 8
+  39              		.cfi_offset 7, -8
+  40              		.cfi_offset 14, -4
+  41 0002 00AF     		add	r7, sp, #0
+  42              		.cfi_def_cfa_register 7
+  52:.\Generated_Source\PSoC5/VSYNC.c ****     /* If not Initialized then initialize all required hardware and software */
+  53:.\Generated_Source\PSoC5/VSYNC.c ****     if(VSYNC_initVar == 0u)
+  43              		.loc 1 53 0
+  44 0004 054B     		ldr	r3, .L3
+  45 0006 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  46 0008 002B     		cmp	r3, #0
+  47 000a 04D1     		bne	.L2
+  54:.\Generated_Source\PSoC5/VSYNC.c ****     {
+  55:.\Generated_Source\PSoC5/VSYNC.c ****         VSYNC_Init();
+  48              		.loc 1 55 0
+  49 000c FFF7FEFF 		bl	VSYNC_Init
+  56:.\Generated_Source\PSoC5/VSYNC.c ****         VSYNC_initVar = 1u;
+  50              		.loc 1 56 0
+  51 0010 024B     		ldr	r3, .L3
+  52 0012 0122     		movs	r2, #1
+  53 0014 1A70     		strb	r2, [r3]
+  54              	.L2:
+  57:.\Generated_Source\PSoC5/VSYNC.c ****     }
+  58:.\Generated_Source\PSoC5/VSYNC.c ****     VSYNC_Enable();
+  55              		.loc 1 58 0
+  56 0016 FFF7FEFF 		bl	VSYNC_Enable
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 3
+
+
+  59:.\Generated_Source\PSoC5/VSYNC.c **** 
+  60:.\Generated_Source\PSoC5/VSYNC.c **** }
+  57              		.loc 1 60 0
+  58 001a 80BD     		pop	{r7, pc}
+  59              	.L4:
+  60              		.align	2
+  61              	.L3:
+  62 001c 00000000 		.word	VSYNC_initVar
+  63              		.cfi_endproc
+  64              	.LFE0:
+  65              		.size	VSYNC_Start, .-VSYNC_Start
+  66              		.section	.text.VSYNC_Init,"ax",%progbits
+  67              		.align	2
+  68              		.global	VSYNC_Init
+  69              		.thumb
+  70              		.thumb_func
+  71              		.type	VSYNC_Init, %function
+  72              	VSYNC_Init:
+  73              	.LFB1:
+  61:.\Generated_Source\PSoC5/VSYNC.c **** 
+  62:.\Generated_Source\PSoC5/VSYNC.c **** 
+  63:.\Generated_Source\PSoC5/VSYNC.c **** /*******************************************************************************
+  64:.\Generated_Source\PSoC5/VSYNC.c **** * Function Name: VSYNC_Init
+  65:.\Generated_Source\PSoC5/VSYNC.c **** ********************************************************************************
+  66:.\Generated_Source\PSoC5/VSYNC.c **** *
+  67:.\Generated_Source\PSoC5/VSYNC.c **** * Summary:
+  68:.\Generated_Source\PSoC5/VSYNC.c **** *  Initialize component's parameters to the parameters set by user in the 
+  69:.\Generated_Source\PSoC5/VSYNC.c **** *  customizer of the component placed onto schematic. Usually called in 
+  70:.\Generated_Source\PSoC5/VSYNC.c **** *  VSYNC_Start().
+  71:.\Generated_Source\PSoC5/VSYNC.c **** *
+  72:.\Generated_Source\PSoC5/VSYNC.c **** * Parameters:  
+  73:.\Generated_Source\PSoC5/VSYNC.c **** *  None
+  74:.\Generated_Source\PSoC5/VSYNC.c **** *
+  75:.\Generated_Source\PSoC5/VSYNC.c **** * Return: 
+  76:.\Generated_Source\PSoC5/VSYNC.c **** *  None
+  77:.\Generated_Source\PSoC5/VSYNC.c **** *
+  78:.\Generated_Source\PSoC5/VSYNC.c **** *******************************************************************************/
+  79:.\Generated_Source\PSoC5/VSYNC.c **** void VSYNC_Init(void) 
+  80:.\Generated_Source\PSoC5/VSYNC.c **** {
+  74              		.loc 1 80 0
+  75              		.cfi_startproc
+  76              		@ args = 0, pretend = 0, frame = 8
+  77              		@ frame_needed = 1, uses_anonymous_args = 0
+  78 0000 80B5     		push	{r7, lr}
+  79              		.cfi_def_cfa_offset 8
+  80              		.cfi_offset 7, -8
+  81              		.cfi_offset 14, -4
+  82 0002 82B0     		sub	sp, sp, #8
+  83              		.cfi_def_cfa_offset 16
+  84 0004 00AF     		add	r7, sp, #0
+  85              		.cfi_def_cfa_register 7
+  81:.\Generated_Source\PSoC5/VSYNC.c ****     #if (VSYNC_UsingFixedFunction || VSYNC_UseControl)
+  82:.\Generated_Source\PSoC5/VSYNC.c ****         uint8 ctrl;
+  83:.\Generated_Source\PSoC5/VSYNC.c ****     #endif /* (VSYNC_UsingFixedFunction || VSYNC_UseControl) */
+  84:.\Generated_Source\PSoC5/VSYNC.c ****     
+  85:.\Generated_Source\PSoC5/VSYNC.c ****     #if(!VSYNC_UsingFixedFunction) 
+  86:.\Generated_Source\PSoC5/VSYNC.c ****         #if(VSYNC_UseStatus)
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 4
+
+
+  87:.\Generated_Source\PSoC5/VSYNC.c ****             /* Interrupt State Backup for Critical Region*/
+  88:.\Generated_Source\PSoC5/VSYNC.c ****             uint8 VSYNC_interruptState;
+  89:.\Generated_Source\PSoC5/VSYNC.c ****         #endif /* (VSYNC_UseStatus) */
+  90:.\Generated_Source\PSoC5/VSYNC.c ****     #endif /* (!VSYNC_UsingFixedFunction) */
+  91:.\Generated_Source\PSoC5/VSYNC.c ****     
+  92:.\Generated_Source\PSoC5/VSYNC.c ****     #if (VSYNC_UsingFixedFunction)
+  93:.\Generated_Source\PSoC5/VSYNC.c ****         /* You are allowed to write the compare value (FF only) */
+  94:.\Generated_Source\PSoC5/VSYNC.c ****         VSYNC_CONTROL |= VSYNC_CFG0_MODE;
+  95:.\Generated_Source\PSoC5/VSYNC.c ****         #if (VSYNC_DeadBand2_4)
+  96:.\Generated_Source\PSoC5/VSYNC.c ****             VSYNC_CONTROL |= VSYNC_CFG0_DB;
+  97:.\Generated_Source\PSoC5/VSYNC.c ****         #endif /* (VSYNC_DeadBand2_4) */
+  98:.\Generated_Source\PSoC5/VSYNC.c ****                 
+  99:.\Generated_Source\PSoC5/VSYNC.c ****         ctrl = VSYNC_CONTROL3 & ((uint8 )(~VSYNC_CTRL_CMPMODE1_MASK));
+ 100:.\Generated_Source\PSoC5/VSYNC.c ****         VSYNC_CONTROL3 = ctrl | VSYNC_DEFAULT_COMPARE1_MODE;
+ 101:.\Generated_Source\PSoC5/VSYNC.c ****         
+ 102:.\Generated_Source\PSoC5/VSYNC.c ****          /* Clear and Set SYNCTC and SYNCCMP bits of RT1 register */
+ 103:.\Generated_Source\PSoC5/VSYNC.c ****         VSYNC_RT1 &= ((uint8)(~VSYNC_RT1_MASK));
+ 104:.\Generated_Source\PSoC5/VSYNC.c ****         VSYNC_RT1 |= VSYNC_SYNC;     
+ 105:.\Generated_Source\PSoC5/VSYNC.c ****                 
+ 106:.\Generated_Source\PSoC5/VSYNC.c ****         /*Enable DSI Sync all all inputs of the PWM*/
+ 107:.\Generated_Source\PSoC5/VSYNC.c ****         VSYNC_RT1 &= ((uint8)(~VSYNC_SYNCDSI_MASK));
+ 108:.\Generated_Source\PSoC5/VSYNC.c ****         VSYNC_RT1 |= VSYNC_SYNCDSI_EN;
+ 109:.\Generated_Source\PSoC5/VSYNC.c ****        
+ 110:.\Generated_Source\PSoC5/VSYNC.c ****     #elif (VSYNC_UseControl)
+ 111:.\Generated_Source\PSoC5/VSYNC.c ****         /* Set the default compare mode defined in the parameter */
+ 112:.\Generated_Source\PSoC5/VSYNC.c ****         ctrl = VSYNC_CONTROL & ((uint8)(~VSYNC_CTRL_CMPMODE2_MASK)) & ((uint8)(~VSYNC_CTRL_CMPMODE1
+  86              		.loc 1 112 0
+  87 0006 104B     		ldr	r3, .L6
+  88 0008 1B78     		ldrb	r3, [r3]
+  89 000a DBB2     		uxtb	r3, r3
+  90 000c 23F03F03 		bic	r3, r3, #63
+  91 0010 FB71     		strb	r3, [r7, #7]
+ 113:.\Generated_Source\PSoC5/VSYNC.c ****         VSYNC_CONTROL = ctrl | VSYNC_DEFAULT_COMPARE2_MODE | 
+  92              		.loc 1 113 0
+  93 0012 0D4A     		ldr	r2, .L6
+  94 0014 FB79     		ldrb	r3, [r7, #7]
+  95 0016 43F00803 		orr	r3, r3, #8
+  96 001a DBB2     		uxtb	r3, r3
+  97 001c 1370     		strb	r3, [r2]
+ 114:.\Generated_Source\PSoC5/VSYNC.c ****                                    VSYNC_DEFAULT_COMPARE1_MODE;
+ 115:.\Generated_Source\PSoC5/VSYNC.c ****     #endif /* (VSYNC_UsingFixedFunction) */
+ 116:.\Generated_Source\PSoC5/VSYNC.c ****         
+ 117:.\Generated_Source\PSoC5/VSYNC.c ****     #if (!VSYNC_UsingFixedFunction)
+ 118:.\Generated_Source\PSoC5/VSYNC.c ****         #if (VSYNC_Resolution == 8)
+ 119:.\Generated_Source\PSoC5/VSYNC.c ****             /* Set FIFO 0 to 1 byte register for period*/
+ 120:.\Generated_Source\PSoC5/VSYNC.c ****             VSYNC_AUX_CONTROLDP0 |= (VSYNC_AUX_CTRL_FIFO0_CLR);
+  98              		.loc 1 120 0
+  99 001e 0B4A     		ldr	r2, .L6+4
+ 100 0020 0A4B     		ldr	r3, .L6+4
+ 101 0022 1B78     		ldrb	r3, [r3]
+ 102 0024 DBB2     		uxtb	r3, r3
+ 103 0026 43F00103 		orr	r3, r3, #1
+ 104 002a DBB2     		uxtb	r3, r3
+ 105 002c 1370     		strb	r3, [r2]
+ 121:.\Generated_Source\PSoC5/VSYNC.c ****         #else /* (VSYNC_Resolution == 16)*/
+ 122:.\Generated_Source\PSoC5/VSYNC.c ****             /* Set FIFO 0 to 1 byte register for period */
+ 123:.\Generated_Source\PSoC5/VSYNC.c ****             VSYNC_AUX_CONTROLDP0 |= (VSYNC_AUX_CTRL_FIFO0_CLR);
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 5
+
+
+ 124:.\Generated_Source\PSoC5/VSYNC.c ****             VSYNC_AUX_CONTROLDP1 |= (VSYNC_AUX_CTRL_FIFO0_CLR);
+ 125:.\Generated_Source\PSoC5/VSYNC.c ****         #endif /* (VSYNC_Resolution == 8) */
+ 126:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 127:.\Generated_Source\PSoC5/VSYNC.c ****         VSYNC_WriteCounter(VSYNC_INIT_PERIOD_VALUE);
+ 106              		.loc 1 127 0
+ 107 002e 0620     		movs	r0, #6
+ 108 0030 FFF7FEFF 		bl	VSYNC_WriteCounter
+ 128:.\Generated_Source\PSoC5/VSYNC.c ****     #endif /* (!VSYNC_UsingFixedFunction) */
+ 129:.\Generated_Source\PSoC5/VSYNC.c ****         
+ 130:.\Generated_Source\PSoC5/VSYNC.c ****     VSYNC_WritePeriod(VSYNC_INIT_PERIOD_VALUE);
+ 109              		.loc 1 130 0
+ 110 0034 0620     		movs	r0, #6
+ 111 0036 FFF7FEFF 		bl	VSYNC_WritePeriod
+ 131:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 132:.\Generated_Source\PSoC5/VSYNC.c ****         #if (VSYNC_UseOneCompareMode)
+ 133:.\Generated_Source\PSoC5/VSYNC.c ****             VSYNC_WriteCompare(VSYNC_INIT_COMPARE_VALUE1);
+ 112              		.loc 1 133 0
+ 113 003a 0620     		movs	r0, #6
+ 114 003c FFF7FEFF 		bl	VSYNC_WriteCompare
+ 134:.\Generated_Source\PSoC5/VSYNC.c ****         #else
+ 135:.\Generated_Source\PSoC5/VSYNC.c ****             VSYNC_WriteCompare1(VSYNC_INIT_COMPARE_VALUE1);
+ 136:.\Generated_Source\PSoC5/VSYNC.c ****             VSYNC_WriteCompare2(VSYNC_INIT_COMPARE_VALUE2);
+ 137:.\Generated_Source\PSoC5/VSYNC.c ****         #endif /* (VSYNC_UseOneCompareMode) */
+ 138:.\Generated_Source\PSoC5/VSYNC.c ****         
+ 139:.\Generated_Source\PSoC5/VSYNC.c ****         #if (VSYNC_KillModeMinTime)
+ 140:.\Generated_Source\PSoC5/VSYNC.c ****             VSYNC_WriteKillTime(VSYNC_MinimumKillTime);
+ 141:.\Generated_Source\PSoC5/VSYNC.c ****         #endif /* (VSYNC_KillModeMinTime) */
+ 142:.\Generated_Source\PSoC5/VSYNC.c ****         
+ 143:.\Generated_Source\PSoC5/VSYNC.c ****         #if (VSYNC_DeadBandUsed)
+ 144:.\Generated_Source\PSoC5/VSYNC.c ****             VSYNC_WriteDeadTime(VSYNC_INIT_DEAD_TIME);
+ 145:.\Generated_Source\PSoC5/VSYNC.c ****         #endif /* (VSYNC_DeadBandUsed) */
+ 146:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 147:.\Generated_Source\PSoC5/VSYNC.c ****     #if (VSYNC_UseStatus || VSYNC_UsingFixedFunction)
+ 148:.\Generated_Source\PSoC5/VSYNC.c ****         VSYNC_SetInterruptMode(VSYNC_INIT_INTERRUPTS_MODE);
+ 149:.\Generated_Source\PSoC5/VSYNC.c ****     #endif /* (VSYNC_UseStatus || VSYNC_UsingFixedFunction) */
+ 150:.\Generated_Source\PSoC5/VSYNC.c ****         
+ 151:.\Generated_Source\PSoC5/VSYNC.c ****     #if (VSYNC_UsingFixedFunction)
+ 152:.\Generated_Source\PSoC5/VSYNC.c ****         /* Globally Enable the Fixed Function Block chosen */
+ 153:.\Generated_Source\PSoC5/VSYNC.c ****         VSYNC_GLOBAL_ENABLE |= VSYNC_BLOCK_EN_MASK;
+ 154:.\Generated_Source\PSoC5/VSYNC.c ****         /* Set the Interrupt source to come from the status register */
+ 155:.\Generated_Source\PSoC5/VSYNC.c ****         VSYNC_CONTROL2 |= VSYNC_CTRL2_IRQ_SEL;
+ 156:.\Generated_Source\PSoC5/VSYNC.c ****     #else
+ 157:.\Generated_Source\PSoC5/VSYNC.c ****         #if(VSYNC_UseStatus)
+ 158:.\Generated_Source\PSoC5/VSYNC.c ****             
+ 159:.\Generated_Source\PSoC5/VSYNC.c ****             /* CyEnterCriticalRegion and CyExitCriticalRegion are used to mark following region cri
+ 160:.\Generated_Source\PSoC5/VSYNC.c ****             /* Enter Critical Region*/
+ 161:.\Generated_Source\PSoC5/VSYNC.c ****             VSYNC_interruptState = CyEnterCriticalSection();
+ 162:.\Generated_Source\PSoC5/VSYNC.c ****             /* Use the interrupt output of the status register for IRQ output */
+ 163:.\Generated_Source\PSoC5/VSYNC.c ****             VSYNC_STATUS_AUX_CTRL |= VSYNC_STATUS_ACTL_INT_EN_MASK;
+ 164:.\Generated_Source\PSoC5/VSYNC.c ****             
+ 165:.\Generated_Source\PSoC5/VSYNC.c ****              /* Exit Critical Region*/
+ 166:.\Generated_Source\PSoC5/VSYNC.c ****             CyExitCriticalSection(VSYNC_interruptState);
+ 167:.\Generated_Source\PSoC5/VSYNC.c ****             
+ 168:.\Generated_Source\PSoC5/VSYNC.c ****             /* Clear the FIFO to enable the VSYNC_STATUS_FIFOFULL
+ 169:.\Generated_Source\PSoC5/VSYNC.c ****                    bit to be set on FIFO full. */
+ 170:.\Generated_Source\PSoC5/VSYNC.c ****             VSYNC_ClearFIFO();
+ 171:.\Generated_Source\PSoC5/VSYNC.c ****         #endif /* (VSYNC_UseStatus) */
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 6
+
+
+ 172:.\Generated_Source\PSoC5/VSYNC.c ****     #endif /* (VSYNC_UsingFixedFunction) */
+ 173:.\Generated_Source\PSoC5/VSYNC.c **** }
+ 115              		.loc 1 173 0
+ 116 0040 0837     		adds	r7, r7, #8
+ 117              		.cfi_def_cfa_offset 8
+ 118 0042 BD46     		mov	sp, r7
+ 119              		.cfi_def_cfa_register 13
+ 120              		@ sp needed
+ 121 0044 80BD     		pop	{r7, pc}
+ 122              	.L7:
+ 123 0046 00BF     		.align	2
+ 124              	.L6:
+ 125 0048 7A640040 		.word	1073767546
+ 126 004c 99650040 		.word	1073767833
+ 127              		.cfi_endproc
+ 128              	.LFE1:
+ 129              		.size	VSYNC_Init, .-VSYNC_Init
+ 130              		.section	.text.VSYNC_Enable,"ax",%progbits
+ 131              		.align	2
+ 132              		.global	VSYNC_Enable
+ 133              		.thumb
+ 134              		.thumb_func
+ 135              		.type	VSYNC_Enable, %function
+ 136              	VSYNC_Enable:
+ 137              	.LFB2:
+ 174:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 175:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 176:.\Generated_Source\PSoC5/VSYNC.c **** /*******************************************************************************
+ 177:.\Generated_Source\PSoC5/VSYNC.c **** * Function Name: VSYNC_Enable
+ 178:.\Generated_Source\PSoC5/VSYNC.c **** ********************************************************************************
+ 179:.\Generated_Source\PSoC5/VSYNC.c **** *
+ 180:.\Generated_Source\PSoC5/VSYNC.c **** * Summary: 
+ 181:.\Generated_Source\PSoC5/VSYNC.c **** *  Enables the PWM block operation
+ 182:.\Generated_Source\PSoC5/VSYNC.c **** *
+ 183:.\Generated_Source\PSoC5/VSYNC.c **** * Parameters:  
+ 184:.\Generated_Source\PSoC5/VSYNC.c **** *  None
+ 185:.\Generated_Source\PSoC5/VSYNC.c **** *
+ 186:.\Generated_Source\PSoC5/VSYNC.c **** * Return: 
+ 187:.\Generated_Source\PSoC5/VSYNC.c **** *  None
+ 188:.\Generated_Source\PSoC5/VSYNC.c **** *
+ 189:.\Generated_Source\PSoC5/VSYNC.c **** * Side Effects: 
+ 190:.\Generated_Source\PSoC5/VSYNC.c **** *  This works only if software enable mode is chosen
+ 191:.\Generated_Source\PSoC5/VSYNC.c **** *
+ 192:.\Generated_Source\PSoC5/VSYNC.c **** *******************************************************************************/
+ 193:.\Generated_Source\PSoC5/VSYNC.c **** void VSYNC_Enable(void) 
+ 194:.\Generated_Source\PSoC5/VSYNC.c **** {
+ 138              		.loc 1 194 0
+ 139              		.cfi_startproc
+ 140              		@ args = 0, pretend = 0, frame = 0
+ 141              		@ frame_needed = 1, uses_anonymous_args = 0
+ 142              		@ link register save eliminated.
+ 143 0000 80B4     		push	{r7}
+ 144              		.cfi_def_cfa_offset 4
+ 145              		.cfi_offset 7, -4
+ 146 0002 00AF     		add	r7, sp, #0
+ 147              		.cfi_def_cfa_register 7
+ 195:.\Generated_Source\PSoC5/VSYNC.c ****     /* Globally Enable the Fixed Function Block chosen */
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 7
+
+
+ 196:.\Generated_Source\PSoC5/VSYNC.c ****     #if (VSYNC_UsingFixedFunction)
+ 197:.\Generated_Source\PSoC5/VSYNC.c ****         VSYNC_GLOBAL_ENABLE |= VSYNC_BLOCK_EN_MASK;
+ 198:.\Generated_Source\PSoC5/VSYNC.c ****         VSYNC_GLOBAL_STBY_ENABLE |= VSYNC_BLOCK_STBY_EN_MASK;
+ 199:.\Generated_Source\PSoC5/VSYNC.c ****     #endif /* (VSYNC_UsingFixedFunction) */
+ 200:.\Generated_Source\PSoC5/VSYNC.c ****     
+ 201:.\Generated_Source\PSoC5/VSYNC.c ****     /* Enable the PWM from the control register  */
+ 202:.\Generated_Source\PSoC5/VSYNC.c ****     #if (VSYNC_UseControl || VSYNC_UsingFixedFunction)
+ 203:.\Generated_Source\PSoC5/VSYNC.c ****         VSYNC_CONTROL |= VSYNC_CTRL_ENABLE;
+ 148              		.loc 1 203 0
+ 149 0004 054A     		ldr	r2, .L9
+ 150 0006 054B     		ldr	r3, .L9
+ 151 0008 1B78     		ldrb	r3, [r3]
+ 152 000a DBB2     		uxtb	r3, r3
+ 153 000c 63F07F03 		orn	r3, r3, #127
+ 154 0010 DBB2     		uxtb	r3, r3
+ 155 0012 1370     		strb	r3, [r2]
+ 204:.\Generated_Source\PSoC5/VSYNC.c ****     #endif /* (VSYNC_UseControl || VSYNC_UsingFixedFunction) */
+ 205:.\Generated_Source\PSoC5/VSYNC.c **** }
+ 156              		.loc 1 205 0
+ 157 0014 BD46     		mov	sp, r7
+ 158              		.cfi_def_cfa_register 13
+ 159              		@ sp needed
+ 160 0016 5DF8047B 		ldr	r7, [sp], #4
+ 161              		.cfi_restore 7
+ 162              		.cfi_def_cfa_offset 0
+ 163 001a 7047     		bx	lr
+ 164              	.L10:
+ 165              		.align	2
+ 166              	.L9:
+ 167 001c 7A640040 		.word	1073767546
+ 168              		.cfi_endproc
+ 169              	.LFE2:
+ 170              		.size	VSYNC_Enable, .-VSYNC_Enable
+ 171              		.section	.text.VSYNC_Stop,"ax",%progbits
+ 172              		.align	2
+ 173              		.global	VSYNC_Stop
+ 174              		.thumb
+ 175              		.thumb_func
+ 176              		.type	VSYNC_Stop, %function
+ 177              	VSYNC_Stop:
+ 178              	.LFB3:
+ 206:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 207:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 208:.\Generated_Source\PSoC5/VSYNC.c **** /*******************************************************************************
+ 209:.\Generated_Source\PSoC5/VSYNC.c **** * Function Name: VSYNC_Stop
+ 210:.\Generated_Source\PSoC5/VSYNC.c **** ********************************************************************************
+ 211:.\Generated_Source\PSoC5/VSYNC.c **** *
+ 212:.\Generated_Source\PSoC5/VSYNC.c **** * Summary:
+ 213:.\Generated_Source\PSoC5/VSYNC.c **** *  The stop function halts the PWM, but does not change any modes or disable
+ 214:.\Generated_Source\PSoC5/VSYNC.c **** *  interrupts.
+ 215:.\Generated_Source\PSoC5/VSYNC.c **** *
+ 216:.\Generated_Source\PSoC5/VSYNC.c **** * Parameters:  
+ 217:.\Generated_Source\PSoC5/VSYNC.c **** *  None  
+ 218:.\Generated_Source\PSoC5/VSYNC.c **** *
+ 219:.\Generated_Source\PSoC5/VSYNC.c **** * Return: 
+ 220:.\Generated_Source\PSoC5/VSYNC.c **** *  None
+ 221:.\Generated_Source\PSoC5/VSYNC.c **** *
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 8
+
+
+ 222:.\Generated_Source\PSoC5/VSYNC.c **** * Side Effects:
+ 223:.\Generated_Source\PSoC5/VSYNC.c **** *  If the Enable mode is set to Hardware only then this function
+ 224:.\Generated_Source\PSoC5/VSYNC.c **** *  has no effect on the operation of the PWM
+ 225:.\Generated_Source\PSoC5/VSYNC.c **** *
+ 226:.\Generated_Source\PSoC5/VSYNC.c **** *******************************************************************************/
+ 227:.\Generated_Source\PSoC5/VSYNC.c **** void VSYNC_Stop(void) 
+ 228:.\Generated_Source\PSoC5/VSYNC.c **** {
+ 179              		.loc 1 228 0
+ 180              		.cfi_startproc
+ 181              		@ args = 0, pretend = 0, frame = 0
+ 182              		@ frame_needed = 1, uses_anonymous_args = 0
+ 183              		@ link register save eliminated.
+ 184 0000 80B4     		push	{r7}
+ 185              		.cfi_def_cfa_offset 4
+ 186              		.cfi_offset 7, -4
+ 187 0002 00AF     		add	r7, sp, #0
+ 188              		.cfi_def_cfa_register 7
+ 229:.\Generated_Source\PSoC5/VSYNC.c ****     #if (VSYNC_UseControl || VSYNC_UsingFixedFunction)
+ 230:.\Generated_Source\PSoC5/VSYNC.c ****         VSYNC_CONTROL &= ((uint8)(~VSYNC_CTRL_ENABLE));
+ 189              		.loc 1 230 0
+ 190 0004 054A     		ldr	r2, .L12
+ 191 0006 054B     		ldr	r3, .L12
+ 192 0008 1B78     		ldrb	r3, [r3]
+ 193 000a DBB2     		uxtb	r3, r3
+ 194 000c 03F07F03 		and	r3, r3, #127
+ 195 0010 DBB2     		uxtb	r3, r3
+ 196 0012 1370     		strb	r3, [r2]
+ 231:.\Generated_Source\PSoC5/VSYNC.c ****     #endif /* (VSYNC_UseControl || VSYNC_UsingFixedFunction) */
+ 232:.\Generated_Source\PSoC5/VSYNC.c ****     
+ 233:.\Generated_Source\PSoC5/VSYNC.c ****     /* Globally disable the Fixed Function Block chosen */
+ 234:.\Generated_Source\PSoC5/VSYNC.c ****     #if (VSYNC_UsingFixedFunction)
+ 235:.\Generated_Source\PSoC5/VSYNC.c ****         VSYNC_GLOBAL_ENABLE &= ((uint8)(~VSYNC_BLOCK_EN_MASK));
+ 236:.\Generated_Source\PSoC5/VSYNC.c ****         VSYNC_GLOBAL_STBY_ENABLE &= ((uint8)(~VSYNC_BLOCK_STBY_EN_MASK));
+ 237:.\Generated_Source\PSoC5/VSYNC.c ****     #endif /* (VSYNC_UsingFixedFunction) */
+ 238:.\Generated_Source\PSoC5/VSYNC.c **** }
+ 197              		.loc 1 238 0
+ 198 0014 BD46     		mov	sp, r7
+ 199              		.cfi_def_cfa_register 13
+ 200              		@ sp needed
+ 201 0016 5DF8047B 		ldr	r7, [sp], #4
+ 202              		.cfi_restore 7
+ 203              		.cfi_def_cfa_offset 0
+ 204 001a 7047     		bx	lr
+ 205              	.L13:
+ 206              		.align	2
+ 207              	.L12:
+ 208 001c 7A640040 		.word	1073767546
+ 209              		.cfi_endproc
+ 210              	.LFE3:
+ 211              		.size	VSYNC_Stop, .-VSYNC_Stop
+ 212              		.section	.text.VSYNC_WriteCounter,"ax",%progbits
+ 213              		.align	2
+ 214              		.global	VSYNC_WriteCounter
+ 215              		.thumb
+ 216              		.thumb_func
+ 217              		.type	VSYNC_WriteCounter, %function
+ 218              	VSYNC_WriteCounter:
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 9
+
+
+ 219              	.LFB4:
+ 239:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 240:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 241:.\Generated_Source\PSoC5/VSYNC.c **** #if (VSYNC_UseOneCompareMode)
+ 242:.\Generated_Source\PSoC5/VSYNC.c **** 	#if (VSYNC_CompareMode1SW)
+ 243:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 244:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 245:.\Generated_Source\PSoC5/VSYNC.c **** 		/*******************************************************************************
+ 246:.\Generated_Source\PSoC5/VSYNC.c **** 		* Function Name: VSYNC_SetCompareMode
+ 247:.\Generated_Source\PSoC5/VSYNC.c **** 		********************************************************************************
+ 248:.\Generated_Source\PSoC5/VSYNC.c **** 		* 
+ 249:.\Generated_Source\PSoC5/VSYNC.c **** 		* Summary:
+ 250:.\Generated_Source\PSoC5/VSYNC.c **** 		*  This function writes the Compare Mode for the pwm output when in Dither mode,
+ 251:.\Generated_Source\PSoC5/VSYNC.c **** 		*  Center Align Mode or One Output Mode.
+ 252:.\Generated_Source\PSoC5/VSYNC.c **** 		*
+ 253:.\Generated_Source\PSoC5/VSYNC.c **** 		* Parameters:
+ 254:.\Generated_Source\PSoC5/VSYNC.c **** 		*  comparemode:  The new compare mode for the PWM output. Use the compare types
+ 255:.\Generated_Source\PSoC5/VSYNC.c **** 		*                defined in the H file as input arguments.
+ 256:.\Generated_Source\PSoC5/VSYNC.c **** 		*
+ 257:.\Generated_Source\PSoC5/VSYNC.c **** 		* Return:
+ 258:.\Generated_Source\PSoC5/VSYNC.c **** 		*  None
+ 259:.\Generated_Source\PSoC5/VSYNC.c **** 		*
+ 260:.\Generated_Source\PSoC5/VSYNC.c **** 		*******************************************************************************/
+ 261:.\Generated_Source\PSoC5/VSYNC.c **** 		void VSYNC_SetCompareMode(uint8 comparemode) 
+ 262:.\Generated_Source\PSoC5/VSYNC.c **** 		{
+ 263:.\Generated_Source\PSoC5/VSYNC.c **** 		    #if(VSYNC_UsingFixedFunction)
+ 264:.\Generated_Source\PSoC5/VSYNC.c ****             
+ 265:.\Generated_Source\PSoC5/VSYNC.c ****                 #if(0 != VSYNC_CTRL_CMPMODE1_SHIFT)
+ 266:.\Generated_Source\PSoC5/VSYNC.c ****                     uint8 comparemodemasked = ((uint8)((uint8)comparemode << VSYNC_CTRL_CMPMODE1_SH
+ 267:.\Generated_Source\PSoC5/VSYNC.c ****                 #else
+ 268:.\Generated_Source\PSoC5/VSYNC.c ****                     uint8 comparemodemasked = comparemode;
+ 269:.\Generated_Source\PSoC5/VSYNC.c ****                 #endif /* (0 != VSYNC_CTRL_CMPMODE1_SHIFT) */
+ 270:.\Generated_Source\PSoC5/VSYNC.c ****             
+ 271:.\Generated_Source\PSoC5/VSYNC.c **** 	            VSYNC_CONTROL3 &= ((uint8)(~VSYNC_CTRL_CMPMODE1_MASK)); /*Clear Existing Data */
+ 272:.\Generated_Source\PSoC5/VSYNC.c **** 	            VSYNC_CONTROL3 |= comparemodemasked;     
+ 273:.\Generated_Source\PSoC5/VSYNC.c **** 		                
+ 274:.\Generated_Source\PSoC5/VSYNC.c **** 		    #elif (VSYNC_UseControl)
+ 275:.\Generated_Source\PSoC5/VSYNC.c **** 		        
+ 276:.\Generated_Source\PSoC5/VSYNC.c ****                 #if(0 != VSYNC_CTRL_CMPMODE1_SHIFT)
+ 277:.\Generated_Source\PSoC5/VSYNC.c ****                     uint8 comparemode1masked = ((uint8)((uint8)comparemode << VSYNC_CTRL_CMPMODE1_S
+ 278:.\Generated_Source\PSoC5/VSYNC.c ****     		                                    VSYNC_CTRL_CMPMODE1_MASK;
+ 279:.\Generated_Source\PSoC5/VSYNC.c ****                 #else
+ 280:.\Generated_Source\PSoC5/VSYNC.c ****                     uint8 comparemode1masked = comparemode & VSYNC_CTRL_CMPMODE1_MASK;             
+ 281:.\Generated_Source\PSoC5/VSYNC.c ****                 #endif /* (0 != VSYNC_CTRL_CMPMODE1_SHIFT) */
+ 282:.\Generated_Source\PSoC5/VSYNC.c ****                 
+ 283:.\Generated_Source\PSoC5/VSYNC.c ****                 #if(0 != VSYNC_CTRL_CMPMODE2_SHIFT)                            
+ 284:.\Generated_Source\PSoC5/VSYNC.c ****     		        uint8 comparemode2masked = ((uint8)((uint8)comparemode << VSYNC_CTRL_CMPMODE2_SHIFT))
+ 285:.\Generated_Source\PSoC5/VSYNC.c ****     		                                   VSYNC_CTRL_CMPMODE2_MASK;
+ 286:.\Generated_Source\PSoC5/VSYNC.c ****                 #else
+ 287:.\Generated_Source\PSoC5/VSYNC.c ****     		        uint8 comparemode2masked = comparemode & VSYNC_CTRL_CMPMODE2_MASK;                
+ 288:.\Generated_Source\PSoC5/VSYNC.c ****                 #endif /* (0 != VSYNC_CTRL_CMPMODE2_SHIFT) */
+ 289:.\Generated_Source\PSoC5/VSYNC.c ****                 
+ 290:.\Generated_Source\PSoC5/VSYNC.c **** 		        /*Clear existing mode */
+ 291:.\Generated_Source\PSoC5/VSYNC.c **** 		        VSYNC_CONTROL &= ((uint8)(~(VSYNC_CTRL_CMPMODE1_MASK | VSYNC_CTRL_CMPMODE2_MASK))); 
+ 292:.\Generated_Source\PSoC5/VSYNC.c **** 		        VSYNC_CONTROL |= (comparemode1masked | comparemode2masked);
+ 293:.\Generated_Source\PSoC5/VSYNC.c **** 		        
+ 294:.\Generated_Source\PSoC5/VSYNC.c **** 		    #else
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 10
+
+
+ 295:.\Generated_Source\PSoC5/VSYNC.c **** 		        uint8 temp = comparemode;
+ 296:.\Generated_Source\PSoC5/VSYNC.c **** 		    #endif /* (VSYNC_UsingFixedFunction) */
+ 297:.\Generated_Source\PSoC5/VSYNC.c **** 		}
+ 298:.\Generated_Source\PSoC5/VSYNC.c **** 	#endif /* VSYNC_CompareMode1SW */
+ 299:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 300:.\Generated_Source\PSoC5/VSYNC.c **** #else /* UseOneCompareMode */
+ 301:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 302:.\Generated_Source\PSoC5/VSYNC.c **** 	#if (VSYNC_CompareMode1SW)
+ 303:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 304:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 305:.\Generated_Source\PSoC5/VSYNC.c **** 		/*******************************************************************************
+ 306:.\Generated_Source\PSoC5/VSYNC.c **** 		* Function Name: VSYNC_SetCompareMode1
+ 307:.\Generated_Source\PSoC5/VSYNC.c **** 		********************************************************************************
+ 308:.\Generated_Source\PSoC5/VSYNC.c **** 		* 
+ 309:.\Generated_Source\PSoC5/VSYNC.c **** 		* Summary:
+ 310:.\Generated_Source\PSoC5/VSYNC.c **** 		*  This function writes the Compare Mode for the pwm or pwm1 output
+ 311:.\Generated_Source\PSoC5/VSYNC.c **** 		*
+ 312:.\Generated_Source\PSoC5/VSYNC.c **** 		* Parameters:  
+ 313:.\Generated_Source\PSoC5/VSYNC.c **** 		*  comparemode:  The new compare mode for the PWM output. Use the compare types
+ 314:.\Generated_Source\PSoC5/VSYNC.c **** 		*                defined in the H file as input arguments.
+ 315:.\Generated_Source\PSoC5/VSYNC.c **** 		*
+ 316:.\Generated_Source\PSoC5/VSYNC.c **** 		* Return: 
+ 317:.\Generated_Source\PSoC5/VSYNC.c **** 		*  None
+ 318:.\Generated_Source\PSoC5/VSYNC.c **** 		*
+ 319:.\Generated_Source\PSoC5/VSYNC.c **** 		*******************************************************************************/
+ 320:.\Generated_Source\PSoC5/VSYNC.c **** 		void VSYNC_SetCompareMode1(uint8 comparemode) 
+ 321:.\Generated_Source\PSoC5/VSYNC.c **** 		{
+ 322:.\Generated_Source\PSoC5/VSYNC.c **** 		    #if(0 != VSYNC_CTRL_CMPMODE1_SHIFT)
+ 323:.\Generated_Source\PSoC5/VSYNC.c ****                 uint8 comparemodemasked = ((uint8)((uint8)comparemode << VSYNC_CTRL_CMPMODE1_SHIFT)
+ 324:.\Generated_Source\PSoC5/VSYNC.c ****     		                               VSYNC_CTRL_CMPMODE1_MASK;
+ 325:.\Generated_Source\PSoC5/VSYNC.c **** 		    #else
+ 326:.\Generated_Source\PSoC5/VSYNC.c ****                 uint8 comparemodemasked = comparemode & VSYNC_CTRL_CMPMODE1_MASK;                
+ 327:.\Generated_Source\PSoC5/VSYNC.c ****             #endif /* (0 != VSYNC_CTRL_CMPMODE1_SHIFT) */
+ 328:.\Generated_Source\PSoC5/VSYNC.c ****                    
+ 329:.\Generated_Source\PSoC5/VSYNC.c **** 		    #if (VSYNC_UseControl)
+ 330:.\Generated_Source\PSoC5/VSYNC.c **** 		        VSYNC_CONTROL &= ((uint8)(~VSYNC_CTRL_CMPMODE1_MASK)); /*Clear existing mode */
+ 331:.\Generated_Source\PSoC5/VSYNC.c **** 		        VSYNC_CONTROL |= comparemodemasked;
+ 332:.\Generated_Source\PSoC5/VSYNC.c **** 		    #endif /* (VSYNC_UseControl) */
+ 333:.\Generated_Source\PSoC5/VSYNC.c **** 		}
+ 334:.\Generated_Source\PSoC5/VSYNC.c **** 	#endif /* VSYNC_CompareMode1SW */
+ 335:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 336:.\Generated_Source\PSoC5/VSYNC.c **** #if (VSYNC_CompareMode2SW)
+ 337:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 338:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 339:.\Generated_Source\PSoC5/VSYNC.c ****     /*******************************************************************************
+ 340:.\Generated_Source\PSoC5/VSYNC.c ****     * Function Name: VSYNC_SetCompareMode2
+ 341:.\Generated_Source\PSoC5/VSYNC.c ****     ********************************************************************************
+ 342:.\Generated_Source\PSoC5/VSYNC.c ****     * 
+ 343:.\Generated_Source\PSoC5/VSYNC.c ****     * Summary:
+ 344:.\Generated_Source\PSoC5/VSYNC.c ****     *  This function writes the Compare Mode for the pwm or pwm2 output
+ 345:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 346:.\Generated_Source\PSoC5/VSYNC.c ****     * Parameters:  
+ 347:.\Generated_Source\PSoC5/VSYNC.c ****     *  comparemode:  The new compare mode for the PWM output. Use the compare types
+ 348:.\Generated_Source\PSoC5/VSYNC.c ****     *                defined in the H file as input arguments.
+ 349:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 350:.\Generated_Source\PSoC5/VSYNC.c ****     * Return: 
+ 351:.\Generated_Source\PSoC5/VSYNC.c ****     *  None
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 11
+
+
+ 352:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 353:.\Generated_Source\PSoC5/VSYNC.c ****     *******************************************************************************/
+ 354:.\Generated_Source\PSoC5/VSYNC.c ****     void VSYNC_SetCompareMode2(uint8 comparemode) 
+ 355:.\Generated_Source\PSoC5/VSYNC.c ****     {
+ 356:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 357:.\Generated_Source\PSoC5/VSYNC.c ****         #if(0 != VSYNC_CTRL_CMPMODE2_SHIFT)
+ 358:.\Generated_Source\PSoC5/VSYNC.c ****             uint8 comparemodemasked = ((uint8)((uint8)comparemode << VSYNC_CTRL_CMPMODE2_SHIFT)) & 
+ 359:.\Generated_Source\PSoC5/VSYNC.c ****                                                  VSYNC_CTRL_CMPMODE2_MASK;
+ 360:.\Generated_Source\PSoC5/VSYNC.c ****         #else
+ 361:.\Generated_Source\PSoC5/VSYNC.c ****             uint8 comparemodemasked = comparemode & VSYNC_CTRL_CMPMODE2_MASK;            
+ 362:.\Generated_Source\PSoC5/VSYNC.c ****         #endif /* (0 != VSYNC_CTRL_CMPMODE2_SHIFT) */
+ 363:.\Generated_Source\PSoC5/VSYNC.c ****         
+ 364:.\Generated_Source\PSoC5/VSYNC.c ****         #if (VSYNC_UseControl)
+ 365:.\Generated_Source\PSoC5/VSYNC.c ****             VSYNC_CONTROL &= ((uint8)(~VSYNC_CTRL_CMPMODE2_MASK)); /*Clear existing mode */
+ 366:.\Generated_Source\PSoC5/VSYNC.c ****             VSYNC_CONTROL |= comparemodemasked;
+ 367:.\Generated_Source\PSoC5/VSYNC.c ****         #endif /* (VSYNC_UseControl) */
+ 368:.\Generated_Source\PSoC5/VSYNC.c ****     }
+ 369:.\Generated_Source\PSoC5/VSYNC.c ****     #endif /*VSYNC_CompareMode2SW */
+ 370:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 371:.\Generated_Source\PSoC5/VSYNC.c **** #endif /* UseOneCompareMode */
+ 372:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 373:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 374:.\Generated_Source\PSoC5/VSYNC.c **** #if (!VSYNC_UsingFixedFunction)
+ 375:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 376:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 377:.\Generated_Source\PSoC5/VSYNC.c ****     /*******************************************************************************
+ 378:.\Generated_Source\PSoC5/VSYNC.c ****     * Function Name: VSYNC_WriteCounter
+ 379:.\Generated_Source\PSoC5/VSYNC.c ****     ********************************************************************************
+ 380:.\Generated_Source\PSoC5/VSYNC.c ****     * 
+ 381:.\Generated_Source\PSoC5/VSYNC.c ****     * Summary:
+ 382:.\Generated_Source\PSoC5/VSYNC.c ****     *  Writes a new counter value directly to the counter register. This will be 
+ 383:.\Generated_Source\PSoC5/VSYNC.c ****     *  implemented for that currently running period and only that period. This API 
+ 384:.\Generated_Source\PSoC5/VSYNC.c ****     *  is valid only for UDB implementation and not available for fixed function 
+ 385:.\Generated_Source\PSoC5/VSYNC.c ****     *  PWM implementation.    
+ 386:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 387:.\Generated_Source\PSoC5/VSYNC.c ****     * Parameters:  
+ 388:.\Generated_Source\PSoC5/VSYNC.c ****     *  counter:  The period new period counter value.
+ 389:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 390:.\Generated_Source\PSoC5/VSYNC.c ****     * Return: 
+ 391:.\Generated_Source\PSoC5/VSYNC.c ****     *  None
+ 392:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 393:.\Generated_Source\PSoC5/VSYNC.c ****     * Side Effects: 
+ 394:.\Generated_Source\PSoC5/VSYNC.c ****     *  The PWM Period will be reloaded when a counter value will be a zero
+ 395:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 396:.\Generated_Source\PSoC5/VSYNC.c ****     *******************************************************************************/
+ 397:.\Generated_Source\PSoC5/VSYNC.c ****     void VSYNC_WriteCounter(uint8 counter) \
+ 398:.\Generated_Source\PSoC5/VSYNC.c ****                                        
+ 399:.\Generated_Source\PSoC5/VSYNC.c ****     {
+ 220              		.loc 1 399 0
+ 221              		.cfi_startproc
+ 222              		@ args = 0, pretend = 0, frame = 8
+ 223              		@ frame_needed = 1, uses_anonymous_args = 0
+ 224              		@ link register save eliminated.
+ 225 0000 80B4     		push	{r7}
+ 226              		.cfi_def_cfa_offset 4
+ 227              		.cfi_offset 7, -4
+ 228 0002 83B0     		sub	sp, sp, #12
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 12
+
+
+ 229              		.cfi_def_cfa_offset 16
+ 230 0004 00AF     		add	r7, sp, #0
+ 231              		.cfi_def_cfa_register 7
+ 232 0006 0346     		mov	r3, r0
+ 233 0008 FB71     		strb	r3, [r7, #7]
+ 400:.\Generated_Source\PSoC5/VSYNC.c ****         CY_SET_REG8(VSYNC_COUNTER_LSB_PTR, counter);
+ 234              		.loc 1 400 0
+ 235 000a 044A     		ldr	r2, .L15
+ 236 000c FB79     		ldrb	r3, [r7, #7]
+ 237 000e 1370     		strb	r3, [r2]
+ 401:.\Generated_Source\PSoC5/VSYNC.c ****     }
+ 238              		.loc 1 401 0
+ 239 0010 0C37     		adds	r7, r7, #12
+ 240              		.cfi_def_cfa_offset 4
+ 241 0012 BD46     		mov	sp, r7
+ 242              		.cfi_def_cfa_register 13
+ 243              		@ sp needed
+ 244 0014 5DF8047B 		ldr	r7, [sp], #4
+ 245              		.cfi_restore 7
+ 246              		.cfi_def_cfa_offset 0
+ 247 0018 7047     		bx	lr
+ 248              	.L16:
+ 249 001a 00BF     		.align	2
+ 250              	.L15:
+ 251 001c 09650040 		.word	1073767689
+ 252              		.cfi_endproc
+ 253              	.LFE4:
+ 254              		.size	VSYNC_WriteCounter, .-VSYNC_WriteCounter
+ 255              		.section	.text.VSYNC_ReadCounter,"ax",%progbits
+ 256              		.align	2
+ 257              		.global	VSYNC_ReadCounter
+ 258              		.thumb
+ 259              		.thumb_func
+ 260              		.type	VSYNC_ReadCounter, %function
+ 261              	VSYNC_ReadCounter:
+ 262              	.LFB5:
+ 402:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 403:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 404:.\Generated_Source\PSoC5/VSYNC.c ****     /*******************************************************************************
+ 405:.\Generated_Source\PSoC5/VSYNC.c ****     * Function Name: VSYNC_ReadCounter
+ 406:.\Generated_Source\PSoC5/VSYNC.c ****     ********************************************************************************
+ 407:.\Generated_Source\PSoC5/VSYNC.c ****     * 
+ 408:.\Generated_Source\PSoC5/VSYNC.c ****     * Summary:
+ 409:.\Generated_Source\PSoC5/VSYNC.c ****     *  This function returns the current value of the counter.  It doesn't matter
+ 410:.\Generated_Source\PSoC5/VSYNC.c ****     *  if the counter is enabled or running.
+ 411:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 412:.\Generated_Source\PSoC5/VSYNC.c ****     * Parameters:  
+ 413:.\Generated_Source\PSoC5/VSYNC.c ****     *  None  
+ 414:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 415:.\Generated_Source\PSoC5/VSYNC.c ****     * Return: 
+ 416:.\Generated_Source\PSoC5/VSYNC.c ****     *  The current value of the counter.
+ 417:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 418:.\Generated_Source\PSoC5/VSYNC.c ****     *******************************************************************************/
+ 419:.\Generated_Source\PSoC5/VSYNC.c ****     uint8 VSYNC_ReadCounter(void) 
+ 420:.\Generated_Source\PSoC5/VSYNC.c ****     {
+ 263              		.loc 1 420 0
+ 264              		.cfi_startproc
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 13
+
+
+ 265              		@ args = 0, pretend = 0, frame = 0
+ 266              		@ frame_needed = 1, uses_anonymous_args = 0
+ 267              		@ link register save eliminated.
+ 268 0000 80B4     		push	{r7}
+ 269              		.cfi_def_cfa_offset 4
+ 270              		.cfi_offset 7, -4
+ 271 0002 00AF     		add	r7, sp, #0
+ 272              		.cfi_def_cfa_register 7
+ 421:.\Generated_Source\PSoC5/VSYNC.c ****         /* Force capture by reading Accumulator */
+ 422:.\Generated_Source\PSoC5/VSYNC.c ****         /* Must first do a software capture to be able to read the counter */
+ 423:.\Generated_Source\PSoC5/VSYNC.c ****         /* It is up to the user code to make sure there isn't already captured data in the FIFO */
+ 424:.\Generated_Source\PSoC5/VSYNC.c ****         (void)VSYNC_COUNTERCAP_LSB;
+ 273              		.loc 1 424 0
+ 274 0004 044B     		ldr	r3, .L19
+ 275 0006 1B78     		ldrb	r3, [r3]
+ 425:.\Generated_Source\PSoC5/VSYNC.c ****         
+ 426:.\Generated_Source\PSoC5/VSYNC.c ****         /* Read the data from the FIFO (or capture register for Fixed Function)*/
+ 427:.\Generated_Source\PSoC5/VSYNC.c ****         return (CY_GET_REG8(VSYNC_CAPTURE_LSB_PTR));
+ 276              		.loc 1 427 0
+ 277 0008 044B     		ldr	r3, .L19+4
+ 278 000a 1B78     		ldrb	r3, [r3]
+ 279 000c DBB2     		uxtb	r3, r3
+ 428:.\Generated_Source\PSoC5/VSYNC.c ****     }
+ 280              		.loc 1 428 0
+ 281 000e 1846     		mov	r0, r3
+ 282 0010 BD46     		mov	sp, r7
+ 283              		.cfi_def_cfa_register 13
+ 284              		@ sp needed
+ 285 0012 5DF8047B 		ldr	r7, [sp], #4
+ 286              		.cfi_restore 7
+ 287              		.cfi_def_cfa_offset 0
+ 288 0016 7047     		bx	lr
+ 289              	.L20:
+ 290              		.align	2
+ 291              	.L19:
+ 292 0018 19650040 		.word	1073767705
+ 293 001c 59650040 		.word	1073767769
+ 294              		.cfi_endproc
+ 295              	.LFE5:
+ 296              		.size	VSYNC_ReadCounter, .-VSYNC_ReadCounter
+ 297              		.section	.text.VSYNC_WritePeriod,"ax",%progbits
+ 298              		.align	2
+ 299              		.global	VSYNC_WritePeriod
+ 300              		.thumb
+ 301              		.thumb_func
+ 302              		.type	VSYNC_WritePeriod, %function
+ 303              	VSYNC_WritePeriod:
+ 304              	.LFB6:
+ 429:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 430:.\Generated_Source\PSoC5/VSYNC.c ****         #if (VSYNC_UseStatus)
+ 431:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 432:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 433:.\Generated_Source\PSoC5/VSYNC.c ****             /*******************************************************************************
+ 434:.\Generated_Source\PSoC5/VSYNC.c ****             * Function Name: VSYNC_ClearFIFO
+ 435:.\Generated_Source\PSoC5/VSYNC.c ****             ********************************************************************************
+ 436:.\Generated_Source\PSoC5/VSYNC.c ****             * 
+ 437:.\Generated_Source\PSoC5/VSYNC.c ****             * Summary:
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 14
+
+
+ 438:.\Generated_Source\PSoC5/VSYNC.c ****             *  This function clears all capture data from the capture FIFO
+ 439:.\Generated_Source\PSoC5/VSYNC.c ****             *
+ 440:.\Generated_Source\PSoC5/VSYNC.c ****             * Parameters:  
+ 441:.\Generated_Source\PSoC5/VSYNC.c ****             *  None
+ 442:.\Generated_Source\PSoC5/VSYNC.c ****             *
+ 443:.\Generated_Source\PSoC5/VSYNC.c ****             * Return: 
+ 444:.\Generated_Source\PSoC5/VSYNC.c ****             *  None
+ 445:.\Generated_Source\PSoC5/VSYNC.c ****             *
+ 446:.\Generated_Source\PSoC5/VSYNC.c ****             *******************************************************************************/
+ 447:.\Generated_Source\PSoC5/VSYNC.c ****             void VSYNC_ClearFIFO(void) 
+ 448:.\Generated_Source\PSoC5/VSYNC.c ****             {
+ 449:.\Generated_Source\PSoC5/VSYNC.c ****                 while(0u != (VSYNC_ReadStatusRegister() & VSYNC_STATUS_FIFONEMPTY))
+ 450:.\Generated_Source\PSoC5/VSYNC.c ****                 {
+ 451:.\Generated_Source\PSoC5/VSYNC.c ****                     (void)VSYNC_ReadCapture();
+ 452:.\Generated_Source\PSoC5/VSYNC.c ****                 }
+ 453:.\Generated_Source\PSoC5/VSYNC.c ****             }
+ 454:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 455:.\Generated_Source\PSoC5/VSYNC.c ****         #endif /* VSYNC_UseStatus */
+ 456:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 457:.\Generated_Source\PSoC5/VSYNC.c **** #endif /* !VSYNC_UsingFixedFunction */
+ 458:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 459:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 460:.\Generated_Source\PSoC5/VSYNC.c **** /*******************************************************************************
+ 461:.\Generated_Source\PSoC5/VSYNC.c **** * Function Name: VSYNC_WritePeriod
+ 462:.\Generated_Source\PSoC5/VSYNC.c **** ********************************************************************************
+ 463:.\Generated_Source\PSoC5/VSYNC.c **** * 
+ 464:.\Generated_Source\PSoC5/VSYNC.c **** * Summary:
+ 465:.\Generated_Source\PSoC5/VSYNC.c **** *  This function is used to change the period of the counter.  The new period 
+ 466:.\Generated_Source\PSoC5/VSYNC.c **** *  will be loaded the next time terminal count is detected.
+ 467:.\Generated_Source\PSoC5/VSYNC.c **** *
+ 468:.\Generated_Source\PSoC5/VSYNC.c **** * Parameters:  
+ 469:.\Generated_Source\PSoC5/VSYNC.c **** *  period:  Period value. May be between 1 and (2^Resolution)-1.  A value of 0 
+ 470:.\Generated_Source\PSoC5/VSYNC.c **** *           will result in the counter remaining at zero.
+ 471:.\Generated_Source\PSoC5/VSYNC.c **** *
+ 472:.\Generated_Source\PSoC5/VSYNC.c **** * Return: 
+ 473:.\Generated_Source\PSoC5/VSYNC.c **** *  None
+ 474:.\Generated_Source\PSoC5/VSYNC.c **** *
+ 475:.\Generated_Source\PSoC5/VSYNC.c **** *******************************************************************************/
+ 476:.\Generated_Source\PSoC5/VSYNC.c **** void VSYNC_WritePeriod(uint8 period) 
+ 477:.\Generated_Source\PSoC5/VSYNC.c **** {
+ 305              		.loc 1 477 0
+ 306              		.cfi_startproc
+ 307              		@ args = 0, pretend = 0, frame = 8
+ 308              		@ frame_needed = 1, uses_anonymous_args = 0
+ 309              		@ link register save eliminated.
+ 310 0000 80B4     		push	{r7}
+ 311              		.cfi_def_cfa_offset 4
+ 312              		.cfi_offset 7, -4
+ 313 0002 83B0     		sub	sp, sp, #12
+ 314              		.cfi_def_cfa_offset 16
+ 315 0004 00AF     		add	r7, sp, #0
+ 316              		.cfi_def_cfa_register 7
+ 317 0006 0346     		mov	r3, r0
+ 318 0008 FB71     		strb	r3, [r7, #7]
+ 478:.\Generated_Source\PSoC5/VSYNC.c ****     #if(VSYNC_UsingFixedFunction)
+ 479:.\Generated_Source\PSoC5/VSYNC.c ****         CY_SET_REG16(VSYNC_PERIOD_LSB_PTR, (uint16)period);
+ 480:.\Generated_Source\PSoC5/VSYNC.c ****     #else
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 15
+
+
+ 481:.\Generated_Source\PSoC5/VSYNC.c ****         CY_SET_REG8(VSYNC_PERIOD_LSB_PTR, period);
+ 319              		.loc 1 481 0
+ 320 000a 044A     		ldr	r2, .L22
+ 321 000c FB79     		ldrb	r3, [r7, #7]
+ 322 000e 1370     		strb	r3, [r2]
+ 482:.\Generated_Source\PSoC5/VSYNC.c ****     #endif /* (VSYNC_UsingFixedFunction) */
+ 483:.\Generated_Source\PSoC5/VSYNC.c **** }
+ 323              		.loc 1 483 0
+ 324 0010 0C37     		adds	r7, r7, #12
+ 325              		.cfi_def_cfa_offset 4
+ 326 0012 BD46     		mov	sp, r7
+ 327              		.cfi_def_cfa_register 13
+ 328              		@ sp needed
+ 329 0014 5DF8047B 		ldr	r7, [sp], #4
+ 330              		.cfi_restore 7
+ 331              		.cfi_def_cfa_offset 0
+ 332 0018 7047     		bx	lr
+ 333              	.L23:
+ 334 001a 00BF     		.align	2
+ 335              	.L22:
+ 336 001c 49650040 		.word	1073767753
+ 337              		.cfi_endproc
+ 338              	.LFE6:
+ 339              		.size	VSYNC_WritePeriod, .-VSYNC_WritePeriod
+ 340              		.section	.text.VSYNC_WriteCompare,"ax",%progbits
+ 341              		.align	2
+ 342              		.global	VSYNC_WriteCompare
+ 343              		.thumb
+ 344              		.thumb_func
+ 345              		.type	VSYNC_WriteCompare, %function
+ 346              	VSYNC_WriteCompare:
+ 347              	.LFB7:
+ 484:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 485:.\Generated_Source\PSoC5/VSYNC.c **** #if (VSYNC_UseOneCompareMode)
+ 486:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 487:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 488:.\Generated_Source\PSoC5/VSYNC.c ****     /*******************************************************************************
+ 489:.\Generated_Source\PSoC5/VSYNC.c ****     * Function Name: VSYNC_WriteCompare
+ 490:.\Generated_Source\PSoC5/VSYNC.c ****     ********************************************************************************
+ 491:.\Generated_Source\PSoC5/VSYNC.c ****     * 
+ 492:.\Generated_Source\PSoC5/VSYNC.c ****     * Summary:
+ 493:.\Generated_Source\PSoC5/VSYNC.c ****     *  This funtion is used to change the compare1 value when the PWM is in Dither
+ 494:.\Generated_Source\PSoC5/VSYNC.c ****     *  mode. The compare output will reflect the new value on the next UDB clock. 
+ 495:.\Generated_Source\PSoC5/VSYNC.c ****     *  The compare output will be driven high when the present counter value is 
+ 496:.\Generated_Source\PSoC5/VSYNC.c ****     *  compared to the compare value based on the compare mode defined in 
+ 497:.\Generated_Source\PSoC5/VSYNC.c ****     *  Dither Mode.
+ 498:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 499:.\Generated_Source\PSoC5/VSYNC.c ****     * Parameters:  
+ 500:.\Generated_Source\PSoC5/VSYNC.c ****     *  compare:  New compare value.  
+ 501:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 502:.\Generated_Source\PSoC5/VSYNC.c ****     * Return: 
+ 503:.\Generated_Source\PSoC5/VSYNC.c ****     *  None
+ 504:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 505:.\Generated_Source\PSoC5/VSYNC.c ****     * Side Effects:
+ 506:.\Generated_Source\PSoC5/VSYNC.c ****     *  This function is only available if the PWM mode parameter is set to
+ 507:.\Generated_Source\PSoC5/VSYNC.c ****     *  Dither Mode, Center Aligned Mode or One Output Mode
+ 508:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 16
+
+
+ 509:.\Generated_Source\PSoC5/VSYNC.c ****     *******************************************************************************/
+ 510:.\Generated_Source\PSoC5/VSYNC.c ****     void VSYNC_WriteCompare(uint8 compare) \
+ 511:.\Generated_Source\PSoC5/VSYNC.c ****                                        
+ 512:.\Generated_Source\PSoC5/VSYNC.c ****     {	
+ 348              		.loc 1 512 0
+ 349              		.cfi_startproc
+ 350              		@ args = 0, pretend = 0, frame = 8
+ 351              		@ frame_needed = 1, uses_anonymous_args = 0
+ 352              		@ link register save eliminated.
+ 353 0000 80B4     		push	{r7}
+ 354              		.cfi_def_cfa_offset 4
+ 355              		.cfi_offset 7, -4
+ 356 0002 83B0     		sub	sp, sp, #12
+ 357              		.cfi_def_cfa_offset 16
+ 358 0004 00AF     		add	r7, sp, #0
+ 359              		.cfi_def_cfa_register 7
+ 360 0006 0346     		mov	r3, r0
+ 361 0008 FB71     		strb	r3, [r7, #7]
+ 513:.\Generated_Source\PSoC5/VSYNC.c **** 		#if(VSYNC_UsingFixedFunction)
+ 514:.\Generated_Source\PSoC5/VSYNC.c **** 			CY_SET_REG16(VSYNC_COMPARE1_LSB_PTR, (uint16)compare);
+ 515:.\Generated_Source\PSoC5/VSYNC.c **** 		#else
+ 516:.\Generated_Source\PSoC5/VSYNC.c **** 	        CY_SET_REG8(VSYNC_COMPARE1_LSB_PTR, compare);	
+ 362              		.loc 1 516 0
+ 363 000a 044A     		ldr	r2, .L25
+ 364 000c FB79     		ldrb	r3, [r7, #7]
+ 365 000e 1370     		strb	r3, [r2]
+ 517:.\Generated_Source\PSoC5/VSYNC.c **** 		#endif /* (VSYNC_UsingFixedFunction) */
+ 518:.\Generated_Source\PSoC5/VSYNC.c ****         
+ 519:.\Generated_Source\PSoC5/VSYNC.c ****         #if (VSYNC_PWMMode == VSYNC__B_PWM__DITHER)
+ 520:.\Generated_Source\PSoC5/VSYNC.c ****             #if(VSYNC_UsingFixedFunction)
+ 521:.\Generated_Source\PSoC5/VSYNC.c ****     			CY_SET_REG16(VSYNC_COMPARE2_LSB_PTR, (uint16)(compare + 1u));
+ 522:.\Generated_Source\PSoC5/VSYNC.c ****     		#else
+ 523:.\Generated_Source\PSoC5/VSYNC.c ****     	        CY_SET_REG8(VSYNC_COMPARE2_LSB_PTR, (compare + 1u));	
+ 524:.\Generated_Source\PSoC5/VSYNC.c ****     		#endif /* (VSYNC_UsingFixedFunction) */
+ 525:.\Generated_Source\PSoC5/VSYNC.c ****         #endif /* (VSYNC_PWMMode == VSYNC__B_PWM__DITHER) */
+ 526:.\Generated_Source\PSoC5/VSYNC.c ****     }
+ 366              		.loc 1 526 0
+ 367 0010 0C37     		adds	r7, r7, #12
+ 368              		.cfi_def_cfa_offset 4
+ 369 0012 BD46     		mov	sp, r7
+ 370              		.cfi_def_cfa_register 13
+ 371              		@ sp needed
+ 372 0014 5DF8047B 		ldr	r7, [sp], #4
+ 373              		.cfi_restore 7
+ 374              		.cfi_def_cfa_offset 0
+ 375 0018 7047     		bx	lr
+ 376              	.L26:
+ 377 001a 00BF     		.align	2
+ 378              	.L25:
+ 379 001c 29650040 		.word	1073767721
+ 380              		.cfi_endproc
+ 381              	.LFE7:
+ 382              		.size	VSYNC_WriteCompare, .-VSYNC_WriteCompare
+ 383              		.section	.text.VSYNC_ReadControlRegister,"ax",%progbits
+ 384              		.align	2
+ 385              		.global	VSYNC_ReadControlRegister
+ 386              		.thumb
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 17
+
+
+ 387              		.thumb_func
+ 388              		.type	VSYNC_ReadControlRegister, %function
+ 389              	VSYNC_ReadControlRegister:
+ 390              	.LFB8:
+ 527:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 528:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 529:.\Generated_Source\PSoC5/VSYNC.c **** #else
+ 530:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 531:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 532:.\Generated_Source\PSoC5/VSYNC.c ****     /*******************************************************************************
+ 533:.\Generated_Source\PSoC5/VSYNC.c ****     * Function Name: VSYNC_WriteCompare1
+ 534:.\Generated_Source\PSoC5/VSYNC.c ****     ********************************************************************************
+ 535:.\Generated_Source\PSoC5/VSYNC.c ****     * 
+ 536:.\Generated_Source\PSoC5/VSYNC.c ****     * Summary:
+ 537:.\Generated_Source\PSoC5/VSYNC.c ****     *  This funtion is used to change the compare1 value.  The compare output will 
+ 538:.\Generated_Source\PSoC5/VSYNC.c ****     *  reflect the new value on the next UDB clock.  The compare output will be 
+ 539:.\Generated_Source\PSoC5/VSYNC.c ****     *  driven high when the present counter value is less than or less than or 
+ 540:.\Generated_Source\PSoC5/VSYNC.c ****     *  equal to the compare register, depending on the mode.
+ 541:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 542:.\Generated_Source\PSoC5/VSYNC.c ****     * Parameters:  
+ 543:.\Generated_Source\PSoC5/VSYNC.c ****     *  compare:  New compare value.  
+ 544:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 545:.\Generated_Source\PSoC5/VSYNC.c ****     * Return: 
+ 546:.\Generated_Source\PSoC5/VSYNC.c ****     *  None
+ 547:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 548:.\Generated_Source\PSoC5/VSYNC.c ****     *******************************************************************************/
+ 549:.\Generated_Source\PSoC5/VSYNC.c ****     void VSYNC_WriteCompare1(uint8 compare) \
+ 550:.\Generated_Source\PSoC5/VSYNC.c ****                                         
+ 551:.\Generated_Source\PSoC5/VSYNC.c ****     {
+ 552:.\Generated_Source\PSoC5/VSYNC.c ****         #if(VSYNC_UsingFixedFunction)
+ 553:.\Generated_Source\PSoC5/VSYNC.c ****             CY_SET_REG16(VSYNC_COMPARE1_LSB_PTR, (uint16)compare);
+ 554:.\Generated_Source\PSoC5/VSYNC.c ****         #else
+ 555:.\Generated_Source\PSoC5/VSYNC.c ****             CY_SET_REG8(VSYNC_COMPARE1_LSB_PTR, compare);
+ 556:.\Generated_Source\PSoC5/VSYNC.c ****         #endif /* (VSYNC_UsingFixedFunction) */
+ 557:.\Generated_Source\PSoC5/VSYNC.c ****     }
+ 558:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 559:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 560:.\Generated_Source\PSoC5/VSYNC.c ****     /*******************************************************************************
+ 561:.\Generated_Source\PSoC5/VSYNC.c ****     * Function Name: VSYNC_WriteCompare2
+ 562:.\Generated_Source\PSoC5/VSYNC.c ****     ********************************************************************************
+ 563:.\Generated_Source\PSoC5/VSYNC.c ****     * 
+ 564:.\Generated_Source\PSoC5/VSYNC.c ****     * Summary:
+ 565:.\Generated_Source\PSoC5/VSYNC.c ****     *  This funtion is used to change the compare value, for compare1 output.  
+ 566:.\Generated_Source\PSoC5/VSYNC.c ****     *  The compare output will reflect the new value on the next UDB clock.  
+ 567:.\Generated_Source\PSoC5/VSYNC.c ****     *  The compare output will be driven high when the present counter value is 
+ 568:.\Generated_Source\PSoC5/VSYNC.c ****     *  less than or less than or equal to the compare register, depending on the 
+ 569:.\Generated_Source\PSoC5/VSYNC.c ****     *  mode.
+ 570:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 571:.\Generated_Source\PSoC5/VSYNC.c ****     * Parameters:  
+ 572:.\Generated_Source\PSoC5/VSYNC.c ****     *  compare:  New compare value.  
+ 573:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 574:.\Generated_Source\PSoC5/VSYNC.c ****     * Return: 
+ 575:.\Generated_Source\PSoC5/VSYNC.c ****     *  None
+ 576:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 577:.\Generated_Source\PSoC5/VSYNC.c ****     *******************************************************************************/
+ 578:.\Generated_Source\PSoC5/VSYNC.c ****     void VSYNC_WriteCompare2(uint8 compare) \
+ 579:.\Generated_Source\PSoC5/VSYNC.c ****                                         
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 18
+
+
+ 580:.\Generated_Source\PSoC5/VSYNC.c ****     {
+ 581:.\Generated_Source\PSoC5/VSYNC.c ****         #if(VSYNC_UsingFixedFunction)
+ 582:.\Generated_Source\PSoC5/VSYNC.c ****             CY_SET_REG16(VSYNC_COMPARE2_LSB_PTR, compare);
+ 583:.\Generated_Source\PSoC5/VSYNC.c ****         #else
+ 584:.\Generated_Source\PSoC5/VSYNC.c ****             CY_SET_REG8(VSYNC_COMPARE2_LSB_PTR, compare);
+ 585:.\Generated_Source\PSoC5/VSYNC.c ****         #endif /* (VSYNC_UsingFixedFunction) */
+ 586:.\Generated_Source\PSoC5/VSYNC.c ****     }
+ 587:.\Generated_Source\PSoC5/VSYNC.c **** #endif /* UseOneCompareMode */
+ 588:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 589:.\Generated_Source\PSoC5/VSYNC.c **** #if (VSYNC_DeadBandUsed)
+ 590:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 591:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 592:.\Generated_Source\PSoC5/VSYNC.c ****     /*******************************************************************************
+ 593:.\Generated_Source\PSoC5/VSYNC.c ****     * Function Name: VSYNC_WriteDeadTime
+ 594:.\Generated_Source\PSoC5/VSYNC.c ****     ********************************************************************************
+ 595:.\Generated_Source\PSoC5/VSYNC.c ****     * 
+ 596:.\Generated_Source\PSoC5/VSYNC.c ****     * Summary:
+ 597:.\Generated_Source\PSoC5/VSYNC.c ****     *  This function writes the dead-band counts to the corresponding register
+ 598:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 599:.\Generated_Source\PSoC5/VSYNC.c ****     * Parameters:  
+ 600:.\Generated_Source\PSoC5/VSYNC.c ****     *  deadtime:  Number of counts for dead time 
+ 601:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 602:.\Generated_Source\PSoC5/VSYNC.c ****     * Return: 
+ 603:.\Generated_Source\PSoC5/VSYNC.c ****     *  None
+ 604:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 605:.\Generated_Source\PSoC5/VSYNC.c ****     *******************************************************************************/
+ 606:.\Generated_Source\PSoC5/VSYNC.c ****     void VSYNC_WriteDeadTime(uint8 deadtime) 
+ 607:.\Generated_Source\PSoC5/VSYNC.c ****     {
+ 608:.\Generated_Source\PSoC5/VSYNC.c ****         /* If using the Dead Band 1-255 mode then just write the register */
+ 609:.\Generated_Source\PSoC5/VSYNC.c ****         #if(!VSYNC_DeadBand2_4)
+ 610:.\Generated_Source\PSoC5/VSYNC.c ****             CY_SET_REG8(VSYNC_DEADBAND_COUNT_PTR, deadtime);
+ 611:.\Generated_Source\PSoC5/VSYNC.c ****         #else
+ 612:.\Generated_Source\PSoC5/VSYNC.c ****             /* Otherwise the data has to be masked and offset */        
+ 613:.\Generated_Source\PSoC5/VSYNC.c ****             /* Clear existing data */
+ 614:.\Generated_Source\PSoC5/VSYNC.c ****             VSYNC_DEADBAND_COUNT &= ((uint8)(~VSYNC_DEADBAND_COUNT_MASK));
+ 615:.\Generated_Source\PSoC5/VSYNC.c ****             
+ 616:.\Generated_Source\PSoC5/VSYNC.c ****             /* Set new dead time */
+ 617:.\Generated_Source\PSoC5/VSYNC.c ****             #if(VSYNC_DEADBAND_COUNT_SHIFT)        
+ 618:.\Generated_Source\PSoC5/VSYNC.c ****                 VSYNC_DEADBAND_COUNT |= ((uint8)((uint8)deadtime << VSYNC_DEADBAND_COUNT_SHIFT)) & 
+ 619:.\Generated_Source\PSoC5/VSYNC.c ****                                                     VSYNC_DEADBAND_COUNT_MASK;
+ 620:.\Generated_Source\PSoC5/VSYNC.c ****             #else
+ 621:.\Generated_Source\PSoC5/VSYNC.c ****                 VSYNC_DEADBAND_COUNT |= deadtime & VSYNC_DEADBAND_COUNT_MASK;        
+ 622:.\Generated_Source\PSoC5/VSYNC.c ****             #endif /* (VSYNC_DEADBAND_COUNT_SHIFT) */
+ 623:.\Generated_Source\PSoC5/VSYNC.c ****         
+ 624:.\Generated_Source\PSoC5/VSYNC.c ****         #endif /* (!VSYNC_DeadBand2_4) */
+ 625:.\Generated_Source\PSoC5/VSYNC.c ****     }
+ 626:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 627:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 628:.\Generated_Source\PSoC5/VSYNC.c ****     /*******************************************************************************
+ 629:.\Generated_Source\PSoC5/VSYNC.c ****     * Function Name: VSYNC_ReadDeadTime
+ 630:.\Generated_Source\PSoC5/VSYNC.c ****     ********************************************************************************
+ 631:.\Generated_Source\PSoC5/VSYNC.c ****     * 
+ 632:.\Generated_Source\PSoC5/VSYNC.c ****     * Summary:
+ 633:.\Generated_Source\PSoC5/VSYNC.c ****     *  This function reads the dead-band counts from the corresponding register
+ 634:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 635:.\Generated_Source\PSoC5/VSYNC.c ****     * Parameters:  
+ 636:.\Generated_Source\PSoC5/VSYNC.c ****     *  None
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 19
+
+
+ 637:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 638:.\Generated_Source\PSoC5/VSYNC.c ****     * Return: 
+ 639:.\Generated_Source\PSoC5/VSYNC.c ****     *  Dead Band Counts
+ 640:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 641:.\Generated_Source\PSoC5/VSYNC.c ****     *******************************************************************************/
+ 642:.\Generated_Source\PSoC5/VSYNC.c ****     uint8 VSYNC_ReadDeadTime(void) 
+ 643:.\Generated_Source\PSoC5/VSYNC.c ****     {
+ 644:.\Generated_Source\PSoC5/VSYNC.c ****         /* If using the Dead Band 1-255 mode then just read the register */
+ 645:.\Generated_Source\PSoC5/VSYNC.c ****         #if(!VSYNC_DeadBand2_4)
+ 646:.\Generated_Source\PSoC5/VSYNC.c ****             return (CY_GET_REG8(VSYNC_DEADBAND_COUNT_PTR));
+ 647:.\Generated_Source\PSoC5/VSYNC.c ****         #else
+ 648:.\Generated_Source\PSoC5/VSYNC.c ****         
+ 649:.\Generated_Source\PSoC5/VSYNC.c ****             /* Otherwise the data has to be masked and offset */
+ 650:.\Generated_Source\PSoC5/VSYNC.c ****             #if(VSYNC_DEADBAND_COUNT_SHIFT)      
+ 651:.\Generated_Source\PSoC5/VSYNC.c ****                 return ((uint8)(((uint8)(VSYNC_DEADBAND_COUNT & VSYNC_DEADBAND_COUNT_MASK)) >> 
+ 652:.\Generated_Source\PSoC5/VSYNC.c ****                                                                            VSYNC_DEADBAND_COUNT_SHI
+ 653:.\Generated_Source\PSoC5/VSYNC.c ****             #else
+ 654:.\Generated_Source\PSoC5/VSYNC.c ****                 return (VSYNC_DEADBAND_COUNT & VSYNC_DEADBAND_COUNT_MASK);
+ 655:.\Generated_Source\PSoC5/VSYNC.c ****             #endif /* (VSYNC_DEADBAND_COUNT_SHIFT) */
+ 656:.\Generated_Source\PSoC5/VSYNC.c ****         #endif /* (!VSYNC_DeadBand2_4) */
+ 657:.\Generated_Source\PSoC5/VSYNC.c ****     }
+ 658:.\Generated_Source\PSoC5/VSYNC.c **** #endif /* DeadBandUsed */
+ 659:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 660:.\Generated_Source\PSoC5/VSYNC.c **** #if (VSYNC_UseStatus || VSYNC_UsingFixedFunction)
+ 661:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 662:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 663:.\Generated_Source\PSoC5/VSYNC.c ****     /*******************************************************************************
+ 664:.\Generated_Source\PSoC5/VSYNC.c ****     * Function Name: VSYNC_SetInterruptMode
+ 665:.\Generated_Source\PSoC5/VSYNC.c ****     ********************************************************************************
+ 666:.\Generated_Source\PSoC5/VSYNC.c ****     * 
+ 667:.\Generated_Source\PSoC5/VSYNC.c ****     * Summary:
+ 668:.\Generated_Source\PSoC5/VSYNC.c ****     *  This function configures the interrupts mask control of theinterrupt 
+ 669:.\Generated_Source\PSoC5/VSYNC.c ****     *  source status register.
+ 670:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 671:.\Generated_Source\PSoC5/VSYNC.c ****     * Parameters:  
+ 672:.\Generated_Source\PSoC5/VSYNC.c ****     *  uint8 interruptMode: Bit field containing the interrupt sources enabled 
+ 673:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 674:.\Generated_Source\PSoC5/VSYNC.c ****     * Return: 
+ 675:.\Generated_Source\PSoC5/VSYNC.c ****     *  None
+ 676:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 677:.\Generated_Source\PSoC5/VSYNC.c ****     *******************************************************************************/
+ 678:.\Generated_Source\PSoC5/VSYNC.c ****     void VSYNC_SetInterruptMode(uint8 interruptMode)  
+ 679:.\Generated_Source\PSoC5/VSYNC.c ****     {
+ 680:.\Generated_Source\PSoC5/VSYNC.c ****     	CY_SET_REG8(VSYNC_STATUS_MASK_PTR, interruptMode);
+ 681:.\Generated_Source\PSoC5/VSYNC.c ****     }
+ 682:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 683:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 684:.\Generated_Source\PSoC5/VSYNC.c ****     /*******************************************************************************
+ 685:.\Generated_Source\PSoC5/VSYNC.c ****     * Function Name: VSYNC_ReadStatusRegister
+ 686:.\Generated_Source\PSoC5/VSYNC.c ****     ********************************************************************************
+ 687:.\Generated_Source\PSoC5/VSYNC.c ****     * 
+ 688:.\Generated_Source\PSoC5/VSYNC.c ****     * Summary:
+ 689:.\Generated_Source\PSoC5/VSYNC.c ****     *  This function returns the current state of the status register. 
+ 690:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 691:.\Generated_Source\PSoC5/VSYNC.c ****     * Parameters:  
+ 692:.\Generated_Source\PSoC5/VSYNC.c ****     *  None
+ 693:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 20
+
+
+ 694:.\Generated_Source\PSoC5/VSYNC.c ****     * Return: 
+ 695:.\Generated_Source\PSoC5/VSYNC.c ****     *  uint8 : Current status register value. The status register bits are:
+ 696:.\Generated_Source\PSoC5/VSYNC.c ****     *  [7:6] : Unused(0)
+ 697:.\Generated_Source\PSoC5/VSYNC.c ****     *  [5]   : Kill event output
+ 698:.\Generated_Source\PSoC5/VSYNC.c ****     *  [4]   : FIFO not empty
+ 699:.\Generated_Source\PSoC5/VSYNC.c ****     *  [3]   : FIFO full
+ 700:.\Generated_Source\PSoC5/VSYNC.c ****     *  [2]   : Terminal count
+ 701:.\Generated_Source\PSoC5/VSYNC.c ****     *  [1]   : Compare output 2
+ 702:.\Generated_Source\PSoC5/VSYNC.c ****     *  [0]   : Compare output 1
+ 703:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 704:.\Generated_Source\PSoC5/VSYNC.c ****     *******************************************************************************/
+ 705:.\Generated_Source\PSoC5/VSYNC.c ****     uint8 VSYNC_ReadStatusRegister(void)   
+ 706:.\Generated_Source\PSoC5/VSYNC.c ****     {
+ 707:.\Generated_Source\PSoC5/VSYNC.c ****     	uint8 result;
+ 708:.\Generated_Source\PSoC5/VSYNC.c ****     	
+ 709:.\Generated_Source\PSoC5/VSYNC.c ****     	result = CY_GET_REG8(VSYNC_STATUS_PTR);
+ 710:.\Generated_Source\PSoC5/VSYNC.c ****     	return (result);
+ 711:.\Generated_Source\PSoC5/VSYNC.c ****     }
+ 712:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 713:.\Generated_Source\PSoC5/VSYNC.c **** #endif /* (VSYNC_UseStatus || VSYNC_UsingFixedFunction) */
+ 714:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 715:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 716:.\Generated_Source\PSoC5/VSYNC.c **** #if (VSYNC_UseControl)
+ 717:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 718:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 719:.\Generated_Source\PSoC5/VSYNC.c ****     /*******************************************************************************
+ 720:.\Generated_Source\PSoC5/VSYNC.c ****     * Function Name: VSYNC_ReadControlRegister
+ 721:.\Generated_Source\PSoC5/VSYNC.c ****     ********************************************************************************
+ 722:.\Generated_Source\PSoC5/VSYNC.c ****     * 
+ 723:.\Generated_Source\PSoC5/VSYNC.c ****     * Summary:
+ 724:.\Generated_Source\PSoC5/VSYNC.c ****     *  Returns the current state of the control register. This API is available 
+ 725:.\Generated_Source\PSoC5/VSYNC.c ****     *  only if the control register is not removed.
+ 726:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 727:.\Generated_Source\PSoC5/VSYNC.c ****     * Parameters:  
+ 728:.\Generated_Source\PSoC5/VSYNC.c ****     *  None 
+ 729:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 730:.\Generated_Source\PSoC5/VSYNC.c ****     * Return: 
+ 731:.\Generated_Source\PSoC5/VSYNC.c ****     *  uint8 : Current control register value
+ 732:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 733:.\Generated_Source\PSoC5/VSYNC.c ****     *******************************************************************************/    
+ 734:.\Generated_Source\PSoC5/VSYNC.c ****     uint8 VSYNC_ReadControlRegister(void) 
+ 735:.\Generated_Source\PSoC5/VSYNC.c ****     {
+ 391              		.loc 1 735 0
+ 392              		.cfi_startproc
+ 393              		@ args = 0, pretend = 0, frame = 8
+ 394              		@ frame_needed = 1, uses_anonymous_args = 0
+ 395              		@ link register save eliminated.
+ 396 0000 80B4     		push	{r7}
+ 397              		.cfi_def_cfa_offset 4
+ 398              		.cfi_offset 7, -4
+ 399 0002 83B0     		sub	sp, sp, #12
+ 400              		.cfi_def_cfa_offset 16
+ 401 0004 00AF     		add	r7, sp, #0
+ 402              		.cfi_def_cfa_register 7
+ 736:.\Generated_Source\PSoC5/VSYNC.c ****     	uint8 result;
+ 737:.\Generated_Source\PSoC5/VSYNC.c ****     	
+ 738:.\Generated_Source\PSoC5/VSYNC.c ****     	result = CY_GET_REG8(VSYNC_CONTROL_PTR);
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 21
+
+
+ 403              		.loc 1 738 0
+ 404 0006 054B     		ldr	r3, .L29
+ 405 0008 1B78     		ldrb	r3, [r3]
+ 406 000a FB71     		strb	r3, [r7, #7]
+ 739:.\Generated_Source\PSoC5/VSYNC.c ****     	return (result);
+ 407              		.loc 1 739 0
+ 408 000c FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 740:.\Generated_Source\PSoC5/VSYNC.c ****     }
+ 409              		.loc 1 740 0
+ 410 000e 1846     		mov	r0, r3
+ 411 0010 0C37     		adds	r7, r7, #12
+ 412              		.cfi_def_cfa_offset 4
+ 413 0012 BD46     		mov	sp, r7
+ 414              		.cfi_def_cfa_register 13
+ 415              		@ sp needed
+ 416 0014 5DF8047B 		ldr	r7, [sp], #4
+ 417              		.cfi_restore 7
+ 418              		.cfi_def_cfa_offset 0
+ 419 0018 7047     		bx	lr
+ 420              	.L30:
+ 421 001a 00BF     		.align	2
+ 422              	.L29:
+ 423 001c 7A640040 		.word	1073767546
+ 424              		.cfi_endproc
+ 425              	.LFE8:
+ 426              		.size	VSYNC_ReadControlRegister, .-VSYNC_ReadControlRegister
+ 427              		.section	.text.VSYNC_WriteControlRegister,"ax",%progbits
+ 428              		.align	2
+ 429              		.global	VSYNC_WriteControlRegister
+ 430              		.thumb
+ 431              		.thumb_func
+ 432              		.type	VSYNC_WriteControlRegister, %function
+ 433              	VSYNC_WriteControlRegister:
+ 434              	.LFB9:
+ 741:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 742:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 743:.\Generated_Source\PSoC5/VSYNC.c ****     /*******************************************************************************
+ 744:.\Generated_Source\PSoC5/VSYNC.c ****     * Function Name: VSYNC_WriteControlRegister
+ 745:.\Generated_Source\PSoC5/VSYNC.c ****     ********************************************************************************
+ 746:.\Generated_Source\PSoC5/VSYNC.c ****     * 
+ 747:.\Generated_Source\PSoC5/VSYNC.c ****     * Summary:
+ 748:.\Generated_Source\PSoC5/VSYNC.c ****     *  Sets the bit field of the control register. This API is available only if 
+ 749:.\Generated_Source\PSoC5/VSYNC.c ****     *  the control register is not removed.
+ 750:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 751:.\Generated_Source\PSoC5/VSYNC.c ****     * Parameters:  
+ 752:.\Generated_Source\PSoC5/VSYNC.c ****     *  uint8 control: Control register bit field, The status register bits are:
+ 753:.\Generated_Source\PSoC5/VSYNC.c ****     *  [7]   : PWM Enable
+ 754:.\Generated_Source\PSoC5/VSYNC.c ****     *  [6]   : Reset
+ 755:.\Generated_Source\PSoC5/VSYNC.c ****     *  [5:3] : Compare Mode2
+ 756:.\Generated_Source\PSoC5/VSYNC.c ****     *  [2:0] : Compare Mode2
+ 757:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 758:.\Generated_Source\PSoC5/VSYNC.c ****     * Return: 
+ 759:.\Generated_Source\PSoC5/VSYNC.c ****     *  None
+ 760:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 761:.\Generated_Source\PSoC5/VSYNC.c ****     *******************************************************************************/  
+ 762:.\Generated_Source\PSoC5/VSYNC.c ****     void VSYNC_WriteControlRegister(uint8 control) 
+ 763:.\Generated_Source\PSoC5/VSYNC.c ****     {
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 22
+
+
+ 435              		.loc 1 763 0
+ 436              		.cfi_startproc
+ 437              		@ args = 0, pretend = 0, frame = 8
+ 438              		@ frame_needed = 1, uses_anonymous_args = 0
+ 439              		@ link register save eliminated.
+ 440 0000 80B4     		push	{r7}
+ 441              		.cfi_def_cfa_offset 4
+ 442              		.cfi_offset 7, -4
+ 443 0002 83B0     		sub	sp, sp, #12
+ 444              		.cfi_def_cfa_offset 16
+ 445 0004 00AF     		add	r7, sp, #0
+ 446              		.cfi_def_cfa_register 7
+ 447 0006 0346     		mov	r3, r0
+ 448 0008 FB71     		strb	r3, [r7, #7]
+ 764:.\Generated_Source\PSoC5/VSYNC.c ****     	CY_SET_REG8(VSYNC_CONTROL_PTR, control);
+ 449              		.loc 1 764 0
+ 450 000a 044A     		ldr	r2, .L32
+ 451 000c FB79     		ldrb	r3, [r7, #7]
+ 452 000e 1370     		strb	r3, [r2]
+ 765:.\Generated_Source\PSoC5/VSYNC.c ****     }
+ 453              		.loc 1 765 0
+ 454 0010 0C37     		adds	r7, r7, #12
+ 455              		.cfi_def_cfa_offset 4
+ 456 0012 BD46     		mov	sp, r7
+ 457              		.cfi_def_cfa_register 13
+ 458              		@ sp needed
+ 459 0014 5DF8047B 		ldr	r7, [sp], #4
+ 460              		.cfi_restore 7
+ 461              		.cfi_def_cfa_offset 0
+ 462 0018 7047     		bx	lr
+ 463              	.L33:
+ 464 001a 00BF     		.align	2
+ 465              	.L32:
+ 466 001c 7A640040 		.word	1073767546
+ 467              		.cfi_endproc
+ 468              	.LFE9:
+ 469              		.size	VSYNC_WriteControlRegister, .-VSYNC_WriteControlRegister
+ 470              		.section	.text.VSYNC_ReadCapture,"ax",%progbits
+ 471              		.align	2
+ 472              		.global	VSYNC_ReadCapture
+ 473              		.thumb
+ 474              		.thumb_func
+ 475              		.type	VSYNC_ReadCapture, %function
+ 476              	VSYNC_ReadCapture:
+ 477              	.LFB10:
+ 766:.\Generated_Source\PSoC5/VSYNC.c **** 	
+ 767:.\Generated_Source\PSoC5/VSYNC.c **** #endif /* (VSYNC_UseControl) */
+ 768:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 769:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 770:.\Generated_Source\PSoC5/VSYNC.c **** #if (!VSYNC_UsingFixedFunction)
+ 771:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 772:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 773:.\Generated_Source\PSoC5/VSYNC.c ****     /*******************************************************************************
+ 774:.\Generated_Source\PSoC5/VSYNC.c ****     * Function Name: VSYNC_ReadCapture
+ 775:.\Generated_Source\PSoC5/VSYNC.c ****     ********************************************************************************
+ 776:.\Generated_Source\PSoC5/VSYNC.c ****     * 
+ 777:.\Generated_Source\PSoC5/VSYNC.c ****     * Summary:
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 23
+
+
+ 778:.\Generated_Source\PSoC5/VSYNC.c ****     *  Reads the capture value from the capture FIFO.
+ 779:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 780:.\Generated_Source\PSoC5/VSYNC.c ****     * Parameters:  
+ 781:.\Generated_Source\PSoC5/VSYNC.c ****     *  None
+ 782:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 783:.\Generated_Source\PSoC5/VSYNC.c ****     * Return: 
+ 784:.\Generated_Source\PSoC5/VSYNC.c ****     *  uint8/uint16: The current capture value
+ 785:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 786:.\Generated_Source\PSoC5/VSYNC.c ****     *******************************************************************************/  
+ 787:.\Generated_Source\PSoC5/VSYNC.c ****     uint8 VSYNC_ReadCapture(void)  
+ 788:.\Generated_Source\PSoC5/VSYNC.c ****     {
+ 478              		.loc 1 788 0
+ 479              		.cfi_startproc
+ 480              		@ args = 0, pretend = 0, frame = 0
+ 481              		@ frame_needed = 1, uses_anonymous_args = 0
+ 482              		@ link register save eliminated.
+ 483 0000 80B4     		push	{r7}
+ 484              		.cfi_def_cfa_offset 4
+ 485              		.cfi_offset 7, -4
+ 486 0002 00AF     		add	r7, sp, #0
+ 487              		.cfi_def_cfa_register 7
+ 789:.\Generated_Source\PSoC5/VSYNC.c ****     	return (CY_GET_REG8(VSYNC_CAPTURE_LSB_PTR));
+ 488              		.loc 1 789 0
+ 489 0004 034B     		ldr	r3, .L36
+ 490 0006 1B78     		ldrb	r3, [r3]
+ 491 0008 DBB2     		uxtb	r3, r3
+ 790:.\Generated_Source\PSoC5/VSYNC.c ****     }
+ 492              		.loc 1 790 0
+ 493 000a 1846     		mov	r0, r3
+ 494 000c BD46     		mov	sp, r7
+ 495              		.cfi_def_cfa_register 13
+ 496              		@ sp needed
+ 497 000e 5DF8047B 		ldr	r7, [sp], #4
+ 498              		.cfi_restore 7
+ 499              		.cfi_def_cfa_offset 0
+ 500 0012 7047     		bx	lr
+ 501              	.L37:
+ 502              		.align	2
+ 503              	.L36:
+ 504 0014 59650040 		.word	1073767769
+ 505              		.cfi_endproc
+ 506              	.LFE10:
+ 507              		.size	VSYNC_ReadCapture, .-VSYNC_ReadCapture
+ 508              		.section	.text.VSYNC_ReadCompare,"ax",%progbits
+ 509              		.align	2
+ 510              		.global	VSYNC_ReadCompare
+ 511              		.thumb
+ 512              		.thumb_func
+ 513              		.type	VSYNC_ReadCompare, %function
+ 514              	VSYNC_ReadCompare:
+ 515              	.LFB11:
+ 791:.\Generated_Source\PSoC5/VSYNC.c **** 	
+ 792:.\Generated_Source\PSoC5/VSYNC.c **** #endif /* (!VSYNC_UsingFixedFunction) */
+ 793:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 794:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 795:.\Generated_Source\PSoC5/VSYNC.c **** #if (VSYNC_UseOneCompareMode)
+ 796:.\Generated_Source\PSoC5/VSYNC.c **** 
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 24
+
+
+ 797:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 798:.\Generated_Source\PSoC5/VSYNC.c ****     /*******************************************************************************
+ 799:.\Generated_Source\PSoC5/VSYNC.c ****     * Function Name: VSYNC_ReadCompare
+ 800:.\Generated_Source\PSoC5/VSYNC.c ****     ********************************************************************************
+ 801:.\Generated_Source\PSoC5/VSYNC.c ****     * 
+ 802:.\Generated_Source\PSoC5/VSYNC.c ****     * Summary:
+ 803:.\Generated_Source\PSoC5/VSYNC.c ****     *  Reads the compare value for the compare output when the PWM Mode parameter is 
+ 804:.\Generated_Source\PSoC5/VSYNC.c ****     *  set to Dither mode, Center Aligned mode, or One Output mode.
+ 805:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 806:.\Generated_Source\PSoC5/VSYNC.c ****     * Parameters:  
+ 807:.\Generated_Source\PSoC5/VSYNC.c ****     *  None
+ 808:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 809:.\Generated_Source\PSoC5/VSYNC.c ****     * Return: 
+ 810:.\Generated_Source\PSoC5/VSYNC.c ****     *  uint8/uint16: Current compare value
+ 811:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 812:.\Generated_Source\PSoC5/VSYNC.c ****     *******************************************************************************/  
+ 813:.\Generated_Source\PSoC5/VSYNC.c ****     uint8 VSYNC_ReadCompare(void)  
+ 814:.\Generated_Source\PSoC5/VSYNC.c ****     {
+ 516              		.loc 1 814 0
+ 517              		.cfi_startproc
+ 518              		@ args = 0, pretend = 0, frame = 0
+ 519              		@ frame_needed = 1, uses_anonymous_args = 0
+ 520              		@ link register save eliminated.
+ 521 0000 80B4     		push	{r7}
+ 522              		.cfi_def_cfa_offset 4
+ 523              		.cfi_offset 7, -4
+ 524 0002 00AF     		add	r7, sp, #0
+ 525              		.cfi_def_cfa_register 7
+ 815:.\Generated_Source\PSoC5/VSYNC.c **** 		#if(VSYNC_UsingFixedFunction)
+ 816:.\Generated_Source\PSoC5/VSYNC.c ****             return ((uint8)CY_GET_REG16(VSYNC_COMPARE1_LSB_PTR));
+ 817:.\Generated_Source\PSoC5/VSYNC.c ****         #else
+ 818:.\Generated_Source\PSoC5/VSYNC.c ****             return (CY_GET_REG8(VSYNC_COMPARE1_LSB_PTR));
+ 526              		.loc 1 818 0
+ 527 0004 034B     		ldr	r3, .L40
+ 528 0006 1B78     		ldrb	r3, [r3]
+ 529 0008 DBB2     		uxtb	r3, r3
+ 819:.\Generated_Source\PSoC5/VSYNC.c ****         #endif /* (VSYNC_UsingFixedFunction) */
+ 820:.\Generated_Source\PSoC5/VSYNC.c ****     }
+ 530              		.loc 1 820 0
+ 531 000a 1846     		mov	r0, r3
+ 532 000c BD46     		mov	sp, r7
+ 533              		.cfi_def_cfa_register 13
+ 534              		@ sp needed
+ 535 000e 5DF8047B 		ldr	r7, [sp], #4
+ 536              		.cfi_restore 7
+ 537              		.cfi_def_cfa_offset 0
+ 538 0012 7047     		bx	lr
+ 539              	.L41:
+ 540              		.align	2
+ 541              	.L40:
+ 542 0014 29650040 		.word	1073767721
+ 543              		.cfi_endproc
+ 544              	.LFE11:
+ 545              		.size	VSYNC_ReadCompare, .-VSYNC_ReadCompare
+ 546              		.section	.text.VSYNC_ReadPeriod,"ax",%progbits
+ 547              		.align	2
+ 548              		.global	VSYNC_ReadPeriod
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 25
+
+
+ 549              		.thumb
+ 550              		.thumb_func
+ 551              		.type	VSYNC_ReadPeriod, %function
+ 552              	VSYNC_ReadPeriod:
+ 553              	.LFB12:
+ 821:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 822:.\Generated_Source\PSoC5/VSYNC.c **** #else
+ 823:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 824:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 825:.\Generated_Source\PSoC5/VSYNC.c ****     /*******************************************************************************
+ 826:.\Generated_Source\PSoC5/VSYNC.c ****     * Function Name: VSYNC_ReadCompare1
+ 827:.\Generated_Source\PSoC5/VSYNC.c ****     ********************************************************************************
+ 828:.\Generated_Source\PSoC5/VSYNC.c ****     * 
+ 829:.\Generated_Source\PSoC5/VSYNC.c ****     * Summary:
+ 830:.\Generated_Source\PSoC5/VSYNC.c ****     *  Reads the compare value for the compare1 output.
+ 831:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 832:.\Generated_Source\PSoC5/VSYNC.c ****     * Parameters:  
+ 833:.\Generated_Source\PSoC5/VSYNC.c ****     *  None
+ 834:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 835:.\Generated_Source\PSoC5/VSYNC.c ****     * Return: 
+ 836:.\Generated_Source\PSoC5/VSYNC.c ****     *  uint8/uint16: Current compare value.
+ 837:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 838:.\Generated_Source\PSoC5/VSYNC.c ****     *******************************************************************************/  
+ 839:.\Generated_Source\PSoC5/VSYNC.c ****     uint8 VSYNC_ReadCompare1(void) 
+ 840:.\Generated_Source\PSoC5/VSYNC.c ****     {
+ 841:.\Generated_Source\PSoC5/VSYNC.c **** 		return (CY_GET_REG8(VSYNC_COMPARE1_LSB_PTR));
+ 842:.\Generated_Source\PSoC5/VSYNC.c ****     }
+ 843:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 844:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 845:.\Generated_Source\PSoC5/VSYNC.c ****     /*******************************************************************************
+ 846:.\Generated_Source\PSoC5/VSYNC.c ****     * Function Name: VSYNC_ReadCompare2
+ 847:.\Generated_Source\PSoC5/VSYNC.c ****     ********************************************************************************
+ 848:.\Generated_Source\PSoC5/VSYNC.c ****     * 
+ 849:.\Generated_Source\PSoC5/VSYNC.c ****     * Summary:
+ 850:.\Generated_Source\PSoC5/VSYNC.c ****     *  Reads the compare value for the compare2 output.
+ 851:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 852:.\Generated_Source\PSoC5/VSYNC.c ****     * Parameters:  
+ 853:.\Generated_Source\PSoC5/VSYNC.c ****     *  None
+ 854:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 855:.\Generated_Source\PSoC5/VSYNC.c ****     * Return: 
+ 856:.\Generated_Source\PSoC5/VSYNC.c ****     *  uint8/uint16: Current compare value.
+ 857:.\Generated_Source\PSoC5/VSYNC.c ****     *
+ 858:.\Generated_Source\PSoC5/VSYNC.c ****     *******************************************************************************/  
+ 859:.\Generated_Source\PSoC5/VSYNC.c ****     uint8 VSYNC_ReadCompare2(void)  
+ 860:.\Generated_Source\PSoC5/VSYNC.c ****     {
+ 861:.\Generated_Source\PSoC5/VSYNC.c **** 		return (CY_GET_REG8(VSYNC_COMPARE2_LSB_PTR));
+ 862:.\Generated_Source\PSoC5/VSYNC.c ****     }
+ 863:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 864:.\Generated_Source\PSoC5/VSYNC.c **** #endif /* (VSYNC_UseOneCompareMode) */
+ 865:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 866:.\Generated_Source\PSoC5/VSYNC.c **** 
+ 867:.\Generated_Source\PSoC5/VSYNC.c **** /*******************************************************************************
+ 868:.\Generated_Source\PSoC5/VSYNC.c **** * Function Name: VSYNC_ReadPeriod
+ 869:.\Generated_Source\PSoC5/VSYNC.c **** ********************************************************************************
+ 870:.\Generated_Source\PSoC5/VSYNC.c **** * 
+ 871:.\Generated_Source\PSoC5/VSYNC.c **** * Summary:
+ 872:.\Generated_Source\PSoC5/VSYNC.c **** *  Reads the period value used by the PWM hardware.
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 26
+
+
+ 873:.\Generated_Source\PSoC5/VSYNC.c **** *
+ 874:.\Generated_Source\PSoC5/VSYNC.c **** * Parameters:  
+ 875:.\Generated_Source\PSoC5/VSYNC.c **** *  None
+ 876:.\Generated_Source\PSoC5/VSYNC.c **** *
+ 877:.\Generated_Source\PSoC5/VSYNC.c **** * Return: 
+ 878:.\Generated_Source\PSoC5/VSYNC.c **** *  uint8/16: Period value
+ 879:.\Generated_Source\PSoC5/VSYNC.c **** *
+ 880:.\Generated_Source\PSoC5/VSYNC.c **** *******************************************************************************/ 
+ 881:.\Generated_Source\PSoC5/VSYNC.c **** uint8 VSYNC_ReadPeriod(void) 
+ 882:.\Generated_Source\PSoC5/VSYNC.c **** {
+ 554              		.loc 1 882 0
+ 555              		.cfi_startproc
+ 556              		@ args = 0, pretend = 0, frame = 0
+ 557              		@ frame_needed = 1, uses_anonymous_args = 0
+ 558              		@ link register save eliminated.
+ 559 0000 80B4     		push	{r7}
+ 560              		.cfi_def_cfa_offset 4
+ 561              		.cfi_offset 7, -4
+ 562 0002 00AF     		add	r7, sp, #0
+ 563              		.cfi_def_cfa_register 7
+ 883:.\Generated_Source\PSoC5/VSYNC.c **** 	#if(VSYNC_UsingFixedFunction)
+ 884:.\Generated_Source\PSoC5/VSYNC.c ****         return ((uint8)CY_GET_REG16(VSYNC_PERIOD_LSB_PTR));
+ 885:.\Generated_Source\PSoC5/VSYNC.c ****     #else
+ 886:.\Generated_Source\PSoC5/VSYNC.c ****         return (CY_GET_REG8(VSYNC_PERIOD_LSB_PTR));
+ 564              		.loc 1 886 0
+ 565 0004 034B     		ldr	r3, .L44
+ 566 0006 1B78     		ldrb	r3, [r3]
+ 567 0008 DBB2     		uxtb	r3, r3
+ 887:.\Generated_Source\PSoC5/VSYNC.c ****     #endif /* (VSYNC_UsingFixedFunction) */
+ 888:.\Generated_Source\PSoC5/VSYNC.c **** }
+ 568              		.loc 1 888 0
+ 569 000a 1846     		mov	r0, r3
+ 570 000c BD46     		mov	sp, r7
+ 571              		.cfi_def_cfa_register 13
+ 572              		@ sp needed
+ 573 000e 5DF8047B 		ldr	r7, [sp], #4
+ 574              		.cfi_restore 7
+ 575              		.cfi_def_cfa_offset 0
+ 576 0012 7047     		bx	lr
+ 577              	.L45:
+ 578              		.align	2
+ 579              	.L44:
+ 580 0014 49650040 		.word	1073767753
+ 581              		.cfi_endproc
+ 582              	.LFE12:
+ 583              		.size	VSYNC_ReadPeriod, .-VSYNC_ReadPeriod
+ 584              		.text
+ 585              	.Letext0:
+ 586              		.file 2 ".\\Generated_Source\\PSoC5\\cytypes.h"
+ 587              		.section	.debug_info,"",%progbits
+ 588              	.Ldebug_info0:
+ 589 0000 21020000 		.4byte	0x221
+ 590 0004 0400     		.2byte	0x4
+ 591 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 592 000a 04       		.byte	0x4
+ 593 000b 01       		.uleb128 0x1
+ 594 000c 97000000 		.4byte	.LASF33
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 27
+
+
+ 595 0010 01       		.byte	0x1
+ 596 0011 3E020000 		.4byte	.LASF34
+ 597 0015 2C010000 		.4byte	.LASF35
+ 598 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 599 001d 00000000 		.4byte	0
+ 600 0021 00000000 		.4byte	.Ldebug_line0
+ 601 0025 02       		.uleb128 0x2
+ 602 0026 01       		.byte	0x1
+ 603 0027 06       		.byte	0x6
+ 604 0028 83020000 		.4byte	.LASF0
+ 605 002c 02       		.uleb128 0x2
+ 606 002d 01       		.byte	0x1
+ 607 002e 08       		.byte	0x8
+ 608 002f 4C000000 		.4byte	.LASF1
+ 609 0033 02       		.uleb128 0x2
+ 610 0034 02       		.byte	0x2
+ 611 0035 05       		.byte	0x5
+ 612 0036 34020000 		.4byte	.LASF2
+ 613 003a 02       		.uleb128 0x2
+ 614 003b 02       		.byte	0x2
+ 615 003c 07       		.byte	0x7
+ 616 003d 0E020000 		.4byte	.LASF3
+ 617 0041 02       		.uleb128 0x2
+ 618 0042 04       		.byte	0x4
+ 619 0043 05       		.byte	0x5
+ 620 0044 7A020000 		.4byte	.LASF4
+ 621 0048 02       		.uleb128 0x2
+ 622 0049 04       		.byte	0x4
+ 623 004a 07       		.byte	0x7
+ 624 004b 5F000000 		.4byte	.LASF5
+ 625 004f 02       		.uleb128 0x2
+ 626 0050 08       		.byte	0x8
+ 627 0051 05       		.byte	0x5
+ 628 0052 21020000 		.4byte	.LASF6
+ 629 0056 02       		.uleb128 0x2
+ 630 0057 08       		.byte	0x8
+ 631 0058 07       		.byte	0x7
+ 632 0059 D0010000 		.4byte	.LASF7
+ 633 005d 03       		.uleb128 0x3
+ 634 005e 04       		.byte	0x4
+ 635 005f 05       		.byte	0x5
+ 636 0060 696E7400 		.ascii	"int\000"
+ 637 0064 02       		.uleb128 0x2
+ 638 0065 04       		.byte	0x4
+ 639 0066 07       		.byte	0x7
+ 640 0067 8D010000 		.4byte	.LASF8
+ 641 006b 04       		.uleb128 0x4
+ 642 006c 7E000000 		.4byte	.LASF12
+ 643 0070 02       		.byte	0x2
+ 644 0071 5B       		.byte	0x5b
+ 645 0072 2C000000 		.4byte	0x2c
+ 646 0076 02       		.uleb128 0x2
+ 647 0077 04       		.byte	0x4
+ 648 0078 04       		.byte	0x4
+ 649 0079 2C000000 		.4byte	.LASF9
+ 650 007d 02       		.uleb128 0x2
+ 651 007e 08       		.byte	0x8
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 28
+
+
+ 652 007f 04       		.byte	0x4
+ 653 0080 25010000 		.4byte	.LASF10
+ 654 0084 02       		.uleb128 0x2
+ 655 0085 01       		.byte	0x1
+ 656 0086 08       		.byte	0x8
+ 657 0087 2F020000 		.4byte	.LASF11
+ 658 008b 04       		.uleb128 0x4
+ 659 008c 5A000000 		.4byte	.LASF13
+ 660 0090 02       		.byte	0x2
+ 661 0091 F0       		.byte	0xf0
+ 662 0092 96000000 		.4byte	0x96
+ 663 0096 05       		.uleb128 0x5
+ 664 0097 6B000000 		.4byte	0x6b
+ 665 009b 02       		.uleb128 0x2
+ 666 009c 04       		.byte	0x4
+ 667 009d 07       		.byte	0x7
+ 668 009e 05020000 		.4byte	.LASF14
+ 669 00a2 06       		.uleb128 0x6
+ 670 00a3 73010000 		.4byte	.LASF15
+ 671 00a7 01       		.byte	0x1
+ 672 00a8 32       		.byte	0x32
+ 673 00a9 00000000 		.4byte	.LFB0
+ 674 00ad 20000000 		.4byte	.LFE0-.LFB0
+ 675 00b1 01       		.uleb128 0x1
+ 676 00b2 9C       		.byte	0x9c
+ 677 00b3 07       		.uleb128 0x7
+ 678 00b4 07000000 		.4byte	.LASF18
+ 679 00b8 01       		.byte	0x1
+ 680 00b9 4F       		.byte	0x4f
+ 681 00ba 00000000 		.4byte	.LFB1
+ 682 00be 50000000 		.4byte	.LFE1-.LFB1
+ 683 00c2 01       		.uleb128 0x1
+ 684 00c3 9C       		.byte	0x9c
+ 685 00c4 D7000000 		.4byte	0xd7
+ 686 00c8 08       		.uleb128 0x8
+ 687 00c9 00020000 		.4byte	.LASF25
+ 688 00cd 01       		.byte	0x1
+ 689 00ce 52       		.byte	0x52
+ 690 00cf 6B000000 		.4byte	0x6b
+ 691 00d3 02       		.uleb128 0x2
+ 692 00d4 91       		.byte	0x91
+ 693 00d5 77       		.sleb128 -9
+ 694 00d6 00       		.byte	0
+ 695 00d7 09       		.uleb128 0x9
+ 696 00d8 71000000 		.4byte	.LASF16
+ 697 00dc 01       		.byte	0x1
+ 698 00dd C1       		.byte	0xc1
+ 699 00de 00000000 		.4byte	.LFB2
+ 700 00e2 20000000 		.4byte	.LFE2-.LFB2
+ 701 00e6 01       		.uleb128 0x1
+ 702 00e7 9C       		.byte	0x9c
+ 703 00e8 09       		.uleb128 0x9
+ 704 00e9 8C000000 		.4byte	.LASF17
+ 705 00ed 01       		.byte	0x1
+ 706 00ee E3       		.byte	0xe3
+ 707 00ef 00000000 		.4byte	.LFB3
+ 708 00f3 20000000 		.4byte	.LFE3-.LFB3
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 29
+
+
+ 709 00f7 01       		.uleb128 0x1
+ 710 00f8 9C       		.byte	0x9c
+ 711 00f9 0A       		.uleb128 0xa
+ 712 00fa 97020000 		.4byte	.LASF19
+ 713 00fe 01       		.byte	0x1
+ 714 00ff 8D01     		.2byte	0x18d
+ 715 0101 00000000 		.4byte	.LFB4
+ 716 0105 20000000 		.4byte	.LFE4-.LFB4
+ 717 0109 01       		.uleb128 0x1
+ 718 010a 9C       		.byte	0x9c
+ 719 010b 1F010000 		.4byte	0x11f
+ 720 010f 0B       		.uleb128 0xb
+ 721 0110 32000000 		.4byte	.LASF21
+ 722 0114 01       		.byte	0x1
+ 723 0115 8D01     		.2byte	0x18d
+ 724 0117 6B000000 		.4byte	0x6b
+ 725 011b 02       		.uleb128 0x2
+ 726 011c 91       		.byte	0x91
+ 727 011d 77       		.sleb128 -9
+ 728 011e 00       		.byte	0
+ 729 011f 0C       		.uleb128 0xc
+ 730 0120 AA020000 		.4byte	.LASF29
+ 731 0124 01       		.byte	0x1
+ 732 0125 A301     		.2byte	0x1a3
+ 733 0127 6B000000 		.4byte	0x6b
+ 734 012b 00000000 		.4byte	.LFB5
+ 735 012f 20000000 		.4byte	.LFE5-.LFB5
+ 736 0133 01       		.uleb128 0x1
+ 737 0134 9C       		.byte	0x9c
+ 738 0135 0A       		.uleb128 0xa
+ 739 0136 3A000000 		.4byte	.LASF20
+ 740 013a 01       		.byte	0x1
+ 741 013b DC01     		.2byte	0x1dc
+ 742 013d 00000000 		.4byte	.LFB6
+ 743 0141 20000000 		.4byte	.LFE6-.LFB6
+ 744 0145 01       		.uleb128 0x1
+ 745 0146 9C       		.byte	0x9c
+ 746 0147 5B010000 		.4byte	0x15b
+ 747 014b 0B       		.uleb128 0xb
+ 748 014c 00000000 		.4byte	.LASF22
+ 749 0150 01       		.byte	0x1
+ 750 0151 DC01     		.2byte	0x1dc
+ 751 0153 6B000000 		.4byte	0x6b
+ 752 0157 02       		.uleb128 0x2
+ 753 0158 91       		.byte	0x91
+ 754 0159 77       		.sleb128 -9
+ 755 015a 00       		.byte	0
+ 756 015b 0A       		.uleb128 0xa
+ 757 015c 9A010000 		.4byte	.LASF23
+ 758 0160 01       		.byte	0x1
+ 759 0161 FE01     		.2byte	0x1fe
+ 760 0163 00000000 		.4byte	.LFB7
+ 761 0167 20000000 		.4byte	.LFE7-.LFB7
+ 762 016b 01       		.uleb128 0x1
+ 763 016c 9C       		.byte	0x9c
+ 764 016d 81010000 		.4byte	0x181
+ 765 0171 0B       		.uleb128 0xb
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 30
+
+
+ 766 0172 8F020000 		.4byte	.LASF24
+ 767 0176 01       		.byte	0x1
+ 768 0177 FE01     		.2byte	0x1fe
+ 769 0179 6B000000 		.4byte	0x6b
+ 770 017d 02       		.uleb128 0x2
+ 771 017e 91       		.byte	0x91
+ 772 017f 77       		.sleb128 -9
+ 773 0180 00       		.byte	0
+ 774 0181 0D       		.uleb128 0xd
+ 775 0182 12000000 		.4byte	.LASF36
+ 776 0186 01       		.byte	0x1
+ 777 0187 DE02     		.2byte	0x2de
+ 778 0189 6B000000 		.4byte	0x6b
+ 779 018d 00000000 		.4byte	.LFB8
+ 780 0191 20000000 		.4byte	.LFE8-.LFB8
+ 781 0195 01       		.uleb128 0x1
+ 782 0196 9C       		.byte	0x9c
+ 783 0197 AB010000 		.4byte	0x1ab
+ 784 019b 0E       		.uleb128 0xe
+ 785 019c E7010000 		.4byte	.LASF26
+ 786 01a0 01       		.byte	0x1
+ 787 01a1 E002     		.2byte	0x2e0
+ 788 01a3 6B000000 		.4byte	0x6b
+ 789 01a7 02       		.uleb128 0x2
+ 790 01a8 91       		.byte	0x91
+ 791 01a9 77       		.sleb128 -9
+ 792 01aa 00       		.byte	0
+ 793 01ab 0A       		.uleb128 0xa
+ 794 01ac 5F020000 		.4byte	.LASF27
+ 795 01b0 01       		.byte	0x1
+ 796 01b1 FA02     		.2byte	0x2fa
+ 797 01b3 00000000 		.4byte	.LFB9
+ 798 01b7 20000000 		.4byte	.LFE9-.LFB9
+ 799 01bb 01       		.uleb128 0x1
+ 800 01bc 9C       		.byte	0x9c
+ 801 01bd D1010000 		.4byte	0x1d1
+ 802 01c1 0B       		.uleb128 0xb
+ 803 01c2 84000000 		.4byte	.LASF28
+ 804 01c6 01       		.byte	0x1
+ 805 01c7 FA02     		.2byte	0x2fa
+ 806 01c9 6B000000 		.4byte	0x6b
+ 807 01cd 02       		.uleb128 0x2
+ 808 01ce 91       		.byte	0x91
+ 809 01cf 77       		.sleb128 -9
+ 810 01d0 00       		.byte	0
+ 811 01d1 0C       		.uleb128 0xc
+ 812 01d2 EE010000 		.4byte	.LASF30
+ 813 01d6 01       		.byte	0x1
+ 814 01d7 1303     		.2byte	0x313
+ 815 01d9 6B000000 		.4byte	0x6b
+ 816 01dd 00000000 		.4byte	.LFB10
+ 817 01e1 18000000 		.4byte	.LFE10-.LFB10
+ 818 01e5 01       		.uleb128 0x1
+ 819 01e6 9C       		.byte	0x9c
+ 820 01e7 0C       		.uleb128 0xc
+ 821 01e8 AD010000 		.4byte	.LASF31
+ 822 01ec 01       		.byte	0x1
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 31
+
+
+ 823 01ed 2D03     		.2byte	0x32d
+ 824 01ef 6B000000 		.4byte	0x6b
+ 825 01f3 00000000 		.4byte	.LFB11
+ 826 01f7 18000000 		.4byte	.LFE11-.LFB11
+ 827 01fb 01       		.uleb128 0x1
+ 828 01fc 9C       		.byte	0x9c
+ 829 01fd 0C       		.uleb128 0xc
+ 830 01fe BF010000 		.4byte	.LASF32
+ 831 0202 01       		.byte	0x1
+ 832 0203 7103     		.2byte	0x371
+ 833 0205 6B000000 		.4byte	0x6b
+ 834 0209 00000000 		.4byte	.LFB12
+ 835 020d 18000000 		.4byte	.LFE12-.LFB12
+ 836 0211 01       		.uleb128 0x1
+ 837 0212 9C       		.byte	0x9c
+ 838 0213 0F       		.uleb128 0xf
+ 839 0214 7F010000 		.4byte	.LASF37
+ 840 0218 01       		.byte	0x1
+ 841 0219 1B       		.byte	0x1b
+ 842 021a 6B000000 		.4byte	0x6b
+ 843 021e 05       		.uleb128 0x5
+ 844 021f 03       		.byte	0x3
+ 845 0220 00000000 		.4byte	VSYNC_initVar
+ 846 0224 00       		.byte	0
+ 847              		.section	.debug_abbrev,"",%progbits
+ 848              	.Ldebug_abbrev0:
+ 849 0000 01       		.uleb128 0x1
+ 850 0001 11       		.uleb128 0x11
+ 851 0002 01       		.byte	0x1
+ 852 0003 25       		.uleb128 0x25
+ 853 0004 0E       		.uleb128 0xe
+ 854 0005 13       		.uleb128 0x13
+ 855 0006 0B       		.uleb128 0xb
+ 856 0007 03       		.uleb128 0x3
+ 857 0008 0E       		.uleb128 0xe
+ 858 0009 1B       		.uleb128 0x1b
+ 859 000a 0E       		.uleb128 0xe
+ 860 000b 55       		.uleb128 0x55
+ 861 000c 17       		.uleb128 0x17
+ 862 000d 11       		.uleb128 0x11
+ 863 000e 01       		.uleb128 0x1
+ 864 000f 10       		.uleb128 0x10
+ 865 0010 17       		.uleb128 0x17
+ 866 0011 00       		.byte	0
+ 867 0012 00       		.byte	0
+ 868 0013 02       		.uleb128 0x2
+ 869 0014 24       		.uleb128 0x24
+ 870 0015 00       		.byte	0
+ 871 0016 0B       		.uleb128 0xb
+ 872 0017 0B       		.uleb128 0xb
+ 873 0018 3E       		.uleb128 0x3e
+ 874 0019 0B       		.uleb128 0xb
+ 875 001a 03       		.uleb128 0x3
+ 876 001b 0E       		.uleb128 0xe
+ 877 001c 00       		.byte	0
+ 878 001d 00       		.byte	0
+ 879 001e 03       		.uleb128 0x3
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 32
+
+
+ 880 001f 24       		.uleb128 0x24
+ 881 0020 00       		.byte	0
+ 882 0021 0B       		.uleb128 0xb
+ 883 0022 0B       		.uleb128 0xb
+ 884 0023 3E       		.uleb128 0x3e
+ 885 0024 0B       		.uleb128 0xb
+ 886 0025 03       		.uleb128 0x3
+ 887 0026 08       		.uleb128 0x8
+ 888 0027 00       		.byte	0
+ 889 0028 00       		.byte	0
+ 890 0029 04       		.uleb128 0x4
+ 891 002a 16       		.uleb128 0x16
+ 892 002b 00       		.byte	0
+ 893 002c 03       		.uleb128 0x3
+ 894 002d 0E       		.uleb128 0xe
+ 895 002e 3A       		.uleb128 0x3a
+ 896 002f 0B       		.uleb128 0xb
+ 897 0030 3B       		.uleb128 0x3b
+ 898 0031 0B       		.uleb128 0xb
+ 899 0032 49       		.uleb128 0x49
+ 900 0033 13       		.uleb128 0x13
+ 901 0034 00       		.byte	0
+ 902 0035 00       		.byte	0
+ 903 0036 05       		.uleb128 0x5
+ 904 0037 35       		.uleb128 0x35
+ 905 0038 00       		.byte	0
+ 906 0039 49       		.uleb128 0x49
+ 907 003a 13       		.uleb128 0x13
+ 908 003b 00       		.byte	0
+ 909 003c 00       		.byte	0
+ 910 003d 06       		.uleb128 0x6
+ 911 003e 2E       		.uleb128 0x2e
+ 912 003f 00       		.byte	0
+ 913 0040 3F       		.uleb128 0x3f
+ 914 0041 19       		.uleb128 0x19
+ 915 0042 03       		.uleb128 0x3
+ 916 0043 0E       		.uleb128 0xe
+ 917 0044 3A       		.uleb128 0x3a
+ 918 0045 0B       		.uleb128 0xb
+ 919 0046 3B       		.uleb128 0x3b
+ 920 0047 0B       		.uleb128 0xb
+ 921 0048 27       		.uleb128 0x27
+ 922 0049 19       		.uleb128 0x19
+ 923 004a 11       		.uleb128 0x11
+ 924 004b 01       		.uleb128 0x1
+ 925 004c 12       		.uleb128 0x12
+ 926 004d 06       		.uleb128 0x6
+ 927 004e 40       		.uleb128 0x40
+ 928 004f 18       		.uleb128 0x18
+ 929 0050 9642     		.uleb128 0x2116
+ 930 0052 19       		.uleb128 0x19
+ 931 0053 00       		.byte	0
+ 932 0054 00       		.byte	0
+ 933 0055 07       		.uleb128 0x7
+ 934 0056 2E       		.uleb128 0x2e
+ 935 0057 01       		.byte	0x1
+ 936 0058 3F       		.uleb128 0x3f
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 33
+
+
+ 937 0059 19       		.uleb128 0x19
+ 938 005a 03       		.uleb128 0x3
+ 939 005b 0E       		.uleb128 0xe
+ 940 005c 3A       		.uleb128 0x3a
+ 941 005d 0B       		.uleb128 0xb
+ 942 005e 3B       		.uleb128 0x3b
+ 943 005f 0B       		.uleb128 0xb
+ 944 0060 27       		.uleb128 0x27
+ 945 0061 19       		.uleb128 0x19
+ 946 0062 11       		.uleb128 0x11
+ 947 0063 01       		.uleb128 0x1
+ 948 0064 12       		.uleb128 0x12
+ 949 0065 06       		.uleb128 0x6
+ 950 0066 40       		.uleb128 0x40
+ 951 0067 18       		.uleb128 0x18
+ 952 0068 9642     		.uleb128 0x2116
+ 953 006a 19       		.uleb128 0x19
+ 954 006b 01       		.uleb128 0x1
+ 955 006c 13       		.uleb128 0x13
+ 956 006d 00       		.byte	0
+ 957 006e 00       		.byte	0
+ 958 006f 08       		.uleb128 0x8
+ 959 0070 34       		.uleb128 0x34
+ 960 0071 00       		.byte	0
+ 961 0072 03       		.uleb128 0x3
+ 962 0073 0E       		.uleb128 0xe
+ 963 0074 3A       		.uleb128 0x3a
+ 964 0075 0B       		.uleb128 0xb
+ 965 0076 3B       		.uleb128 0x3b
+ 966 0077 0B       		.uleb128 0xb
+ 967 0078 49       		.uleb128 0x49
+ 968 0079 13       		.uleb128 0x13
+ 969 007a 02       		.uleb128 0x2
+ 970 007b 18       		.uleb128 0x18
+ 971 007c 00       		.byte	0
+ 972 007d 00       		.byte	0
+ 973 007e 09       		.uleb128 0x9
+ 974 007f 2E       		.uleb128 0x2e
+ 975 0080 00       		.byte	0
+ 976 0081 3F       		.uleb128 0x3f
+ 977 0082 19       		.uleb128 0x19
+ 978 0083 03       		.uleb128 0x3
+ 979 0084 0E       		.uleb128 0xe
+ 980 0085 3A       		.uleb128 0x3a
+ 981 0086 0B       		.uleb128 0xb
+ 982 0087 3B       		.uleb128 0x3b
+ 983 0088 0B       		.uleb128 0xb
+ 984 0089 27       		.uleb128 0x27
+ 985 008a 19       		.uleb128 0x19
+ 986 008b 11       		.uleb128 0x11
+ 987 008c 01       		.uleb128 0x1
+ 988 008d 12       		.uleb128 0x12
+ 989 008e 06       		.uleb128 0x6
+ 990 008f 40       		.uleb128 0x40
+ 991 0090 18       		.uleb128 0x18
+ 992 0091 9742     		.uleb128 0x2117
+ 993 0093 19       		.uleb128 0x19
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 34
+
+
+ 994 0094 00       		.byte	0
+ 995 0095 00       		.byte	0
+ 996 0096 0A       		.uleb128 0xa
+ 997 0097 2E       		.uleb128 0x2e
+ 998 0098 01       		.byte	0x1
+ 999 0099 3F       		.uleb128 0x3f
+ 1000 009a 19       		.uleb128 0x19
+ 1001 009b 03       		.uleb128 0x3
+ 1002 009c 0E       		.uleb128 0xe
+ 1003 009d 3A       		.uleb128 0x3a
+ 1004 009e 0B       		.uleb128 0xb
+ 1005 009f 3B       		.uleb128 0x3b
+ 1006 00a0 05       		.uleb128 0x5
+ 1007 00a1 27       		.uleb128 0x27
+ 1008 00a2 19       		.uleb128 0x19
+ 1009 00a3 11       		.uleb128 0x11
+ 1010 00a4 01       		.uleb128 0x1
+ 1011 00a5 12       		.uleb128 0x12
+ 1012 00a6 06       		.uleb128 0x6
+ 1013 00a7 40       		.uleb128 0x40
+ 1014 00a8 18       		.uleb128 0x18
+ 1015 00a9 9742     		.uleb128 0x2117
+ 1016 00ab 19       		.uleb128 0x19
+ 1017 00ac 01       		.uleb128 0x1
+ 1018 00ad 13       		.uleb128 0x13
+ 1019 00ae 00       		.byte	0
+ 1020 00af 00       		.byte	0
+ 1021 00b0 0B       		.uleb128 0xb
+ 1022 00b1 05       		.uleb128 0x5
+ 1023 00b2 00       		.byte	0
+ 1024 00b3 03       		.uleb128 0x3
+ 1025 00b4 0E       		.uleb128 0xe
+ 1026 00b5 3A       		.uleb128 0x3a
+ 1027 00b6 0B       		.uleb128 0xb
+ 1028 00b7 3B       		.uleb128 0x3b
+ 1029 00b8 05       		.uleb128 0x5
+ 1030 00b9 49       		.uleb128 0x49
+ 1031 00ba 13       		.uleb128 0x13
+ 1032 00bb 02       		.uleb128 0x2
+ 1033 00bc 18       		.uleb128 0x18
+ 1034 00bd 00       		.byte	0
+ 1035 00be 00       		.byte	0
+ 1036 00bf 0C       		.uleb128 0xc
+ 1037 00c0 2E       		.uleb128 0x2e
+ 1038 00c1 00       		.byte	0
+ 1039 00c2 3F       		.uleb128 0x3f
+ 1040 00c3 19       		.uleb128 0x19
+ 1041 00c4 03       		.uleb128 0x3
+ 1042 00c5 0E       		.uleb128 0xe
+ 1043 00c6 3A       		.uleb128 0x3a
+ 1044 00c7 0B       		.uleb128 0xb
+ 1045 00c8 3B       		.uleb128 0x3b
+ 1046 00c9 05       		.uleb128 0x5
+ 1047 00ca 27       		.uleb128 0x27
+ 1048 00cb 19       		.uleb128 0x19
+ 1049 00cc 49       		.uleb128 0x49
+ 1050 00cd 13       		.uleb128 0x13
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 35
+
+
+ 1051 00ce 11       		.uleb128 0x11
+ 1052 00cf 01       		.uleb128 0x1
+ 1053 00d0 12       		.uleb128 0x12
+ 1054 00d1 06       		.uleb128 0x6
+ 1055 00d2 40       		.uleb128 0x40
+ 1056 00d3 18       		.uleb128 0x18
+ 1057 00d4 9742     		.uleb128 0x2117
+ 1058 00d6 19       		.uleb128 0x19
+ 1059 00d7 00       		.byte	0
+ 1060 00d8 00       		.byte	0
+ 1061 00d9 0D       		.uleb128 0xd
+ 1062 00da 2E       		.uleb128 0x2e
+ 1063 00db 01       		.byte	0x1
+ 1064 00dc 3F       		.uleb128 0x3f
+ 1065 00dd 19       		.uleb128 0x19
+ 1066 00de 03       		.uleb128 0x3
+ 1067 00df 0E       		.uleb128 0xe
+ 1068 00e0 3A       		.uleb128 0x3a
+ 1069 00e1 0B       		.uleb128 0xb
+ 1070 00e2 3B       		.uleb128 0x3b
+ 1071 00e3 05       		.uleb128 0x5
+ 1072 00e4 27       		.uleb128 0x27
+ 1073 00e5 19       		.uleb128 0x19
+ 1074 00e6 49       		.uleb128 0x49
+ 1075 00e7 13       		.uleb128 0x13
+ 1076 00e8 11       		.uleb128 0x11
+ 1077 00e9 01       		.uleb128 0x1
+ 1078 00ea 12       		.uleb128 0x12
+ 1079 00eb 06       		.uleb128 0x6
+ 1080 00ec 40       		.uleb128 0x40
+ 1081 00ed 18       		.uleb128 0x18
+ 1082 00ee 9742     		.uleb128 0x2117
+ 1083 00f0 19       		.uleb128 0x19
+ 1084 00f1 01       		.uleb128 0x1
+ 1085 00f2 13       		.uleb128 0x13
+ 1086 00f3 00       		.byte	0
+ 1087 00f4 00       		.byte	0
+ 1088 00f5 0E       		.uleb128 0xe
+ 1089 00f6 34       		.uleb128 0x34
+ 1090 00f7 00       		.byte	0
+ 1091 00f8 03       		.uleb128 0x3
+ 1092 00f9 0E       		.uleb128 0xe
+ 1093 00fa 3A       		.uleb128 0x3a
+ 1094 00fb 0B       		.uleb128 0xb
+ 1095 00fc 3B       		.uleb128 0x3b
+ 1096 00fd 05       		.uleb128 0x5
+ 1097 00fe 49       		.uleb128 0x49
+ 1098 00ff 13       		.uleb128 0x13
+ 1099 0100 02       		.uleb128 0x2
+ 1100 0101 18       		.uleb128 0x18
+ 1101 0102 00       		.byte	0
+ 1102 0103 00       		.byte	0
+ 1103 0104 0F       		.uleb128 0xf
+ 1104 0105 34       		.uleb128 0x34
+ 1105 0106 00       		.byte	0
+ 1106 0107 03       		.uleb128 0x3
+ 1107 0108 0E       		.uleb128 0xe
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 36
+
+
+ 1108 0109 3A       		.uleb128 0x3a
+ 1109 010a 0B       		.uleb128 0xb
+ 1110 010b 3B       		.uleb128 0x3b
+ 1111 010c 0B       		.uleb128 0xb
+ 1112 010d 49       		.uleb128 0x49
+ 1113 010e 13       		.uleb128 0x13
+ 1114 010f 3F       		.uleb128 0x3f
+ 1115 0110 19       		.uleb128 0x19
+ 1116 0111 02       		.uleb128 0x2
+ 1117 0112 18       		.uleb128 0x18
+ 1118 0113 00       		.byte	0
+ 1119 0114 00       		.byte	0
+ 1120 0115 00       		.byte	0
+ 1121              		.section	.debug_aranges,"",%progbits
+ 1122 0000 7C000000 		.4byte	0x7c
+ 1123 0004 0200     		.2byte	0x2
+ 1124 0006 00000000 		.4byte	.Ldebug_info0
+ 1125 000a 04       		.byte	0x4
+ 1126 000b 00       		.byte	0
+ 1127 000c 0000     		.2byte	0
+ 1128 000e 0000     		.2byte	0
+ 1129 0010 00000000 		.4byte	.LFB0
+ 1130 0014 20000000 		.4byte	.LFE0-.LFB0
+ 1131 0018 00000000 		.4byte	.LFB1
+ 1132 001c 50000000 		.4byte	.LFE1-.LFB1
+ 1133 0020 00000000 		.4byte	.LFB2
+ 1134 0024 20000000 		.4byte	.LFE2-.LFB2
+ 1135 0028 00000000 		.4byte	.LFB3
+ 1136 002c 20000000 		.4byte	.LFE3-.LFB3
+ 1137 0030 00000000 		.4byte	.LFB4
+ 1138 0034 20000000 		.4byte	.LFE4-.LFB4
+ 1139 0038 00000000 		.4byte	.LFB5
+ 1140 003c 20000000 		.4byte	.LFE5-.LFB5
+ 1141 0040 00000000 		.4byte	.LFB6
+ 1142 0044 20000000 		.4byte	.LFE6-.LFB6
+ 1143 0048 00000000 		.4byte	.LFB7
+ 1144 004c 20000000 		.4byte	.LFE7-.LFB7
+ 1145 0050 00000000 		.4byte	.LFB8
+ 1146 0054 20000000 		.4byte	.LFE8-.LFB8
+ 1147 0058 00000000 		.4byte	.LFB9
+ 1148 005c 20000000 		.4byte	.LFE9-.LFB9
+ 1149 0060 00000000 		.4byte	.LFB10
+ 1150 0064 18000000 		.4byte	.LFE10-.LFB10
+ 1151 0068 00000000 		.4byte	.LFB11
+ 1152 006c 18000000 		.4byte	.LFE11-.LFB11
+ 1153 0070 00000000 		.4byte	.LFB12
+ 1154 0074 18000000 		.4byte	.LFE12-.LFB12
+ 1155 0078 00000000 		.4byte	0
+ 1156 007c 00000000 		.4byte	0
+ 1157              		.section	.debug_ranges,"",%progbits
+ 1158              	.Ldebug_ranges0:
+ 1159 0000 00000000 		.4byte	.LFB0
+ 1160 0004 20000000 		.4byte	.LFE0
+ 1161 0008 00000000 		.4byte	.LFB1
+ 1162 000c 50000000 		.4byte	.LFE1
+ 1163 0010 00000000 		.4byte	.LFB2
+ 1164 0014 20000000 		.4byte	.LFE2
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 37
+
+
+ 1165 0018 00000000 		.4byte	.LFB3
+ 1166 001c 20000000 		.4byte	.LFE3
+ 1167 0020 00000000 		.4byte	.LFB4
+ 1168 0024 20000000 		.4byte	.LFE4
+ 1169 0028 00000000 		.4byte	.LFB5
+ 1170 002c 20000000 		.4byte	.LFE5
+ 1171 0030 00000000 		.4byte	.LFB6
+ 1172 0034 20000000 		.4byte	.LFE6
+ 1173 0038 00000000 		.4byte	.LFB7
+ 1174 003c 20000000 		.4byte	.LFE7
+ 1175 0040 00000000 		.4byte	.LFB8
+ 1176 0044 20000000 		.4byte	.LFE8
+ 1177 0048 00000000 		.4byte	.LFB9
+ 1178 004c 20000000 		.4byte	.LFE9
+ 1179 0050 00000000 		.4byte	.LFB10
+ 1180 0054 18000000 		.4byte	.LFE10
+ 1181 0058 00000000 		.4byte	.LFB11
+ 1182 005c 18000000 		.4byte	.LFE11
+ 1183 0060 00000000 		.4byte	.LFB12
+ 1184 0064 18000000 		.4byte	.LFE12
+ 1185 0068 00000000 		.4byte	0
+ 1186 006c 00000000 		.4byte	0
+ 1187              		.section	.debug_line,"",%progbits
+ 1188              	.Ldebug_line0:
+ 1189 0000 45010000 		.section	.debug_str,"MS",%progbits,1
+ 1189      02004400 
+ 1189      00000201 
+ 1189      FB0E0D00 
+ 1189      01010101 
+ 1190              	.LASF22:
+ 1191 0000 70657269 		.ascii	"period\000"
+ 1191      6F6400
+ 1192              	.LASF18:
+ 1193 0007 5653594E 		.ascii	"VSYNC_Init\000"
+ 1193      435F496E 
+ 1193      697400
+ 1194              	.LASF36:
+ 1195 0012 5653594E 		.ascii	"VSYNC_ReadControlRegister\000"
+ 1195      435F5265 
+ 1195      6164436F 
+ 1195      6E74726F 
+ 1195      6C526567 
+ 1196              	.LASF9:
+ 1197 002c 666C6F61 		.ascii	"float\000"
+ 1197      7400
+ 1198              	.LASF21:
+ 1199 0032 636F756E 		.ascii	"counter\000"
+ 1199      74657200 
+ 1200              	.LASF20:
+ 1201 003a 5653594E 		.ascii	"VSYNC_WritePeriod\000"
+ 1201      435F5772 
+ 1201      69746550 
+ 1201      6572696F 
+ 1201      6400
+ 1202              	.LASF1:
+ 1203 004c 756E7369 		.ascii	"unsigned char\000"
+ 1203      676E6564 
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 38
+
+
+ 1203      20636861 
+ 1203      7200
+ 1204              	.LASF13:
+ 1205 005a 72656738 		.ascii	"reg8\000"
+ 1205      00
+ 1206              	.LASF5:
+ 1207 005f 6C6F6E67 		.ascii	"long unsigned int\000"
+ 1207      20756E73 
+ 1207      69676E65 
+ 1207      6420696E 
+ 1207      7400
+ 1208              	.LASF16:
+ 1209 0071 5653594E 		.ascii	"VSYNC_Enable\000"
+ 1209      435F456E 
+ 1209      61626C65 
+ 1209      00
+ 1210              	.LASF12:
+ 1211 007e 75696E74 		.ascii	"uint8\000"
+ 1211      3800
+ 1212              	.LASF28:
+ 1213 0084 636F6E74 		.ascii	"control\000"
+ 1213      726F6C00 
+ 1214              	.LASF17:
+ 1215 008c 5653594E 		.ascii	"VSYNC_Stop\000"
+ 1215      435F5374 
+ 1215      6F7000
+ 1216              	.LASF33:
+ 1217 0097 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 1217      4320342E 
+ 1217      392E3320 
+ 1217      32303135 
+ 1217      30333033 
+ 1218 00ca 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 1218      20726576 
+ 1218      6973696F 
+ 1218      6E203232 
+ 1218      31323230 
+ 1219 00fd 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 1219      66756E63 
+ 1219      74696F6E 
+ 1219      2D736563 
+ 1219      74696F6E 
+ 1220              	.LASF10:
+ 1221 0125 646F7562 		.ascii	"double\000"
+ 1221      6C6500
+ 1222              	.LASF35:
+ 1223 012c 433A5C55 		.ascii	"C:\\Users\\ologa\\Documents\\MIT\\Senior S22\\6.115"
+ 1223      73657273 
+ 1223      5C6F6C6F 
+ 1223      67615C44 
+ 1223      6F63756D 
+ 1224 0159 315C4669 		.ascii	"1\\Final Project\\vga.cydsn\000"
+ 1224      6E616C20 
+ 1224      50726F6A 
+ 1224      6563745C 
+ 1224      7667612E 
+ 1225              	.LASF15:
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 39
+
+
+ 1226 0173 5653594E 		.ascii	"VSYNC_Start\000"
+ 1226      435F5374 
+ 1226      61727400 
+ 1227              	.LASF37:
+ 1228 017f 5653594E 		.ascii	"VSYNC_initVar\000"
+ 1228      435F696E 
+ 1228      69745661 
+ 1228      7200
+ 1229              	.LASF8:
+ 1230 018d 756E7369 		.ascii	"unsigned int\000"
+ 1230      676E6564 
+ 1230      20696E74 
+ 1230      00
+ 1231              	.LASF23:
+ 1232 019a 5653594E 		.ascii	"VSYNC_WriteCompare\000"
+ 1232      435F5772 
+ 1232      69746543 
+ 1232      6F6D7061 
+ 1232      726500
+ 1233              	.LASF31:
+ 1234 01ad 5653594E 		.ascii	"VSYNC_ReadCompare\000"
+ 1234      435F5265 
+ 1234      6164436F 
+ 1234      6D706172 
+ 1234      6500
+ 1235              	.LASF32:
+ 1236 01bf 5653594E 		.ascii	"VSYNC_ReadPeriod\000"
+ 1236      435F5265 
+ 1236      61645065 
+ 1236      72696F64 
+ 1236      00
+ 1237              	.LASF7:
+ 1238 01d0 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 1238      206C6F6E 
+ 1238      6720756E 
+ 1238      7369676E 
+ 1238      65642069 
+ 1239              	.LASF26:
+ 1240 01e7 72657375 		.ascii	"result\000"
+ 1240      6C7400
+ 1241              	.LASF30:
+ 1242 01ee 5653594E 		.ascii	"VSYNC_ReadCapture\000"
+ 1242      435F5265 
+ 1242      61644361 
+ 1242      70747572 
+ 1242      6500
+ 1243              	.LASF25:
+ 1244 0200 6374726C 		.ascii	"ctrl\000"
+ 1244      00
+ 1245              	.LASF14:
+ 1246 0205 73697A65 		.ascii	"sizetype\000"
+ 1246      74797065 
+ 1246      00
+ 1247              	.LASF3:
+ 1248 020e 73686F72 		.ascii	"short unsigned int\000"
+ 1248      7420756E 
+ 1248      7369676E 
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccYHVhCF.s 			page 40
+
+
+ 1248      65642069 
+ 1248      6E7400
+ 1249              	.LASF6:
+ 1250 0221 6C6F6E67 		.ascii	"long long int\000"
+ 1250      206C6F6E 
+ 1250      6720696E 
+ 1250      7400
+ 1251              	.LASF11:
+ 1252 022f 63686172 		.ascii	"char\000"
+ 1252      00
+ 1253              	.LASF2:
+ 1254 0234 73686F72 		.ascii	"short int\000"
+ 1254      7420696E 
+ 1254      7400
+ 1255              	.LASF34:
+ 1256 023e 2E5C4765 		.ascii	".\\Generated_Source\\PSoC5\\VSYNC.c\000"
+ 1256      6E657261 
+ 1256      7465645F 
+ 1256      536F7572 
+ 1256      63655C50 
+ 1257              	.LASF27:
+ 1258 025f 5653594E 		.ascii	"VSYNC_WriteControlRegister\000"
+ 1258      435F5772 
+ 1258      69746543 
+ 1258      6F6E7472 
+ 1258      6F6C5265 
+ 1259              	.LASF4:
+ 1260 027a 6C6F6E67 		.ascii	"long int\000"
+ 1260      20696E74 
+ 1260      00
+ 1261              	.LASF0:
+ 1262 0283 7369676E 		.ascii	"signed char\000"
+ 1262      65642063 
+ 1262      68617200 
+ 1263              	.LASF24:
+ 1264 028f 636F6D70 		.ascii	"compare\000"
+ 1264      61726500 
+ 1265              	.LASF19:
+ 1266 0297 5653594E 		.ascii	"VSYNC_WriteCounter\000"
+ 1266      435F5772 
+ 1266      69746543 
+ 1266      6F756E74 
+ 1266      657200
+ 1267              	.LASF29:
+ 1268 02aa 5653594E 		.ascii	"VSYNC_ReadCounter\000"
+ 1268      435F5265 
+ 1268      6164436F 
+ 1268      756E7465 
+ 1268      7200
+ 1269              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br

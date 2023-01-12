@@ -1,0 +1,5 @@
+C:\Users\ologa\Documents\MIT\Senior S22\6.1151\Final Project\Controller\Controller.cydsn\Controller.cyprj|edf59370-2df2-47c6-95a6-c4ad16479ebd
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|9e69ec84-5c05-4145-834a-6ff99f1032d9
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|74ee21f0-f738-4589-a384-b85927977884
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|47f7dfc8-9fca-4a7d-8499-b81966b03298
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|df9b5b42-18ca-4ad6-9926-92cd3636e485

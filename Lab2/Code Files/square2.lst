@@ -1,0 +1,24 @@
+8000:              .org 8000h
+                   main:
+8000: 90 90 01         mov dptr, #9001h
+8003: E0               movx A, @dptr   ; Move the value at 9001h into acc
+8004: F8               mov R0, A       ; R0, high byte counter
+8005: 75 82 00         mov dpl, #00h   ; Preset dph and dpl to 9000h
+8008: E0               movx A, @dptr   ; A, low byte counter
+                       loop:
+8009: 60 03            jz carry        ; jump if acc is 0
+                       return:
+800B: 14               dec A
+800C: 80 FB            sjmp loop
+                   
+                   carry:
+800E: B8 00 07         CJNE R0, #00h, here     ; checks if R0 is 0, if 
+8011: B4 00 F5         CJNE A, #00h, loop
+8014: B2 90            cpl P1.0
+8016: 80 E8            sjmp main
+                   
+                       here:
+8018: 18               dec R0
+8019: 80 F0            sjmp return
+                   
+                   

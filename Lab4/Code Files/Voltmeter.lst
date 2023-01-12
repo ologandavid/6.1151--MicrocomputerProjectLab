@@ -1,0 +1,138 @@
+                   main:
+0000: 12 00 36         lcall setup
+0003: 90 FE 40         mov dptr, #0FE40h
+                       ;setb P3.5
+0006: 74 00            mov a, #00h
+0008: F0               movx @dptr, a
+                       
+                       loop:
+0009: 20 B5 FD         jb P3.5, loop
+000C: E0               movx a, @dptr
+000D: 75 F0 33         mov B, #33h
+0010: 84               div AB
+0011: 24 30            ADD A, #30h
+0013: FA               mov R2, A
+0014: 12 00 BE         lcall disp1
+0017: 7A 2E            mov R2, #2Eh
+0019: 12 00 BE         lcall disp1
+001C: E5 F0            mov A, B
+001E: 75 F0 05         mov B, #05h
+0021: 84               div AB
+0022: 24 30            ADD A, #30h
+0024: FA               mov R2, A
+0025: 12 00 BE         lcall disp1
+0028: 12 00 2D         lcall delay
+002B: 80 D3            sjmp main
+                   
+                   delay:
+002D: 78 FF            mov R0, #0FFh
+                       sups:
+002F: D8 FE            DJNZ R0, sups
+0031: 79 FF            mov R1, #0FFh
+                       sups2:
+0033: D9 FE            DJNZ R1, sups2
+0035: 22               ret
+                   
+                   setup:
+0036: 90 FE 33             mov dptr, #0FE33h
+0039: 74 80            mov a, #80h
+003B: F0               movx @dptr, a
+003C: 12 00 2D         lcall delay
+                   
+                       ; Set display for 8 bit communication
+003F: 90 FE 32         mov dptr, #0FE32h
+0042: 74 00            mov a, #00h
+0044: F0               movx @dptr, a
+0045: 12 00 2D         lcall delay
+                   
+0048: 90 FE 31         mov dptr, #0FE31h
+004B: 74 38            mov a, #38h
+004D: F0               movx @dptr, a
+004E: 12 00 2D         lcall delay
+                   
+0051: 90 FE 32         mov dptr, #0FE32h
+0054: 74 04            mov a, #04h
+0056: F0               movx @dptr, a
+0057: 12 00 2D         lcall delay
+                   
+005A: 90 FE 32         mov dptr, #0FE32h
+005D: 74 00            mov a, #00h
+005F: F0               movx @dptr, a
+0060: 12 00 2D         lcall delay
+                   
+                       ; Turn display on, hide cursor
+0063: 90 FE 31         mov dptr, #0FE31h
+0066: 74 0C            mov a, #0Ch
+0068: F0               movx @dptr, a
+0069: 12 00 2D         lcall delay
+                   
+006C: 90 FE 32         mov dptr, #0FE32h
+006F: 74 04            mov a, #04h
+0071: F0               movx @dptr, a
+0072: 12 00 2D         lcall delay
+                   
+0075: 90 FE 32         mov dptr, #0FE32h
+0078: 74 00            mov a, #00h
+007A: F0               movx @dptr, a
+007B: 12 00 2D         lcall delay
+                   
+                       ; Clear display
+007E: 90 FE 31         mov dptr, #0FE31h
+0081: 74 01            mov a, #01h
+0083: F0               movx @dptr, a
+0084: 12 00 2D         lcall delay
+                       
+0087: 90 FE 32         mov dptr, #0FE32h
+008A: 74 04            mov a, #04h
+008C: F0               movx @dptr, a
+008D: 12 00 2D         lcall delay
+                   
+0090: 90 FE 32         mov dptr, #0FE32h
+0093: 74 00            mov a, #00h
+0095: F0               movx @dptr, a
+0096: 12 00 2D         lcall delay
+                   
+                       ; Set RAM address to zero
+0099: 90 FE 32         mov dptr, #0FE32h
+009C: 74 00            mov a, #00h
+009E: F0               movx @dptr, a
+009F: 12 00 2D         lcall delay
+                   
+00A2: 90 FE 31         mov dptr, #0FE31h
+00A5: 74 80            mov a, #80h
+00A7: F0               movx @dptr, a
+00A8: 12 00 2D         lcall delay
+                   
+00AB: 90 FE 32         mov dptr, #0FE32h
+00AE: 74 04            mov a, #04h
+00B0: F0               movx @dptr, a
+00B1: 12 00 2D         lcall delay
+                   
+00B4: 90 FE 32         mov dptr, #0FE32h
+00B7: 74 00            mov a, #00h
+00B9: F0               movx @dptr, a
+00BA: 12 00 2D         lcall delay
+00BD: 22               ret
+                   
+                   disp1:
+                       ;Display Characters
+00BE: 90 FE 32         mov dptr, #0FE32h
+00C1: 74 01            mov a, #01h
+00C3: F0               movx @dptr, a
+00C4: 12 00 2D         lcall delay
+                       
+00C7: 90 FE 31         mov dptr, #0FE31h
+00CA: EA               mov a, R2
+00CB: F0               movx @dptr, a
+00CC: 12 00 2D         lcall delay
+                   
+00CF: 90 FE 32         mov dptr, #0FE32h
+00D2: 74 05            mov a, #05h
+00D4: F0               movx @dptr, a
+00D5: 12 00 2D         lcall delay
+                   
+00D8: 90 FE 32         mov dptr, #0FE32h
+00DB: 74 01            mov a, #01h
+00DD: F0               movx @dptr, a
+00DE: 12 00 2D         lcall delay
+00E1: 22               ret

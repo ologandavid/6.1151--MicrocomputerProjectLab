@@ -1,0 +1,6 @@
+C:\Users\ologa\Documents\MIT\Senior S22\6.1151\Lab2\Exercise 9\LAB1.cydsn\LAB1.cyprj|597dbd49-1914-4016-a677-22cb40341019
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|9305ec6e-5365-4d78-bce6-b848e751bc9f
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\default\CyReferenceLibrary\CyReferenceLibrary.cylib\CyReferenceLibrary.cyprj|a6e2a32d-40ff-4e23-9f1e-8c05ef4983fa
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|bbb71fe2-6040-48ac-9b77-73622b2c0758
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|a2fdd413-56db-4d79-b5aa-8fea2ebf7503
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|9ea985e3-0387-44f5-b862-c43d895b8728

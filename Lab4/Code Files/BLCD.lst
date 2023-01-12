@@ -1,0 +1,136 @@
+                   ;.org 8000h
+                   main:
+0000: 90 FE 23     mov dptr, #0FE23h
+0003: 74 80        MOV A, #80h
+0005: F0           movx @dptr, A
+                   
+                   
+                   ; Set display for 8 bit communication, 5x7 char set
+0006: 90 FE 20     mov dptr, #0FE20h
+0009: 74 00        MOV A, #00h
+000B: F0           movx @dptr,A; #00h
+000C: 12 00 BD     lcall delay
+                   
+000F: 90 FE 21     mov dptr, #0FE21h
+0012: 74 38        MOV A, #38h
+0014: F0           movx @dptr,A; #38h
+0015: 12 00 BD     lcall delay
+                   
+0018: 90 FE 20     mov dptr, #0FE20h
+001B: 74 04        MOV A, #04h
+001D: F0           movx @dptr, A;#04h
+001E: 12 00 BD     lcall delay
+                   
+0021: 90 FE 20     mov dptr, #0FE20h
+0024: 74 00        MOV A, #00h
+0026: F0           movx @dptr, A;#00h
+0027: 12 00 BD     lcall delay
+                   
+                   ; Turn display on, hide cursor
+002A: 90 FE 21     mov dptr, #0FE21h
+002D: 74 0C        MOV A, #0Ch
+002F: F0           movx @dptr, A;#0Ch
+0030: 12 00 BD     lcall delay
+                   
+0033: 90 FE 20     mov dptr, #0FE20h
+0036: 74 04        MOV A, #04h
+0038: F0           movx @dptr, A;#04h
+0039: 12 00 BD     lcall delay
+                   
+003C: 90 FE 20     mov dptr, #0FE20h
+003F: 74 00        MOV A, #00h
+0041: F0           movx @dptr, A;#00h
+0042: 12 00 BD     lcall delay
+                   
+                   ;Clear display
+0045: 90 FE 21     mov dptr, #0FE21h
+0048: 74 01        MOV A, #01h
+004A: F0           movx @dptr, A;#01h
+004B: 12 00 BD     lcall delay
+                   
+004E: 90 FE 20     mov dptr, #0FE20h
+0051: 74 04        MOV A, #04h
+0053: F0           movx @dptr, A;#04h
+0054: 12 00 BD     lcall delay
+                   
+0057: 90 FE 20     mov dptr, #0FE20h
+005A: 74 00        MOV A, #00h
+005C: F0           movx @dptr, A;#00h
+005D: 12 00 BD     lcall delay
+                   
+                   ;Set RAM address to zero
+0060: 90 FE 20     mov dptr, #0FE20h
+0063: 74 00        MOV A, #00h
+0065: F0           movx @dptr, A; #00h
+0066: 12 00 BD     lcall delay
+                   
+0069: 90 FE 21     mov dptr, #0FE21h
+006C: 74 80        MOV A, #80h
+006E: F0           movx @dptr, A; #80h
+006F: 12 00 BD     lcall delay
+                   
+0072: 90 FE 20     mov dptr, #0FE20h
+0075: 74 04        MOV A, #04h
+0077: F0           movx @dptr, A;#04h
+0078: 12 00 BD     lcall delay
+                   
+007B: 90 FE 20     mov dptr, #0FE20h
+007E: 74 00        MOV A, #00h
+0080: F0           movx @dptr, A;#00h
+0081: 12 00 BD     lcall delay
+                   
+                   ;Print Chars
+0084: 78 20        mov R0, #32
+0086: 90 FE 20     mov dptr, #0FE20h
+0089: 74 FB        MOV A, #0FBh
+008B: F0           movx @dptr, A;#0FBh
+008C: 12 00 BD     lcall delay
+                   
+008F: 90 50 00     mov dptr, #5000h;FF00h
+                   
+                   print_loop:
+0092: AB 83        mov R3, dph
+0094: AC 82        mov R4, dpl
+0096: E0           movx A, @dptr; value of text
+0097: 90 FE 21     mov dptr, #0FE21h
+009A: F0           movx @dptr, A
+009B: 12 00 BD     lcall delay
+                   
+009E: 90 FE 20     mov dptr, #0FE20h
+00A1: 74 FF        MOV A, #0FFh
+00A3: F0           movx @dptr, A;#0FFh
+00A4: 12 00 BD     lcall delay
+                   
+00A7: 90 FE 20     mov dptr, #0FE20h
+00AA: 74 FB        MOV A, #0FBh
+00AC: F0           movx @dptr, A;#0FBh
+00AD: 12 00 BD     lcall delay
+                   
+00B0: F0           movx @dptr, A;#0FBh
+00B1: 12 00 BD     lcall delay
+                   
+00B4: 8B 83        mov dph, R3; put original address in pointer for incrementin
+00B6: 8C 82        mov dpl, R4
+00B8: A3           inc dptr
+00B9: D8 D7        DJNZ R0, print_loop
+                   
+                   loop:
+00BB: 80 FE        sjmp loop
+                   
+                   delay:
+00BD: 7A FF        mov R2, #0FFh
+                   timer:
+00BF: DA FE        djnz R2, timer
+00C1: 22           ret
+                   
+5000:              .org 5000h
+5000: 36 A5 31 31 
+      35 20 52 75 
+      6C 65 73 21 
+      20 20 20 20 
+                   .db 36h,0A5h,31h,31h,35h,20h,52h,75h,6ch,65h,73h,21h,20h,20h
+5010: 50 20 20 20 
+      20 20 20 20 
+      20 20 20 20 
+      20 20 20 50 
+                   .db 50h,20h,20h,20h,20h,20h,20h,20h,20h,20h,20h,20h,20h,20h,

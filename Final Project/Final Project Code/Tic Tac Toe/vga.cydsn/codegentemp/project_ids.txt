@@ -1,0 +1,6 @@
+C:\Users\ologa\Documents\MIT\Senior S22\6.1151\Final Project\Tic Tac Toe\vga.cydsn\vga.cyprj|fe105a09-50d4-48d6-bcc9-a844087bcdb4
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|ccf58d7a-b648-465c-b0f2-d2c87591c5df
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\default\CyReferenceLibrary\CyReferenceLibrary.cylib\CyReferenceLibrary.cyprj|d40af369-87de-4040-8433-cd66c9d89c34
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|f23d38f8-4a11-4d62-9b36-936dca5ba219
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|8d15db48-f713-4fe3-9496-9cc616f04d84
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|34ee43e1-9f7c-4303-9d06-cba467774926

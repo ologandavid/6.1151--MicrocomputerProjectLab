@@ -1,0 +1,1098 @@
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccChgFj1.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"main.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.main,"ax",%progbits
+  19              		.align	2
+  20              		.global	main
+  21              		.thumb
+  22              		.thumb_func
+  23              		.type	main, %function
+  24              	main:
+  25              	.LFB63:
+  26              		.file 1 ".\\main.c"
+   1:.\main.c      **** /* ========================================
+   2:.\main.c      ****  *
+   3:.\main.c      ****  * 6.115 Demo Program
+   4:.\main.c      ****  * All Rights Reserved
+   5:.\main.c      ****  * North and Steven Leeb, 2013
+   6:.\main.c      ****  *
+   7:.\main.c      ****  * CONFIDENTIAL AND PROPRIETARY INFORMATION
+   8:.\main.c      ****  * WHICH IS THE PROPERTY OF your company.
+   9:.\main.c      ****  *
+  10:.\main.c      ****  * ========================================
+  11:.\main.c      **** */
+  12:.\main.c      **** #include <device.h>
+  13:.\main.c      **** void DigitLED_Write( int);
+  14:.\main.c      **** void DigitLED_WriteHex( int);
+  15:.\main.c      **** 
+  16:.\main.c      **** void main()
+  17:.\main.c      **** {
+  27              		.loc 1 17 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31 0000 80B5     		push	{r7, lr}
+  32              		.cfi_def_cfa_offset 8
+  33              		.cfi_offset 7, -8
+  34              		.cfi_offset 14, -4
+  35 0002 00AF     		add	r7, sp, #0
+  36              		.cfi_def_cfa_register 7
+  37              	.L2:
+  18:.\main.c      **** 
+  19:.\main.c      ****     while(1)
+  20:.\main.c      ****     {
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccChgFj1.s 			page 2
+
+
+  21:.\main.c      ****         DigitLED_WriteHex(0x06);    // 6
+  38              		.loc 1 21 0 discriminator 1
+  39 0004 0620     		movs	r0, #6
+  40 0006 FFF7FEFF 		bl	DigitLED_WriteHex
+  22:.\main.c      ****         CyDelay(500);
+  41              		.loc 1 22 0 discriminator 1
+  42 000a 4FF4FA70 		mov	r0, #500
+  43 000e FFF7FEFF 		bl	CyDelay
+  23:.\main.c      ****         DigitLED_WriteHex(0xff);    // null
+  44              		.loc 1 23 0 discriminator 1
+  45 0012 FF20     		movs	r0, #255
+  46 0014 FFF7FEFF 		bl	DigitLED_WriteHex
+  24:.\main.c      ****         CyDelay(100);
+  47              		.loc 1 24 0 discriminator 1
+  48 0018 6420     		movs	r0, #100
+  49 001a FFF7FEFF 		bl	CyDelay
+  25:.\main.c      ****         DigitLED_WriteHex(0x10);    // .
+  50              		.loc 1 25 0 discriminator 1
+  51 001e 1020     		movs	r0, #16
+  52 0020 FFF7FEFF 		bl	DigitLED_WriteHex
+  26:.\main.c      ****         CyDelay(500);
+  53              		.loc 1 26 0 discriminator 1
+  54 0024 4FF4FA70 		mov	r0, #500
+  55 0028 FFF7FEFF 		bl	CyDelay
+  27:.\main.c      ****         DigitLED_WriteHex(0xff);    // null
+  56              		.loc 1 27 0 discriminator 1
+  57 002c FF20     		movs	r0, #255
+  58 002e FFF7FEFF 		bl	DigitLED_WriteHex
+  28:.\main.c      ****         CyDelay(100);
+  59              		.loc 1 28 0 discriminator 1
+  60 0032 6420     		movs	r0, #100
+  61 0034 FFF7FEFF 		bl	CyDelay
+  29:.\main.c      ****         DigitLED_WriteHex(0x01);    // 1
+  62              		.loc 1 29 0 discriminator 1
+  63 0038 0120     		movs	r0, #1
+  64 003a FFF7FEFF 		bl	DigitLED_WriteHex
+  30:.\main.c      ****         CyDelay(500);
+  65              		.loc 1 30 0 discriminator 1
+  66 003e 4FF4FA70 		mov	r0, #500
+  67 0042 FFF7FEFF 		bl	CyDelay
+  31:.\main.c      ****         DigitLED_WriteHex(0xff);    // null
+  68              		.loc 1 31 0 discriminator 1
+  69 0046 FF20     		movs	r0, #255
+  70 0048 FFF7FEFF 		bl	DigitLED_WriteHex
+  32:.\main.c      ****         CyDelay(100);
+  71              		.loc 1 32 0 discriminator 1
+  72 004c 6420     		movs	r0, #100
+  73 004e FFF7FEFF 		bl	CyDelay
+  33:.\main.c      ****         DigitLED_WriteHex(0x01);    // 1
+  74              		.loc 1 33 0 discriminator 1
+  75 0052 0120     		movs	r0, #1
+  76 0054 FFF7FEFF 		bl	DigitLED_WriteHex
+  34:.\main.c      ****         CyDelay(500);
+  77              		.loc 1 34 0 discriminator 1
+  78 0058 4FF4FA70 		mov	r0, #500
+  79 005c FFF7FEFF 		bl	CyDelay
+  35:.\main.c      ****         DigitLED_WriteHex(0xff);    // null
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccChgFj1.s 			page 3
+
+
+  80              		.loc 1 35 0 discriminator 1
+  81 0060 FF20     		movs	r0, #255
+  82 0062 FFF7FEFF 		bl	DigitLED_WriteHex
+  36:.\main.c      ****         CyDelay(100);
+  83              		.loc 1 36 0 discriminator 1
+  84 0066 6420     		movs	r0, #100
+  85 0068 FFF7FEFF 		bl	CyDelay
+  37:.\main.c      ****         DigitLED_WriteHex(0x05);    // 5
+  86              		.loc 1 37 0 discriminator 1
+  87 006c 0520     		movs	r0, #5
+  88 006e FFF7FEFF 		bl	DigitLED_WriteHex
+  38:.\main.c      ****         CyDelay(500);
+  89              		.loc 1 38 0 discriminator 1
+  90 0072 4FF4FA70 		mov	r0, #500
+  91 0076 FFF7FEFF 		bl	CyDelay
+  39:.\main.c      ****         DigitLED_WriteHex(0xff);    // null
+  92              		.loc 1 39 0 discriminator 1
+  93 007a FF20     		movs	r0, #255
+  94 007c FFF7FEFF 		bl	DigitLED_WriteHex
+  40:.\main.c      ****         CyDelay(100);
+  95              		.loc 1 40 0 discriminator 1
+  96 0080 6420     		movs	r0, #100
+  97 0082 FFF7FEFF 		bl	CyDelay
+  41:.\main.c      ****         DigitLED_WriteHex(0xff);    // null
+  98              		.loc 1 41 0 discriminator 1
+  99 0086 FF20     		movs	r0, #255
+ 100 0088 FFF7FEFF 		bl	DigitLED_WriteHex
+  42:.\main.c      ****         CyDelay(500);
+ 101              		.loc 1 42 0 discriminator 1
+ 102 008c 4FF4FA70 		mov	r0, #500
+ 103 0090 FFF7FEFF 		bl	CyDelay
+  43:.\main.c      ****         DigitLED_WriteHex(0xff);    // null
+ 104              		.loc 1 43 0 discriminator 1
+ 105 0094 FF20     		movs	r0, #255
+ 106 0096 FFF7FEFF 		bl	DigitLED_WriteHex
+  44:.\main.c      ****         CyDelay(100);
+ 107              		.loc 1 44 0 discriminator 1
+ 108 009a 6420     		movs	r0, #100
+ 109 009c FFF7FEFF 		bl	CyDelay
+  45:.\main.c      ****         DigitLED_WriteHex(0x01);    // I
+ 110              		.loc 1 45 0 discriminator 1
+ 111 00a0 0120     		movs	r0, #1
+ 112 00a2 FFF7FEFF 		bl	DigitLED_WriteHex
+  46:.\main.c      ****         CyDelay(500);
+ 113              		.loc 1 46 0 discriminator 1
+ 114 00a6 4FF4FA70 		mov	r0, #500
+ 115 00aa FFF7FEFF 		bl	CyDelay
+  47:.\main.c      ****         DigitLED_WriteHex(0xff);    // null
+ 116              		.loc 1 47 0 discriminator 1
+ 117 00ae FF20     		movs	r0, #255
+ 118 00b0 FFF7FEFF 		bl	DigitLED_WriteHex
+  48:.\main.c      ****         CyDelay(100);
+ 119              		.loc 1 48 0 discriminator 1
+ 120 00b4 6420     		movs	r0, #100
+ 121 00b6 FFF7FEFF 		bl	CyDelay
+  49:.\main.c      ****         DigitLED_WriteHex(0x05);    // S
+ 122              		.loc 1 49 0 discriminator 1
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccChgFj1.s 			page 4
+
+
+ 123 00ba 0520     		movs	r0, #5
+ 124 00bc FFF7FEFF 		bl	DigitLED_WriteHex
+  50:.\main.c      ****         CyDelay(500);
+ 125              		.loc 1 50 0 discriminator 1
+ 126 00c0 4FF4FA70 		mov	r0, #500
+ 127 00c4 FFF7FEFF 		bl	CyDelay
+  51:.\main.c      ****         DigitLED_WriteHex(0xff);    // null
+ 128              		.loc 1 51 0 discriminator 1
+ 129 00c8 FF20     		movs	r0, #255
+ 130 00ca FFF7FEFF 		bl	DigitLED_WriteHex
+  52:.\main.c      ****         CyDelay(100);
+ 131              		.loc 1 52 0 discriminator 1
+ 132 00ce 6420     		movs	r0, #100
+ 133 00d0 FFF7FEFF 		bl	CyDelay
+  53:.\main.c      ****         DigitLED_WriteHex(0xff);    // null
+ 134              		.loc 1 53 0 discriminator 1
+ 135 00d4 FF20     		movs	r0, #255
+ 136 00d6 FFF7FEFF 		bl	DigitLED_WriteHex
+  54:.\main.c      ****         CyDelay(500);
+ 137              		.loc 1 54 0 discriminator 1
+ 138 00da 4FF4FA70 		mov	r0, #500
+ 139 00de FFF7FEFF 		bl	CyDelay
+  55:.\main.c      ****         DigitLED_WriteHex(0xff);    // null
+ 140              		.loc 1 55 0 discriminator 1
+ 141 00e2 FF20     		movs	r0, #255
+ 142 00e4 FFF7FEFF 		bl	DigitLED_WriteHex
+  56:.\main.c      ****         CyDelay(100);
+ 143              		.loc 1 56 0 discriminator 1
+ 144 00e8 6420     		movs	r0, #100
+ 145 00ea FFF7FEFF 		bl	CyDelay
+  57:.\main.c      ****         DigitLED_Write(0b01100011); // C
+ 146              		.loc 1 57 0 discriminator 1
+ 147 00ee 6320     		movs	r0, #99
+ 148 00f0 FFF7FEFF 		bl	DigitLED_Write
+  58:.\main.c      ****         CyDelay(500);
+ 149              		.loc 1 58 0 discriminator 1
+ 150 00f4 4FF4FA70 		mov	r0, #500
+ 151 00f8 FFF7FEFF 		bl	CyDelay
+  59:.\main.c      ****         DigitLED_WriteHex(0xff);    // null
+ 152              		.loc 1 59 0 discriminator 1
+ 153 00fc FF20     		movs	r0, #255
+ 154 00fe FFF7FEFF 		bl	DigitLED_WriteHex
+  60:.\main.c      ****         CyDelay(100);
+ 155              		.loc 1 60 0 discriminator 1
+ 156 0102 6420     		movs	r0, #100
+ 157 0104 FFF7FEFF 		bl	CyDelay
+  61:.\main.c      ****         DigitLED_WriteHex(0x00);    // O
+ 158              		.loc 1 61 0 discriminator 1
+ 159 0108 0020     		movs	r0, #0
+ 160 010a FFF7FEFF 		bl	DigitLED_WriteHex
+  62:.\main.c      ****         CyDelay(500);
+ 161              		.loc 1 62 0 discriminator 1
+ 162 010e 4FF4FA70 		mov	r0, #500
+ 163 0112 FFF7FEFF 		bl	CyDelay
+  63:.\main.c      ****         DigitLED_WriteHex(0xff);    // null
+ 164              		.loc 1 63 0 discriminator 1
+ 165 0116 FF20     		movs	r0, #255
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccChgFj1.s 			page 5
+
+
+ 166 0118 FFF7FEFF 		bl	DigitLED_WriteHex
+  64:.\main.c      ****         CyDelay(100);
+ 167              		.loc 1 64 0 discriminator 1
+ 168 011c 6420     		movs	r0, #100
+ 169 011e FFF7FEFF 		bl	CyDelay
+  65:.\main.c      ****         DigitLED_WriteHex(0x00);    // O
+ 170              		.loc 1 65 0 discriminator 1
+ 171 0122 0020     		movs	r0, #0
+ 172 0124 FFF7FEFF 		bl	DigitLED_WriteHex
+  66:.\main.c      ****         CyDelay(500);
+ 173              		.loc 1 66 0 discriminator 1
+ 174 0128 4FF4FA70 		mov	r0, #500
+ 175 012c FFF7FEFF 		bl	CyDelay
+  67:.\main.c      ****         DigitLED_WriteHex(0xff);    // null
+ 176              		.loc 1 67 0 discriminator 1
+ 177 0130 FF20     		movs	r0, #255
+ 178 0132 FFF7FEFF 		bl	DigitLED_WriteHex
+  68:.\main.c      ****         CyDelay(100);
+ 179              		.loc 1 68 0 discriminator 1
+ 180 0136 6420     		movs	r0, #100
+ 181 0138 FFF7FEFF 		bl	CyDelay
+  69:.\main.c      ****         DigitLED_Write(0b11100011); // L
+ 182              		.loc 1 69 0 discriminator 1
+ 183 013c E320     		movs	r0, #227
+ 184 013e FFF7FEFF 		bl	DigitLED_Write
+  70:.\main.c      ****         CyDelay(500);
+ 185              		.loc 1 70 0 discriminator 1
+ 186 0142 4FF4FA70 		mov	r0, #500
+ 187 0146 FFF7FEFF 		bl	CyDelay
+  71:.\main.c      ****         DigitLED_WriteHex(0xff);    // null
+ 188              		.loc 1 71 0 discriminator 1
+ 189 014a FF20     		movs	r0, #255
+ 190 014c FFF7FEFF 		bl	DigitLED_WriteHex
+  72:.\main.c      ****         CyDelay(500);
+ 191              		.loc 1 72 0 discriminator 1
+ 192 0150 4FF4FA70 		mov	r0, #500
+ 193 0154 FFF7FEFF 		bl	CyDelay
+  73:.\main.c      ****     }
+ 194              		.loc 1 73 0 discriminator 1
+ 195 0158 54E7     		b	.L2
+ 196              		.cfi_endproc
+ 197              	.LFE63:
+ 198              		.size	main, .-main
+ 199 015a 00BF     		.section	.text.DigitLED_Write,"ax",%progbits
+ 200              		.align	2
+ 201              		.global	DigitLED_Write
+ 202              		.thumb
+ 203              		.thumb_func
+ 204              		.type	DigitLED_Write, %function
+ 205              	DigitLED_Write:
+ 206              	.LFB64:
+  74:.\main.c      **** }
+  75:.\main.c      **** 
+  76:.\main.c      **** // DigitLED_Write will write the binary number "bi" to turn on/off each segment
+  77:.\main.c      **** // of the digit LED. The binary number correspond to 0b000000000 => 0bABCDEGFP
+  78:.\main.c      **** // Make each bit "0" to turn each segment "on"
+  79:.\main.c      **** 
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccChgFj1.s 			page 6
+
+
+  80:.\main.c      **** void DigitLED_Write( int bi)
+  81:.\main.c      **** {
+ 207              		.loc 1 81 0
+ 208              		.cfi_startproc
+ 209              		@ args = 0, pretend = 0, frame = 8
+ 210              		@ frame_needed = 1, uses_anonymous_args = 0
+ 211 0000 80B5     		push	{r7, lr}
+ 212              		.cfi_def_cfa_offset 8
+ 213              		.cfi_offset 7, -8
+ 214              		.cfi_offset 14, -4
+ 215 0002 82B0     		sub	sp, sp, #8
+ 216              		.cfi_def_cfa_offset 16
+ 217 0004 00AF     		add	r7, sp, #0
+ 218              		.cfi_def_cfa_register 7
+ 219 0006 7860     		str	r0, [r7, #4]
+  82:.\main.c      ****     A_Write((bi >> 7) & 1);
+ 220              		.loc 1 82 0
+ 221 0008 7B68     		ldr	r3, [r7, #4]
+ 222 000a DB11     		asrs	r3, r3, #7
+ 223 000c DBB2     		uxtb	r3, r3
+ 224 000e 03F00103 		and	r3, r3, #1
+ 225 0012 DBB2     		uxtb	r3, r3
+ 226 0014 1846     		mov	r0, r3
+ 227 0016 FFF7FEFF 		bl	A_Write
+  83:.\main.c      ****     B_Write((bi >> 6) & 1);
+ 228              		.loc 1 83 0
+ 229 001a 7B68     		ldr	r3, [r7, #4]
+ 230 001c 9B11     		asrs	r3, r3, #6
+ 231 001e DBB2     		uxtb	r3, r3
+ 232 0020 03F00103 		and	r3, r3, #1
+ 233 0024 DBB2     		uxtb	r3, r3
+ 234 0026 1846     		mov	r0, r3
+ 235 0028 FFF7FEFF 		bl	B_Write
+  84:.\main.c      ****     C_Write((bi >> 5) & 1);
+ 236              		.loc 1 84 0
+ 237 002c 7B68     		ldr	r3, [r7, #4]
+ 238 002e 5B11     		asrs	r3, r3, #5
+ 239 0030 DBB2     		uxtb	r3, r3
+ 240 0032 03F00103 		and	r3, r3, #1
+ 241 0036 DBB2     		uxtb	r3, r3
+ 242 0038 1846     		mov	r0, r3
+ 243 003a FFF7FEFF 		bl	C_Write
+  85:.\main.c      ****     D_Write((bi >> 4) & 1);
+ 244              		.loc 1 85 0
+ 245 003e 7B68     		ldr	r3, [r7, #4]
+ 246 0040 1B11     		asrs	r3, r3, #4
+ 247 0042 DBB2     		uxtb	r3, r3
+ 248 0044 03F00103 		and	r3, r3, #1
+ 249 0048 DBB2     		uxtb	r3, r3
+ 250 004a 1846     		mov	r0, r3
+ 251 004c FFF7FEFF 		bl	D_Write
+  86:.\main.c      ****     E_Write((bi >> 3) & 1);
+ 252              		.loc 1 86 0
+ 253 0050 7B68     		ldr	r3, [r7, #4]
+ 254 0052 DB10     		asrs	r3, r3, #3
+ 255 0054 DBB2     		uxtb	r3, r3
+ 256 0056 03F00103 		and	r3, r3, #1
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccChgFj1.s 			page 7
+
+
+ 257 005a DBB2     		uxtb	r3, r3
+ 258 005c 1846     		mov	r0, r3
+ 259 005e FFF7FEFF 		bl	E_Write
+  87:.\main.c      ****     F_Write((bi >> 2) & 1);
+ 260              		.loc 1 87 0
+ 261 0062 7B68     		ldr	r3, [r7, #4]
+ 262 0064 9B10     		asrs	r3, r3, #2
+ 263 0066 DBB2     		uxtb	r3, r3
+ 264 0068 03F00103 		and	r3, r3, #1
+ 265 006c DBB2     		uxtb	r3, r3
+ 266 006e 1846     		mov	r0, r3
+ 267 0070 FFF7FEFF 		bl	F_Write
+  88:.\main.c      ****     G_Write((bi >> 1) & 1);
+ 268              		.loc 1 88 0
+ 269 0074 7B68     		ldr	r3, [r7, #4]
+ 270 0076 5B10     		asrs	r3, r3, #1
+ 271 0078 DBB2     		uxtb	r3, r3
+ 272 007a 03F00103 		and	r3, r3, #1
+ 273 007e DBB2     		uxtb	r3, r3
+ 274 0080 1846     		mov	r0, r3
+ 275 0082 FFF7FEFF 		bl	G_Write
+  89:.\main.c      ****     P_Write((bi >> 0) & 1);
+ 276              		.loc 1 89 0
+ 277 0086 7B68     		ldr	r3, [r7, #4]
+ 278 0088 DBB2     		uxtb	r3, r3
+ 279 008a 03F00103 		and	r3, r3, #1
+ 280 008e DBB2     		uxtb	r3, r3
+ 281 0090 1846     		mov	r0, r3
+ 282 0092 FFF7FEFF 		bl	P_Write
+  90:.\main.c      **** }
+ 283              		.loc 1 90 0
+ 284 0096 0837     		adds	r7, r7, #8
+ 285              		.cfi_def_cfa_offset 8
+ 286 0098 BD46     		mov	sp, r7
+ 287              		.cfi_def_cfa_register 13
+ 288              		@ sp needed
+ 289 009a 80BD     		pop	{r7, pc}
+ 290              		.cfi_endproc
+ 291              	.LFE64:
+ 292              		.size	DigitLED_Write, .-DigitLED_Write
+ 293              		.section	.text.DigitLED_WriteHex,"ax",%progbits
+ 294              		.align	2
+ 295              		.global	DigitLED_WriteHex
+ 296              		.thumb
+ 297              		.thumb_func
+ 298              		.type	DigitLED_WriteHex, %function
+ 299              	DigitLED_WriteHex:
+ 300              	.LFB65:
+  91:.\main.c      **** 
+  92:.\main.c      **** // DigitLED_WriteHex will write the hexadicimal number "hex" to the LED screen
+  93:.\main.c      **** void DigitLED_WriteHex( int hex)
+  94:.\main.c      **** {
+ 301              		.loc 1 94 0
+ 302              		.cfi_startproc
+ 303              		@ args = 0, pretend = 0, frame = 8
+ 304              		@ frame_needed = 1, uses_anonymous_args = 0
+ 305 0000 80B5     		push	{r7, lr}
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccChgFj1.s 			page 8
+
+
+ 306              		.cfi_def_cfa_offset 8
+ 307              		.cfi_offset 7, -8
+ 308              		.cfi_offset 14, -4
+ 309 0002 82B0     		sub	sp, sp, #8
+ 310              		.cfi_def_cfa_offset 16
+ 311 0004 00AF     		add	r7, sp, #0
+ 312              		.cfi_def_cfa_register 7
+ 313 0006 7860     		str	r0, [r7, #4]
+  95:.\main.c      ****     if (hex == 0x00)
+ 314              		.loc 1 95 0
+ 315 0008 7B68     		ldr	r3, [r7, #4]
+ 316 000a 002B     		cmp	r3, #0
+ 317 000c 03D1     		bne	.L5
+  96:.\main.c      ****         DigitLED_Write(0b00000011);
+ 318              		.loc 1 96 0
+ 319 000e 0320     		movs	r0, #3
+ 320 0010 FFF7FEFF 		bl	DigitLED_Write
+ 321 0014 72E0     		b	.L4
+ 322              	.L5:
+  97:.\main.c      ****     else if (hex == 0x01)
+ 323              		.loc 1 97 0
+ 324 0016 7B68     		ldr	r3, [r7, #4]
+ 325 0018 012B     		cmp	r3, #1
+ 326 001a 03D1     		bne	.L7
+  98:.\main.c      ****         DigitLED_Write(0b10011111);
+ 327              		.loc 1 98 0
+ 328 001c 9F20     		movs	r0, #159
+ 329 001e FFF7FEFF 		bl	DigitLED_Write
+ 330 0022 6BE0     		b	.L4
+ 331              	.L7:
+  99:.\main.c      ****     else if (hex == 0x02)
+ 332              		.loc 1 99 0
+ 333 0024 7B68     		ldr	r3, [r7, #4]
+ 334 0026 022B     		cmp	r3, #2
+ 335 0028 03D1     		bne	.L8
+ 100:.\main.c      ****         DigitLED_Write(0b00100101);  
+ 336              		.loc 1 100 0
+ 337 002a 2520     		movs	r0, #37
+ 338 002c FFF7FEFF 		bl	DigitLED_Write
+ 339 0030 64E0     		b	.L4
+ 340              	.L8:
+ 101:.\main.c      ****     else if (hex == 0x03)
+ 341              		.loc 1 101 0
+ 342 0032 7B68     		ldr	r3, [r7, #4]
+ 343 0034 032B     		cmp	r3, #3
+ 344 0036 03D1     		bne	.L9
+ 102:.\main.c      ****         DigitLED_Write(0b00001101); 
+ 345              		.loc 1 102 0
+ 346 0038 0D20     		movs	r0, #13
+ 347 003a FFF7FEFF 		bl	DigitLED_Write
+ 348 003e 5DE0     		b	.L4
+ 349              	.L9:
+ 103:.\main.c      ****     else if (hex == 0x04)
+ 350              		.loc 1 103 0
+ 351 0040 7B68     		ldr	r3, [r7, #4]
+ 352 0042 042B     		cmp	r3, #4
+ 353 0044 03D1     		bne	.L10
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccChgFj1.s 			page 9
+
+
+ 104:.\main.c      ****         DigitLED_Write(0b10011001);
+ 354              		.loc 1 104 0
+ 355 0046 9920     		movs	r0, #153
+ 356 0048 FFF7FEFF 		bl	DigitLED_Write
+ 357 004c 56E0     		b	.L4
+ 358              	.L10:
+ 105:.\main.c      ****     else if (hex == 0x05)
+ 359              		.loc 1 105 0
+ 360 004e 7B68     		ldr	r3, [r7, #4]
+ 361 0050 052B     		cmp	r3, #5
+ 362 0052 03D1     		bne	.L11
+ 106:.\main.c      ****         DigitLED_Write(0b01001001);
+ 363              		.loc 1 106 0
+ 364 0054 4920     		movs	r0, #73
+ 365 0056 FFF7FEFF 		bl	DigitLED_Write
+ 366 005a 4FE0     		b	.L4
+ 367              	.L11:
+ 107:.\main.c      ****     else if (hex == 0x06)
+ 368              		.loc 1 107 0
+ 369 005c 7B68     		ldr	r3, [r7, #4]
+ 370 005e 062B     		cmp	r3, #6
+ 371 0060 03D1     		bne	.L12
+ 108:.\main.c      ****         DigitLED_Write(0b01000001);
+ 372              		.loc 1 108 0
+ 373 0062 4120     		movs	r0, #65
+ 374 0064 FFF7FEFF 		bl	DigitLED_Write
+ 375 0068 48E0     		b	.L4
+ 376              	.L12:
+ 109:.\main.c      ****     else if (hex == 0x07)
+ 377              		.loc 1 109 0
+ 378 006a 7B68     		ldr	r3, [r7, #4]
+ 379 006c 072B     		cmp	r3, #7
+ 380 006e 03D1     		bne	.L13
+ 110:.\main.c      ****         DigitLED_Write(0b00011111); 
+ 381              		.loc 1 110 0
+ 382 0070 1F20     		movs	r0, #31
+ 383 0072 FFF7FEFF 		bl	DigitLED_Write
+ 384 0076 41E0     		b	.L4
+ 385              	.L13:
+ 111:.\main.c      ****     else if (hex == 0x08)
+ 386              		.loc 1 111 0
+ 387 0078 7B68     		ldr	r3, [r7, #4]
+ 388 007a 082B     		cmp	r3, #8
+ 389 007c 03D1     		bne	.L14
+ 112:.\main.c      ****         DigitLED_Write(0b00000001);
+ 390              		.loc 1 112 0
+ 391 007e 0120     		movs	r0, #1
+ 392 0080 FFF7FEFF 		bl	DigitLED_Write
+ 393 0084 3AE0     		b	.L4
+ 394              	.L14:
+ 113:.\main.c      ****     else if (hex == 0x09)
+ 395              		.loc 1 113 0
+ 396 0086 7B68     		ldr	r3, [r7, #4]
+ 397 0088 092B     		cmp	r3, #9
+ 398 008a 03D1     		bne	.L15
+ 114:.\main.c      ****         DigitLED_Write(0b00011001);
+ 399              		.loc 1 114 0
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccChgFj1.s 			page 10
+
+
+ 400 008c 1920     		movs	r0, #25
+ 401 008e FFF7FEFF 		bl	DigitLED_Write
+ 402 0092 33E0     		b	.L4
+ 403              	.L15:
+ 115:.\main.c      ****     else if (hex == 0x0a)
+ 404              		.loc 1 115 0
+ 405 0094 7B68     		ldr	r3, [r7, #4]
+ 406 0096 0A2B     		cmp	r3, #10
+ 407 0098 03D1     		bne	.L16
+ 116:.\main.c      ****         DigitLED_Write(0b00010001);
+ 408              		.loc 1 116 0
+ 409 009a 1120     		movs	r0, #17
+ 410 009c FFF7FEFF 		bl	DigitLED_Write
+ 411 00a0 2CE0     		b	.L4
+ 412              	.L16:
+ 117:.\main.c      ****     else if (hex == 0x0b)
+ 413              		.loc 1 117 0
+ 414 00a2 7B68     		ldr	r3, [r7, #4]
+ 415 00a4 0B2B     		cmp	r3, #11
+ 416 00a6 03D1     		bne	.L17
+ 118:.\main.c      ****         DigitLED_Write(0b11000001);
+ 417              		.loc 1 118 0
+ 418 00a8 C120     		movs	r0, #193
+ 419 00aa FFF7FEFF 		bl	DigitLED_Write
+ 420 00ae 25E0     		b	.L4
+ 421              	.L17:
+ 119:.\main.c      ****     else if (hex == 0x0c)
+ 422              		.loc 1 119 0
+ 423 00b0 7B68     		ldr	r3, [r7, #4]
+ 424 00b2 0C2B     		cmp	r3, #12
+ 425 00b4 03D1     		bne	.L18
+ 120:.\main.c      ****         DigitLED_Write(0b01100011);
+ 426              		.loc 1 120 0
+ 427 00b6 6320     		movs	r0, #99
+ 428 00b8 FFF7FEFF 		bl	DigitLED_Write
+ 429 00bc 1EE0     		b	.L4
+ 430              	.L18:
+ 121:.\main.c      ****     else if (hex == 0x0d)
+ 431              		.loc 1 121 0
+ 432 00be 7B68     		ldr	r3, [r7, #4]
+ 433 00c0 0D2B     		cmp	r3, #13
+ 434 00c2 03D1     		bne	.L19
+ 122:.\main.c      ****         DigitLED_Write(0b10000101);
+ 435              		.loc 1 122 0
+ 436 00c4 8520     		movs	r0, #133
+ 437 00c6 FFF7FEFF 		bl	DigitLED_Write
+ 438 00ca 17E0     		b	.L4
+ 439              	.L19:
+ 123:.\main.c      ****     else if (hex == 0x0e)
+ 440              		.loc 1 123 0
+ 441 00cc 7B68     		ldr	r3, [r7, #4]
+ 442 00ce 0E2B     		cmp	r3, #14
+ 443 00d0 03D1     		bne	.L20
+ 124:.\main.c      ****         DigitLED_Write(0b01100001);
+ 444              		.loc 1 124 0
+ 445 00d2 6120     		movs	r0, #97
+ 446 00d4 FFF7FEFF 		bl	DigitLED_Write
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccChgFj1.s 			page 11
+
+
+ 447 00d8 10E0     		b	.L4
+ 448              	.L20:
+ 125:.\main.c      ****     else if (hex == 0x0f)
+ 449              		.loc 1 125 0
+ 450 00da 7B68     		ldr	r3, [r7, #4]
+ 451 00dc 0F2B     		cmp	r3, #15
+ 452 00de 03D1     		bne	.L21
+ 126:.\main.c      ****         DigitLED_Write(0b01110001);
+ 453              		.loc 1 126 0
+ 454 00e0 7120     		movs	r0, #113
+ 455 00e2 FFF7FEFF 		bl	DigitLED_Write
+ 456 00e6 09E0     		b	.L4
+ 457              	.L21:
+ 127:.\main.c      ****     else if (hex == 0x10)
+ 458              		.loc 1 127 0
+ 459 00e8 7B68     		ldr	r3, [r7, #4]
+ 460 00ea 102B     		cmp	r3, #16
+ 461 00ec 03D1     		bne	.L22
+ 128:.\main.c      ****         DigitLED_Write(0b11111110);
+ 462              		.loc 1 128 0
+ 463 00ee FE20     		movs	r0, #254
+ 464 00f0 FFF7FEFF 		bl	DigitLED_Write
+ 465 00f4 02E0     		b	.L4
+ 466              	.L22:
+ 129:.\main.c      ****     else
+ 130:.\main.c      ****         DigitLED_Write(0b11111111);
+ 467              		.loc 1 130 0
+ 468 00f6 FF20     		movs	r0, #255
+ 469 00f8 FFF7FEFF 		bl	DigitLED_Write
+ 470              	.L4:
+ 131:.\main.c      **** }
+ 471              		.loc 1 131 0
+ 472 00fc 0837     		adds	r7, r7, #8
+ 473              		.cfi_def_cfa_offset 8
+ 474 00fe BD46     		mov	sp, r7
+ 475              		.cfi_def_cfa_register 13
+ 476              		@ sp needed
+ 477 0100 80BD     		pop	{r7, pc}
+ 478              		.cfi_endproc
+ 479              	.LFE65:
+ 480              		.size	DigitLED_WriteHex, .-DigitLED_WriteHex
+ 481 0102 00BF     		.text
+ 482              	.Letext0:
+ 483              		.file 2 "c:\\program files (x86)\\cypress\\psoc creator\\3.3\\psoc creator\\import\\gnu\\arm\\4.9.
+ 484              		.file 3 "c:\\program files (x86)\\cypress\\psoc creator\\3.3\\psoc creator\\import\\gnu\\arm\\4.9.
+ 485              		.file 4 "Generated_Source\\PSoC5/core_cm3.h"
+ 486              		.section	.debug_info,"",%progbits
+ 487              	.Ldebug_info0:
+ 488 0000 03010000 		.4byte	0x103
+ 489 0004 0400     		.2byte	0x4
+ 490 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 491 000a 04       		.byte	0x4
+ 492 000b 01       		.uleb128 0x1
+ 493 000c 8B000000 		.4byte	.LASF17
+ 494 0010 01       		.byte	0x1
+ 495 0011 19010000 		.4byte	.LASF18
+ 496 0015 32010000 		.4byte	.LASF19
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccChgFj1.s 			page 12
+
+
+ 497 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 498 001d 00000000 		.4byte	0
+ 499 0021 00000000 		.4byte	.Ldebug_line0
+ 500 0025 02       		.uleb128 0x2
+ 501 0026 01       		.byte	0x1
+ 502 0027 06       		.byte	0x6
+ 503 0028 A2010000 		.4byte	.LASF0
+ 504 002c 02       		.uleb128 0x2
+ 505 002d 01       		.byte	0x1
+ 506 002e 08       		.byte	0x8
+ 507 002f 66000000 		.4byte	.LASF1
+ 508 0033 02       		.uleb128 0x2
+ 509 0034 02       		.byte	0x2
+ 510 0035 05       		.byte	0x5
+ 511 0036 C3010000 		.4byte	.LASF2
+ 512 003a 02       		.uleb128 0x2
+ 513 003b 02       		.byte	0x2
+ 514 003c 07       		.byte	0x7
+ 515 003d 0E000000 		.4byte	.LASF3
+ 516 0041 03       		.uleb128 0x3
+ 517 0042 AE010000 		.4byte	.LASF9
+ 518 0046 02       		.byte	0x2
+ 519 0047 3F       		.byte	0x3f
+ 520 0048 4C000000 		.4byte	0x4c
+ 521 004c 02       		.uleb128 0x2
+ 522 004d 04       		.byte	0x4
+ 523 004e 05       		.byte	0x5
+ 524 004f 29010000 		.4byte	.LASF4
+ 525 0053 02       		.uleb128 0x2
+ 526 0054 04       		.byte	0x4
+ 527 0055 07       		.byte	0x7
+ 528 0056 2E000000 		.4byte	.LASF5
+ 529 005a 02       		.uleb128 0x2
+ 530 005b 08       		.byte	0x8
+ 531 005c 05       		.byte	0x5
+ 532 005d 00000000 		.4byte	.LASF6
+ 533 0061 02       		.uleb128 0x2
+ 534 0062 08       		.byte	0x8
+ 535 0063 07       		.byte	0x7
+ 536 0064 4F000000 		.4byte	.LASF7
+ 537 0068 04       		.uleb128 0x4
+ 538 0069 04       		.byte	0x4
+ 539 006a 05       		.byte	0x5
+ 540 006b 696E7400 		.ascii	"int\000"
+ 541 006f 02       		.uleb128 0x2
+ 542 0070 04       		.byte	0x4
+ 543 0071 07       		.byte	0x7
+ 544 0072 21000000 		.4byte	.LASF8
+ 545 0076 03       		.uleb128 0x3
+ 546 0077 CD010000 		.4byte	.LASF10
+ 547 007b 03       		.byte	0x3
+ 548 007c 2C       		.byte	0x2c
+ 549 007d 41000000 		.4byte	0x41
+ 550 0081 02       		.uleb128 0x2
+ 551 0082 04       		.byte	0x4
+ 552 0083 04       		.byte	0x4
+ 553 0084 BD010000 		.4byte	.LASF11
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccChgFj1.s 			page 13
+
+
+ 554 0088 02       		.uleb128 0x2
+ 555 0089 08       		.byte	0x8
+ 556 008a 04       		.byte	0x4
+ 557 008b 22010000 		.4byte	.LASF12
+ 558 008f 02       		.uleb128 0x2
+ 559 0090 01       		.byte	0x1
+ 560 0091 08       		.byte	0x8
+ 561 0092 74000000 		.4byte	.LASF13
+ 562 0096 02       		.uleb128 0x2
+ 563 0097 04       		.byte	0x4
+ 564 0098 07       		.byte	0x7
+ 565 0099 D5010000 		.4byte	.LASF14
+ 566 009d 05       		.uleb128 0x5
+ 567 009e B8010000 		.4byte	.LASF20
+ 568 00a2 01       		.byte	0x1
+ 569 00a3 10       		.byte	0x10
+ 570 00a4 00000000 		.4byte	.LFB63
+ 571 00a8 5A010000 		.4byte	.LFE63-.LFB63
+ 572 00ac 01       		.uleb128 0x1
+ 573 00ad 9C       		.byte	0x9c
+ 574 00ae 06       		.uleb128 0x6
+ 575 00af 40000000 		.4byte	.LASF15
+ 576 00b3 01       		.byte	0x1
+ 577 00b4 50       		.byte	0x50
+ 578 00b5 00000000 		.4byte	.LFB64
+ 579 00b9 9C000000 		.4byte	.LFE64-.LFB64
+ 580 00bd 01       		.uleb128 0x1
+ 581 00be 9C       		.byte	0x9c
+ 582 00bf D1000000 		.4byte	0xd1
+ 583 00c3 07       		.uleb128 0x7
+ 584 00c4 626900   		.ascii	"bi\000"
+ 585 00c7 01       		.byte	0x1
+ 586 00c8 50       		.byte	0x50
+ 587 00c9 68000000 		.4byte	0x68
+ 588 00cd 02       		.uleb128 0x2
+ 589 00ce 91       		.byte	0x91
+ 590 00cf 74       		.sleb128 -12
+ 591 00d0 00       		.byte	0
+ 592 00d1 06       		.uleb128 0x6
+ 593 00d2 79000000 		.4byte	.LASF16
+ 594 00d6 01       		.byte	0x1
+ 595 00d7 5D       		.byte	0x5d
+ 596 00d8 00000000 		.4byte	.LFB65
+ 597 00dc 02010000 		.4byte	.LFE65-.LFB65
+ 598 00e0 01       		.uleb128 0x1
+ 599 00e1 9C       		.byte	0x9c
+ 600 00e2 F5000000 		.4byte	0xf5
+ 601 00e6 07       		.uleb128 0x7
+ 602 00e7 68657800 		.ascii	"hex\000"
+ 603 00eb 01       		.byte	0x1
+ 604 00ec 5D       		.byte	0x5d
+ 605 00ed 68000000 		.4byte	0x68
+ 606 00f1 02       		.uleb128 0x2
+ 607 00f2 91       		.byte	0x91
+ 608 00f3 74       		.sleb128 -12
+ 609 00f4 00       		.byte	0
+ 610 00f5 08       		.uleb128 0x8
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccChgFj1.s 			page 14
+
+
+ 611 00f6 95010000 		.4byte	.LASF21
+ 612 00fa 04       		.byte	0x4
+ 613 00fb 9606     		.2byte	0x696
+ 614 00fd 01010000 		.4byte	0x101
+ 615 0101 09       		.uleb128 0x9
+ 616 0102 76000000 		.4byte	0x76
+ 617 0106 00       		.byte	0
+ 618              		.section	.debug_abbrev,"",%progbits
+ 619              	.Ldebug_abbrev0:
+ 620 0000 01       		.uleb128 0x1
+ 621 0001 11       		.uleb128 0x11
+ 622 0002 01       		.byte	0x1
+ 623 0003 25       		.uleb128 0x25
+ 624 0004 0E       		.uleb128 0xe
+ 625 0005 13       		.uleb128 0x13
+ 626 0006 0B       		.uleb128 0xb
+ 627 0007 03       		.uleb128 0x3
+ 628 0008 0E       		.uleb128 0xe
+ 629 0009 1B       		.uleb128 0x1b
+ 630 000a 0E       		.uleb128 0xe
+ 631 000b 55       		.uleb128 0x55
+ 632 000c 17       		.uleb128 0x17
+ 633 000d 11       		.uleb128 0x11
+ 634 000e 01       		.uleb128 0x1
+ 635 000f 10       		.uleb128 0x10
+ 636 0010 17       		.uleb128 0x17
+ 637 0011 00       		.byte	0
+ 638 0012 00       		.byte	0
+ 639 0013 02       		.uleb128 0x2
+ 640 0014 24       		.uleb128 0x24
+ 641 0015 00       		.byte	0
+ 642 0016 0B       		.uleb128 0xb
+ 643 0017 0B       		.uleb128 0xb
+ 644 0018 3E       		.uleb128 0x3e
+ 645 0019 0B       		.uleb128 0xb
+ 646 001a 03       		.uleb128 0x3
+ 647 001b 0E       		.uleb128 0xe
+ 648 001c 00       		.byte	0
+ 649 001d 00       		.byte	0
+ 650 001e 03       		.uleb128 0x3
+ 651 001f 16       		.uleb128 0x16
+ 652 0020 00       		.byte	0
+ 653 0021 03       		.uleb128 0x3
+ 654 0022 0E       		.uleb128 0xe
+ 655 0023 3A       		.uleb128 0x3a
+ 656 0024 0B       		.uleb128 0xb
+ 657 0025 3B       		.uleb128 0x3b
+ 658 0026 0B       		.uleb128 0xb
+ 659 0027 49       		.uleb128 0x49
+ 660 0028 13       		.uleb128 0x13
+ 661 0029 00       		.byte	0
+ 662 002a 00       		.byte	0
+ 663 002b 04       		.uleb128 0x4
+ 664 002c 24       		.uleb128 0x24
+ 665 002d 00       		.byte	0
+ 666 002e 0B       		.uleb128 0xb
+ 667 002f 0B       		.uleb128 0xb
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccChgFj1.s 			page 15
+
+
+ 668 0030 3E       		.uleb128 0x3e
+ 669 0031 0B       		.uleb128 0xb
+ 670 0032 03       		.uleb128 0x3
+ 671 0033 08       		.uleb128 0x8
+ 672 0034 00       		.byte	0
+ 673 0035 00       		.byte	0
+ 674 0036 05       		.uleb128 0x5
+ 675 0037 2E       		.uleb128 0x2e
+ 676 0038 00       		.byte	0
+ 677 0039 3F       		.uleb128 0x3f
+ 678 003a 19       		.uleb128 0x19
+ 679 003b 03       		.uleb128 0x3
+ 680 003c 0E       		.uleb128 0xe
+ 681 003d 3A       		.uleb128 0x3a
+ 682 003e 0B       		.uleb128 0xb
+ 683 003f 3B       		.uleb128 0x3b
+ 684 0040 0B       		.uleb128 0xb
+ 685 0041 11       		.uleb128 0x11
+ 686 0042 01       		.uleb128 0x1
+ 687 0043 12       		.uleb128 0x12
+ 688 0044 06       		.uleb128 0x6
+ 689 0045 40       		.uleb128 0x40
+ 690 0046 18       		.uleb128 0x18
+ 691 0047 9642     		.uleb128 0x2116
+ 692 0049 19       		.uleb128 0x19
+ 693 004a 00       		.byte	0
+ 694 004b 00       		.byte	0
+ 695 004c 06       		.uleb128 0x6
+ 696 004d 2E       		.uleb128 0x2e
+ 697 004e 01       		.byte	0x1
+ 698 004f 3F       		.uleb128 0x3f
+ 699 0050 19       		.uleb128 0x19
+ 700 0051 03       		.uleb128 0x3
+ 701 0052 0E       		.uleb128 0xe
+ 702 0053 3A       		.uleb128 0x3a
+ 703 0054 0B       		.uleb128 0xb
+ 704 0055 3B       		.uleb128 0x3b
+ 705 0056 0B       		.uleb128 0xb
+ 706 0057 27       		.uleb128 0x27
+ 707 0058 19       		.uleb128 0x19
+ 708 0059 11       		.uleb128 0x11
+ 709 005a 01       		.uleb128 0x1
+ 710 005b 12       		.uleb128 0x12
+ 711 005c 06       		.uleb128 0x6
+ 712 005d 40       		.uleb128 0x40
+ 713 005e 18       		.uleb128 0x18
+ 714 005f 9642     		.uleb128 0x2116
+ 715 0061 19       		.uleb128 0x19
+ 716 0062 01       		.uleb128 0x1
+ 717 0063 13       		.uleb128 0x13
+ 718 0064 00       		.byte	0
+ 719 0065 00       		.byte	0
+ 720 0066 07       		.uleb128 0x7
+ 721 0067 05       		.uleb128 0x5
+ 722 0068 00       		.byte	0
+ 723 0069 03       		.uleb128 0x3
+ 724 006a 08       		.uleb128 0x8
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccChgFj1.s 			page 16
+
+
+ 725 006b 3A       		.uleb128 0x3a
+ 726 006c 0B       		.uleb128 0xb
+ 727 006d 3B       		.uleb128 0x3b
+ 728 006e 0B       		.uleb128 0xb
+ 729 006f 49       		.uleb128 0x49
+ 730 0070 13       		.uleb128 0x13
+ 731 0071 02       		.uleb128 0x2
+ 732 0072 18       		.uleb128 0x18
+ 733 0073 00       		.byte	0
+ 734 0074 00       		.byte	0
+ 735 0075 08       		.uleb128 0x8
+ 736 0076 34       		.uleb128 0x34
+ 737 0077 00       		.byte	0
+ 738 0078 03       		.uleb128 0x3
+ 739 0079 0E       		.uleb128 0xe
+ 740 007a 3A       		.uleb128 0x3a
+ 741 007b 0B       		.uleb128 0xb
+ 742 007c 3B       		.uleb128 0x3b
+ 743 007d 05       		.uleb128 0x5
+ 744 007e 49       		.uleb128 0x49
+ 745 007f 13       		.uleb128 0x13
+ 746 0080 3F       		.uleb128 0x3f
+ 747 0081 19       		.uleb128 0x19
+ 748 0082 3C       		.uleb128 0x3c
+ 749 0083 19       		.uleb128 0x19
+ 750 0084 00       		.byte	0
+ 751 0085 00       		.byte	0
+ 752 0086 09       		.uleb128 0x9
+ 753 0087 35       		.uleb128 0x35
+ 754 0088 00       		.byte	0
+ 755 0089 49       		.uleb128 0x49
+ 756 008a 13       		.uleb128 0x13
+ 757 008b 00       		.byte	0
+ 758 008c 00       		.byte	0
+ 759 008d 00       		.byte	0
+ 760              		.section	.debug_aranges,"",%progbits
+ 761 0000 2C000000 		.4byte	0x2c
+ 762 0004 0200     		.2byte	0x2
+ 763 0006 00000000 		.4byte	.Ldebug_info0
+ 764 000a 04       		.byte	0x4
+ 765 000b 00       		.byte	0
+ 766 000c 0000     		.2byte	0
+ 767 000e 0000     		.2byte	0
+ 768 0010 00000000 		.4byte	.LFB63
+ 769 0014 5A010000 		.4byte	.LFE63-.LFB63
+ 770 0018 00000000 		.4byte	.LFB64
+ 771 001c 9C000000 		.4byte	.LFE64-.LFB64
+ 772 0020 00000000 		.4byte	.LFB65
+ 773 0024 02010000 		.4byte	.LFE65-.LFB65
+ 774 0028 00000000 		.4byte	0
+ 775 002c 00000000 		.4byte	0
+ 776              		.section	.debug_ranges,"",%progbits
+ 777              	.Ldebug_ranges0:
+ 778 0000 00000000 		.4byte	.LFB63
+ 779 0004 5A010000 		.4byte	.LFE63
+ 780 0008 00000000 		.4byte	.LFB64
+ 781 000c 9C000000 		.4byte	.LFE64
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccChgFj1.s 			page 17
+
+
+ 782 0010 00000000 		.4byte	.LFB65
+ 783 0014 02010000 		.4byte	.LFE65
+ 784 0018 00000000 		.4byte	0
+ 785 001c 00000000 		.4byte	0
+ 786              		.section	.debug_line,"",%progbits
+ 787              	.Ldebug_line0:
+ 788 0000 A7020000 		.section	.debug_str,"MS",%progbits,1
+ 788      02003C01 
+ 788      00000201 
+ 788      FB0E0D00 
+ 788      01010101 
+ 789              	.LASF6:
+ 790 0000 6C6F6E67 		.ascii	"long long int\000"
+ 790      206C6F6E 
+ 790      6720696E 
+ 790      7400
+ 791              	.LASF3:
+ 792 000e 73686F72 		.ascii	"short unsigned int\000"
+ 792      7420756E 
+ 792      7369676E 
+ 792      65642069 
+ 792      6E7400
+ 793              	.LASF8:
+ 794 0021 756E7369 		.ascii	"unsigned int\000"
+ 794      676E6564 
+ 794      20696E74 
+ 794      00
+ 795              	.LASF5:
+ 796 002e 6C6F6E67 		.ascii	"long unsigned int\000"
+ 796      20756E73 
+ 796      69676E65 
+ 796      6420696E 
+ 796      7400
+ 797              	.LASF15:
+ 798 0040 44696769 		.ascii	"DigitLED_Write\000"
+ 798      744C4544 
+ 798      5F577269 
+ 798      746500
+ 799              	.LASF7:
+ 800 004f 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 800      206C6F6E 
+ 800      6720756E 
+ 800      7369676E 
+ 800      65642069 
+ 801              	.LASF1:
+ 802 0066 756E7369 		.ascii	"unsigned char\000"
+ 802      676E6564 
+ 802      20636861 
+ 802      7200
+ 803              	.LASF13:
+ 804 0074 63686172 		.ascii	"char\000"
+ 804      00
+ 805              	.LASF16:
+ 806 0079 44696769 		.ascii	"DigitLED_WriteHex\000"
+ 806      744C4544 
+ 806      5F577269 
+ 806      74654865 
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccChgFj1.s 			page 18
+
+
+ 806      7800
+ 807              	.LASF17:
+ 808 008b 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 808      4320342E 
+ 808      392E3320 
+ 808      32303135 
+ 808      30333033 
+ 809 00be 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 809      20726576 
+ 809      6973696F 
+ 809      6E203232 
+ 809      31323230 
+ 810 00f1 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 810      66756E63 
+ 810      74696F6E 
+ 810      2D736563 
+ 810      74696F6E 
+ 811              	.LASF18:
+ 812 0119 2E5C6D61 		.ascii	".\\main.c\000"
+ 812      696E2E63 
+ 812      00
+ 813              	.LASF12:
+ 814 0122 646F7562 		.ascii	"double\000"
+ 814      6C6500
+ 815              	.LASF4:
+ 816 0129 6C6F6E67 		.ascii	"long int\000"
+ 816      20696E74 
+ 816      00
+ 817              	.LASF19:
+ 818 0132 433A5C55 		.ascii	"C:\\Users\\ologa\\Documents\\MIT\\Senior S22\\6.115"
+ 818      73657273 
+ 818      5C6F6C6F 
+ 818      67615C44 
+ 818      6F63756D 
+ 819 015f 315C4C61 		.ascii	"1\\Lab2\\Exercise 9\\blinky_zip\\blinky\\115_is_coo"
+ 819      62325C45 
+ 819      78657263 
+ 819      69736520 
+ 819      395C626C 
+ 820 018d 6C2E6379 		.ascii	"l.cydsn\000"
+ 820      64736E00 
+ 821              	.LASF21:
+ 822 0195 49544D5F 		.ascii	"ITM_RxBuffer\000"
+ 822      52784275 
+ 822      66666572 
+ 822      00
+ 823              	.LASF0:
+ 824 01a2 7369676E 		.ascii	"signed char\000"
+ 824      65642063 
+ 824      68617200 
+ 825              	.LASF9:
+ 826 01ae 5F5F696E 		.ascii	"__int32_t\000"
+ 826      7433325F 
+ 826      7400
+ 827              	.LASF20:
+ 828 01b8 6D61696E 		.ascii	"main\000"
+ 828      00
+ARM GAS  C:\Users\ologa\AppData\Local\Temp\ccChgFj1.s 			page 19
+
+
+ 829              	.LASF11:
+ 830 01bd 666C6F61 		.ascii	"float\000"
+ 830      7400
+ 831              	.LASF2:
+ 832 01c3 73686F72 		.ascii	"short int\000"
+ 832      7420696E 
+ 832      7400
+ 833              	.LASF10:
+ 834 01cd 696E7433 		.ascii	"int32_t\000"
+ 834      325F7400 
+ 835              	.LASF14:
+ 836 01d5 73697A65 		.ascii	"sizetype\000"
+ 836      74797065 
+ 836      00
+ 837              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br

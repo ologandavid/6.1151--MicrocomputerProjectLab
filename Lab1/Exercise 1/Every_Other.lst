@@ -1,0 +1,7 @@
+                   main: 
+                   
+0000: 75 90 00     mov P1, #00h     ; Clear the LED Bank
+0003: 75 90 55     mov P1, #55h     ; Turn on Every Other Light
+                   loop:
+0006: 80 FE                 sjmp loop
+                            
